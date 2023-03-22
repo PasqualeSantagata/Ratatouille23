@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SpringClient</string>
+    <string name="form_first_name">FirstName</string>
+    <string name="form_last_name">LastName</string>
+    <string name="form_email">Email</string>
+    <string name="form_dob">dob</string>
+    <string name="register_student">Register student</string>
+    <string name="crea_utente" />
+</resources>
