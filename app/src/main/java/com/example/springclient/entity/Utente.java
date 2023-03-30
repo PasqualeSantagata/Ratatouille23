@@ -1,8 +1,5 @@
 package com.example.springclient.entity;
 
-
-
-
 import java.time.LocalDate;
 
 public class Utente {
@@ -27,8 +24,7 @@ public class Utente {
             Long id,
             String nome,
             String cognome,
-            String email,
-            LocalDate dob) {
+            String email) {
         super();
         this.id = id;
         this.nome = nome;
@@ -40,8 +36,9 @@ public class Utente {
     public Utente(
             String nome,
             String cognome,
-            String email,
-            LocalDate dob) {
+            String email
+
+            ) {
         super();
         this.nome = nome;
         this.cognome = cognome;

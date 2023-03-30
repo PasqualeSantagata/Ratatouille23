@@ -1,5 +1,6 @@
 package com.example.springclient.RetrofitService;
 
+import com.example.springclient.entity.Allergene;
 import com.google.gson.Gson;
 
 import retrofit2.Retrofit;
@@ -11,7 +12,8 @@ public class RetrofitService {
     private static RetrofitService ISTANCE;
 
     private UtenteAPI utenteAPI;
-
+    private ElementoMenuAPI elementoMenuAPI;
+    private AllergeneAPI allergeneAPI;
 
 
     public static RetrofitService getIstance(){
@@ -29,6 +31,8 @@ public class RetrofitService {
                 .build();
 
         utenteAPI = retrofit.create(UtenteAPI.class);
+        elementoMenuAPI = retrofit.create(ElementoMenuAPI.class);
+        allergeneAPI = retrofit.create(AllergeneAPI.class);
 
     }
 
@@ -36,7 +40,13 @@ public class RetrofitService {
         return  utenteAPI;
     }
 
+    public ElementoMenuAPI getElementoMenuAPI(){
+        return elementoMenuAPI;
+    }
 
+    public AllergeneAPI getAllergeneAPI(){
+        return allergeneAPI;
+    }
 
 
 }

@@ -1,5 +1,7 @@
 package com.example.springclient.presenter;
 
+import android.util.Log;
+
 import com.example.springclient.contract.RegisterUtenteContract;
 import com.example.springclient.model.UtenteModel;
 import com.example.springclient.view.MainActivity;
@@ -32,6 +34,7 @@ public class RegisterPresenter implements RegisterUtenteContract.Presenter {
         utenteModel.saveUtente(utente, new RegisterUtenteContract.Model.RegisterCallback() {
             @Override
             public void onFinished() {
+                Log.e("utente: ", "registrato");
                 registerActivity.cleanFields();
             }
 

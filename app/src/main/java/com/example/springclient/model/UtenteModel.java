@@ -5,6 +5,8 @@ import com.example.springclient.RetrofitService.UtenteAPI;
 import com.example.springclient.contract.RegisterUtenteContract;
 import com.example.springclient.entity.Utente;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +39,17 @@ public class UtenteModel implements RegisterUtenteContract.Model {
 
     @Override
     public void getUtente() {
+        utenteAPI.getAllUtenti().enqueue(new Callback<List<Utente>>() {
+            @Override
+            public void onResponse(Call<List<Utente>> call, Response<List<Utente>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Utente>> call, Throwable t) {
+
+            }
+        });
 
     }
 }
