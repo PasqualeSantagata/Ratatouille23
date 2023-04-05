@@ -27,14 +27,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/TextInputLayoutNomeInserisciElementoMenu"
-        android:hint="@string/nome"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
+        android:hint="@string/nome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,40 +42,39 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditTextNomeInserisciElementoMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-             />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/TextInputLayoutPrezzoInserisciElementoMenu"
-        android:hint="Prezzo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="800dp"
+        android:hint="Prezzo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutNomeInserisciElementoMenu">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id = "@+id/TextInputEditTextPrezzoInserisciElementoMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            />
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/TextInputLayoutAllergeniInserisciElementoMenu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 
-        android:hint="Allergeni "
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
+        android:hint="Allergeni "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutPrezzoInserisciElementoMenu">
@@ -83,20 +82,19 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputTextFieldAllergeniInserisciElementoMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/TextInputLayoutDescrizioneInserisciElementoMenu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 
-        android:hint="Descrizione"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
+        android:hint="Descrizione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutAllergeniInserisciElementoMenu">

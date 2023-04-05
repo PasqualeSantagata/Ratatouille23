@@ -19,8 +19,8 @@ import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity implements RegisterUtenteContract.View {
 
-    public EditText inputEditTextNome;
-    public EditText inputEditTextCognome;
+    private EditText inputEditTextNome;
+    private EditText inputEditTextCognome;
     EditText EditTextPassword;
     EditText EditTextEmail;
 
@@ -33,24 +33,11 @@ public class MainActivity extends AppCompatActivity implements RegisterUtenteCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        registerPresenter = new RegisterPresenter(this);
+        /*registerPresenter = new RegisterPresenter(this);
 
-        ElementoMenu e1 = new ElementoMenu("spaghetti", 9.0f, "classic");
-        ElementoMenu e2 = new ElementoMenu("gamberi", 18f, "classic fish");
-        Allergene a1 = new Allergene("farina");
-        Allergene a2 = new Allergene("crostacei");
-
-        e1.addAllergene(a1);
-        e2.addAllergene(a2);
-        AllergenePresenter allergenePresenter = new AllergenePresenter();
-        ElementoMenuPresenter presenter = new ElementoMenuPresenter();
-
-        allergenePresenter.saveAllergene(a1);
-        allergenePresenter.saveAllergene(a2);
-        presenter.saveElementoMenu(e1);
         presenter.saveElementoMenu(e2);
 
-        initializeComponents();
+        initializeComponents();*/
 
     }
 
