@@ -48,6 +48,5 @@ dependencies {
 
 
     //OkHttp
-
     implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '5.0.0-alpha.11'
 }
