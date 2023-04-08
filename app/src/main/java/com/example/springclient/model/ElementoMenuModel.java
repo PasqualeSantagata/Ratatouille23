@@ -1,10 +1,13 @@
 package com.example.springclient.model;
 
+import android.util.Log;
+
 import com.example.springclient.RetrofitService.ElementoMenuAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.errorUtils.APIutil;
+import com.example.springclient.errorUtils.ApiError;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,8 +31,10 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                     elementoMenuCallback.onSuccess();
                 }
                 else{
-                    String errorMessage = APIutil.parseError(response);
-                    elementoMenuCallback.onFinished(errorMessage);
+                    assert response.errorBody() != null;
+                    ApiError apiError = new Gson().fromJson(response.errorBody().charStream(), ApiError.class);
+                    Log.e("errore: ", apiError.getMessage());
+                    elementoMenuCallback.onFinished(apiError.getMessage());
                 }
 
             }

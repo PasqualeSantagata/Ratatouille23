@@ -15,7 +15,7 @@ public class RetrofitService {
 
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
-    private AllergeneAPI allergeneAPI;
+
 
 
     public static RetrofitService getIstance(){
@@ -28,6 +28,8 @@ public class RetrofitService {
 
     private RetrofitService(){
         OkHttpClient.Builder okHttp = new OkHttpClient.Builder();
+
+        /** PER TESTING **/
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttp.addInterceptor(loggingInterceptor);
@@ -41,7 +43,7 @@ public class RetrofitService {
 
         utenteAPI = retrofitClient.create(UtenteAPI.class);
         elementoMenuAPI = retrofitClient.create(ElementoMenuAPI.class);
-        allergeneAPI = retrofitClient.create(AllergeneAPI.class);
+
 
     }
 
@@ -52,10 +54,5 @@ public class RetrofitService {
     public ElementoMenuAPI getElementoMenuAPI(){
         return elementoMenuAPI;
     }
-
-    public AllergeneAPI getAllergeneAPI(){
-        return allergeneAPI;
-    }
-
 
 }

@@ -8,10 +8,6 @@ import android.widget.EditText;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.RegisterUtenteContract;
-import com.example.springclient.entity.Allergene;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.presenter.AllergenePresenter;
-import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.RegisterPresenter;
 import com.example.springclient.entity.Utente;
 

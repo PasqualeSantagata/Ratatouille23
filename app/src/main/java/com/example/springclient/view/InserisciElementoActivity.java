@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
-import com.example.springclient.entity.Allergene;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterCategorie;
@@ -58,10 +57,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         //Spinner
         spinnerCategorie = findViewById(R.id.categorie_spinner);
         List<String> categorie = new ArrayList<>();
+
         categorie.add("Primo");
         categorie.add("Secondo");
         categorie.add("Drink");
         categorie.add("Dessert");
+
         spinnerAdapterCategorie = new SpinnerAdapterCategorie(InserisciElementoActivity.this, categorie);
         spinnerCategorie.setAdapter(spinnerAdapterCategorie);
 
@@ -70,6 +71,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         okButton.setOnClickListener(view -> {
             if(checkFields()) {
+                Log.e("Ok:", "Ok");
                 ElementoMenu elementoMenu = getElementoValues();
                 elementoMenuPresenter.saveElementoMenu(elementoMenu);
             }
@@ -88,21 +90,21 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     public ElementoMenu getElementoValues() {
         String nomeElemento, prezzoElemento;
         String[] elencoAllergeni;
-        String descrizione;
+        String descrizione, lingua = "Italiano";
 
         ElementoMenu elementoMenu;
 
-        List<Allergene> listOfAllergeni = new ArrayList<>();
+        List<String> listOfAllergeni = new ArrayList<>();
 
-        nomeElemento = nomeElementoTextInputLayout.getEditText().toString();
-        prezzoElemento = prezzoElementoTextInputLayout.getEditText().toString();
-        elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().toString().split(",");
-        descrizione = descrizioneTextInputLayout.getEditText().toString();
-
+        nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
+        prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
+        elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
+        descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
+        Log.e("prezzo:", prezzoElemento);
         for(String s: elencoAllergeni) {
-            listOfAllergeni.add(new Allergene(s));
+            listOfAllergeni.add(s);
         }
-        elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, listOfAllergeni);
+        elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, listOfAllergeni, lingua);
 
 
         return  elementoMenu;
@@ -116,19 +118,19 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         String descrizione;
 
 
-        nomeElemento = nomeElementoTextInputLayout.getEditText().toString();
-        prezzoElemento = prezzoElementoTextInputLayout.getEditText().toString();
-        elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().toString().split(",");
-        descrizione = descrizioneTextInputLayout.getEditText().toString();
+        nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
+        prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
+        elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
+        descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
 
 
-        if(nomeElemento.matches("")){
+        if(nomeElemento.equals("")){
             nomeElementoTextInputLayout.setError("Nome non valido");
 
             checked = false;
         }
         else{
-            Log.d("valore", String.valueOf(10));
+
             nomeElementoTextInputLayout.setErrorEnabled(false);
         }
 

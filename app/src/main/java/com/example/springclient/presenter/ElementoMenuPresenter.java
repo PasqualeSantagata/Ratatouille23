@@ -1,6 +1,7 @@
 package com.example.springclient.presenter;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
@@ -29,11 +30,13 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback() {
             @Override
             public void onFinished(String errorMessage) {
+                Toast.makeText(inserisciElementoView, errorMessage, Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onFailure(Throwable t) {
+                Toast.makeText(inserisciElementoView, t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("elemento: ", "errore salvataggio elemento");
             }
 
