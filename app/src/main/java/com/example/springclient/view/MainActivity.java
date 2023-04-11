@@ -29,11 +29,6 @@ public class MainActivity extends AppCompatActivity implements RegisterUtenteCon
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*registerPresenter = new RegisterPresenter(this);
-
-        presenter.saveElementoMenu(e2);
-
-        initializeComponents();*/
 
     }
 

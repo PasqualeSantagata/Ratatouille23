@@ -32,9 +32,10 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                 }
                 else{
                     assert response.errorBody() != null;
-                    ApiError apiError = new Gson().fromJson(response.errorBody().charStream(), ApiError.class);
-                    Log.e("errore: ", apiError.getMessage());
-                    elementoMenuCallback.onFinished(apiError.getMessage());
+                    ApiError[] apiError = new Gson().fromJson(response.errorBody().charStream(), ApiError[].class);
+                    for(ApiError a: apiError)
+                        Log.e("errore: ", a.getMessage());
+                   /* elementoMenuCallback.onFinished(apiError.);*/
                 }
 
             }
