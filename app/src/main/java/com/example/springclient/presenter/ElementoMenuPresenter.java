@@ -9,6 +9,8 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.InserisciElementoActivity;
 
+import java.util.List;
+
 public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     private ElementoMenuModel elementoMenuModel;
@@ -27,22 +29,24 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
-        elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback() {
+        elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback<ElementoMenu>() {
             @Override
-            public void onFinished(String errorMessage) {
-                Toast.makeText(inserisciElementoView, errorMessage, Toast.LENGTH_SHORT).show();
+            public void onFinished(List<String> errorMessages) {
+                inserisciElementoView.showErrors(errorMessages);
+                getAllElementiMenu();
 
             }
 
             @Override
             public void onFailure(Throwable t) {
                 Toast.makeText(inserisciElementoView, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("elemento: ", "errore salvataggio elemento");
+                Log.e("Failure: ", t.getMessage());
             }
 
             @Override
-            public void onSuccess() {
+            public void onSuccess(ElementoMenu elem) {
                 inserisciElementoView.cleanFields();
+                getAllElementiMenu();
 
             }
 
@@ -51,6 +55,22 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     @Override
     public void getAllElementiMenu() {
+        elementoMenuModel.getAllElementiMenu(new ElementoMenuContract.Model.ElementoMenuCallback<List<ElementoMenu>>() {
+            @Override
+            public void onFinished(List<String> errorMessage) {}
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("onFailure", t.getMessage());
+            }
+
+            @Override
+            public void onSuccess(List<ElementoMenu> returnedData) {
+                for (ElementoMenu e: returnedData) {
+                    e.getNome();
+                }
+            }
+
+        });
 
     }
 }

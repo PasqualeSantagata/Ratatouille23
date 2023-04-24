@@ -26,26 +26,19 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private Button okButton;
     private Button indietroButton;
     private ElementoMenuPresenter elementoMenuPresenter;
-
     private Spinner spinnerCategorie;
-
     private SpinnerAdapterCategorie spinnerAdapterCategorie;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inserisci_elemento);
-
         elementoMenuPresenter = new ElementoMenuPresenter(this);
         initializeComponents();
-
     }
-
 
     @Override
     public void initializeComponents() {
-
         okButton = findViewById(R.id.buttonInserElemOk);
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
 
@@ -53,7 +46,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         prezzoElementoTextInputLayout = findViewById(R.id.TextInputLayoutPrezzoInserisciElementoMenu);
         elencoAllergeniTextInputLayout = findViewById(R.id.TextInputLayoutAllergeniInserisciElementoMenu);
         descrizioneTextInputLayout = findViewById(R.id.TextInputLayoutDescrizioneInserisciElementoMenu);
-
         //Spinner
         spinnerCategorie = findViewById(R.id.categorie_spinner);
         List<String> categorie = new ArrayList<>();
@@ -66,9 +58,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         spinnerAdapterCategorie = new SpinnerAdapterCategorie(InserisciElementoActivity.this, categorie);
         spinnerCategorie.setAdapter(spinnerAdapterCategorie);
 
-
-
-
         okButton.setOnClickListener(view -> {
             if(checkFields()) {
 
@@ -76,14 +65,8 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
                 elementoMenuPresenter.saveElementoMenu(elementoMenu);
             }
         });
-
-
         indietroButton.setOnClickListener(view -> {
-
         });
-
-
-
     }
 
     @Override
@@ -105,10 +88,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
             listOfAllergeni.add(s);
         }
         elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, listOfAllergeni, lingua);
-
-
         return  elementoMenu;
-
     }
 
     private boolean checkFields(){
@@ -117,26 +97,20 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         String[] elencoAllergeni;
         String descrizione;
 
-
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
         elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
 
-
         if(nomeElemento.equals("")){
             nomeElementoTextInputLayout.setError("Nome non valido");
-
             checked = false;
         }
         else{
-
             nomeElementoTextInputLayout.setErrorEnabled(false);
         }
-
         if(prezzoElemento.isEmpty() || !prezzoElemento.matches("[+-]?([0-9]*[.])?[0-9]+")){
             prezzoElementoTextInputLayout.setError("Prezzo non valido");
-
             checked = false;
         }
         else{
@@ -144,17 +118,14 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         }
         if(descrizione.isEmpty()){
             descrizioneTextInputLayout.setError("Descrizione non valida");
-
+            String s = "";
             checked = false;
         }
         else{
             prezzoElementoTextInputLayout.setErrorEnabled(false);
         }
-
-
         return checked;
     }
-
 
     @Override
     public void cleanFields() {
@@ -162,8 +133,14 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         prezzoElementoTextInputLayout.getEditText().setText("");
         elencoAllergeniTextInputLayout.getEditText().setText("");
         descrizioneTextInputLayout.getEditText().setText("");
-
     }
 
+    public void showErrors(List<String> listOfErrors){
+        for(String s: listOfErrors) {
+          if(s.toLowerCase().contains("nome")) {
+              nomeElementoTextInputLayout.setError(s);
+          }
+        }
+    }
 
 }

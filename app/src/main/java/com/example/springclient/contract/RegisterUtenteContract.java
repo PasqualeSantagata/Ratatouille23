@@ -12,10 +12,11 @@ public interface RegisterUtenteContract {
         void saveUtente(Utente utente, RegisterCallback registerCallback);
         void getUtente();
 
-        interface RegisterCallback {
+        interface RegisterCallback{
 
             void onFinished();
             void onFailure(Throwable t);
+
 
         }
     }

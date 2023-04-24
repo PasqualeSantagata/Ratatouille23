@@ -2,21 +2,23 @@ package com.example.springclient.contract;
 
 import com.example.springclient.entity.ElementoMenu;
 
+import java.util.List;
+
 public interface ElementoMenuContract {
 
     interface Model{
 
         void saveElementoMenu(ElementoMenu elementoMenu, ElementoMenuCallback elementoMenuCallback);
 
-        void getAllElementiMenu();
+        void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback);
 
-        interface ElementoMenuCallback{
+        interface ElementoMenuCallback<T>{
 
-            void onFinished(String errorMessage);
+            void onFinished(List<String> errorMessage);
 
             void onFailure(Throwable t);
 
-            void onSuccess();
+            void onSuccess(T returnedData);
 
         }
 
