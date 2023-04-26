@@ -17,16 +17,13 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private RetrofitService retrofitService;
     private InserisciElementoActivity inserisciElementoView;
 
-
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoView){
         if(retrofitService == null)
             retrofitService = RetrofitService.getIstance();
 
         elementoMenuModel = new ElementoMenuModel(retrofitService);
         this.inserisciElementoView = inserisciElementoView;
-
     }
-
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
         elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback<ElementoMenu>() {
@@ -34,25 +31,19 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             public void onFinished(List<String> errorMessages) {
                 inserisciElementoView.showErrors(errorMessages);
                 getAllElementiMenu();
-
             }
-
             @Override
             public void onFailure(Throwable t) {
                 Toast.makeText(inserisciElementoView, t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("Failure: ", t.getMessage());
             }
-
             @Override
             public void onSuccess(ElementoMenu elem) {
                 inserisciElementoView.cleanFields();
                 getAllElementiMenu();
-
             }
-
         });
     }
-
     @Override
     public void getAllElementiMenu() {
         elementoMenuModel.getAllElementiMenu(new ElementoMenuContract.Model.ElementoMenuCallback<List<ElementoMenu>>() {
@@ -62,14 +53,12 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
             }
-
             @Override
             public void onSuccess(List<ElementoMenu> returnedData) {
                 for (ElementoMenu e: returnedData) {
-                    e.getNome();
+                    Log.d("elemento: ", e.getNome());
                 }
             }
-
         });
 
     }
