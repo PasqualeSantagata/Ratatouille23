@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
@@ -36,6 +37,7 @@ public class RetrofitService {
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(base_URL)
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .client(okHttp.build());
 
@@ -43,8 +45,6 @@ public class RetrofitService {
 
         utenteAPI = retrofitClient.create(UtenteAPI.class);
         elementoMenuAPI = retrofitClient.create(ElementoMenuAPI.class);
-
-
     }
 
     public UtenteAPI getUtenteAPI(){

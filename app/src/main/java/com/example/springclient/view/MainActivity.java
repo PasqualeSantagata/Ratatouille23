@@ -14,24 +14,16 @@ import com.example.springclient.entity.Utente;
 import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity implements RegisterUtenteContract.View {
-
     private EditText inputEditTextNome;
     private EditText inputEditTextCognome;
-    EditText EditTextPassword;
-    EditText EditTextEmail;
-
+    private EditText EditTextPassword;
+    private EditText EditTextEmail;
     private RegisterPresenter registerPresenter;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
-
     private void initializeComponents() {
        inputEditTextNome =  findViewById(R.id.editTextTextPersonName2);
        inputEditTextCognome =  findViewById(R.id.editTextTextPersonName);
@@ -39,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements RegisterUtenteCon
        EditTextEmail =  findViewById(R.id.editTextTextEmailAddress);
 
        Button buttonSave = findViewById(R.id.button);
-
-
 
        buttonSave.setOnClickListener(view -> {
            String nome, cognome, email, password;
@@ -51,33 +41,23 @@ public class MainActivity extends AppCompatActivity implements RegisterUtenteCon
            email = String.valueOf(EditTextEmail.getText());
            password = String.valueOf(EditTextPassword.getText());
 
-
            Utente utente = new Utente();
            utente.setNome(nome);
            utente.setCognome(cognome);
            utente.setEmail(email);
            utente.setPassword(password);
 
-
-
            registerPresenter.saveUtente(utente);
            cleanFields();
-
-
-
        });
-
-
     }
 
     @Override
     public void cleanFields(){
-
         inputEditTextNome.setText("");
         inputEditTextCognome.setText("");
         EditTextPassword.setText("");
         EditTextEmail.setText("");
-
     }
 
 
