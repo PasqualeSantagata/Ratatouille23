@@ -55,13 +55,23 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
         elementoMenuAPI.getAllElementoMenu()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<ElementoMenu>>() {
+                .subscribe(new SingleObserver<Response<List<ElementoMenu>>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                     }
                     @Override
-                    public void onSuccess(@NonNull List<ElementoMenu> elementoMenus) {
-                        elementoMenuCallback.onSuccess(elementoMenus);
+                    public void onSuccess(@NonNull Response<List<ElementoMenu>> elementoMenus) {
+                        if(elementoMenus.isSuccessful()){
+                            elementoMenuCallback.onSuccess(elementoMenus.body());
+                        }
+                        else{
+                            assert elementoMenus.errorBody() != null;
+                            ApiError[] apiError = new Gson().fromJson(elementoMenus.errorBody().charStream(), ApiError[].class);
+                            List<String> listOfError = new ArrayList<>();
+                            for(ApiError a: apiError)
+                                listOfError.add(a.getMessage());
+                            elementoMenuCallback.onFinished(listOfError);
+                        }
                     }
                     @Override
                     public void onError(@NonNull Throwable e) {
