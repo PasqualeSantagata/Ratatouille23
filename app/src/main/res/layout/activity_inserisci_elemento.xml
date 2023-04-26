@@ -27,13 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginBottom="77dp"
-        android:backgroundTint="@color/my_green"
         android:text="@string/indietro"
         android:textColor="@android:color/white"
-
-        app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:backgroundTint="@color/my_green"
+        app:cornerRadius="@android:dimen/app_icon_size" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayoutNomeInserisciElementoMenu"
@@ -46,14 +46,20 @@
         android:hint="@string/nome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:boxStrokeColor="@color/my_green"
+        app:hintTextColor="@color/my_green"
+
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditTextNomeInserisciElementoMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:shadowColor="#4CAF50"
-            android:singleLine="true" />
+            android:singleLine="true"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -64,10 +70,14 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="800dp"
-        android:hint="Prezzo"
+        android:hint="@string/prezzo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutNomeInserisciElementoMenu">
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutNomeInserisciElementoMenu"
+
+        app:boxStrokeColor="@color/my_green"
+        app:hintTextColor="@color/my_green"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditTextPrezzoInserisciElementoMenu"
@@ -85,7 +95,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
-        android:hint="Allergeni "
+        android:hint="@string/allergeni"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutPrezzoInserisciElementoMenu">
@@ -99,24 +109,29 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayoutDescrizioneInserisciElementoMenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
-        android:hint="Descrizione"
+        android:hint="@string/descrizione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutAllergeniInserisciElementoMenu">
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutAllergeniInserisciElementoMenu"
+
+        app:boxStrokeColor="@color/my_green"
+        app:hintTextColor="@color/my_green"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputTextFieldDescrizioneInserisciElementoMenu"
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:singleLine="false"
-            android:textAlignment="viewStart"
-            android:textColorLink="#4CAF50" />
+            android:textAlignment="gravity"
+            android:textColorLink="#4CAF50"
+            android:inputType="textMultiLine"
+            android:maxLines="@integer/material_motion_duration_long_1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner

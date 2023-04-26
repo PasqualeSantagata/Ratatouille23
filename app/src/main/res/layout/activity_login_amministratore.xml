@@ -13,7 +13,10 @@
         android:layout_marginBottom="112dp"
         android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:backgroundTint="@color/my_green"
+        app:cornerRadius="@android:dimen/app_icon_size" />
 
     <Button
         android:id="@+id/buttonNuovaUtenzaIndietro"
@@ -23,7 +26,10 @@
         android:layout_marginBottom="116dp"
         android:text="Indietro"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:backgroundTint="@color/my_green"
+        app:cornerRadius="@android:dimen/app_icon_size" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"

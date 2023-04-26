@@ -8,4 +8,8 @@
     <string name="crea_utente" />
     <string name="nome">Nome</string>
     <string name="indietro">indietro</string>
+    <string name="prezzo">prezzo</string>
+    <string name="allergeni">allergeni</string>
+    <string name="nota">breve nota</string>
+    <string name="descrizione">descrizione</string>
 </resources>
