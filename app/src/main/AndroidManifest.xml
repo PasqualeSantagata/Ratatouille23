@@ -15,29 +15,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpringClient"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        android:debuggable="true"
+        tools:targetApi="31"
+        tools:ignore="HardcodedDebugMode">
         <activity
             android:name=".view.MainActivity"
-            android:exported="false"
+            android:exported= "true"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
             tools:ignore="LockedOrientationActivity">
-
-        </activity>
-
-        <activity
-            android:name=".view.InserisciElementoActivity"
-            android:exported="true"
-            android:configChanges="orientation"
-            android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity">
-
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".view.InserisciElementoActivity"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:screenOrientation= "landscape"
+            tools:ignore="LockedOrientationActivity">
+
+
 
             <meta-data
                 android:name="android.app.lib_name"

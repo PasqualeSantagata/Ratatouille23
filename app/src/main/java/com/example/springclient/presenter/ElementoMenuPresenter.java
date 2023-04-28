@@ -40,7 +40,6 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             @Override
             public void onSuccess(ElementoMenu elem) {
                 inserisciElementoView.cleanFields();
-                getAllElementiMenu();
             }
         });
     }

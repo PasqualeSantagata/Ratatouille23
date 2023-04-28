@@ -1,4 +1,4 @@
-package com.example.springclient.errorUtils;
+package com.example.springclient.apiUtils;
 
 public class ApiError{
 

@@ -1,12 +1,10 @@
 package com.example.springclient.model;
 
-import android.util.Log;
-
 import com.example.springclient.RetrofitService.ElementoMenuAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.errorUtils.ApiError;
+import com.example.springclient.apiUtils.ApiError;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -75,7 +73,7 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                     }
                     @Override
                     public void onError(@NonNull Throwable e) {
-                         elementoMenuCallback.onFailure(e);
+                        elementoMenuCallback.onFailure(e);
                     }
                 });
     }

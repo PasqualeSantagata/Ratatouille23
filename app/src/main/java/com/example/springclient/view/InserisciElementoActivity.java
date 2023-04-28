@@ -60,7 +60,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         okButton.setOnClickListener(view -> {
             if(checkFields()) {
-
                 ElementoMenu elementoMenu = getElementoValues();
                 elementoMenuPresenter.saveElementoMenu(elementoMenu);
             }

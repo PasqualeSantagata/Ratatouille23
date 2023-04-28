@@ -1,6 +1,14 @@
 package com.example.springclient.RetrofitService;
 
+import android.content.SharedPreferences;
+
+import androidx.annotation.NonNull;
+
+import com.example.springclient.apiUtils.MyInterceptor;
+import com.example.springclient.presenter.UtentePresenter;
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -13,10 +21,10 @@ public class RetrofitService {
 
     private static final  String base_URL ="http://192.168.1.4:8080/";
     private static RetrofitService ISTANCE;
-
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
-
+    private OkHttpClient.Builder okHttp;
+    private MyInterceptor myInterceptor;
 
 
     public static RetrofitService getIstance(){
@@ -28,12 +36,14 @@ public class RetrofitService {
     }
 
     private RetrofitService(){
-        OkHttpClient.Builder okHttp = new OkHttpClient.Builder();
+         okHttp = new OkHttpClient.Builder();
+         myInterceptor = new MyInterceptor();
 
         /** PER TESTING **/
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttp.addInterceptor(loggingInterceptor);
+        okHttp.addInterceptor(myInterceptor);
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(base_URL)
@@ -54,5 +64,7 @@ public class RetrofitService {
     public ElementoMenuAPI getElementoMenuAPI(){
         return elementoMenuAPI;
     }
+
+    public MyInterceptor getMyInterceptor(){return myInterceptor;}
 
 }

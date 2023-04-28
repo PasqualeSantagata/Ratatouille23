@@ -3,34 +3,12 @@ package com.example.springclient.entity;
 import java.time.LocalDate;
 
 public class Utente {
-
-
-    private Long id;
-
     private String nome;
-
     private String cognome;
-
     private String email;
-
     private String password;
-
-
     public Utente() {
         super();
-    }
-
-    public Utente(
-            Long id,
-            String nome,
-            String cognome,
-            String email) {
-        super();
-        this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-
     }
 
     public Utente(
@@ -63,13 +41,6 @@ public class Utente {
         this.cognome = cognome;
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setPassword(String password){
         this.password = password;
     }
@@ -77,7 +48,6 @@ public class Utente {
     public String getPassword(){
         return password;
     }
-
 
     public String getEmail() {
         return email;
@@ -92,7 +62,6 @@ public class Utente {
 
         // TODO Auto-generated method stub
         return "Student{" +
-                "id= "+ id +
                 ", firstName= " + nome +
                 ", lastName= " + cognome +
                 ", email= " + email +

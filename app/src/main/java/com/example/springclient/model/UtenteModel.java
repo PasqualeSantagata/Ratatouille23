@@ -2,16 +2,19 @@ package com.example.springclient.model;
 
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.RetrofitService.UtenteAPI;
-import com.example.springclient.contract.RegisterUtenteContract;
+import com.example.springclient.apiUtils.AuthRequest;
+import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.entity.Utente;
+import com.example.springclient.apiUtils.ApiToken;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class UtenteModel implements RegisterUtenteContract.Model {
+public class UtenteModel implements UtenteContract.Model {
 
     private UtenteAPI utenteAPI;
 
@@ -21,35 +24,35 @@ public class UtenteModel implements RegisterUtenteContract.Model {
     }
 
     @Override
-    public void saveUtente(Utente utente, RegisterCallback registerCallback) {
-        utenteAPI.registerNewUtente(utente).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                registerCallback.onFinished();
-;
-            }
+    public void saveUtente(Utente utente, UtenteContract.UtenteCallback utenteCallbackCallback) {
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-            }
-        });
 
     }
-
     @Override
-    public void getUtente() {
-        utenteAPI.getAllUtenti().enqueue(new Callback<List<Utente>>() {
-            @Override
-            public void onResponse(Call<List<Utente>> call, Response<List<Utente>> response) {
+    public void logInUtente(AuthRequest authRequest, UtenteContract.UtenteCallback utenteCallback) {
+        utenteAPI.logInUtente(authRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<ApiToken>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-            }
+                    }
 
-            @Override
-            public void onFailure(Call<List<Utente>> call, Throwable t) {
+                    @Override
+                    public void onSuccess(@NonNull Response<ApiToken> apiTokenResponse) {
+                        if(apiTokenResponse.isSuccessful()){
+                            utenteCallback.onSuccess(apiTokenResponse.body());
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
 
     }
+
+
 }
