@@ -1,10 +1,7 @@
 package com.example.springclient.apiUtils;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-
-import com.example.springclient.presenter.UtentePresenter;
 
 import java.io.IOException;
 
@@ -14,6 +11,7 @@ import javax.inject.Singleton;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+
 
 @Singleton
 public class MyInterceptor implements Interceptor {

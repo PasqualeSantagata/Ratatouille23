@@ -12,4 +12,6 @@
     <string name="allergeni">allergeni</string>
     <string name="nota">breve nota</string>
     <string name="descrizione">descrizione</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
