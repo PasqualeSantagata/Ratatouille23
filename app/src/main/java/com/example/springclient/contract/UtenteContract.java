@@ -7,10 +7,8 @@ import com.example.springclient.entity.Utente;
 public interface UtenteContract {
 
     interface Model{
-
         void saveUtente(Utente utente, UtenteCallback registerCallback);
         void logInUtente(AuthRequest authRequest, UtenteCallback utenteCallback);
-
 
     }
 

@@ -42,8 +42,9 @@ public class RetrofitService {
         /** PER TESTING **/
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        okHttp.addInterceptor(loggingInterceptor);
+
         okHttp.addInterceptor(myInterceptor);
+        okHttp.addInterceptor(loggingInterceptor);
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(base_URL)

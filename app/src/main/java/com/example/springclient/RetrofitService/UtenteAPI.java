@@ -24,17 +24,10 @@ public interface UtenteAPI {
     Call<List<Utente>> getAllUtenti();
 
     @POST("api/v1/auth/register")
-    Single<Response<String>> registerNewUtente(@Body Utente utente);
-
-    @POST("api/v1/auth/registerAdmin")
-    Single<Response<String>> registerAdmin(@Body Utente utente);
-
+    Single<Response<String>> registerAddettoSala(@Body Utente utente);
     @POST("api/v1/auth/authenticate")
     @Headers("No-Authentication: true")
     Single<Response<ApiToken>> logInUtente(@Body AuthRequest authRequest);
-
-
-
 
 
 }

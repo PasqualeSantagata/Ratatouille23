@@ -22,7 +22,6 @@ public class MyInterceptor implements Interceptor {
     public MyInterceptor() {
 
     }
-
     public void setSessionToken(String sessionToken) {
         this.token = sessionToken;
     }
@@ -34,7 +33,6 @@ public class MyInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-
         Request.Builder requestBuilder = request.newBuilder();
 
         if (request.header("No-Authentication") == null) {

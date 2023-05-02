@@ -1,28 +1,21 @@
 package com.example.springclient.entity;
 
-import java.time.LocalDate;
-
 public class Utente {
     private String nome;
     private String cognome;
     private String email;
     private String password;
-    public Utente() {
-        super();
-    }
+    public Utente() {super();}
 
     public Utente(
             String nome,
             String cognome,
             String email
-
             ) {
         super();
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-
-
     }
 
     public String getNome() {
@@ -55,8 +48,6 @@ public class Utente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
     @Override
     public String toString() {
 
