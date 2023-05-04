@@ -38,28 +38,34 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayoutNomeInserisciElementoMenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="430dp"
+        android:layout_height="52dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
         android:hint="@string/nome"
+        app:boxStrokeColor="@color/my_green"
+        app:hintTextColor="@color/my_green"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:boxStrokeColor="@color/my_green"
-        app:hintTextColor="@color/my_green"
-
         >
 
-        <com.google.android.material.textfield.TextInputEditText
+        <AutoCompleteTextView
+            android:id="@+id/TextInputEditTextNomeInserisciElementoMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shadowColor="#4CAF50"
+            android:singleLine="true" />
+        <!-- <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/TextInputEditTextNomeInserisciElementoMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:shadowColor="#4CAF50"
             android:singleLine="true"
-            />
+            />-->
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

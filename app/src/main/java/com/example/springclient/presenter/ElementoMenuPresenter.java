@@ -3,12 +3,17 @@ package com.example.springclient.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.springclient.RetrofitService.FoodFactsRetrofit;
 import com.example.springclient.RetrofitService.RetrofitService;
+import com.example.springclient.apiUtils.FoodFactsResponse;
+import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
+import com.example.springclient.model.FoodFactsModel;
 import com.example.springclient.view.InserisciElementoActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
@@ -17,12 +22,15 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private RetrofitService retrofitService;
     private InserisciElementoActivity inserisciElementoView;
 
+
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoView){
         if(retrofitService == null)
             retrofitService = RetrofitService.getIstance();
 
         elementoMenuModel = new ElementoMenuModel(retrofitService);
         this.inserisciElementoView = inserisciElementoView;
+
+
     }
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
@@ -59,6 +67,10 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
                 }
             }
         });
-
     }
+
+
+
+
+
 }

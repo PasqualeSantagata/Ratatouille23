@@ -20,7 +20,18 @@
         tools:ignore="HardcodedDebugMode">
         <activity
             android:name=".view.MainActivity"
-            android:exported= "true"
+            android:exported= "false"
+            android:configChanges="orientation"
+            android:screenOrientation= "landscape"
+            tools:ignore="LockedOrientationActivity">
+
+
+
+        </activity>
+
+        <activity
+            android:name=".view.InserisciElementoActivity"
+            android:exported="true"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
             tools:ignore="LockedOrientationActivity">
@@ -30,15 +41,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-
-        <activity
-            android:name=".view.InserisciElementoActivity"
-            android:exported="false"
-            android:configChanges="orientation"
-            android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity">
 
 
 
