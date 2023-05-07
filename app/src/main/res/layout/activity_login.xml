@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login">
 
     <Button
         android:id="@+id/buttonNuovaUtenzaOk"
@@ -11,10 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="260dp"
         android:layout_marginBottom="112dp"
-        android:backgroundTint="@color/my_green"
+        android:backgroundTint="@color/white"
         android:text="@android:string/ok"
-        app:cornerRadius="@android:dimen/app_icon_size"
+        android:textColor="@color/black"
 
+        app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -24,10 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="332dp"
         android:layout_marginBottom="116dp"
-        android:backgroundTint="@color/my_green"
+        android:backgroundTint="@color/white"
         android:text="Indietro"
-        app:cornerRadius="@android:dimen/app_icon_size"
+        android:textColor="@color/black"
 
+        app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -36,23 +39,21 @@
         android:layout_width="357dp"
         android:layout_height="0dp"
         android:layout_marginStart="450dp"
-        android:layout_marginTop="165dp"
-        android:layout_marginBottom="124dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginBottom="80dp"
+        android:hint="@string/email"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        android:hint="@string/email"
-        app:startIconDrawable="@drawable/ic_user"
-        app:boxStrokeColor="@color/my_green"
-        app:hintTextColor="@color/my_green"
-        >
+        app:startIconDrawable="@drawable/ic_user">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="356dp"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-             />
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,21 +62,38 @@
         android:layout_height="0dp"
         android:layout_marginStart="450dp"
         android:layout_marginBottom="396dp"
+        android:hint="@string/password"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+
+        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-
-        android:hint="@string/password"
-        app:endIconMode="password_toggle"
-        app:boxStrokeColor="@color/my_green"
-        app:hintTextColor="@color/my_green"
-        >
+        app:startIconDrawable="@drawable/ic_lock">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+            android:layout_width="356dp"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-             />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="220dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="510dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="550dp"
+        android:layout_marginBottom="47dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
