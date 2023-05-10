@@ -1,13 +1,10 @@
 package com.example.springclient.view;
 
 import android.annotation.SuppressLint;
-import android.database.Observable;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -16,7 +13,6 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.apiUtils.FoodFactsResponse;
 import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
@@ -24,9 +20,6 @@ import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.FoodFactsPresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterCategorie;
 import com.google.android.material.textfield.TextInputLayout;
-import com.jakewharton.rxbinding4.widget.RxAdapter;
-import com.jakewharton.rxbinding4.widget.RxAdapterView;
-import com.jakewharton.rxbinding4.widget.RxAutoCompleteTextView;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
 import java.util.ArrayList;
@@ -34,7 +27,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View {
 
@@ -57,6 +49,8 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inserisci_elemento);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         elementoMenuPresenter = new ElementoMenuPresenter(this);
         foodFactsPresenter = new FoodFactsPresenter(this);
         initializeComponents();

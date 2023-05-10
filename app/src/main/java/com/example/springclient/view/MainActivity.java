@@ -1,40 +1,41 @@
 package com.example.springclient.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.apiUtils.AuthRequest;
 import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.presenter.UtentePresenter;
-import com.example.springclient.entity.Utente;
-
-import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity implements UtenteContract.View {
     private EditText inputEditTextNome;
     private EditText inputEditTextCognome;
     private EditText EditTextPassword;
     private EditText EditTextEmail;
+    private TextView textViewPasswordDimenticata;
     private UtentePresenter utentePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         utentePresenter = new UtentePresenter(this);
         initializeComponents();
     }
     private void initializeComponents() {
-       inputEditTextNome =  findViewById(R.id.editTextTextPersonName2);
-       inputEditTextCognome =  findViewById(R.id.editTextTextPersonName);
-       EditTextPassword =  findViewById(R.id.editTextTextPassword);
-       EditTextEmail =  findViewById(R.id.editTextTextEmailAddress);
+       EditTextPassword =  findViewById(R.id.textInputLayoutPassword);
+       EditTextEmail =  findViewById(R.id.textInputLayoutEmail);
+       //CREDO debba fare la lambda expr per avviare poi l'activity di recupero password
+       textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
 
-       Button buttonSave = findViewById(R.id.button);
+       Button buttonSave = findViewById(R.id.buttonLoginOk);
 
        buttonSave.setOnClickListener(view -> {
            String nome, cognome, email, password;
