@@ -14,4 +14,6 @@
     <string name="descrizione">descrizione</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="nuovaPassword">Nuova password</string>
+    <string name="ripeti_password">Ripeti password</string>
 </resources>

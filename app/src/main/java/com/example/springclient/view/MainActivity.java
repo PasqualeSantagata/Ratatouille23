@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     }
     private void initializeComponents() {
        EditTextPassword =  findViewById(R.id.textInputLayoutPassword);
-       EditTextEmail =  findViewById(R.id.textInputLayoutEmail);
+       EditTextEmail =  findViewById(R.id.textInputLayoutEmailLogin);
        //CREDO debba fare la lambda expr per avviare poi l'activity di recupero password
        textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
 
