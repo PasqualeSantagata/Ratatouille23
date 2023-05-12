@@ -5,17 +5,20 @@ public class Utente {
     private String cognome;
     private String email;
     private String password;
+    private boolean firstAccess;
     public Utente() {super();}
 
     public Utente(
             String nome,
             String cognome,
-            String email
+            String email,
+            boolean firstAccess
             ) {
         super();
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.firstAccess = firstAccess;
     }
 
     public String getNome() {

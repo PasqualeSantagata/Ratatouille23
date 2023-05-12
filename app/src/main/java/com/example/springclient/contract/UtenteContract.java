@@ -22,6 +22,8 @@ public interface UtenteContract {
         void getAllUtenti();
         void logInUtente(AuthRequest authRequest);
         void saveUtente(Utente utente);
+        void reimpostaPassword(Utente utente);
+        void passwordDimenticata(Utente utente);
     }
 
     interface UtenteCallback<T>{

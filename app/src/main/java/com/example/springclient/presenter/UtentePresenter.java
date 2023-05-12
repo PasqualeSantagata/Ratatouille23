@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.springclient.apiUtils.AuthRequest;
-import com.example.springclient.apiUtils.MyInterceptor;
-import com.example.springclient.contract.UtenteContract;
-import com.example.springclient.apiUtils.ApiToken;
-import com.example.springclient.model.UtenteModel;
 import com.example.springclient.RetrofitService.RetrofitService;
+import com.example.springclient.apiUtils.ApiToken;
+import com.example.springclient.apiUtils.AuthRequest;
+import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.entity.Utente;
+import com.example.springclient.model.UtenteModel;
 import com.example.springclient.view.InserisciElementoActivity;
 import com.example.springclient.view.MainActivity;
 
@@ -64,9 +63,22 @@ public class UtentePresenter implements UtenteContract.Presenter {
 
     }
 
+    @Override
+    public void reimpostaPassword(Utente utente) {
+        //Al primo accesso l'utente (addetto sala, addetto alla cucina e supervisore)
+        //deve reimpostare la pass
+
+    }
+
+    @Override
+    public void passwordDimenticata(Utente utente) {
+
+    }
+
     public MainActivity getActivity(){
         return registerActivity;
     }
+
 
 
 }

@@ -16,4 +16,10 @@
     <string name="email">Email</string>
     <string name="nuovaPassword">Nuova password</string>
     <string name="ripeti_password">Ripeti password</string>
+    <string name="login">Login</string>
+    <string name="ho_dimenticato_la_password">ho dimenticato la password</string>
+    <string name="password_dimenticata">Password dimenticata</string>
+    <string name="avviso_primo_accesso">N.B. questo step è richiesto in quanto hai effettuato l\'accesso per la prima volta</string>
+    <string name="reimposta_password">Reimposta password</string>
+    <string name="cognome">Cognome</string>
 </resources>
