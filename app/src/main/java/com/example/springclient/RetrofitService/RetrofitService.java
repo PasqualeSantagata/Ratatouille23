@@ -1,14 +1,11 @@
 package com.example.springclient.RetrofitService;
 
-import android.content.SharedPreferences;
+import com.example.springclient.authentication.MyInterceptor;
 
-import androidx.annotation.NonNull;
-
-import com.example.springclient.apiUtils.MyInterceptor;
+import com.example.springclient.authentication.TokenRefreshInterceptor;
+import com.example.springclient.authentication.TokenRefreshInterceptor;
 import com.example.springclient.presenter.UtentePresenter;
 import com.google.gson.Gson;
-
-import java.io.IOException;
 
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,7 +22,9 @@ public class RetrofitService {
     private ElementoMenuAPI elementoMenuAPI;
     private OkHttpClient.Builder okHttp;
     private MyInterceptor myInterceptor;
-
+    private TokenRefreshInterceptor tokenRefreshInterceptor;
+    //private TokenAuthenticator tokenAuthenticator;
+    private UtentePresenter utentePresenter;
 
     public static RetrofitService getIstance(){
 
@@ -38,14 +37,17 @@ public class RetrofitService {
     private RetrofitService(){
          okHttp = new OkHttpClient.Builder();
          myInterceptor = new MyInterceptor();
+         tokenRefreshInterceptor = new TokenRefreshInterceptor();
+       // tokenAuthenticator = new TokenAuthenticator();
 
-        /** PER TESTING **/
+
+        /** PER TESTING */
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         okHttp.addInterceptor(myInterceptor);
+        okHttp.addInterceptor(tokenRefreshInterceptor);
         okHttp.addInterceptor(loggingInterceptor);
-
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .baseUrl(base_URL)
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -68,4 +70,14 @@ public class RetrofitService {
 
     public MyInterceptor getMyInterceptor(){return myInterceptor;}
 
+    public void setUtentePresenter(UtentePresenter utentePresenter) {
+        this.utentePresenter = utentePresenter;
+    }
+    public TokenRefreshInterceptor getTokenRefreshInterceptor() {
+        return tokenRefreshInterceptor;
+    }
+
+    /*public TokenAuthenticator getTokenAuthenticator() {
+        return tokenAuthenticator;
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.example.springclient.apiUtils;
+package com.example.springclient.authentication;
 
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -13,19 +13,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-@Singleton
+
 public class MyInterceptor implements Interceptor {
     private String token;
     private SharedPreferences preferences;
 
-    @Inject
     public MyInterceptor() {
 
     }
-    public void setSessionToken(String sessionToken) {
-        this.token = sessionToken;
-    }
-
     public void setPreferences(SharedPreferences preferences){
         this.preferences = preferences;
     }
@@ -37,12 +32,12 @@ public class MyInterceptor implements Interceptor {
 
         if (request.header("No-Authentication") == null) {
             Log.d("no-auth", "no");
-            token = preferences.getString("token", "");
+            token = preferences.getString("accessToken", "");
 
             if (token.isEmpty() || token == null) {
                 throw new RuntimeException("Session token should be defined for auth apis");
             } else {
-                requestBuilder.addHeader("Authorization", "Bearer " + token);
+                requestBuilder.header("Authorization", "Bearer " + token);
             }
         }
         return chain.proceed(requestBuilder.build());

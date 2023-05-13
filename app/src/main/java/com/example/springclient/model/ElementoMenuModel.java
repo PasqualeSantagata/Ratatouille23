@@ -1,5 +1,7 @@
 package com.example.springclient.model;
 
+import android.util.Log;
+
 import com.example.springclient.RetrofitService.ElementoMenuAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
@@ -34,12 +36,13 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                     elementoMenuCallback.onSuccess(response.body());
                 }
                 else{
-                    assert response.errorBody() != null;
-                    ApiError[] apiError = new Gson().fromJson(response.errorBody().charStream(), ApiError[].class);
-                    List<String> listOfError = new ArrayList<>();
-                    for(ApiError a: apiError)
-                        listOfError.add(a.getMessage());
-                    elementoMenuCallback.onFinished(listOfError);
+                    if(response.code() == 412) {
+                        ApiError[] apiError = new Gson().fromJson(response.errorBody().charStream(), ApiError[].class);
+                        List<String> listOfError = new ArrayList<>();
+                        for (ApiError a : apiError)
+                            listOfError.add(a.getMessage());
+                        elementoMenuCallback.onFinished(listOfError);
+                    }
                 }
             }
             @Override
@@ -48,7 +51,12 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
             }
         });
     }
+
     @Override
+    public void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback) {
+
+    }
+  /*  @Override
     public void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback) {
         elementoMenuAPI.getAllElementoMenu()
                 .subscribeOn(Schedulers.io())
@@ -76,5 +84,5 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                         elementoMenuCallback.onFailure(e);
                     }
                 });
-    }
+    }*/
 }

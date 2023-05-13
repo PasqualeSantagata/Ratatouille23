@@ -21,19 +21,11 @@
 
         <activity
             android:name=".view.MainActivity"
-            android:exported= "false"
+            android:exported= "true"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
             tools:ignore="LockedOrientationActivity">
-        </activity>
-        
 
-        <activity
-            android:name=".view.InserisciElementoActivity"
-            android:exported="true"
-            android:configChanges="orientation"
-            android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,6 +34,15 @@
             </intent-filter>
 
 
+        </activity>
+
+
+        <activity
+            android:name=".view.InserisciElementoActivity"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:screenOrientation= "landscape"
+            tools:ignore="LockedOrientationActivity">
 
             <meta-data
                 android:name="android.app.lib_name"

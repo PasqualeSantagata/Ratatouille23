@@ -1,7 +1,7 @@
 package com.example.springclient.contract;
 
 
-import com.example.springclient.apiUtils.AuthRequest;
+import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.entity.Utente;
 
 public interface UtenteContract {

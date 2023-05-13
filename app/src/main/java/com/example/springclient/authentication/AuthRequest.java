@@ -1,4 +1,4 @@
-package com.example.springclient.apiUtils;
+package com.example.springclient.authentication;
 
 public class AuthRequest {
     private String email;

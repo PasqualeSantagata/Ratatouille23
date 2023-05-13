@@ -1,5 +1,6 @@
 package com.example.springclient.entity;
 
+
 public class Utente {
     private String nome;
     private String cognome;

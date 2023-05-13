@@ -1,10 +1,14 @@
 package com.example.springclient.view;
 
+
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -13,6 +17,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.apiUtils.FoodFactsResponse;
 import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
@@ -20,13 +25,18 @@ import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.FoodFactsPresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterCategorie;
 import com.google.android.material.textfield.TextInputLayout;
+import com.jakewharton.rxbinding4.widget.RxAdapter;
+import com.jakewharton.rxbinding4.widget.RxAdapterView;
+import com.jakewharton.rxbinding4.widget.RxAutoCompleteTextView;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View {
 
@@ -41,9 +51,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private Spinner spinnerCategorie;
     private SpinnerAdapterCategorie spinnerAdapterCategorie;
     private AutoCompleteTextView autoTextView;
-    private List<String>  suggeriti;
+    private List<String> suggeriti;
     private ArrayAdapter<String> adapter;
     private List<ProdottoResponse> prodotti;
+    private Disposable autocompDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,16 +67,17 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         initializeComponents();
     }
 
-    @SuppressLint("CheckResult")
+
     @Override
     public void initializeComponents() {
         okButton = findViewById(R.id.buttonInserElemOk);
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
 
-        autoTextView = findViewById(R.id.TextInputEditTextNomeInserisciElementoMenu);
+        nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
         prezzoElementoTextInputLayout = findViewById(R.id.TextInputLayoutPrezzoInserisciElementoMenu);
         elencoAllergeniTextInputLayout = findViewById(R.id.TextInputLayoutAllergeniInserisciElementoMenu);
         descrizioneTextInputLayout = findViewById(R.id.TextInputLayoutDescrizioneInserisciElementoMenu);
+        autoTextView = (AutoCompleteTextView) nomeElementoTextInputLayout.getEditText();
         //Spinner
         spinnerCategorie = findViewById(R.id.categorie_spinner);
         List<String> categorie = new ArrayList<>();
@@ -83,18 +95,19 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setThreshold(3);
 
-        RxTextView.textChanges(autoTextView)
-                .debounce(400, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        charSequence -> {
-                            Editable editable = autoTextView.getText();
-                            if(editable != null && !editable.toString().isEmpty()){
-                                foodFactsPresenter.getElementoMenuDetails(editable.toString());
-                            }
-
+        autocompDisposable =
+            RxTextView.afterTextChangeEvents(autoTextView)
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                    charSequence -> {
+                        Editable editable = autoTextView.getText();
+                        if (editable != null && !editable.toString().isEmpty()) {
+                            foodFactsPresenter.getElementoMenuDetails(editable.toString());
                         }
-                );
+                    });
+
+
         autoTextView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
                     descrizioneTextInputLayout.getEditText().setText(prodotti.get(i).getGeneric_name());
@@ -133,9 +146,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
         Log.e("prezzo:", prezzoElemento);
-        for(String s: elencoAllergeni) {
-            listOfAllergeni.add(s);
-        }
+        Collections.addAll(listOfAllergeni, elencoAllergeni);
         elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, listOfAllergeni, lingua);
         return  elementoMenu;
     }
@@ -200,6 +211,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         adapter = new ArrayAdapter<>(InserisciElementoActivity.this,android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        autoTextView.showDropDown();
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        autocompDisposable.dispose();
     }
 }

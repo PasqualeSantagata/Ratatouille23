@@ -1,5 +1,6 @@
 package com.example.springclient.apiUtils;
 
+
 public class ProdottoResponse {
     private String product_name;
     private String brands;
@@ -12,11 +13,9 @@ public class ProdottoResponse {
         this.generic_name = generic_name;
         this.allergens = allergens;
     }
-
     public String getProduct_name() {
         return product_name;
     }
-
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
     }
