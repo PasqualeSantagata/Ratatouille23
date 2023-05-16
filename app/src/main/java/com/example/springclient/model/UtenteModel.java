@@ -47,6 +47,7 @@ public class UtenteModel implements UtenteContract.Model {
                             utenteCallback.onSuccess(apiTokenResponse.body());
                         }
                         else{
+                            utenteCallback.onFinished();
                             Log.d("login response: ", String.valueOf(apiTokenResponse.code()));
 
                         }
@@ -59,29 +60,5 @@ public class UtenteModel implements UtenteContract.Model {
                 });
     }
 
-    /*public void refreshToken(String token, UtenteContract.UtenteCallback utenteCallback){
-        utenteAPI.refreshToken(token)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ApiToken>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(@NonNull Response<ApiToken> apiTokenResponse) {
-                        if(apiTokenResponse.isSuccessful()){
-                            Log.d("refresh: ", "sono qui");
-                            utenteCallback.onSuccess(apiTokenResponse.body());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-    }*/
 
 }

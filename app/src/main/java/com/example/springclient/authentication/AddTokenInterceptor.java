@@ -12,13 +12,11 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
-
-public class MyInterceptor implements Interceptor {
+public class AddTokenInterceptor implements Interceptor {
     private String token;
     private SharedPreferences preferences;
 
-    public MyInterceptor() {
+    public AddTokenInterceptor() {
 
     }
     public void setPreferences(SharedPreferences preferences){

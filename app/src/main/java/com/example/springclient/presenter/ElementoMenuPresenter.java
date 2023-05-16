@@ -29,9 +29,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
         elementoMenuModel = new ElementoMenuModel(retrofitService);
         this.inserisciElementoView = inserisciElementoView;
-
-
     }
+
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
         elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback<ElementoMenu>() {

@@ -26,7 +26,6 @@ public class TokenRefreshInterceptor implements Interceptor {
 
     public TokenRefreshInterceptor(){
 
-
     }
 
     @NonNull
@@ -37,15 +36,18 @@ public class TokenRefreshInterceptor implements Interceptor {
         Response response = chain.proceed(request);
 
         sharedPreferences = utentePresenter.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        if (response.code() == 401) {
+        if (response.code() == 401 && request.header("No-Authentication").equals(null)) {
             response.close();
             String refreshToken = sharedPreferences.getString("refreshToken", "");
             if(!refreshToken.isEmpty()) {
                 String token = getNewToken("Bearer " + refreshToken);
                 if (token.isEmpty() || token == null) {
+                    /**
+                     * gestire meglio
+                     */
                     throw new RuntimeException("Session token should be defined for auth apis");
                 }
-                 newRequestBuilder.header("Authorization", "Bearer " + token);
+                newRequestBuilder.header("Authorization", "Bearer " + token);
                 return chain.proceed(newRequestBuilder.build());
             }
         }
@@ -53,8 +55,10 @@ public class TokenRefreshInterceptor implements Interceptor {
     }
 
     private String getNewToken(String refreshToken) throws IOException {
+
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
@@ -67,6 +71,9 @@ public class TokenRefreshInterceptor implements Interceptor {
         UtenteAPI service = retrofit.create(UtenteAPI.class);
         retrofit2.Response<ApiToken> response= service.refreshToken(refreshToken).execute();
         if(response.code() == 401){
+            /**
+             * mostrare di nuovo schermata login
+             */
             Log.d("Token: ", "Sessone scaduta");
             //throw new RuntimeException("Sessione scaduta");
         }
@@ -82,6 +89,5 @@ public class TokenRefreshInterceptor implements Interceptor {
     public void setUtentePresenter(UtentePresenter utentePresenter) {
         this.utentePresenter = utentePresenter;
     }
-
 
 }

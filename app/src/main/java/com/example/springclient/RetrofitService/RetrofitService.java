@@ -1,8 +1,7 @@
 package com.example.springclient.RetrofitService;
 
-import com.example.springclient.authentication.MyInterceptor;
+import com.example.springclient.authentication.AddTokenInterceptor;
 
-import com.example.springclient.authentication.TokenRefreshInterceptor;
 import com.example.springclient.authentication.TokenRefreshInterceptor;
 import com.example.springclient.presenter.UtentePresenter;
 import com.google.gson.Gson;
@@ -21,9 +20,9 @@ public class RetrofitService {
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
     private OkHttpClient.Builder okHttp;
-    private MyInterceptor myInterceptor;
+    private AddTokenInterceptor addTokenInterceptor;
     private TokenRefreshInterceptor tokenRefreshInterceptor;
-    //private TokenAuthenticator tokenAuthenticator;
+
     private UtentePresenter utentePresenter;
 
     public static RetrofitService getIstance(){
@@ -36,16 +35,14 @@ public class RetrofitService {
 
     private RetrofitService(){
          okHttp = new OkHttpClient.Builder();
-         myInterceptor = new MyInterceptor();
+         addTokenInterceptor = new AddTokenInterceptor();
          tokenRefreshInterceptor = new TokenRefreshInterceptor();
-       // tokenAuthenticator = new TokenAuthenticator();
-
 
         /** PER TESTING */
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        okHttp.addInterceptor(myInterceptor);
+        okHttp.addInterceptor(addTokenInterceptor);
         okHttp.addInterceptor(tokenRefreshInterceptor);
         okHttp.addInterceptor(loggingInterceptor);
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
@@ -68,7 +65,7 @@ public class RetrofitService {
         return elementoMenuAPI;
     }
 
-    public MyInterceptor getMyInterceptor(){return myInterceptor;}
+    public AddTokenInterceptor getMyInterceptor(){return addTokenInterceptor;}
 
     public void setUtentePresenter(UtentePresenter utentePresenter) {
         this.utentePresenter = utentePresenter;
@@ -77,7 +74,4 @@ public class RetrofitService {
         return tokenRefreshInterceptor;
     }
 
-    /*public TokenAuthenticator getTokenAuthenticator() {
-        return tokenAuthenticator;
-    }*/
 }
