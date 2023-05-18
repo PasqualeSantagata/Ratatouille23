@@ -7,7 +7,6 @@ import java.util.List;
 public interface ElementoMenuContract {
 
     interface Model{
-
         void saveElementoMenu(ElementoMenu elementoMenu, ElementoMenuCallback elementoMenuCallback);
 
         void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback);
@@ -21,8 +20,6 @@ public interface ElementoMenuContract {
             void onSuccess(T returnedData);
 
         }
-
-
 
     }
 
