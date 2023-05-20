@@ -1,14 +1,10 @@
 package com.example.springclient.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +12,7 @@ import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.presenter.UtentePresenter;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity implements UtenteContract.View {
@@ -29,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         utentePresenter = new UtentePresenter(this);
@@ -57,9 +55,16 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     public void loginError(){
         textInputLayoutEmail.setError(" ");
         textInputLayoutPassword.setError(" ");
+/*
         Toast t = Toast.makeText(getApplicationContext(),"Attenzione: credenziali errate!", Toast.LENGTH_SHORT);
         t.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
-        t.show();
+        t.show(); */
+
+        //Da proivare poichè a me non và ma penso sia un problema del mio emulatore android studio
+        CharSequence messaggio = "Credenziali errate";
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), messaggio, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
     }
 
     @Override

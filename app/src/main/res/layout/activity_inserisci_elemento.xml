@@ -43,7 +43,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
-        android:hint="@string/nome"
+        android:hint="    Nome"
         app:boxStrokeColor="@color/my_green"
         app:hintTextColor="@color/my_green"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:shadowColor="#4CAF50"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:background="@drawable/desing_rounded_green_tf"
+
+            />
         <!-- <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/TextInputEditTextNomeInserisciElementoMenu"
             android:layout_width="match_parent"
@@ -89,7 +92,10 @@
             android:id="@+id/TextInputEditTextPrezzoInserisciElementoMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:background="@drawable/desing_rounded_green_tf"
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -109,7 +115,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputTextFieldAllergeniInserisciElementoMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/desing_rounded_green_tf"
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -134,10 +143,13 @@
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:singleLine="false"
-            android:textAlignment="gravity"
+            android:textAlignment="viewStart"
             android:textColorLink="#4CAF50"
             android:inputType="textMultiLine"
-            android:maxLines="@integer/material_motion_duration_long_1"/>
+            android:maxLines="@integer/material_motion_duration_long_1"
+            android:background="@drawable/desing_rounded_green_tf"
+
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
@@ -150,6 +162,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
