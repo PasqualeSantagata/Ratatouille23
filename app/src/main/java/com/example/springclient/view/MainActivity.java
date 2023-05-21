@@ -1,5 +1,6 @@
 package com.example.springclient.view;
 
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
+
+    private Button buttonIndietro;
     private UtentePresenter utentePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
        Button buttonSave = findViewById(R.id.buttonLoginOk);
+       buttonIndietro = findViewById(R.id.buttonLoginIndietro);
 
        buttonSave.setOnClickListener(view -> {
            String nome, cognome, email, password;
@@ -50,6 +54,15 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
            utentePresenter.logInUtente(new AuthRequest(email, password));
 
        });
+
+        buttonIndietro.setOnClickListener(view -> {
+
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dialog_login);
+            dialog.show();
+
+        });
+
     }
 
     public void loginError(){

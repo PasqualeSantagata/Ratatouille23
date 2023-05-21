@@ -1,8 +1,10 @@
 package com.example.springclient.view;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,10 +35,15 @@ public class StartInserimentoNelMenu extends AppCompatActivity {
         buttonModificaElementi = findViewById(R.id.buttonModElemMenù);
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
+
+            PopupWindow popupWindow = new PopupWindow(getApplicationContext());
+            EditText tv = new EditText(getApplicationContext());
+            tv.setText("Sei sicuro di voler uscire?");
+            View view2 = tv;
+            popupWindow.setContentView(view2);
         });
 
-
+        //Intent intent = new Intent(this, MainActivity.class);
     }
 
 
