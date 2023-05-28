@@ -22,4 +22,6 @@
     <string name="avviso_primo_accesso">N.B. questo step è richiesto in quanto hai effettuato l\'accesso per la prima volta</string>
     <string name="reimposta_password">Reimposta password</string>
     <string name="cognome">Cognome</string>
+    <string name="cerca">Cerca</string>
+    <string name="esplora_le_categorie">Esplora le categorie</string>
 </resources>

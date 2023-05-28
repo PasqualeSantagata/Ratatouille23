@@ -3,6 +3,7 @@ package com.example.springclient.view;
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,13 +23,25 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
-
     private Button buttonIndietro;
     private UtentePresenter utentePresenter;
+
+    private MainActivity mainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        mainActivity = this;
+        Window window = mainActivity.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+       // window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+       // window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+       // window.setStatusBarColor(ContextCompat.getColor(mainActivity,R.color.login_statusbar_color));
 
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

@@ -86,6 +86,8 @@
 
         app:boxStrokeColor="@color/my_green"
         app:hintTextColor="@color/my_green"
+
+
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -94,6 +96,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:background="@drawable/desing_rounded_green_tf"
+
 
             />
     </com.google.android.material.textfield.TextInputLayout>

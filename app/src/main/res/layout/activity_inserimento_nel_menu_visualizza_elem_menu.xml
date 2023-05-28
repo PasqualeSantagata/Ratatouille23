@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_food_icons">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="785dp"
-        android:layout_height="688dp"
+        android:layout_width="772dp"
+        android:layout_height="689dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="110dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,17 +78,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="179dp" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:backgroundTint="@color/my_green"
+            app:fabSize="auto"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            app:tint="@color/white"
+            tools:layout_editor_absoluteX="684dp"
+            tools:layout_editor_absoluteY="592dp"
+            android:outlineSpotShadowColor="@color/white"
+
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="494dp"
-        android:layout_height="688dp"
+        android:layout_width="474dp"
+        android:layout_height="689dp"
         android:layout_marginBottom="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,4 +128,17 @@
         android:text="Button"
         tools:layout_editor_absoluteX="1123dp"
         tools:layout_editor_absoluteY="712dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="111dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toEndOf="@+id/scrollView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line_elem_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/item_categoria"
+        android:id="@+id/item_ruolo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:dropDownVerticalOffset ="40dp"
@@ -14,7 +14,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/design_item_spinner"
         android:fontFamily="@font/roboto_light"
-        android:text="Categoria"
+        android:text="Ruolo"
         android:textAlignment="center"
         android:textIsSelectable="false"
         android:textSize="25sp"></TextView>
