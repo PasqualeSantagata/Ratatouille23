@@ -90,13 +90,15 @@
     <Spinner
         android:id="@+id/spinnerTipoUtenzaCreaUtenza"
         android:layout_width="600dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginStart="450dp"
         android:layout_marginEnd="473dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonIndietroNuovaUtenza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/design_item_spinner"
+        />
 
     <ImageView
         android:id="@+id/imageView"

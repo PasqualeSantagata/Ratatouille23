@@ -83,16 +83,19 @@
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="684dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="41dp"
             android:clickable="true"
+            android:outlineSpotShadowColor="@color/white"
             app:backgroundTint="@color/my_green"
             app:fabSize="auto"
-            app:srcCompat="@android:drawable/ic_menu_edit"
-            app:tint="@color/white"
-            tools:layout_editor_absoluteX="684dp"
-            tools:layout_editor_absoluteY="592dp"
-            android:outlineSpotShadowColor="@color/white"
 
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_edit"
+            app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -109,7 +112,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="689dp" />
+        </LinearLayout>
     </ScrollView>
 
     <Button

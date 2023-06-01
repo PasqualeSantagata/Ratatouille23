@@ -8,22 +8,25 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class ElementoMenu{
+public class ElementoMenu {
     private String nome;
     private Float prezzo;
     private String descrizione;
     private List<String> elencoAllergeni;
     public final String lingua;
+    private String tempoPreparazione;
 
-    public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua){
+
+    public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
         this.nome = nome;
         this.prezzo = prezzo;
         this.descrizione = descrizione;
         this.elencoAllergeni = elencoAllergeni;
         this.lingua = lingua;
     }
-    public void addAllergene(String allergene){
-        if(!elencoAllergeni.contains(allergene))
+
+    public void addAllergene(String allergene) {
+        if (!elencoAllergeni.contains(allergene))
             elencoAllergeni.add(allergene);
     }
 
@@ -50,6 +53,7 @@ public class ElementoMenu{
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+
     public List<String> getElencoAllergeni() {
         return elencoAllergeni;
     }
@@ -61,4 +65,13 @@ public class ElementoMenu{
     public String getLingua() {
         return lingua;
     }
+
+    public String getTempoPreparazione() {
+        return tempoPreparazione;
+    }
+
+    public void setTempoPreparazione(String tempoPreparazione) {
+        this.tempoPreparazione = tempoPreparazione;
+    }
+
 }

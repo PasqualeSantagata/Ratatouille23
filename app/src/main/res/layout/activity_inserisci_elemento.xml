@@ -158,15 +158,17 @@
     <Spinner
         android:id="@+id/categorie_spinner"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginStart="700dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="200dp"
+        android:background="@drawable/design_item_spinner"
+        android:tooltipText="Categoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
 
-        />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
