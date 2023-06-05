@@ -51,7 +51,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inserisci_elemento);
+        setContentView(R.layout.activity_inserisci_elemento_inserimento_nel_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         elementoMenuPresenter = new ElementoMenuPresenter(this);
@@ -71,14 +71,16 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         descrizioneTextInputLayout = findViewById(R.id.TextInputLayoutDescrizioneInserisciElementoMenu);
         autoTextView = (AutoCompleteTextView) nomeElementoTextInputLayout.getEditText();
         //Spinner
-        spinnerCategorie = findViewById(R.id.categorie_spinner);
-        List<String> categorie = new ArrayList<>();
+        //spinnerCategorie = findViewById(R.id.categorie_spinner);
+        //List<String> categorie = new ArrayList<>();
 
         //renderle leggibili dal DB
+        /*
         categorie.add("Primo");
         categorie.add("Secondo");
         categorie.add("Drink");
         categorie.add("Dessert");
+        */
 
 
         spinnerAdapterCategorie = new SpinnerAdapterCategorie(InserisciElementoActivity.this, categorie);
