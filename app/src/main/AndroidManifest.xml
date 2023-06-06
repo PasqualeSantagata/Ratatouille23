@@ -38,7 +38,7 @@
 
 
         <activity
-            android:name=".view.InserisciElementoActivity"
+            android:name=".view.inserimentoNelMenu.InserisciElementoActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"

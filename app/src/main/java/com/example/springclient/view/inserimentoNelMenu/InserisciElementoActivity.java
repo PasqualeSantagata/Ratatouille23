@@ -1,4 +1,4 @@
-package com.example.springclient.view;
+package com.example.springclient.view.inserimentoNelMenu;
 
 
 import android.content.pm.ActivityInfo;
@@ -80,11 +80,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         categorie.add("Secondo");
         categorie.add("Drink");
         categorie.add("Dessert");
+
+          spinnerAdapterCategorie = new SpinnerAdapterCategorie(InserisciElementoActivity.this, categorie);
+          spinnerCategorie.setAdapter(spinnerAdapterCategorie);
+
         */
 
 
-        spinnerAdapterCategorie = new SpinnerAdapterCategorie(InserisciElementoActivity.this, categorie);
-        spinnerCategorie.setAdapter(spinnerAdapterCategorie);
 
         //adapter suggeritore nome elementi
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggeriti);

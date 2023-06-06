@@ -7,8 +7,8 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
-import com.example.springclient.view.InserisciElementoActivity;
-import com.example.springclient.view.StartInserimentoNelMenu;
+import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
+import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.springclient.view;
+package com.example.springclient.view.inserimentoNelMenu;
 
 import android.os.Bundle;
 import android.widget.Button;

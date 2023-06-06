@@ -1,4 +1,4 @@
-package com.example.springclient.view;
+package com.example.springclient.view.inserimentoNelMenu;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -19,7 +19,7 @@ public class HomeModificaElemMenu extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Modifica Elemento del Menù");
-        setContentView(R.layout.activity_home_modifica_elem_menu);
+        setContentView(R.layout.activity_home_modifica_elem_inserimento_nel_menu);
 
 
     }
