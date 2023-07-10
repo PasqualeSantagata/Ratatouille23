@@ -11,8 +11,8 @@
         android:id="@+id/buttonLoginOk"
         android:layout_width="160dp"
         android:layout_height="70dp"
-        android:layout_marginEnd="300dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/white"
         android:text="@android:string/ok"
         android:textColor="@color/black"
@@ -20,20 +20,6 @@
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/buttonLoginIndietro"
-        android:layout_width="160dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/indietro"
-        android:textColor="@color/black"
-
-        app:cornerRadius="@android:dimen/app_icon_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmailLogin"

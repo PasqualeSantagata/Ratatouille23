@@ -6,9 +6,12 @@ import android.widget.Toast;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.model.ElementoMenuModel;
+import com.example.springclient.view.inserimentoNelMenu.HomeNuovoElemento;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
+import com.example.springclient.view.nuovaOrdinazione.EsploraCategorie;
 
 import java.util.List;
 
@@ -17,8 +20,10 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private ElementoMenuModel elementoMenuModel;
     private RetrofitService retrofitService;
     private InserisciElementoActivity inserisciElementoView;
-
     private StartInserimentoNelMenu startInserimentoNelMenu;
+    private HomeNuovoElemento homeNuovoElemento;
+
+    private EsploraCategorie esploraCategorie;
 
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoView){
         if(retrofitService == null)
@@ -31,7 +36,14 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     public ElementoMenuPresenter(StartInserimentoNelMenu startInserimentoNelMenu){
         this.startInserimentoNelMenu = startInserimentoNelMenu;
+    }
 
+    public ElementoMenuPresenter(HomeNuovoElemento homeNuovoElemento){
+        this.homeNuovoElemento = homeNuovoElemento;
+    }
+
+    public ElementoMenuPresenter(EsploraCategorie esploraCategorie){
+        this.esploraCategorie=esploraCategorie;
     }
 
     @Override
@@ -71,8 +83,10 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         });
     }
 
-
-
+    @Override
+    public void setElementiPerCategoriaRecycleView(Ordinazione ordinazione, String categoria) {
+        //interrogazione per categoria
+    }
 
 
 }

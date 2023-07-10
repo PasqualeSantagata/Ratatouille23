@@ -12,6 +12,7 @@ public class SelezioneNuovaLingua extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("SELEZIONA LINGUA");
         setContentView(R.layout.activity_nuova_lingua_inserimento_nel_menu);
     }
 }

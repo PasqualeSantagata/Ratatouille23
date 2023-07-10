@@ -1,6 +1,6 @@
 package com.example.springclient.view;
 
-import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
-    private Button buttonIndietro;
     private UtentePresenter utentePresenter;
 
     private MainActivity mainActivity;
@@ -56,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
        Button buttonSave = findViewById(R.id.buttonLoginOk);
-       buttonIndietro = findViewById(R.id.buttonLoginIndietro);
+       textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
+
 
        buttonSave.setOnClickListener(view -> {
            String nome, cognome, email, password;
@@ -68,12 +68,9 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
 
        });
 
-        buttonIndietro.setOnClickListener(view -> {
-
-            Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_login);
-            dialog.show();
-
+        textViewPasswordDimenticata.setOnClickListener(view -> {
+            Intent intentReimpostaPass = new Intent(this, ReimpostaPassword.class);
+            startActivity(intentReimpostaPass);
         });
 
     }

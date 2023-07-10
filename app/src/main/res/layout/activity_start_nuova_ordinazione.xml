@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_food_icons">
+
+    <Button
+        android:id="@+id/buttonIndietroStartNuovaOrdinazione"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/indietro"
+        app:cornerRadius="@android:dimen/app_icon_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonOkStartNuovaOrdinazione"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="50dp"
+        android:text="@android:string/ok"
+        app:cornerRadius="@android:dimen/app_icon_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="37dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumPersoneStartNuovaOrdinazione"
+        app:srcCompat="@drawable/rectangle_number_people" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:srcCompat="@drawable/iic_number_10"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toEndOf="@+id/fab1"
+        app:layout_constraintTop_toTopOf="@+id/fab1"
+        app:srcCompat="@drawable/ic_number_2"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toEndOf="@+id/fab4"
+        app:layout_constraintTop_toTopOf="@+id/fab4"
+        app:srcCompat="@drawable/ic_number_8"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="7dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toStartOf="@+id/fab2"
+        app:layout_constraintTop_toBottomOf="@+id/fab2"
+        app:srcCompat="@drawable/ic_number_20"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toStartOf="@+id/fab4"
+        app:layout_constraintTop_toBottomOf="@+id/fab4"
+        app:srcCompat="@drawable/ic_number_30"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toStartOf="@+id/fab8"
+        app:layout_constraintTop_toBottomOf="@+id/fab8"
+        app:srcCompat="@drawable/ic_number_50"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="1dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toEndOf="@+id/fab2"
+        app:layout_constraintTop_toTopOf="@+id/fab2"
+        app:srcCompat="@drawable/ic_number_4"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="9dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintBottom_toTopOf="@+id/fab10"
+        app:layout_constraintStart_toStartOf="@+id/fab10"
+        app:srcCompat="@drawable/ic_number_1"
+        app:tint="@color/white" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutNumPersoneStartNuovaOrdinazione"
+        android:layout_width="430dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/numero_di_persone_al_tavolo"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/desing_rounded_green_tf"
+            android:inputType="number"
+             />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutTavoloStartNuovaOrdinazione"
+        android:layout_width="430dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        android:hint="@string/tavolo"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/desing_rounded_green_tf"
+            android:inputType="number"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutSalaStartNuovaOrdinazione"
+        android:layout_width="430dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTavoloStartNuovaOrdinazione"
+        android:hint="@string/sala"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/desing_rounded_green_tf"
+            android:inputType="number"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toEndOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:srcCompat="@drawable/ic_add_fab"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="15dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintStart_toStartOf="@+id/fabPlus"
+        app:layout_constraintTop_toBottomOf="@+id/fabPlus"
+        app:srcCompat="@drawable/ic_minus"
+        app:tint="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

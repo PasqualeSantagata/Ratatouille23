@@ -14,7 +14,9 @@ public class ElementoMenu {
     private String descrizione;
     private List<String> elencoAllergeni;
     public final String lingua;
-    private String tempoPreparazione;
+    private String tempoPreparazione;  //Magari va cambiato in float o int se li interpretiamo sempre come minuti
+    private String breveNota;
+    private Float quantita;
 
 
     public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
@@ -74,4 +76,19 @@ public class ElementoMenu {
         this.tempoPreparazione = tempoPreparazione;
     }
 
+    public String getBreveNota() {
+        return breveNota;
+    }
+
+    public void setBreveNota(String nota){
+        this.breveNota = nota;
+    }
+
+    public Float getQuantita() {
+        return quantita;
+    }
+
+    public void setQuantita(Float quantita) {
+        this.quantita = quantita;
+    }
 }

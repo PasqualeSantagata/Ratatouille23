@@ -32,7 +32,6 @@ public interface UtenteContract {
         void onFailure(Throwable t);
         void onSuccess(T retData);
 
-
     }
 
 }

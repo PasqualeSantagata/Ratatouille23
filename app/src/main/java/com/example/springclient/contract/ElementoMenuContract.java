@@ -1,6 +1,7 @@
 package com.example.springclient.contract;
 
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Ordinazione;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public interface ElementoMenuContract {
 
         void saveElementoMenu(ElementoMenu elementoMenu);
         void getAllElementiMenu();
-
+        void setElementiPerCategoriaRecycleView(Ordinazione ordinazione, String categoria);
     }
 
 

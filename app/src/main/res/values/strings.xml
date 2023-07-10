@@ -24,4 +24,12 @@
     <string name="cognome">Cognome</string>
     <string name="cerca">Cerca</string>
     <string name="esplora_le_categorie">Esplora le categorie</string>
+    <string name="dialog_sicuro_di_uscire">Sei sicuro di voler uscire?</string>
+    <string name="numero_di_persone_al_tavolo">Numero di persone al tavolo</string>
+    <string name="tavolo">Tavolo</string>
+    <string name="sala">Sala</string>
+    <string name="riepilogo">Riepilogo ⏩</string>
+    <string name="breve_nota">Breve nota</string>
+
+
 </resources>

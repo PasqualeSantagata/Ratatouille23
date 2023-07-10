@@ -70,23 +70,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         elencoAllergeniTextInputLayout = findViewById(R.id.TextInputLayoutAllergeniInserisciElementoMenu);
         descrizioneTextInputLayout = findViewById(R.id.TextInputLayoutDescrizioneInserisciElementoMenu);
         autoTextView = (AutoCompleteTextView) nomeElementoTextInputLayout.getEditText();
-        //Spinner
-        //spinnerCategorie = findViewById(R.id.categorie_spinner);
-        //List<String> categorie = new ArrayList<>();
-
-        //renderle leggibili dal DB
-        /*
-        categorie.add("Primo");
-        categorie.add("Secondo");
-        categorie.add("Drink");
-        categorie.add("Dessert");
-
-          spinnerAdapterCategorie = new SpinnerAdapterCategorie(InserisciElementoActivity.this, categorie);
-          spinnerCategorie.setAdapter(spinnerAdapterCategorie);
-
-        */
-
-
 
         //adapter suggeritore nome elementi
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggeriti);

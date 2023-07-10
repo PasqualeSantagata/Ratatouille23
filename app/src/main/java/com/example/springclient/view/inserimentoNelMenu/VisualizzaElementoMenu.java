@@ -12,6 +12,7 @@ public class VisualizzaElementoMenu extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //getSupportActionBar().setTitle("PRIMI"); CATEGORIA PASSATA DALLA ACTIVITY PRECEDENTE (ESPLORA CATEGORIE)
         setContentView(R.layout.activity_visualizza_elem_menu_inserimento_nel_menu);
     }
 }
