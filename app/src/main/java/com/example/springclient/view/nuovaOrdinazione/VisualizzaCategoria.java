@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
@@ -24,7 +25,9 @@ public class VisualizzaCategoria extends AppCompatActivity {
     private TextInputLayout textInputLayoutAllergeni;
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutNota;
+    private FloatingActionButton fabAggiungiAdOrdinazione;
 
+    //boolean categoriaInclusa; serve a sapere quali categorie ci sono per sapere quali mostrare nel riepilogo, non so se sarà utile quindi lo mantengo commentato per ora
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +45,7 @@ public class VisualizzaCategoria extends AppCompatActivity {
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneVisuaCatNuovaOrdinazione);
         textInputLayoutNota = findViewById(R.id.textInputLayoutBreveNotaVisuaCatNuovaOrdinazione);
 
-        
+        fabAggiungiAdOrdinazione = findViewById(R.id.fabAggiungiAdOrdinazione);
 
     }
 

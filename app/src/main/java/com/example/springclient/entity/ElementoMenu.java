@@ -17,6 +17,7 @@ public class ElementoMenu {
     private String tempoPreparazione;  //Magari va cambiato in float o int se li interpretiamo sempre come minuti
     private String breveNota;
     private Float quantita;
+    private String categoria;
 
 
     public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {

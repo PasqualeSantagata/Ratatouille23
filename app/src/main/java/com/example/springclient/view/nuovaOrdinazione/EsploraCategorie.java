@@ -52,6 +52,9 @@ public class EsploraCategorie extends AppCompatActivity {
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
+        //magari si fa l'entity categforia cosi si leggono da db
+        //e si fa un metodo per associarre imageview alla foto e al nome della categoria
+        //cosi da rendere semplice l'aggiunta di categorie da parte dell'admin
         imageViewPrimi.setOnClickListener(view -> {
             String categoria = "primi";
             //Deve ritornare la lista di tutte le pietanze della categoria
