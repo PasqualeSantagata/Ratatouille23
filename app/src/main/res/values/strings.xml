@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpringClient</string>
+    <string name="app_name">Rattatouille 23</string>
     <string name="form_first_name">FirstName</string>
     <string name="form_last_name">LastName</string>
     <string name="form_email">Email</string>
@@ -30,6 +30,16 @@
     <string name="sala">Sala</string>
     <string name="riepilogo">Riepilogo ⏩</string>
     <string name="breve_nota">Breve nota</string>
+    <string name="categoria">Categoria</string>
+    <string name="errore">errore</string>
+    <string name="dialog_campi_errati">I campi inseriti non sono validi</string>
+    <string name="dialog_ord_vuota">ordinazione vuota!</string>
+
+    <string-array name="array_ruoli">
+            <item>👨🏻‍🍳 Addetto alla cucina</item>
+            <item>🧑🏾‍💼 Addetto alla sala</item>
+            <item>🤵🏼 Supervisore </item>
+        </string-array>
 
 
 </resources>

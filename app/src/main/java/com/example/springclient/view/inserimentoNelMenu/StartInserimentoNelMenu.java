@@ -35,14 +35,17 @@ public class StartInserimentoNelMenu extends AppCompatActivity {
 
         buttonIndietro.setOnClickListener(view -> {
             Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         });
 
         buttonAggiungiElementi.setOnClickListener(view -> {
             Intent intent = new Intent(this, HomeNuovoElemento.class);
+            startActivity(intent);
         });
 
         buttonModificaElementi.setOnClickListener(view -> {
             Intent intent = new Intent(this, HomeModificaElemMenu.class);
+            startActivity(intent);
         });
 
     }

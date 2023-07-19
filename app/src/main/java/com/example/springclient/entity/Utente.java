@@ -22,6 +22,12 @@ public class Utente {
         this.firstAccess = firstAccess;
     }
 
+    public Utente(String nome, String cognome, String email) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+    }
+
     public String getNome() {
         return nome;
     }

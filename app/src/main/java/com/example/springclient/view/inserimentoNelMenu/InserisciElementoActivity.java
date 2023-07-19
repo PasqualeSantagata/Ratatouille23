@@ -51,6 +51,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("INSERISCI ELEMENTO");
         setContentView(R.layout.activity_inserisci_elemento_inserimento_nel_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
@@ -164,6 +165,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         else{
             prezzoElementoTextInputLayout.setErrorEnabled(false);
         }
+
         return checked;
     }
 

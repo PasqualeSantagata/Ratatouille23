@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.ElementoMenuPresenter;
+
+import java.util.List;
 
 public class EsploraCategorie extends AppCompatActivity {
 
@@ -36,13 +40,16 @@ public class EsploraCategorie extends AppCompatActivity {
         getSupportActionBar().setTitle("CATEGORIE");
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
 
-        //Da provare, prende le info dall activity Start nuova ordinazione
-        Integer persone = ordinazione.getNumeroPersone();
+    }
 
-
+    public void startVisualizzaCategoria(){
+        Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoria.class);
+        intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
+        startActivity(intentVisiualizzaCategoria);
     }
 
     private void InitializeComponents() {
+
         imageViewPrimi = findViewById(R.id.imgViewPrimiCategorieNuovaOrd);
         imageViewSecondi = findViewById(R.id.imgViewSecondiCategorieNuovaOrd);
         imageViewBevande = findViewById(R.id.imgViewBevandeCategorieNuovaOrd);
@@ -52,45 +59,46 @@ public class EsploraCategorie extends AppCompatActivity {
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
-        //magari si fa l'entity categforia cosi si leggono da db
+        //magari si fa l'entity categoria cosi si leggono da db
         //e si fa un metodo per associarre imageview alla foto e al nome della categoria
         //cosi da rendere semplice l'aggiunta di categorie da parte dell'admin
         imageViewPrimi.setOnClickListener(view -> {
             String categoria = "primi";
             //Deve ritornare la lista di tutte le pietanze della categoria
-            presenter.setElementiPerCategoriaRecycleView(ordinazione, categoria);
+            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
         });
 
         imageViewSecondi.setOnClickListener(view -> {
             String categoria = "secondi";
             //Deve ritornare la lista di tutte le pietanze della categoria
-            presenter.setElementiPerCategoriaRecycleView(ordinazione, categoria);
+            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
         });
 
         imageViewBevande.setOnClickListener(view -> {
             String categoria = "bevande";
             //Deve ritornare la lista di tutte le pietanze della categoria
-            presenter.setElementiPerCategoriaRecycleView(ordinazione, categoria);
+            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
         });
 
         imageViewSushi.setOnClickListener(view -> {
             String categoria = "sushi";
             //Deve ritornare la lista di tutte le pietanze della categoria
-            presenter.setElementiPerCategoriaRecycleView(ordinazione, categoria);
+            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
         });
 
         imageViewPizze.setOnClickListener(view -> {
             String categoria = "pizze";
             //Deve ritornare la lista di tutte le pietanze della categoria
-            presenter.setElementiPerCategoriaRecycleView(ordinazione, categoria);
+            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
         });
 
         imageViewDessert.setOnClickListener(view -> {
             String categoria = "dessert";
             //Deve settare la lista di tutte le pietanze della categoria nelle recycle view e
             //passare la categoria , ma anche le info dell'ordinazione dall'intent della pre. activity
-            presenter.setElementiPerCategoriaRecycleView(ordinazione, categoria);
+            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
         });
+//dopo la list avviano visualizza cateogria
 
         buttonIndietro.setOnClickListener(view -> {
             Intent intentIndietro = new Intent(this, StartNuovaOrdinazione.class);
@@ -100,7 +108,9 @@ public class EsploraCategorie extends AppCompatActivity {
         buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
                 Dialog dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_ord_vuota_nuova_ordinazione);
+                dialog.setContentView(R.layout.dialog_error_one_button);
+                TextView errorMessage = findViewById(R.id.textViewMessageDialogueErrorOneBt);
+                errorMessage.setText(R.string.dialog_ord_vuota);
                 dialog.show();
             } else {
                 /* starta il riepilogo ordinazione non vuota
@@ -110,6 +120,7 @@ public class EsploraCategorie extends AppCompatActivity {
             }
 
         });
+
 
 
     }

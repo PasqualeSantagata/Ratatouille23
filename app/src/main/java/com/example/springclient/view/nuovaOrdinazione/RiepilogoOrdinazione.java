@@ -6,9 +6,12 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.presenter.ElementoMenuPresenter;
 
 public class RiepilogoOrdinazione extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class RiepilogoOrdinazione extends AppCompatActivity {
     private RecyclerView recyclerViewPizze;
     private RecyclerView recyclerViewDessert;
 
-
+    private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,13 @@ public class RiepilogoOrdinazione extends AppCompatActivity {
 
     }
 
+    private void setHorizontalRecycleView (RecyclerView recyclerView){
+        RecyclerView.LayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(recyclerViewLayoutManager);
+        LinearLayoutManager horizontalLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayout);
+
+    }
 
 
 }

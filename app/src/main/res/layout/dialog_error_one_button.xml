@@ -21,46 +21,45 @@
             android:layout_height="440dp">
 
             <TextView
-                android:id="@+id/textViewAttenzioneDialogNuovOrd"
+                android:id="@+id/textViewAttenzioneDialogueErrorOneBt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="228dp"
+                android:layout_marginStart="328dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginEnd="237dp"
-                android:fontFamily="@font/roboto"
+                android:layout_marginEnd="327dp"
                 android:text="Attenzione"
                 android:textAlignment="center"
                 android:textColor="#F44336"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/buttonOkNuovOrd"
+                android:id="@+id/buttonOkDialogueErrorOneBt"
                 android:layout_width="180dp"
                 android:layout_height="60dp"
                 android:layout_marginEnd="100dp"
                 android:layout_marginBottom="50dp"
                 android:text="@android:string/ok"
+                app:cornerRadius="@android:dimen/app_icon_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/textViewOrdVuota"
+                android:id="@+id/textViewMessageDialogueErrorOneBt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="232dp"
-                android:layout_marginTop="56dp"
-                android:layout_marginEnd="232dp"
-                android:text="l'ordinazione è vuota!!"
+                android:layout_marginStart="360dp"
+                android:layout_marginEnd="361dp"
+                android:layout_marginBottom="238dp"
+                android:text="@string/errore"
                 android:textColor="@color/black"
                 android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewAttenzioneDialogNuovOrd" />
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 

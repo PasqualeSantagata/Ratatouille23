@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,11 +69,13 @@ public class StartNuovaOrdinazione extends AppCompatActivity {
 
         buttonIndietro.setOnClickListener(view -> {
             Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_error_login);
+            TextView errorMessage = findViewById(R.id.textViewDialogeError);
+            errorMessage.setText(R.string.dialog_sicuro_di_uscire);
+            dialog.setContentView(R.layout.dialog_error_two_button);
             dialog.show();
 
-            Button buttonNo = findViewById(R.id.buttonNoDialogLogOut);
-            Button buttonSi = findViewById(R.id.buttonOkNuovOrd);
+            Button buttonNo = findViewById(R.id.buttonNoDialogeError);
+            Button buttonSi = findViewById(R.id.buttonSiDialogeError);
 
             buttonNo.setOnClickListener(view1 -> {
                 dialog.dismiss();

@@ -6,12 +6,12 @@ import android.widget.Toast;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.inserimentoNelMenu.HomeNuovoElemento;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorie;
+import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazione;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private HomeNuovoElemento homeNuovoElemento;
 
     private EsploraCategorie esploraCategorie;
+    private RiepilogoOrdinazione riepilogoOrdinazione;
 
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoView){
         if(retrofitService == null)
@@ -44,6 +45,10 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     public ElementoMenuPresenter(EsploraCategorie esploraCategorie){
         this.esploraCategorie=esploraCategorie;
+    }
+
+    public ElementoMenuPresenter(RiepilogoOrdinazione riepilogoOrdinazione) {
+        this.riepilogoOrdinazione = riepilogoOrdinazione;
     }
 
     @Override
@@ -84,8 +89,10 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     }
 
     @Override
-    public void setElementiPerCategoriaRecycleView(Ordinazione ordinazione, String categoria) {
-        //interrogazione per categoria
+    public List<ElementoMenu> getElementiPerCategoria(String categoria) {
+        //interrogazione per categoria riceve dal model list<ElementoMenu> di quella categoria
+        //e starta visualizza categoria
+        return  null;
     }
 
 

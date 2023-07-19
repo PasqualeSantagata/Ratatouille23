@@ -11,27 +11,27 @@ import com.example.springclient.R;
 
 import java.util.List;
 
-public class SpinnerAdapterCategorie extends BaseAdapter {
+public class SpinnerAdapterRuoli extends BaseAdapter {
 
     Context context;
-    List<String> categorie;
+    List<String> ruoli;
 
-    public SpinnerAdapterCategorie(Context context, List<String> categorie) {
+    public SpinnerAdapterRuoli(Context context, List<String> ruoli) {
         this.context = context;
-        this.categorie = categorie;
+        this.ruoli = ruoli;
     }
 
     @Override
     public int getCount() {
-        if(categorie.isEmpty())
+        if(ruoli.isEmpty())
             return 0;
         else
-            return categorie.size();
+            return ruoli.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return categorie.get(i);
+        return ruoli.get(i);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class SpinnerAdapterCategorie extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View localView = LayoutInflater.from(context).inflate(R.layout.item_spinner_categorie, viewGroup, false);
+        View localView = LayoutInflater.from(context).inflate(R.layout.item_spinner_ruolo, viewGroup, false);
 
-        TextView textView = localView.findViewById(R.id.item_categoria);
+        TextView textView = localView.findViewById(R.id.item_ruolo);
 
-        textView.setText(categorie.get(i).toString());
+        textView.setText(ruoli.get(i).toString());
 
         return localView;
     }
