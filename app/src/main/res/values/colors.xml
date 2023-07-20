@@ -12,5 +12,9 @@
     <color name="grey">#F5F5F5</color>
     <color name="login_statusbar_color">#FFFFFF</color>
 
+    <color name="grey_trasparent">#EFC4C4C4</color>
+
+
+
 </resources>
 

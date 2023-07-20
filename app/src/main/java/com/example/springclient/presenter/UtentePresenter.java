@@ -10,6 +10,7 @@ import com.example.springclient.authentication.ApiToken;
 import com.example.springclient.model.UtenteModel;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.entity.Utente;
+import com.example.springclient.view.creaNuovaUtenza.CreaNuovaUtenza;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.MainActivity;
 
@@ -17,6 +18,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
     private UtenteModel utenteModel;
     private RetrofitService retrofitService;
     private MainActivity loginActivity;
+    private CreaNuovaUtenza creaNuovaUtenza;
 
     public UtentePresenter(MainActivity loginActivity){
         if(retrofitService == null)
@@ -28,6 +30,10 @@ public class UtentePresenter implements UtenteContract.Presenter {
         SharedPreferences sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         retrofitService.getMyInterceptor().setPreferences(sharedPreferences);
         retrofitService.getTokenRefreshInterceptor().setUtentePresenter(this);
+    }
+
+    public UtentePresenter(CreaNuovaUtenza creaNuovaUtenza) {
+        this.creaNuovaUtenza = creaNuovaUtenza;
     }
 
     @Override

@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.entity.Utente;
+import com.example.springclient.presenter.UtentePresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterRuoli;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -32,6 +34,8 @@ public class CreaNuovaUtenza extends AppCompatActivity {
     private Button buttonIndietro;
 
     private Utente utente;
+
+    UtenteContract.Presenter presenter = new UtentePresenter(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class CreaNuovaUtenza extends AppCompatActivity {
             }else{
                 utente = new Utente(textInputLayoutNome.getEditText().toString(), textInputLayoutCognome.getEditText().toString(), textInputLayoutEmail.getEditText().toString());
                 //caricare utente sul db e magari aggiungere riepilogo in dialog delle info inserite
+                presenter.saveUtente(utente);
             }
         });
 
