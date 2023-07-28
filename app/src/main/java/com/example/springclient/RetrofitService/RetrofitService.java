@@ -15,8 +15,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final  String base_URL ="http://192.168.1.4:8080/";
-    private static RetrofitService ISTANCE;
+    private static final  String base_URL ="http://localhost:8080/";
+    private static RetrofitService INSTANCE;
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
     private OkHttpClient.Builder okHttp;
@@ -27,10 +27,10 @@ public class RetrofitService {
 
     public static RetrofitService getIstance(){
 
-        if(ISTANCE == null)
-            ISTANCE = new RetrofitService();
+        if(INSTANCE == null)
+            INSTANCE = new RetrofitService();
 
-        return  ISTANCE;
+        return  INSTANCE;
     }
 
     private RetrofitService(){

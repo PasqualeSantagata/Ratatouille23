@@ -18,6 +18,8 @@ public class UtentePresenter implements UtenteContract.Presenter {
     private UtenteModel utenteModel;
     private RetrofitService retrofitService;
     private MainActivity loginActivity;
+    private SharedPreferences sharedPreferences;
+
     private CreaNuovaUtenza creaNuovaUtenza;
 
     public UtentePresenter(MainActivity loginActivity){
@@ -27,7 +29,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
         retrofitService.setUtentePresenter(this);
         utenteModel = new UtenteModel(retrofitService);
         this.loginActivity = loginActivity;
-        SharedPreferences sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         retrofitService.getMyInterceptor().setPreferences(sharedPreferences);
         retrofitService.getTokenRefreshInterceptor().setUtentePresenter(this);
     }
@@ -47,6 +49,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
             @Override
             public void onFinished() {
                 loginActivity.loginError();
+                sharedPreferences.edit().putString("email", "").apply();
 
             }
             @Override
@@ -55,11 +58,17 @@ public class UtentePresenter implements UtenteContract.Presenter {
             }
             @Override
             public void onSuccess(ApiToken retData) {
-                SharedPreferences sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                Intent intent = null;
+                sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 sharedPreferences.edit().putString("accessToken", retData.getAccessToken()).apply();
                 sharedPreferences.edit().putString("refreshToken", retData.getRefreshToken()).apply();
-                Intent intent = new Intent(loginActivity, InserisciElementoActivity.class);
-                loginActivity.startActivity(intent);
+                if(retData.isPasswordChanged()) {
+                    intent = new Intent(loginActivity, InserisciElementoActivity.class);
+                    loginActivity.startActivity(intent);//TODO
+                }
+                else{
+
+                }
             }
         });
 
@@ -79,7 +88,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
     }
 
     @Override
-    public void passwordDimenticata(Utente utente) {
+    public void passwordDimenticata() {
 
     }
 

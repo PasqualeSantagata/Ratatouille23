@@ -1,12 +1,15 @@
 package com.example.springclient.view;
 
-import android.content.Intent;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Window;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,25 +26,13 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
-    private UtentePresenter utentePresenter;
 
-    private MainActivity mainActivity;
+    private Button buttonIndietro;
+    private UtentePresenter utentePresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        mainActivity = this;
-        Window window = mainActivity.getWindow();
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
-       // window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-       // window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-// finally change the color
-       // window.setStatusBarColor(ContextCompat.getColor(mainActivity,R.color.login_statusbar_color));
-
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         utentePresenter = new UtentePresenter(this);
@@ -55,22 +46,30 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
        Button buttonSave = findViewById(R.id.buttonLoginOk);
-       textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
-
+       buttonIndietro = findViewById(R.id.buttonLoginIndietro);
 
        buttonSave.setOnClickListener(view -> {
-           String nome, cognome, email, password;
-
+           String email, password;
            email = String.valueOf(editTextEmail.getText());
            password = String.valueOf(editTextPassword.getText());
-
            utentePresenter.logInUtente(new AuthRequest(email, password));
-
+           SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+           sharedPreferences.edit().putString("email", email).apply();
        });
 
-        textViewPasswordDimenticata.setOnClickListener(view -> {
-            Intent intentReimpostaPass = new Intent(this, ReimpostaPassword.class);
-            startActivity(intentReimpostaPass);
+       textViewPasswordDimenticata.setOnClickListener(view -> {
+           utentePresenter.passwordDimenticata();
+
+       }
+
+       );
+
+        buttonIndietro.setOnClickListener(view -> {
+
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dialog_login);
+            dialog.show();
+
         });
 
     }

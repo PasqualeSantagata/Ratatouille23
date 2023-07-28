@@ -47,6 +47,9 @@ public class UtenteModel implements UtenteContract.Model {
                         if(apiTokenResponse.isSuccessful()){
                             utenteCallback.onSuccess(apiTokenResponse.body());
                         }
+                        else if(apiTokenResponse.code() == 403){
+
+                        }
                         else {
                             utenteCallback.onFinished();
                             Log.d("login response: ", String.valueOf(apiTokenResponse.code()));

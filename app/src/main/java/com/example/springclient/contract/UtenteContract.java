@@ -23,7 +23,7 @@ public interface UtenteContract {
         void logInUtente(AuthRequest authRequest);
         void saveUtente(Utente utente);
         void reimpostaPassword(Utente utente);
-        void passwordDimenticata(Utente utente);
+        void passwordDimenticata();
     }
 
     interface UtenteCallback<T>{
