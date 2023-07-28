@@ -39,6 +39,7 @@ public class UtenteModel implements UtenteContract.Model {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
+
                     }
 
                     @Override
@@ -46,7 +47,7 @@ public class UtenteModel implements UtenteContract.Model {
                         if(apiTokenResponse.isSuccessful()){
                             utenteCallback.onSuccess(apiTokenResponse.body());
                         }
-                        else{
+                        else {
                             utenteCallback.onFinished();
                             Log.d("login response: ", String.valueOf(apiTokenResponse.code()));
 
