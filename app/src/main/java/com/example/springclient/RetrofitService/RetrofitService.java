@@ -19,6 +19,7 @@ public class RetrofitService {
     private static RetrofitService INSTANCE;
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
+    private CategoriaAPI categoriaAPI;
     private OkHttpClient.Builder okHttp;
     private AddTokenInterceptor addTokenInterceptor;
     private TokenRefreshInterceptor tokenRefreshInterceptor;
@@ -55,6 +56,7 @@ public class RetrofitService {
 
         utenteAPI = retrofitClient.create(UtenteAPI.class);
         elementoMenuAPI = retrofitClient.create(ElementoMenuAPI.class);
+        categoriaAPI = retrofitClient.create(CategoriaAPI.class);
     }
 
     public UtenteAPI getUtenteAPI(){
@@ -64,6 +66,8 @@ public class RetrofitService {
     public ElementoMenuAPI getElementoMenuAPI(){
         return elementoMenuAPI;
     }
+
+    public CategoriaAPI getCategoriaAPI() { return categoriaAPI; }
 
     public AddTokenInterceptor getMyInterceptor(){return addTokenInterceptor;}
 

@@ -2,6 +2,7 @@ package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.widget.Button;
@@ -43,6 +44,7 @@ public class StartNuovaOrdinazione extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("NUOVA ORDINAZIONE");
         setContentView(R.layout.activity_start_nuova_ordinazione);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 
     }
@@ -158,14 +160,6 @@ public class StartNuovaOrdinazione extends AppCompatActivity {
 
 
             ordinazione = new Ordinazione(nPersone,ntavolo,nsala);
-
-            /*
-            //Avvia Esplora categorie nuovaOrdinazione
-            Intent intentCategorie = new Intent(this, EsploraCategorie.class);
-            intentCategorie.putExtra("persone", nPersone);
-            intentCategorie.putExtra("tavolo", ntavolo);
-            intentCategorie.putExtra("sala", nsala);
-            */
 
             Intent intentCategorie = new Intent(this, EsploraCategorie.class);
             intentCategorie.putExtra("ordinazione", ordinazione);

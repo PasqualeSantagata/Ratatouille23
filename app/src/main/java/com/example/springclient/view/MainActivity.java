@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
 
     private Button buttonIndietro;
     private UtentePresenter utentePresenter;
+    private String email;
+
+    private MainActivity mainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +47,12 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
        Button buttonSave = findViewById(R.id.buttonLoginOk);
-       buttonIndietro = findViewById(R.id.buttonLoginIndietro);
+
 
        buttonSave.setOnClickListener(view -> {
-           String email, password;
+           String nome, cognome, password;
+
+
            email = String.valueOf(editTextEmail.getText());
            password = String.valueOf(editTextPassword.getText());
            utentePresenter.logInUtente(new AuthRequest(email, password));
@@ -60,18 +63,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
        textViewPasswordDimenticata.setOnClickListener(view -> {
            utentePresenter.passwordDimenticata();
 
-       }
-
-       );
-
-        buttonIndietro.setOnClickListener(view -> {
-
-            Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_login);
-            dialog.show();
-
-        });
-
+       });
     }
 
     public void loginError(){
@@ -87,6 +79,22 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), messaggio, Snackbar.LENGTH_LONG);
         snackbar.show();
 
+    }
+
+    public void dialgPrimoAccesso(){
+
+        Dialog dialogPrimoAcesso = new Dialog(this);
+        TextView errorMessage = findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        errorMessage.setText(R.string.dialog_cambia_pass);
+        dialogPrimoAcesso.setContentView(R.layout.dialog_error_one_button);
+        dialogPrimoAcesso.show();
+
+
+        Button buttonDialog = findViewById(R.id.buttonOkDialogueErrorOneBt);
+        buttonDialog.setOnClickListener(view -> {
+            utentePresenter.reimpostaPassword(email);
+            dialogPrimoAcesso.dismiss();
+        });
     }
 
     @Override

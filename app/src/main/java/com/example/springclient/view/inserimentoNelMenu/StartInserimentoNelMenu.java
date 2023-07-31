@@ -1,6 +1,7 @@
 package com.example.springclient.view.inserimentoNelMenu;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -24,6 +25,7 @@ public class StartInserimentoNelMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Elementi del Menù");
         setContentView(R.layout.activity_start_inserimento_nel_menu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
 
     }

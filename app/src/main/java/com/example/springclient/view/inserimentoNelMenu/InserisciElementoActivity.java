@@ -1,6 +1,7 @@
 package com.example.springclient.view.inserimentoNelMenu;
 
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,6 +33,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 
 public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View {
 
+    private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
     private TextInputLayout elencoAllergeniTextInputLayout;
@@ -48,6 +50,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private List<ProdottoResponse> prodotti;
     private Disposable autocompDisposable;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         initializeComponents();
     }
 
+    public void elementoSalvatoCorrettamente() {
+        Intent intentElemCaricato = new Intent(this, ElementoInseritoCorrettamente.class);
+        startActivity(intentElemCaricato);
+    }
 
     @Override
     public void initializeComponents() {

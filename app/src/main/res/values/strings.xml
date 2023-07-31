@@ -34,6 +34,8 @@
     <string name="errore">errore</string>
     <string name="dialog_campi_errati">I campi inseriti non sono validi</string>
     <string name="dialog_ord_vuota">ordinazione vuota!</string>
+    <string name="esci">esci</string>
+    <string name="dialog_cambia_pass">"Devi cambiare password! "</string>
 
     <string-array name="array_ruoli">
             <item>👨🏻‍🍳 Addetto alla cucina</item>

@@ -27,7 +27,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
             retrofitService = RetrofitService.getIstance();
 
         retrofitService.setUtentePresenter(this);
-        utenteModel = new UtenteModel(retrofitService);
+        utenteModel = new UtenteModel(retrofitService, this);
         this.loginActivity = loginActivity;
         sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         retrofitService.getMyInterceptor().setPreferences(sharedPreferences);
@@ -81,7 +81,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
     }
 
     @Override
-    public void reimpostaPassword(Utente utente) {
+    public void reimpostaPassword(String email) {
         //Al primo accesso l'utente (addetto sala, addetto alla cucina e supervisore)
         //deve reimpostare la pass
 
@@ -92,9 +92,14 @@ public class UtentePresenter implements UtenteContract.Presenter {
 
     }
 
+    public void avviaAggiornaPassword(){
+        loginActivity.dialgPrimoAccesso();
+    }
+
     public MainActivity getActivity(){
         return loginActivity;
     }
+
 
 
 }

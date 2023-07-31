@@ -26,10 +26,8 @@ public interface ElementoMenuContract {
     interface View{
      /************** TODO ******************/
      void initializeComponents();
-
+     void cleanFields();
      ElementoMenu getElementoValues();
-
-      void cleanFields();
 
     }
 
@@ -38,6 +36,7 @@ public interface ElementoMenuContract {
         void saveElementoMenu(ElementoMenu elementoMenu);
         void getAllElementiMenu();
         List<ElementoMenu> getElementiPerCategoria(String categoria);
+
     }
 
 
