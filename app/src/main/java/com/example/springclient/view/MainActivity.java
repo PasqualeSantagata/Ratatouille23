@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
        Button buttonSave = findViewById(R.id.buttonLoginOk);
-       buttonIndietro = findViewById(R.id.buttonLoginIndietro);
+     //  buttonIndietro = findViewById(R.id.buttonLoginIndietro);
 
        buttonSave.setOnClickListener(view -> {
            String email, password;
@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
 
        );
 
-        buttonIndietro.setOnClickListener(view -> {
+      /*  buttonIndietro.setOnClickListener(view -> {
 
             Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_login);
+            //dialog.setContentView(R.layout.dialog_login);
             dialog.show();
 
-        });
+        });*/
 
     }
 

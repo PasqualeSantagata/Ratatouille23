@@ -41,7 +41,6 @@ public class UtenteModel implements UtenteContract.Model {
 
 
                     }
-
                     @Override
                     public void onSuccess(@NonNull Response<ApiToken> apiTokenResponse) {
                         if(apiTokenResponse.isSuccessful()){

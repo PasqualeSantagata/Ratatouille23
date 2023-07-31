@@ -62,13 +62,9 @@ public class UtentePresenter implements UtenteContract.Presenter {
                 sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 sharedPreferences.edit().putString("accessToken", retData.getAccessToken()).apply();
                 sharedPreferences.edit().putString("refreshToken", retData.getRefreshToken()).apply();
-                if(retData.isPasswordChanged()) {
-                    intent = new Intent(loginActivity, InserisciElementoActivity.class);
-                    loginActivity.startActivity(intent);//TODO
-                }
-                else{
+                intent = new Intent(loginActivity, InserisciElementoActivity.class);
+                loginActivity.startActivity(intent);//TODO
 
-                }
             }
         });
 
