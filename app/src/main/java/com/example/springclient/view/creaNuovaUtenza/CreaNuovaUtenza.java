@@ -35,7 +35,7 @@ public class CreaNuovaUtenza extends AppCompatActivity {
 
     private Utente utente;
 
-    UtenteContract.Presenter presenter = new UtentePresenter(this);
+    private UtenteContract.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class CreaNuovaUtenza extends AppCompatActivity {
         getSupportActionBar().setTitle("NUOVA UTENZA");
         setContentView(R.layout.activity_nuova_utenza);
         initializeComponents();
+        presenter = new UtentePresenter(this);
     }
 
     public void initializeComponents() {

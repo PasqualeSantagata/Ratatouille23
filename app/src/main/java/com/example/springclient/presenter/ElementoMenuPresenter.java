@@ -19,20 +19,20 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     private ElementoMenuModel elementoMenuModel;
     private RetrofitService retrofitService;
-    private InserisciElementoActivity inserisciElementoView;
+    private InserisciElementoActivity inserisciElementoActivity;
     private StartInserimentoNelMenu startInserimentoNelMenu;
     private HomeNuovoElemento homeNuovoElemento;
 
     private EsploraCategorie esploraCategorie;
     private RiepilogoOrdinazione riepilogoOrdinazione;
 
-    public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoView){
+    public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         if(retrofitService == null)
             retrofitService = RetrofitService.getIstance();
 
         //Da tenere presente eventuali possibili problemi con le altre new ElementoMenuModel negli altri costruttori
         elementoMenuModel = new ElementoMenuModel(retrofitService);
-        this.inserisciElementoView = inserisciElementoView;
+        this.inserisciElementoActivity = inserisciElementoActivity;
     }
 
     public ElementoMenuPresenter(StartInserimentoNelMenu startInserimentoNelMenu){
@@ -56,17 +56,18 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback<ElementoMenu>() {
             @Override
             public void onFinished(List<String> errorMessages) {
-                inserisciElementoView.showErrors(errorMessages);
-                getAllElementiMenu();
+                inserisciElementoActivity.showErrors(errorMessages);
+               // getAllElementiMenu();
             }
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(inserisciElementoView, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(inserisciElementoActivity, t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("Failure: ", t.getMessage());
             }
             @Override
             public void onSuccess(ElementoMenu elem) {
-                inserisciElementoView.cleanFields();
+                inserisciElementoActivity.cleanFields();
+                inserisciElementoActivity.elementoSalvatoCorrettamente();
             }
         });
     }

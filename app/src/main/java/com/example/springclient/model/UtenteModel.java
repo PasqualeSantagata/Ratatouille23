@@ -4,10 +4,10 @@ import android.util.Log;
 
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.RetrofitService.UtenteAPI;
+import com.example.springclient.authentication.ApiToken;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.entity.Utente;
-import com.example.springclient.authentication.ApiToken;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -18,11 +18,12 @@ import retrofit2.Response;
 
 public class UtenteModel implements UtenteContract.Model {
 
+    private UtenteContract.Presenter presenter;
     private final UtenteAPI utenteAPI;
 
-    public UtenteModel(RetrofitService retrofitService){
+    public UtenteModel(RetrofitService retrofitService, UtenteContract.Presenter presenter){
         utenteAPI = retrofitService.getUtenteAPI();
-
+        this.presenter = presenter;
     }
 
     @Override
@@ -47,6 +48,7 @@ public class UtenteModel implements UtenteContract.Model {
                             utenteCallback.onSuccess(apiTokenResponse.body());
                         }
                         else if(apiTokenResponse.code() == 403){
+
 
                         }
                         else {
