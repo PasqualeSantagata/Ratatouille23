@@ -40,11 +40,11 @@ public class HomeNuovoElemento extends AppCompatActivity {
         buttonOk = findViewById(R.id.buttonOkNuovoElemento);
 
         buttonOk.setOnClickListener(view -> {
-           /*
+/*
             List<Categoria> categoriaList = elementoMenuPresenter
             SpinnerAdapterCategorie spinnerAdapterCategorie = new SpinnerAdapterCategorie(this,categoriaList);
-            spinnerCategoria.setAdapter(spinnerAdapterCategorie); */
-          //  spinnerCategoria.getItemAtPosition();
+            spinnerCategoria.setAdapter(spinnerAdapterCategorie);
+            spinnerCategoria.getItemAtPosition(); */
         });
 
            /*   //Spinner
