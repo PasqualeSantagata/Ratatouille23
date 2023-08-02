@@ -9,13 +9,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.entity.Utente;
+import com.example.springclient.presenter.UtentePresenter;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenza;
+import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
 
 public class DashboardAdmin extends AppCompatActivity {
-    ImageView imageViewMenu;
-    ImageView imageViewAnalytics;
-    ImageView imageViewNuovaUtenza;
+    private ImageView imageViewMenu;
+    private ImageView imageViewAnalytics;
+    private ImageView imageViewNuovaUtenza;
+    private UtentePresenter utentePresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +28,7 @@ public class DashboardAdmin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_dashboard_admin);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        utentePresenter = new UtentePresenter(this);
         initializeComponents();
     }
 
@@ -33,7 +38,7 @@ public class DashboardAdmin extends AppCompatActivity {
         imageViewAnalytics = findViewById(R.id.imageViewAnalyticsDash);
         imageViewNuovaUtenza = findViewById(R.id.imageViewNewUserDash);
         imageViewMenu.setOnClickListener(view -> {
-            Intent intentMenu = new Intent(this, StartInserimentoNelMenu.class);
+            Intent intentMenu = new Intent(this, InserisciElementoActivity.class);// aggiungere navigazione
             startActivity(intentMenu);
         });
 

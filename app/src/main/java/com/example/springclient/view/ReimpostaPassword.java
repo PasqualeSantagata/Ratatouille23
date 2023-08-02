@@ -22,11 +22,7 @@ public class ReimpostaPassword extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_reimposta_password);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         initializeComponents();
-
-
-
     }
 
     private void initializeComponents(){

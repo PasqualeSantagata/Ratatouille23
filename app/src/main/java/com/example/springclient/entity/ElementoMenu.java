@@ -15,7 +15,7 @@ public class ElementoMenu {
     private List<String> elencoAllergeni;
     public final String lingua;
     private String tempoPreparazione;  //Magari va cambiato in float o int se li interpretiamo sempre come minuti
-    private String breveNota;
+    private String breveNota; //nel caso dell'ordinazione??
     private Float quantita;
     private String categoria;
 

@@ -23,7 +23,6 @@ public class Utente {
 
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -62,7 +61,7 @@ public class Utente {
     public String toString() {
 
         // TODO Auto-generated method stub
-        return "Student{" +
+        return "Utente{" +
                 ", firstName= " + nome +
                 ", lastName= " + cognome +
                 ", email= " + email +

@@ -22,8 +22,8 @@ public interface UtenteAPI {
     @GET("api/v1/utente")
     Call<List<Utente>> getAllUtenti();
 
-    @POST("api/v1/auth/register")
-    Single<Response<ApiToken>> registerAddettoSala(@Body Utente utente);
+    @POST("api/v1/register")
+    Single<Response<Void>> registraUtente(@Body Utente utente);
     @POST("api/v1/auth/authenticate")
     @Headers("No-Authentication: true")
     Single<Response<ApiToken>> logInUtente(@Body AuthRequest authRequest);

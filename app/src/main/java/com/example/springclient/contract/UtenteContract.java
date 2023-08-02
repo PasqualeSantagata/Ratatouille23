@@ -9,7 +9,7 @@ import com.example.springclient.presenter.UtentePresenter;
 public interface UtenteContract {
 
     interface Model{
-        void saveUtente(Utente utente, UtenteCallback registerCallback);//
+        void saveUtente(Utente utente, UtenteCallback<Void> registerCallback);//
         void logInUtente(AuthRequest authRequest, UtenteCallback<ApiToken> utenteCallback);
         void forgotPassword(String email, UtenteCallback<Void> utenteCallback);
 

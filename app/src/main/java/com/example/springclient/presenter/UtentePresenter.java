@@ -1,7 +1,6 @@
 package com.example.springclient.presenter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.springclient.authentication.AuthRequest;
@@ -11,33 +10,40 @@ import com.example.springclient.entity.Role;
 import com.example.springclient.model.UtenteModel;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.entity.Utente;
-import com.example.springclient.view.creaNuovaUtenza.CreaNuovaUtenza;
-import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
+import com.example.springclient.view.DashboardAdmin;
+import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenza;
 import com.example.springclient.view.MainActivity;
-
-
 
 public class UtentePresenter implements UtenteContract.Presenter {
     private UtenteModel utenteModel;
     private RetrofitService retrofitService;
     private MainActivity loginActivity;
     private SharedPreferences sharedPreferences;
-    private CreaNuovaUtenza creaNuovaUtenza;
+    private StartNuovaUtenza startNuovaUtenza;
+    private DashboardAdmin dashboardAdmin;
 
-    public UtentePresenter(MainActivity loginActivity){
-        if(retrofitService == null)
-            retrofitService = RetrofitService.getIstance();
-
+    private UtentePresenter(){
+        retrofitService = RetrofitService.getIstance();
         retrofitService.setUtentePresenter(this);
-        utenteModel = new UtenteModel(retrofitService, this);
+        utenteModel = UtenteModel.getIstance();
+        utenteModel.setPresenter(this);
+    }
+    public UtentePresenter(MainActivity loginActivity){
+        this();
         this.loginActivity = loginActivity;
         sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        retrofitService.getTokenRefreshInterceptor().setMainActivityPresenter(this);
         retrofitService.getMyInterceptor().setPreferences(sharedPreferences);
-        retrofitService.getTokenRefreshInterceptor().setUtentePresenter(this);
+
+    }
+    public UtentePresenter(StartNuovaUtenza startNuovaUtenza){
+        this();
+        this.startNuovaUtenza = startNuovaUtenza;
     }
 
-    public UtentePresenter(CreaNuovaUtenza creaNuovaUtenza) {
-        this.creaNuovaUtenza = creaNuovaUtenza;
+    public UtentePresenter(DashboardAdmin dashboardAdmin){
+        this();
+        this.dashboardAdmin = dashboardAdmin;
     }
 
     @Override
@@ -52,7 +58,6 @@ public class UtentePresenter implements UtenteContract.Presenter {
             public void onFinished() {
                 loginActivity.loginError();
                 sharedPreferences.edit().putString("email", "").apply();
-
             }
             @Override
             public void onFailure(Throwable t) {
@@ -66,17 +71,28 @@ public class UtentePresenter implements UtenteContract.Presenter {
                 if(retData.getRole().equals(Role.ADMIN.name())) {
                     loginActivity.avviaDashboardAdmin();
                 }
-
-
-
             }
         });
-
     }
 
     @Override
     public void saveUtente(Utente utente) {
+        utenteModel.saveUtente(utente, new UtenteContract.UtenteCallback<Void>() {
+            @Override
+            public void onFinished() {
 
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Void retData) {
+
+            }
+        });
 
     }
 

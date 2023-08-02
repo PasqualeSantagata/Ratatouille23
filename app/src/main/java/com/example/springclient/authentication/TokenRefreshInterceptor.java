@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TokenRefreshInterceptor implements Interceptor {
     private SharedPreferences sharedPreferences;
-    private UtentePresenter utentePresenter;
+    private UtentePresenter mainActivityPresenter;
 
     public TokenRefreshInterceptor(){
 
@@ -35,8 +35,8 @@ public class TokenRefreshInterceptor implements Interceptor {
         Request.Builder newRequestBuilder = request.newBuilder();
         Response response = chain.proceed(request);
 
-        sharedPreferences = utentePresenter.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        if (response.code() == 401 && request.header("No-Authentication").equals(null)) {
+        sharedPreferences = mainActivityPresenter.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        if (response.code() == 401 && request.header("No-Authentication") == null) {
             response.close();
             String refreshToken = sharedPreferences.getString("refreshToken", "");
             if(!refreshToken.isEmpty()) {
@@ -63,7 +63,7 @@ public class TokenRefreshInterceptor implements Interceptor {
                 .addInterceptor(loggingInterceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.4:8080/")
+                .baseUrl("http://192.168.1.7:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(okHttpClient)
@@ -86,8 +86,8 @@ public class TokenRefreshInterceptor implements Interceptor {
         return token;
     }
 
-    public void setUtentePresenter(UtentePresenter utentePresenter) {
-        this.utentePresenter = utentePresenter;
+    public void setMainActivityPresenter(UtentePresenter mainActivityPresenter) {
+        this.mainActivityPresenter = mainActivityPresenter;
     }
 
 }

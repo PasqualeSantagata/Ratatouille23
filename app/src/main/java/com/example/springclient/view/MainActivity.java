@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     public void avviaDashboardAdmin(){
         Intent dashIntent = new Intent(this, DashboardAdmin.class);
         startActivity(dashIntent);
+
     }
 
 

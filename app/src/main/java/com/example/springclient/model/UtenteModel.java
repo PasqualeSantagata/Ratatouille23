@@ -17,18 +17,42 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
 public class UtenteModel implements UtenteContract.Model {
-
     private UtenteContract.Presenter presenter;
     private final UtenteAPI utenteAPI;
-
-    public UtenteModel(RetrofitService retrofitService, UtenteContract.Presenter presenter){
+    private static UtenteModel ISTANCE;
+    private UtenteModel(RetrofitService retrofitService){
         utenteAPI = retrofitService.getUtenteAPI();
-        this.presenter = presenter;
+    }
+    public static UtenteModel getIstance(){
+        if(ISTANCE == null){
+            ISTANCE = new UtenteModel(RetrofitService.getIstance());
+        }
+        return ISTANCE;
     }
 
     @Override
-    public void saveUtente(Utente utente, UtenteContract.UtenteCallback utenteCallbackCallback) {
+    public void saveUtente(Utente utente, UtenteContract.UtenteCallback<Void> utenteCallback) {
+        utenteAPI.registraUtente(utente)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> apiTokenResponse) {
+                        if(apiTokenResponse.isSuccessful()){
+                            utenteCallback.onSuccess(null);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
 
     }
     @Override
@@ -90,5 +114,8 @@ public class UtenteModel implements UtenteContract.Model {
                 });
     }
 
+    public void setPresenter(UtenteContract.Presenter presenter){
+        this.presenter = presenter;
+    }
 
 }
