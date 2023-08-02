@@ -35,12 +35,12 @@
     <string name="dialog_campi_errati">I campi inseriti non sono validi</string>
     <string name="dialog_ord_vuota">ordinazione vuota!</string>
     <string name="esci">esci</string>
-    <string name="dialog_cambia_pass">"Devi cambiare password! "</string>
+    <string name="dialog_cambia_pass">"Devi cambiare password, clicca ok e riceverai una mail per aggiornarla"</string>
 
     <string-array name="array_ruoli">
-            <item>👨🏻‍🍳 Addetto alla cucina</item>
-            <item>🧑🏾‍💼 Addetto alla sala</item>
-            <item>🤵🏼 Supervisore </item>
+            <item>Addetto alla cucina</item>
+            <item>Addetto alla sala</item>
+            <item>Supervisore </item>
         </string-array>
 
 

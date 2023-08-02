@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.UtenteContract;
 import com.example.springclient.authentication.ApiToken;
+import com.example.springclient.entity.Role;
 import com.example.springclient.model.UtenteModel;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.entity.Utente;
@@ -14,12 +15,13 @@ import com.example.springclient.view.creaNuovaUtenza.CreaNuovaUtenza;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.MainActivity;
 
+
+
 public class UtentePresenter implements UtenteContract.Presenter {
     private UtenteModel utenteModel;
     private RetrofitService retrofitService;
     private MainActivity loginActivity;
     private SharedPreferences sharedPreferences;
-
     private CreaNuovaUtenza creaNuovaUtenza;
 
     public UtentePresenter(MainActivity loginActivity){
@@ -58,12 +60,14 @@ public class UtentePresenter implements UtenteContract.Presenter {
             }
             @Override
             public void onSuccess(ApiToken retData) {
-                Intent intent = null;
                 sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 sharedPreferences.edit().putString("accessToken", retData.getAccessToken()).apply();
                 sharedPreferences.edit().putString("refreshToken", retData.getRefreshToken()).apply();
-                intent = new Intent(loginActivity, InserisciElementoActivity.class);
-                loginActivity.startActivity(intent);//TODO
+                if(retData.getRole().equals(Role.ADMIN.name())) {
+                    loginActivity.avviaDashboardAdmin();
+                }
+
+
 
             }
         });
@@ -78,9 +82,20 @@ public class UtentePresenter implements UtenteContract.Presenter {
 
     @Override
     public void reimpostaPassword(String email) {
-        //Al primo accesso l'utente (addetto sala, addetto alla cucina e supervisore)
-        //deve reimpostare la pass
+        utenteModel.forgotPassword(email, new UtenteContract.UtenteCallback<Void>() {
+            @Override
+            public void onFinished() {
 
+            }
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+            @Override
+            public void onSuccess(Void retData) {
+
+            }
+        });
     }
 
     @Override
@@ -91,6 +106,7 @@ public class UtentePresenter implements UtenteContract.Presenter {
     public void avviaAggiornaPassword(){
         loginActivity.dialgPrimoAccesso();
     }
+
 
     public MainActivity getActivity(){
         return loginActivity;

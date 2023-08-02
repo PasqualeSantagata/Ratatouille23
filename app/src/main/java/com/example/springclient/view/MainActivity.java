@@ -2,9 +2,11 @@ package com.example.springclient.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.UtenteContract;
+import com.example.springclient.entity.Role;
 import com.example.springclient.presenter.UtentePresenter;
+import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -24,12 +28,9 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
-
-    private Button buttonIndietro;
     private UtentePresenter utentePresenter;
     private String email;
 
-    private MainActivity mainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         utentePresenter = new UtentePresenter(this);
         initializeComponents();
+
     }
     private void initializeComponents() {
        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmailLogin);
@@ -51,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
 
        buttonSave.setOnClickListener(view -> {
            String nome, cognome, password;
-
 
            email = String.valueOf(editTextEmail.getText());
            password = String.valueOf(editTextPassword.getText());
@@ -84,13 +85,12 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
     public void dialgPrimoAccesso(){
 
         Dialog dialogPrimoAcesso = new Dialog(this);
-        TextView errorMessage = findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        errorMessage.setText(R.string.dialog_cambia_pass);
         dialogPrimoAcesso.setContentView(R.layout.dialog_error_one_button);
+        TextView errorMessage = dialogPrimoAcesso.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        errorMessage.setText(R.string.dialog_cambia_pass);
         dialogPrimoAcesso.show();
 
-
-        Button buttonDialog = findViewById(R.id.buttonOkDialogueErrorOneBt);
+        Button buttonDialog = dialogPrimoAcesso.findViewById(R.id.buttonOkDialogueErrorOneBt);
         buttonDialog.setOnClickListener(view -> {
             utentePresenter.reimpostaPassword(email);
             dialogPrimoAcesso.dismiss();
@@ -102,6 +102,14 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
         editTextPassword.setText("");
         editTextEmail.setText("");
     }
+
+    public void avviaDashboardAdmin(){
+        Intent dashIntent = new Intent(this, DashboardAdmin.class);
+        startActivity(dashIntent);
+    }
+
+
+
 
 
 

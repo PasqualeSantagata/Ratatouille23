@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.UtenteContract;
+import com.example.springclient.entity.Role;
 import com.example.springclient.entity.Utente;
 import com.example.springclient.presenter.UtentePresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterRuoli;
@@ -61,8 +62,21 @@ public class CreaNuovaUtenza extends AppCompatActivity {
                 findViewById(R.id.buttonOkDialogueErrorOneBt).setOnClickListener(view1 -> {dialog.dismiss();});
 
             }else{
-                utente = new Utente(textInputLayoutNome.getEditText().toString(), textInputLayoutCognome.getEditText().toString(), textInputLayoutEmail.getEditText().toString());
-                //caricare utente sul db e magari aggiungere riepilogo in dialog delle info inserite
+                utente = new Utente(textInputLayoutNome.getEditText().toString(), textInputLayoutCognome.getEditText().toString(),
+                        textInputLayoutEmail.getEditText().toString(),"pass"); //aggiungere il recupero del ruolo
+
+                //manca anche il campo password
+                String role = spinnerRuolo.getSelectedItem().toString();
+                switch (role){
+                    case "Addetto alla cucina":
+                        utente.setRole(Role.ADDETTO_CUCINA);
+                        break;
+                    case "Addetto alla sala":
+                        utente.setRole(Role.ADDETTO_SALA);
+                        break;
+                    case "Supervisore":
+                        utente.setRole(Role.SUPERVISORE);
+                }
                 presenter.saveUtente(utente);
             }
         });
@@ -71,20 +85,23 @@ public class CreaNuovaUtenza extends AppCompatActivity {
     }
 
     private boolean checkIncorrectFields(){
-        boolean bool=false;
-
-        if (textInputLayoutNome.getEditText().toString().isEmpty()); {
+        boolean bool = false;
+        String nome, cognome, email;
+        nome = textInputLayoutNome.getEditText().toString();
+        cognome = textInputLayoutCognome.getEditText().toString();
+        email = textInputLayoutEmail.getEditText().toString();
+        if (nome.isEmpty()) {
             textInputLayoutNome.setError("Nome non valido");
             bool = true;
         }
-        if (textInputLayoutCognome.getEditText().toString().isEmpty()){
+        if (cognome.isEmpty()){
             textInputLayoutCognome.setError("Cognome non valido");
             bool = true;
-        };
-        if(textInputLayoutEmail.getEditText().toString().isEmpty() || !textInputLayoutEmail.getEditText().toString().matches("^(.+)@(\\S+) $.")){
+        }
+        if(email.isEmpty() || !email.matches("^(.+)@(\\S+) $.")){
             textInputLayoutEmail.setError("Email non valida");
             bool = true;
-        };
+        }
 
         int selectedItemOfMySpinner = spinnerRuolo.getSelectedItemPosition();
         String actualPositionOfMySpinner = (String) spinnerRuolo.getItemAtPosition(selectedItemOfMySpinner);
@@ -92,8 +109,6 @@ public class CreaNuovaUtenza extends AppCompatActivity {
             setSpinnerError(spinnerRuolo,"Seleziona un ruolo");
             bool = true;
         }
-
-
         return bool;
     }
 

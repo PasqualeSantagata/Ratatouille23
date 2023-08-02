@@ -32,7 +32,7 @@ public class UtenteModel implements UtenteContract.Model {
 
     }
     @Override
-    public void logInUtente(AuthRequest authRequest, UtenteContract.UtenteCallback utenteCallback) {
+    public void logInUtente(AuthRequest authRequest, UtenteContract.UtenteCallback<ApiToken> utenteCallback) {
         utenteAPI.logInUtente(authRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -48,13 +48,38 @@ public class UtenteModel implements UtenteContract.Model {
                             utenteCallback.onSuccess(apiTokenResponse.body());
                         }
                         else if(apiTokenResponse.code() == 403){
-
+                            presenter.avviaAggiornaPassword();
 
                         }
                         else {
                             utenteCallback.onFinished();
                             Log.d("login response: ", String.valueOf(apiTokenResponse.code()));
 
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+    }
+
+    @Override
+    public void forgotPassword(String email, UtenteContract.UtenteCallback<Void> utenteCallback) {
+        utenteAPI.forgotPassword(email)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<?>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<?> response) {
+                        if(response.isSuccessful()){
+                            /* mostrare schermata "controlla la tua casella di posta" e ritorna al login */
                         }
                     }
 

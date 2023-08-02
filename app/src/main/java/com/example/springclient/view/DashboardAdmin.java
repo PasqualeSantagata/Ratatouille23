@@ -29,6 +29,9 @@ public class DashboardAdmin extends AppCompatActivity {
 
 
     private void initializeComponents(){
+        imageViewMenu = findViewById(R.id.imageViewMenuDash);
+        imageViewAnalytics = findViewById(R.id.imageViewAnalyticsDash);
+        imageViewNuovaUtenza = findViewById(R.id.imageViewNewUserDash);
         imageViewMenu.setOnClickListener(view -> {
             Intent intentMenu = new Intent(this, StartInserimentoNelMenu.class);
             startActivity(intentMenu);

@@ -53,7 +53,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
-        elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.Model.ElementoMenuCallback<ElementoMenu>() {
+        elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.ElementoMenuCallback<Void>() {
             @Override
             public void onFinished(List<String> errorMessages) {
                 inserisciElementoActivity.showErrors(errorMessages);
@@ -65,7 +65,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
                 Log.e("Failure: ", t.getMessage());
             }
             @Override
-            public void onSuccess(ElementoMenu elem) {
+            public void onSuccess(Void elem) {
                 inserisciElementoActivity.cleanFields();
                 inserisciElementoActivity.elementoSalvatoCorrettamente();
             }
@@ -73,7 +73,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     }
     @Override
     public void getAllElementiMenu() {
-        elementoMenuModel.getAllElementiMenu(new ElementoMenuContract.Model.ElementoMenuCallback<List<ElementoMenu>>() {
+        elementoMenuModel.getAllElementiMenu(new ElementoMenuContract.ElementoMenuCallback<List<ElementoMenu>>() {
             @Override
             public void onFinished(List<String> errorMessage) {}
             @Override

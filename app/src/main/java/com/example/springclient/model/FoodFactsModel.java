@@ -24,7 +24,7 @@ public class FoodFactsModel {
         foodFactsAPI = foodFactsRetrofit.getFoodFactsAPI();
     }
 
-    public void getElementoMenuDetails(String nome, ElementoMenuContract.Model.ElementoMenuCallback<FoodFactsResponse> callback){
+    public void getElementoMenuDetails(String nome, ElementoMenuContract.ElementoMenuCallback<FoodFactsResponse> callback){
         foodFactsAPI.getElementoMenuDetails(nome)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

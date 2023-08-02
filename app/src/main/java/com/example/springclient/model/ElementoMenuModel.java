@@ -28,7 +28,7 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
         this.elementoMenuAPI = retrofitService.getElementoMenuAPI();
     }
     @Override
-    public void saveElementoMenu(ElementoMenu elementoMenu, ElementoMenuCallback elementoMenuCallback) {
+    public void saveElementoMenu(ElementoMenu elementoMenu, ElementoMenuContract.ElementoMenuCallback<Void> elementoMenuCallback) {
         elementoMenuAPI.addElementoMenu(elementoMenu).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -53,7 +53,7 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
     }
 
     @Override
-    public void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback) {
+    public void getAllElementiMenu(ElementoMenuContract.ElementoMenuCallback elementoMenuCallback) {
 
     }
   /*  @Override

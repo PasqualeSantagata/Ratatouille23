@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -98,9 +99,15 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         autoTextView.setOnItemClickListener(
                 (adapterView, view, i, l) -> {
-                    descrizioneTextInputLayout.getEditText().setText(prodotti.get(i).getGeneric_name());
+                    String descrizione = prodotti.get(i).getGeneric_name();
+                    if(descrizione == null) {
+                        Toast.makeText(this, "Descrizione non disponibile", Toast.LENGTH_SHORT).show();
+
+                    }
+                    descrizioneTextInputLayout.getEditText().setText(descrizione);
                     if (prodotti.get(i).getAllergens()!= null){
                         /** traduci allergeni da allergens.json*/
+
 
                     }
                     else{

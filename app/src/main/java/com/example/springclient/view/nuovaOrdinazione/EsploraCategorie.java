@@ -21,7 +21,7 @@ import java.util.List;
 public class EsploraCategorie extends AppCompatActivity {
 
     //riceve le info dell'ordinazione dalla preced. activity
-    Ordinazione ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+    private Ordinazione ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
     private ImageView imageViewPrimi;
     private ImageView imageViewSecondi;
     private ImageView imageViewBevande;

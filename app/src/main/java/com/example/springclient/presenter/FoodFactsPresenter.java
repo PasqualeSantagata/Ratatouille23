@@ -25,7 +25,7 @@ public class FoodFactsPresenter {
     }
 
     public void getElementoMenuDetails(String nome){
-        foodFactsModel.getElementoMenuDetails(nome, new ElementoMenuContract.Model.ElementoMenuCallback<FoodFactsResponse>() {
+        foodFactsModel.getElementoMenuDetails(nome, new ElementoMenuContract.ElementoMenuCallback<FoodFactsResponse>() {
             @Override
             public void onFinished(List<String> errorMessage) {
             }

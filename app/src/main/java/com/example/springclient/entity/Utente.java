@@ -6,27 +6,23 @@ public class Utente {
     private String cognome;
     private String email;
     private String password;
-    private boolean firstAccess;
+    private String role;
     public Utente() {super();}
 
     public Utente(
             String nome,
             String cognome,
             String email,
-            boolean firstAccess
+            String password
             ) {
         super();
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.firstAccess = firstAccess;
+        this.password = password;
+
     }
 
-    public Utente(String nome, String cognome, String email) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-    }
 
     public String getNome() {
         return nome;
@@ -58,6 +54,10 @@ public class Utente {
     public void setEmail(String email) {
         this.email = email;
     }
+    public void setRole(Role role){
+        this.role = role.name();
+    }
+
     @Override
     public String toString() {
 

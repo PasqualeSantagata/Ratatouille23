@@ -22,7 +22,6 @@ public class PasswordDimenticata extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_password_dimenticata);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
         initializeComponents();
 
     }
