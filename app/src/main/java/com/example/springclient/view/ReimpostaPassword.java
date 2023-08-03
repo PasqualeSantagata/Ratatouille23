@@ -8,14 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.presenter.UtentePresenter;
+import com.example.springclient.presenter.AutenticazionePresenter;
 
 public class ReimpostaPassword extends AppCompatActivity {
 
     private EditText EditTextNuovaPassword;
     private EditText EditTextRipetiPassword;
 
-    private UtentePresenter utentePresenter;
+    private AutenticazionePresenter autenticazionePresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

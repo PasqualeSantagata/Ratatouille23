@@ -9,17 +9,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.Utente;
-import com.example.springclient.presenter.UtentePresenter;
-import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenza;
+import com.example.springclient.presenter.AdminPresenter;
+import com.example.springclient.presenter.AutenticazionePresenter;
+import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
-import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
 
 public class DashboardAdmin extends AppCompatActivity {
     private ImageView imageViewMenu;
     private ImageView imageViewAnalytics;
     private ImageView imageViewNuovaUtenza;
-    private UtentePresenter utentePresenter;
+    private AdminPresenter adminPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class DashboardAdmin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_dashboard_admin);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        utentePresenter = new UtentePresenter(this);
+        adminPresenter = new AdminPresenter(this);
         initializeComponents();
     }
 
@@ -47,7 +46,7 @@ public class DashboardAdmin extends AppCompatActivity {
         });
 
         imageViewNuovaUtenza.setOnClickListener(view -> {
-            Intent intentUtenza = new Intent(this, StartNuovaUtenza.class);
+            Intent intentUtenza = new Intent(this, StartNuovaUtenzaActivity.class);
             startActivity(intentUtenza);
         });
     }

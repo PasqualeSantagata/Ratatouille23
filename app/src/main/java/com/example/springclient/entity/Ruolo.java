@@ -1,6 +1,6 @@
 package com.example.springclient.entity;
 
-public enum Role {
+public enum Ruolo {
     ADMIN,
     ADDETTO_SALA,
     ADDETTO_CUCINA,

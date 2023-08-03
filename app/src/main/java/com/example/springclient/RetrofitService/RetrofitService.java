@@ -1,9 +1,9 @@
 package com.example.springclient.RetrofitService;
 
-import com.example.springclient.authentication.AddTokenInterceptor;
+import com.example.springclient.authentication.AggiungiTokenInterceptor;
 
 import com.example.springclient.authentication.TokenRefreshInterceptor;
-import com.example.springclient.presenter.UtentePresenter;
+import com.example.springclient.presenter.AutenticazionePresenter;
 import com.google.gson.Gson;
 
 import okhttp3.*;
@@ -20,11 +20,12 @@ public class RetrofitService {
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
     private CategoriaAPI categoriaAPI;
+    private RecuperoCredenzialiAPI recuperoCredenzialiAPI;
     private OkHttpClient.Builder okHttp;
-    private AddTokenInterceptor addTokenInterceptor;
+    private AggiungiTokenInterceptor aggiungiTokenInterceptor;
     private TokenRefreshInterceptor tokenRefreshInterceptor;
 
-    private UtentePresenter utentePresenter;
+    private AutenticazionePresenter autenticazionePresenter;
 
     public static RetrofitService getIstance(){
 
@@ -36,14 +37,14 @@ public class RetrofitService {
 
     private RetrofitService(){
          okHttp = new OkHttpClient.Builder();
-         addTokenInterceptor = new AddTokenInterceptor();
+         aggiungiTokenInterceptor = new AggiungiTokenInterceptor();
          tokenRefreshInterceptor = new TokenRefreshInterceptor();
 
         /** PER TESTING */
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        okHttp.addInterceptor(addTokenInterceptor);
+        okHttp.addInterceptor(aggiungiTokenInterceptor);
         okHttp.addInterceptor(tokenRefreshInterceptor);
         okHttp.addInterceptor(loggingInterceptor);
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
@@ -57,6 +58,8 @@ public class RetrofitService {
         utenteAPI = retrofitClient.create(UtenteAPI.class);
         elementoMenuAPI = retrofitClient.create(ElementoMenuAPI.class);
         categoriaAPI = retrofitClient.create(CategoriaAPI.class);
+        recuperoCredenzialiAPI = retrofitClient.create(RecuperoCredenzialiAPI.class);
+
     }
 
     public UtenteAPI getUtenteAPI(){
@@ -68,11 +71,12 @@ public class RetrofitService {
     }
 
     public CategoriaAPI getCategoriaAPI() { return categoriaAPI; }
+    public RecuperoCredenzialiAPI getRecuperoCredenzialiAPI(){return recuperoCredenzialiAPI;}
 
-    public AddTokenInterceptor getMyInterceptor(){return addTokenInterceptor;}
+    public AggiungiTokenInterceptor getMyInterceptor(){return aggiungiTokenInterceptor;}
 
-    public void setUtentePresenter(UtentePresenter utentePresenter) {
-        this.utentePresenter = utentePresenter;
+    public void setUtentePresenter(AutenticazionePresenter autenticazionePresenter) {
+        this.autenticazionePresenter = autenticazionePresenter;
     }
     public TokenRefreshInterceptor getTokenRefreshInterceptor() {
         return tokenRefreshInterceptor;

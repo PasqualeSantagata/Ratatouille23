@@ -13,10 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.UtenteContract;
-import com.example.springclient.entity.Role;
+import com.example.springclient.contract.AdminContract;
+import com.example.springclient.entity.Ruolo;
 import com.example.springclient.entity.Utente;
-import com.example.springclient.presenter.UtentePresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterRuoli;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -36,7 +35,7 @@ public class CreaNuovaUtenza extends AppCompatActivity {
 
     private Utente utente;
 
-    private UtenteContract.Presenter presenter;
+    private AdminContract.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,15 +68,15 @@ public class CreaNuovaUtenza extends AppCompatActivity {
                 String role = spinnerRuolo.getSelectedItem().toString();
                 switch (role){
                     case "Addetto alla cucina":
-                        utente.setRole(Role.ADDETTO_CUCINA);
+                        utente.setRuolo(Ruolo.ADDETTO_CUCINA);
                         break;
                     case "Addetto alla sala":
-                        utente.setRole(Role.ADDETTO_SALA);
+                        utente.setRuolo(Ruolo.ADDETTO_SALA);
                         break;
                     case "Supervisore":
-                        utente.setRole(Role.SUPERVISORE);
+                        utente.setRuolo(Ruolo.SUPERVISORE);
                 }
-                presenter.saveUtente(utente);
+                presenter.registraUtente(utente);
             }
         });
 

@@ -1,22 +1,15 @@
 package com.example.springclient.model;
 
-import android.util.Log;
-
 import com.example.springclient.RetrofitService.ElementoMenuAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.apiUtils.ApiError;
+import com.example.springclient.apiUtils.ApiResponse;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,8 +21,8 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
         this.elementoMenuAPI = retrofitService.getElementoMenuAPI();
     }
     @Override
-    public void saveElementoMenu(ElementoMenu elementoMenu, ElementoMenuContract.ElementoMenuCallback<Void> elementoMenuCallback) {
-        elementoMenuAPI.addElementoMenu(elementoMenu).enqueue(new Callback<Void>() {
+    public void salvaElementoMenu(ElementoMenu elementoMenu, ElementoMenuContract.ElementoMenuCallback<Void> elementoMenuCallback) {
+        elementoMenuAPI.salvaElementoMenu(elementoMenu).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
@@ -37,9 +30,9 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                 }
                 else{
                     if(response.code() == 412) {
-                        ApiError[] apiError = new Gson().fromJson(response.errorBody().charStream(), ApiError[].class);
+                        ApiResponse[] apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse[].class);
                         List<String> listOfError = new ArrayList<>();
-                        for (ApiError a : apiError)
+                        for (ApiResponse a : apiResponse)
                             listOfError.add(a.getMessage());
                         elementoMenuCallback.onFinished(listOfError);
                     }

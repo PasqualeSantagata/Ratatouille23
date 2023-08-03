@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,20 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
-import com.example.springclient.contract.UtenteContract;
-import com.example.springclient.entity.Role;
-import com.example.springclient.presenter.UtentePresenter;
-import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
+import com.example.springclient.contract.AutenticazioneContract;
+import com.example.springclient.presenter.AutenticazionePresenter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class MainActivity extends AppCompatActivity implements UtenteContract.View {
+public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View {
     private EditText editTextPassword;
     private EditText editTextEmail;
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
-    private UtentePresenter utentePresenter;
+    private AutenticazioneContract.Presenter autenticazionePresenter;
     private String email;
 
     @Override
@@ -37,14 +34,13 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        utentePresenter = new UtentePresenter(this);
+        autenticazionePresenter = new AutenticazionePresenter(this);
         initializeComponents();
 
     }
     private void initializeComponents() {
        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmailLogin);
        textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
-       //CREDO debba fare la lambda expr per avviare poi l'activity di recupero password
        textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
@@ -52,38 +48,48 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
 
 
        buttonSave.setOnClickListener(view -> {
-           String nome, cognome, password;
-
+           String password;
            email = String.valueOf(editTextEmail.getText());
            password = String.valueOf(editTextPassword.getText());
-           utentePresenter.logInUtente(new AuthRequest(email, password));
-           SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
-           sharedPreferences.edit().putString("email", email).apply();
+           disabilitaErrori();
+           verificaCredenziali(email, password);
        });
 
        textViewPasswordDimenticata.setOnClickListener(view -> {
-           utentePresenter.passwordDimenticata();
-
+           avviaRecuperoPassword();
        });
     }
+    @Override
+    public void verificaCredenziali(String email, String password){
+        if(email.equals("")){
+            textInputLayoutEmail.setError("Inserisci la mail");
+        }
+        if(password.equals("")){
+            textInputLayoutPassword.setError("Inserisci la password");
+        }
+        if(!email.equals("") && !password.equals("") ){
+            autenticazionePresenter.logInUtente(new AuthRequest(email, password));
+            SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString("email", email).apply();
+        }
+    }
 
-    public void loginError(){
+    public void disabilitaErrori(){
+        textInputLayoutEmail.setErrorEnabled(false);
+        textInputLayoutPassword.setErrorEnabled(false);
+    }
+    @Override
+    public void loginErrore(){
         textInputLayoutEmail.setError(" ");
         textInputLayoutPassword.setError(" ");
-/*
-        Toast t = Toast.makeText(getApplicationContext(),"Attenzione: credenziali errate!", Toast.LENGTH_SHORT);
-        t.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
-        t.show(); */
-
         //Da proivare poichè a me non và ma penso sia un problema del mio emulatore android studio
         CharSequence messaggio = "Credenziali errate";
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), messaggio, Snackbar.LENGTH_LONG);
         snackbar.show();
 
     }
-
+    @Override
     public void dialgPrimoAccesso(){
-
         Dialog dialogPrimoAcesso = new Dialog(this);
         dialogPrimoAcesso.setContentView(R.layout.dialog_error_one_button);
         TextView errorMessage = dialogPrimoAcesso.findViewById(R.id.textViewMessageDialogueErrorOneBt);
@@ -92,21 +98,42 @@ public class MainActivity extends AppCompatActivity implements UtenteContract.Vi
 
         Button buttonDialog = dialogPrimoAcesso.findViewById(R.id.buttonOkDialogueErrorOneBt);
         buttonDialog.setOnClickListener(view -> {
-            utentePresenter.reimpostaPassword(email);
+           // utentePresenter.reimpostaPassword(email);
             dialogPrimoAcesso.dismiss();
         });
     }
 
-    @Override
+
     public void cleanFields(){
         editTextPassword.setText("");
         editTextEmail.setText("");
     }
-
+    @Override
     public void avviaDashboardAdmin(){
         Intent dashIntent = new Intent(this, DashboardAdmin.class);
         startActivity(dashIntent);
 
+    }
+
+    @Override
+    public void avviaDashboardSupervisore() {
+
+    }
+
+    @Override
+    public void avviaDashboardAddettoSala() {
+
+    }
+
+    @Override
+    public void avviaDashboardAddettoCucina() {
+
+    }
+
+    @Override
+    public void avviaRecuperoPassword(){
+        Intent passwordDimenticataIntent = new Intent(this, PasswordDimenticataActivity.class);
+        startActivity(passwordDimenticataIntent);
     }
 
 

@@ -7,7 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.springclient.RetrofitService.UtenteAPI;
-import com.example.springclient.presenter.UtentePresenter;
+import com.example.springclient.presenter.AutenticazionePresenter;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TokenRefreshInterceptor implements Interceptor {
     private SharedPreferences sharedPreferences;
-    private UtentePresenter mainActivityPresenter;
+    private AutenticazionePresenter mainActivityPresenter;
 
     public TokenRefreshInterceptor(){
 
@@ -86,7 +86,7 @@ public class TokenRefreshInterceptor implements Interceptor {
         return token;
     }
 
-    public void setMainActivityPresenter(UtentePresenter mainActivityPresenter) {
+    public void setMainActivityPresenter(AutenticazionePresenter mainActivityPresenter) {
         this.mainActivityPresenter = mainActivityPresenter;
     }
 

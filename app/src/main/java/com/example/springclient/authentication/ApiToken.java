@@ -3,12 +3,12 @@ package com.example.springclient.authentication;
 public class ApiToken {
     private String accessToken;
     private String refreshToken;
-    private String role;
+    private String ruolo;
 
-    public ApiToken(String accessToken, String refreshToken, String role){
+    public ApiToken(String accessToken, String refreshToken, String ruolo){
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.role = role;
+        this.ruolo = ruolo;
     }
     public String getAccessToken(){
         return accessToken;
@@ -18,5 +18,5 @@ public class ApiToken {
         return refreshToken;
     }
 
-    public String getRole(){return role;}
+    public String getRuolo(){return ruolo;}
 }

@@ -1,6 +1,6 @@
 package com.example.springclient.apiUtils;
 
-public class ApiError{
+public class ApiResponse {
 
     private String message;
     private String status;

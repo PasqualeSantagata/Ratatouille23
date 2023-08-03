@@ -1,12 +1,11 @@
 package com.example.springclient.entity;
 
-
 public class Utente {
     private String nome;
     private String cognome;
     private String email;
     private String password;
-    private String role;
+    private String ruolo;
     public Utente() {super();}
 
     public Utente(
@@ -53,8 +52,8 @@ public class Utente {
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setRole(Role role){
-        this.role = role.name();
+    public void setRuolo(Ruolo ruolo){
+        this.ruolo = ruolo.name();
     }
 
     @Override

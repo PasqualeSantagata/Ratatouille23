@@ -53,7 +53,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
-        elementoMenuModel.saveElementoMenu(elementoMenu, new ElementoMenuContract.ElementoMenuCallback<Void>() {
+        elementoMenuModel.salvaElementoMenu(elementoMenu, new ElementoMenuContract.ElementoMenuCallback<Void>() {
             @Override
             public void onFinished(List<String> errorMessages) {
                 inserisciElementoActivity.showErrors(errorMessages);

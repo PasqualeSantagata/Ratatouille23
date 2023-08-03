@@ -1,6 +1,7 @@
 package com.example.springclient.RetrofitService;
 
 
+import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.authentication.ApiToken;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.entity.Utente;
@@ -23,7 +24,7 @@ public interface UtenteAPI {
     Call<List<Utente>> getAllUtenti();
 
     @POST("api/v1/register")
-    Single<Response<Void>> registraUtente(@Body Utente utente);
+    Single<Response<ApiResponse>> registraUtente(@Body Utente utente);
     @POST("api/v1/auth/authenticate")
     @Headers("No-Authentication: true")
     Single<Response<ApiToken>> logInUtente(@Body AuthRequest authRequest);

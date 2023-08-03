@@ -7,7 +7,7 @@ import java.util.List;
 public interface ElementoMenuContract {
 
     interface Model{
-        void saveElementoMenu(ElementoMenu elementoMenu, ElementoMenuCallback<Void> elementoMenuCallback);
+        void salvaElementoMenu(ElementoMenu elementoMenu, ElementoMenuCallback<Void> elementoMenuCallback);
 
         void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback);
 
