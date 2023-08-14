@@ -43,7 +43,7 @@ public class CreaNuovaUtenza extends AppCompatActivity {
         getSupportActionBar().setTitle("NUOVA UTENZA");
         setContentView(R.layout.activity_nuova_utenza);
         initializeComponents();
-       // presenter = new UtentePresenter(this);
+       //presenter = new UtentePresenter(this);
     }
 
     public void initializeComponents() {

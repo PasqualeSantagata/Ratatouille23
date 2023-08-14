@@ -12,8 +12,6 @@ public interface AdminContract {
     interface View{
         interface Dashboard{
 
-
-
         }
         interface CreaUtenza{
 

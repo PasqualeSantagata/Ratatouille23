@@ -4,6 +4,7 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.model.RecuperoCredenzialiModel;
 
+import com.example.springclient.view.MainActivity;
 import com.example.springclient.view.PasswordDimenticataActivity;
 
 import retrofit2.Response;
@@ -12,9 +13,13 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
 
     private PasswordDimenticataActivity passwordDimenticataActivity;
     private RecuperoCredenzialiModel recuperoCredenzialiModel;
-
+    private MainActivity loginActivity;
     public RecuperoCredenzialiPresenter(PasswordDimenticataActivity passwordDimenticataActivity){
         this.passwordDimenticataActivity = passwordDimenticataActivity;
+        recuperoCredenzialiModel = new RecuperoCredenzialiModel();
+    }
+    public RecuperoCredenzialiPresenter(MainActivity loginActivity){
+        this.loginActivity = loginActivity;
         recuperoCredenzialiModel = new RecuperoCredenzialiModel();
     }
 
@@ -29,9 +34,9 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    //mostrare dialog di corretto invio della mail per il reset password
+                    passwordDimenticataActivity.emailInviataCorrettamente();
                 }
-                if(retData.code() == 401){
+                else if(retData.code() == 401){
                     passwordDimenticataActivity.emailErrata();
                 }
             }

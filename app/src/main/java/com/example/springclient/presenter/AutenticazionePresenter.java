@@ -34,7 +34,6 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
         sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         retrofitService.getTokenRefreshInterceptor().setMainActivityPresenter(this);
         retrofitService.getMyInterceptor().setPreferences(sharedPreferences);
-
     }
 
     @Override
@@ -42,6 +41,9 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
         autenticazioneModel.logInUtente(authRequest, new CallbackResponse<ApiToken>() {
             @Override
             public void onFailure(Throwable t) {
+                /*TODO*
+                Disabilitare progress bar quando non c'è connessione
+                */
                 Toast.makeText(loginActivity, t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("Failure: ", t.getMessage());
             }

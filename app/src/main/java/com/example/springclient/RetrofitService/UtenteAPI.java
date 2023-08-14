@@ -33,10 +33,4 @@ public interface UtenteAPI {
     @Headers("No-Authentication: true")
     Call<ApiToken> refreshToken(@Header("Authorization") String token);
 
-    @POST("api/v1/auth/forgot_password")
-    Single<Response<?>> forgotPassword(@Query("email") String email);
-
-
-
-
 }

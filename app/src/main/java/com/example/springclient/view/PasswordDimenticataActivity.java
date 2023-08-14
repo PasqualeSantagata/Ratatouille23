@@ -1,7 +1,10 @@
 package com.example.springclient.view;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
@@ -18,6 +21,7 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
     private Button buttonOk;
     private Button buttonIndietro;
     private RecuperoCredenzialiContract.Presenter credenzialiPresenter;
+    private View progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         emailTextInputLayout = findViewById(R.id.textInputLayoutEmailPassDimenticata);
         buttonOk = findViewById(R.id.buttonOkPassDimenticata);
         buttonIndietro = findViewById(R.id.buttonIndietroPassDimenticata);
+        progressBar = findViewById(R.id.passwordDimenticataProgessBar);
+        progressBar.setVisibility(View.GONE);
         buttonOk.setOnClickListener(view -> {
             emailTextInputLayout.setErrorEnabled(false);
             String email = String.valueOf(emailTextInputLayout.getEditText().getText());
@@ -46,11 +52,27 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
             emailTextInputLayout.setError("Inserisci la mail");
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
         credenzialiPresenter.avviaRecuperoPassword(email);
+    }
+
+    public void emailInviataCorrettamente(){
+        Dialog emailInviataCorrettamenteDialog = new Dialog(this);
+        emailInviataCorrettamenteDialog.setContentView(R.layout.dialog_email_inviata);
+        Button okButton = emailInviataCorrettamenteDialog.findViewById(R.id.okButtonEmailInviata);
+        emailInviataCorrettamenteDialog.show();
+        okButton.setOnClickListener(view -> {
+                progressBar.setVisibility(View.GONE);
+                emailInviataCorrettamenteDialog.dismiss();
+                Intent loginActivity = new Intent(this, MainActivity.class);
+                startActivity(loginActivity);
+        });
+
     }
 
     @Override
     public void emailErrata(){
+        progressBar.setVisibility(View.GONE);
         emailTextInputLayout.setError("Email non trovata");
     }
 

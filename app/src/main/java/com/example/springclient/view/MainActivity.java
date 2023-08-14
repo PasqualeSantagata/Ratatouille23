@@ -6,16 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.AutenticazioneContract;
+import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.presenter.AutenticazionePresenter;
+import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     private TextInputLayout textInputLayoutPassword;
     private TextView textViewPasswordDimenticata;
     private AutenticazioneContract.Presenter autenticazionePresenter;
+    private RecuperoCredenzialiContract.Presenter recuperoCredenzialiPresenter;
+    private View progressBar;
     private String email;
 
     @Override
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autenticazionePresenter = new AutenticazionePresenter(this);
+        recuperoCredenzialiPresenter = new RecuperoCredenzialiPresenter(this);
         initializeComponents();
 
     }
@@ -42,10 +49,11 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmailLogin);
        textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
        textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
+       progressBar = findViewById(R.id.mainActivityProgressBar);
        editTextEmail = textInputLayoutEmail.getEditText();
        editTextPassword = textInputLayoutPassword.getEditText();
        Button buttonSave = findViewById(R.id.buttonLoginOk);
-
+       progressBar.setVisibility(View.GONE);
 
        buttonSave.setOnClickListener(view -> {
            String password;
@@ -68,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
             textInputLayoutPassword.setError("Inserisci la password");
         }
         if(!email.equals("") && !password.equals("") ){
+            progressBar.setVisibility(View.VISIBLE);
             autenticazionePresenter.logInUtente(new AuthRequest(email, password));
             SharedPreferences sharedPreferences = getSharedPreferences("prefs", Context.MODE_PRIVATE);
             sharedPreferences.edit().putString("email", email).apply();
@@ -80,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
     @Override
     public void loginErrore(){
+        progressBar.setVisibility(View.GONE);
         textInputLayoutEmail.setError(" ");
         textInputLayoutPassword.setError(" ");
         //Da proivare poichè a me non và ma penso sia un problema del mio emulatore android studio
@@ -90,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
     @Override
     public void dialgPrimoAccesso(){
-        Dialog dialogPrimoAcesso = new Dialog(this);
+       Dialog dialogPrimoAcesso = new Dialog(this);
         dialogPrimoAcesso.setContentView(R.layout.dialog_error_one_button);
         TextView errorMessage = dialogPrimoAcesso.findViewById(R.id.textViewMessageDialogueErrorOneBt);
         errorMessage.setText(R.string.dialog_cambia_pass);
@@ -98,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
         Button buttonDialog = dialogPrimoAcesso.findViewById(R.id.buttonOkDialogueErrorOneBt);
         buttonDialog.setOnClickListener(view -> {
-           // utentePresenter.reimpostaPassword(email);
+            recuperoCredenzialiPresenter.avviaRecuperoPassword(email);
+            progressBar.setVisibility(View.GONE);
             dialogPrimoAcesso.dismiss();
         });
     }
@@ -110,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
     @Override
     public void avviaDashboardAdmin(){
+        progressBar.setVisibility(View.GONE);
         Intent dashIntent = new Intent(this, DashboardAdmin.class);
         startActivity(dashIntent);
 
