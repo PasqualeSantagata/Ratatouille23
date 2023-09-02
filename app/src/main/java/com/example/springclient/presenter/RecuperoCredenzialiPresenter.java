@@ -34,7 +34,8 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    passwordDimenticataActivity.emailInviataCorrettamente();
+                    if(passwordDimenticataActivity!= null)
+                        passwordDimenticataActivity.emailInviataCorrettamente();
                 }
                 else if(retData.code() == 401){
                     passwordDimenticataActivity.emailErrata();

@@ -1,6 +1,7 @@
 package com.example.springclient.entity;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.Data;
@@ -8,7 +9,7 @@ import lombok.ToString;
 
 @Data
 @ToString
-public class ElementoMenu {
+public class ElementoMenu implements Serializable {
     private Long id;
     private String nome;
     private Float prezzo;

@@ -10,7 +10,7 @@ import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.inserimentoNelMenu.HomeNuovoElemento;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
-import com.example.springclient.view.nuovaOrdinazione.EsploraCategorie;
+import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazione;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private StartInserimentoNelMenu startInserimentoNelMenu;
     private HomeNuovoElemento homeNuovoElemento;
 
-    private EsploraCategorie esploraCategorie;
+    private EsploraCategorieActivity esploraCategorieActivity;
     private RiepilogoOrdinazione riepilogoOrdinazione;
 
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
@@ -43,8 +43,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         this.homeNuovoElemento = homeNuovoElemento;
     }
 
-    public ElementoMenuPresenter(EsploraCategorie esploraCategorie){
-        this.esploraCategorie=esploraCategorie;
+    public ElementoMenuPresenter(EsploraCategorieActivity esploraCategorieActivity){
+        this.esploraCategorieActivity = esploraCategorieActivity;
     }
 
     public ElementoMenuPresenter(RiepilogoOrdinazione riepilogoOrdinazione) {

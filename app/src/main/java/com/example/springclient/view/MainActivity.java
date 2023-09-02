@@ -7,13 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
@@ -24,16 +22,13 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
+import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
 public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View {
@@ -47,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     private View progressBar;
     private String email;
     private StompClient stompClient;
+    private Dialog dialogPrimoAcesso;
 
 
     @SuppressLint("CheckResult")
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         Ordinazione o = new Ordinazione(3,4,2);
         o.setElementiOrdinati(elementoMenuList);
 
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
+        /*stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
         stompClient.connect();
         String elemento = new Gson().toJson(o);
 
@@ -75,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(ordinazione-> {
                     Log.d("WS:", "Received " + ordinazione.getPayload());
-                });
+                });*/
         initializeComponents();
 
 
@@ -136,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
     @Override
     public void dialgPrimoAccesso(){
-       Dialog dialogPrimoAcesso = new Dialog(this);
+        dialogPrimoAcesso = new Dialog(this);
         dialogPrimoAcesso.setContentView(R.layout.dialog_error_one_button);
         TextView errorMessage = dialogPrimoAcesso.findViewById(R.id.textViewMessageDialogueErrorOneBt);
         errorMessage.setText(R.string.dialog_cambia_pass);
@@ -148,6 +144,11 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
             progressBar.setVisibility(View.GONE);
             dialogPrimoAcesso.dismiss();
         });
+    }
+
+    public void chiudiDialogPrimoAccesso(){
+
+
     }
 
 
@@ -170,7 +171,8 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
     @Override
     public void avviaDashboardAddettoSala() {
-
+        Intent avviaOrdinazione =  new Intent(this, StartNuovaOrdinazioneActivity.class);
+        startActivity(avviaOrdinazione);
     }
 
     @Override

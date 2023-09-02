@@ -57,6 +57,9 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
                     if(apiToken.getRuolo().equals(Ruolo.ADMIN.name())) {
                         loginActivity.avviaDashboardAdmin();
                     }
+                    else if(apiToken.getRuolo().equals(Ruolo.ADDETTO_SALA.name())){
+                        loginActivity.avviaDashboardAddettoSala();
+                    }
                 }
                 else if(retData.code() == 403){
                    avviaAggiornaPassword();

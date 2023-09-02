@@ -15,11 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class StartNuovaOrdinazione extends AppCompatActivity {
+public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
 
     private TextInputLayout textInputLayoutNumeroPersone;
     private TextInputLayout textInputLayoutSala;
@@ -37,19 +38,20 @@ public class StartNuovaOrdinazione extends AppCompatActivity {
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabMinus;
     private ImageView imageViewRectangleNumbers;
-
+    private int n = 0;
     private Ordinazione ordinazione;
+    private OrdinazionePresenter ordinazionePresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("NUOVA ORDINAZIONE");
         setContentView(R.layout.activity_start_nuova_ordinazione);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
+        ordinazionePresenter = new OrdinazionePresenter(this);
+        initializeComponents();
     }
 
-    private void InitializeComponents(){
+    private void initializeComponents(){
         textInputLayoutNumeroPersone = findViewById(R.id.textInputLayoutNumPersoneStartNuovaOrdinazione);
         EditText etNumPersone = textInputLayoutNumeroPersone.getEditText();
         textInputLayoutSala = findViewById(R.id.textInputLayoutSalaStartNuovaOrdinazione);
@@ -70,6 +72,7 @@ public class StartNuovaOrdinazione extends AppCompatActivity {
         fabMinus = findViewById(R.id.fabMinus);
 
         buttonIndietro.setOnClickListener(view -> {
+
             Dialog dialog = new Dialog(this);
             TextView errorMessage = findViewById(R.id.textViewDialogeError);
             errorMessage.setText(R.string.dialog_sicuro_di_uscire);
@@ -126,49 +129,47 @@ public class StartNuovaOrdinazione extends AppCompatActivity {
         fabAdd.setOnClickListener(view -> {
             Editable numPersone = etNumPersone.getText();
             String nPersone = numPersone.toString();
-            Integer n = Integer.getInteger(nPersone);
-
-            etNumPersone.setText(n+1);
+            if(!nPersone.equals("")) {
+                n = Integer.parseInt(nPersone);
+            }
+            etNumPersone.setText(Integer.valueOf(n + 1).toString());
         });
 
         fabMinus.setOnClickListener(view -> {
             Editable numPersone = etNumPersone.getText();
             String nPersone = numPersone.toString();
-            Integer n = Integer.getInteger(nPersone);
-
-            //Se non va bene wrapparlo di nuovo in una String
-            etNumPersone.setText(n-1);
+            int n = Integer.parseInt(nPersone);
+            if(n > 1) {
+                etNumPersone.setText(Integer.valueOf(n - 1).toString());
+            }
         });
 
         buttonOk.setOnClickListener(view -> {
             //TODO Aggiungere controllo sul numero dei tavoli e sale complessivi
             Editable numPersone = etNumPersone.getText();
-            String Persone = numPersone.toString();
-            Integer n = Integer.getInteger(Persone);
+            String persone = numPersone.toString();
+            Integer n = Integer.getInteger(persone);
 
             Editable numTavolo = etTavolo.getText();
-            String Tavolo = numPersone.toString();
-            Integer n2 = Integer.getInteger(Persone);
+            String tavolo = numPersone.toString();
+            Integer n2 = Integer.getInteger(persone);
 
             Editable numSala = etSala.getText();
-            String Sala = numPersone.toString();
-            Integer n3 = Integer.getInteger(Persone);
+            String sala = numPersone.toString();
+            Integer n3 = Integer.getInteger(persone);
 
             Integer nPersone = n;
             Integer ntavolo = n2;
             Integer nsala = n3;
 
-
             ordinazione = new Ordinazione(nPersone,ntavolo,nsala);
-
-            Intent intentCategorie = new Intent(this, EsploraCategorie.class);
-            intentCategorie.putExtra("ordinazione", ordinazione);
-
+            ordinazionePresenter.preparaOrdinazione(ordinazione);
+            Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
+            intentCategorie.putExtra("nPersone", persone);
+            intentCategorie.putExtra("nTavolo", tavolo);
+            intentCategorie.putExtra("nSala", sala);
             startActivity(intentCategorie);
-
-            
         });
     }
-
 
 }

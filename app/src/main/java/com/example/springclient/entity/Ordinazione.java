@@ -1,6 +1,7 @@
 package com.example.springclient.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Ordinazione implements Serializable {
@@ -8,7 +9,7 @@ public class Ordinazione implements Serializable {
     private Integer tavolo;
     private Integer sala;
 
-    private List<ElementoMenu> elementiOrdinati;
+    private List<ElementoMenu> elementiOrdinati = new ArrayList<>();
 
     public Ordinazione() {
     }
@@ -43,8 +44,8 @@ public class Ordinazione implements Serializable {
         this.sala = sala;
     }
 
-    public void aggiungiPiatto(List<ElementoMenu> piattiOrdinati, ElementoMenu elementoMenu){
-        piattiOrdinati.add(elementoMenu);
+    public void aggiungiPiatto( ElementoMenu elementoMenu){
+        elementiOrdinati.add(elementoMenu);
     }
 
     public void setElementiOrdinati(List<ElementoMenu> elementiOrdinati){

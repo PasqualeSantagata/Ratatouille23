@@ -18,10 +18,10 @@ import com.example.springclient.presenter.ElementoMenuPresenter;
 
 import java.util.List;
 
-public class EsploraCategorie extends AppCompatActivity {
+public class EsploraCategorieActivity extends AppCompatActivity {
 
-    //riceve le info dell'ordinazione dalla preced. activity
-    private Ordinazione ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+
+    private Ordinazione ordinazione;
     private ImageView imageViewPrimi;
     private ImageView imageViewSecondi;
     private ImageView imageViewBevande;
@@ -32,6 +32,7 @@ public class EsploraCategorie extends AppCompatActivity {
     private Button buttonIndietro;
     private Button buttonRiepilogo;
 
+
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
 
     @Override
@@ -39,12 +40,15 @@ public class EsploraCategorie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
-
+        int nPersone = Integer.valueOf(getIntent().getStringExtra("nPersone"));
+        int tavolo = Integer.valueOf(getIntent().getStringExtra("tavolo"));
+        int sala = Integer.valueOf(getIntent().getStringExtra("nSala"));
+        ordinazione = new Ordinazione(nPersone, tavolo, sala);
     }
 
     public void startVisualizzaCategoria(){
         Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoria.class);
-        intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
+        //intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
         startActivity(intentVisiualizzaCategoria);
     }
 
@@ -101,11 +105,11 @@ public class EsploraCategorie extends AppCompatActivity {
 //dopo la list avviano visualizza cateogria
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intentIndietro = new Intent(this, StartNuovaOrdinazione.class);
+            Intent intentIndietro = new Intent(this, StartNuovaOrdinazioneActivity.class);
             startActivity(intentIndietro);
         });
 
-        buttonRiepilogo.setOnClickListener(view -> {
+       /* buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_error_one_button);
@@ -116,11 +120,11 @@ public class EsploraCategorie extends AppCompatActivity {
                 /* starta il riepilogo ordinazione non vuota
                 Intent intentRiepilogo = new Intent(this, Riepilogo.class);
                 intentCategoria.putExtra("")
-                 */
+
             }
 
         });
-
+*/
 
 
     }
