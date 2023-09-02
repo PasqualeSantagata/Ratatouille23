@@ -9,6 +9,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class ElementoMenu {
+    private Long id;
     private String nome;
     private Float prezzo;
     private String descrizione;
@@ -20,6 +21,14 @@ public class ElementoMenu {
     private String categoria;
 
 
+    public ElementoMenu(Long id, String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
+        this.id = id;
+        this.nome = nome;
+        this.prezzo = prezzo;
+        this.descrizione = descrizione;
+        this.elencoAllergeni = elencoAllergeni;
+        this.lingua = lingua;
+    }
     public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
         this.nome = nome;
         this.prezzo = prezzo;
@@ -91,5 +100,12 @@ public class ElementoMenu {
 
     public void setQuantita(Float quantita) {
         this.quantita = quantita;
+    }
+
+    public Long getId(){
+        return id;
+    }
+    public void setId(Long id){
+        this.id = id;
     }
 }

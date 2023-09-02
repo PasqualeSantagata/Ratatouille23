@@ -47,6 +47,10 @@ public class Ordinazione implements Serializable {
         piattiOrdinati.add(elementoMenu);
     }
 
+    public void setElementiOrdinati(List<ElementoMenu> elementiOrdinati){
+        this.elementiOrdinati = elementiOrdinati;
+    }
+
     public boolean ordinazioneVuota(){
         return elementiOrdinati.isEmpty();
     }

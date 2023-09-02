@@ -1,11 +1,13 @@
 package com.example.springclient.view;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,10 +20,21 @@ import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.AutenticazioneContract;
 import com.example.springclient.contract.RecuperoCredenzialiContract;
+import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View {
     private EditText editTextPassword;
@@ -33,7 +46,10 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     private RecuperoCredenzialiContract.Presenter recuperoCredenzialiPresenter;
     private View progressBar;
     private String email;
+    private StompClient stompClient;
 
+
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +58,27 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autenticazionePresenter = new AutenticazionePresenter(this);
         recuperoCredenzialiPresenter = new RecuperoCredenzialiPresenter(this);
+
+        ElementoMenu e1 = new ElementoMenu(1L,"Spaghetti", 10.0f, "La pasta di tutti i giorni", null, "Italiano");
+        List<ElementoMenu> elementoMenuList = new ArrayList<>();
+        elementoMenuList.add(e1);
+        Ordinazione o = new Ordinazione(3,4,2);
+        o.setElementiOrdinati(elementoMenuList);
+
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
+        stompClient.connect();
+        String elemento = new Gson().toJson(o);
+
+        stompClient.send("/app/invia-ordinazione", elemento).subscribe();
+        stompClient.topic("/topic/ricevi-ordinazione")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(ordinazione-> {
+                    Log.d("WS:", "Received " + ordinazione.getPayload());
+                });
         initializeComponents();
+
+
 
     }
     private void initializeComponents() {
