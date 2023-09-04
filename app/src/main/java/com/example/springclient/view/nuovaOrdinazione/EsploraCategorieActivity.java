@@ -3,6 +3,7 @@ package com.example.springclient.view.nuovaOrdinazione;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,9 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.presenter.CategoriaPresenter;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 
 import java.util.List;
@@ -31,19 +35,21 @@ public class EsploraCategorieActivity extends AppCompatActivity {
 
     private Button buttonIndietro;
     private Button buttonRiepilogo;
-
+    private CategoriaContract.Presenter categoriaPresenter;
 
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
-
+    private List<Categoria> categorie;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
         int nPersone = Integer.valueOf(getIntent().getStringExtra("nPersone"));
-        int tavolo = Integer.valueOf(getIntent().getStringExtra("tavolo"));
+        int tavolo = Integer.valueOf(getIntent().getStringExtra("nTavolo"));
         int sala = Integer.valueOf(getIntent().getStringExtra("nSala"));
+        categoriaPresenter = new CategoriaPresenter(this);
         ordinazione = new Ordinazione(nPersone, tavolo, sala);
+        initializeComponents();
     }
 
     public void startVisualizzaCategoria(){
@@ -52,7 +58,7 @@ public class EsploraCategorieActivity extends AppCompatActivity {
         startActivity(intentVisiualizzaCategoria);
     }
 
-    private void InitializeComponents() {
+    private void initializeComponents() {
 
         imageViewPrimi = findViewById(R.id.imgViewPrimiCategorieNuovaOrd);
         imageViewSecondi = findViewById(R.id.imgViewSecondiCategorieNuovaOrd);
@@ -125,7 +131,15 @@ public class EsploraCategorieActivity extends AppCompatActivity {
 
         });
 */
-
-
+        categoriaPresenter.getAllCategorie();
     }
+
+    public void setCategorie(List<Categoria> categorie){
+        //controllare che la lista abbia almeno un elemento
+        this.categorie = categorie;
+        /*creare un metodo che crea bottoni in automatico in base alle categorie create
+        * quelle default non conviene tenerle perchè non saprei come popolarle senza db
+        * */
+    }
+
 }

@@ -1,24 +1,16 @@
 package com.example.springclient.contract;
 
 import com.example.springclient.entity.Categoria;
+import com.example.springclient.entity.ElementoMenu;
 
 import java.util.List;
 
 public interface CategoriaContract {
     interface Model{
-        void saveCategoria(Categoria categoria, CategoriaContract.Model.CategoriaCallback categoriaCallback);
+        void saveCategoria(Categoria categoria, CallbackResponse<Void> callbackResponse);
 
-        void getAllCategorie(CategoriaContract.Model.CategoriaCallback categoriaCallback);
+        void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback);
 
-        interface CategoriaCallback<T>{
-
-            void onFinished(List<String> errorMessage);
-
-            void onFailure(Throwable t);
-
-            void onSuccess(T returnedData);
-
-        }
 
     }
 
@@ -28,6 +20,7 @@ public interface CategoriaContract {
     }
 
     interface Presenter{
-        List<Categoria> getAllCategorie();
+        void getAllCategorie();
+
     }
 }

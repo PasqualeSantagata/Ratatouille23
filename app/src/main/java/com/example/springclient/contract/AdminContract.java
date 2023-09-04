@@ -32,7 +32,7 @@ public interface AdminContract {
         }
     }
     interface Model{
-        void registraUtente(Utente utente, CallbackResponse<ApiResponse> CallbackResponse);
+        void registraUtente(Utente utente, CallbackResponse<ApiResponse> callbackResponse);
 
     }
 }

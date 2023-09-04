@@ -2,6 +2,7 @@ package com.example.springclient.model;
 
 import com.example.springclient.RetrofitService.CategoriaAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
+import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 
@@ -22,12 +23,12 @@ public class CategoriaModel implements CategoriaContract.Model {
     }
 
     @Override
-    public void saveCategoria(Categoria categoria, CategoriaCallback categoriaCallback) {
+    public void saveCategoria(Categoria categoria, CallbackResponse<Void> categoriaCallback) {
 
     }
 
     @Override
-    public void getAllCategorie(CategoriaCallback categoriaCallback) {
+    public void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback) {
         categoriaAPI.getAllCategorie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -39,9 +40,7 @@ public class CategoriaModel implements CategoriaContract.Model {
 
                     @Override
                     public void onSuccess(@NonNull Response<List<Categoria>> listResponse) {
-                        if(listResponse.isSuccessful()){
-                            listResponse.body();
-                        }
+                       categoriaCallback.onSuccess(listResponse);
                     }
 
                     @Override
