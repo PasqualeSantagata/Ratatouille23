@@ -1,12 +1,9 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,18 +41,16 @@ public class EsploraCategorieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
-        int nPersone = Integer.valueOf(getIntent().getStringExtra("nPersone"));
-        int tavolo = Integer.valueOf(getIntent().getStringExtra("nTavolo"));
-        int sala = Integer.valueOf(getIntent().getStringExtra("nSala"));
         categoriaPresenter = new CategoriaPresenter(this);
-        ordinazione = new Ordinazione(nPersone, tavolo, sala);
+        ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         initializeComponents();
     }
 
     public void startVisualizzaCategoria(){
-        Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoria.class);
-        //intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
+        Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
+        intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
         startActivity(intentVisiualizzaCategoria);
+
     }
 
     private void initializeComponents() {
@@ -137,6 +132,7 @@ public class EsploraCategorieActivity extends AppCompatActivity {
     public void setCategorie(List<Categoria> categorie){
         //controllare che la lista abbia almeno un elemento
         this.categorie = categorie;
+
         /*creare un metodo che crea bottoni in automatico in base alle categorie create
         * quelle default non conviene tenerle perchè non saprei come popolarle senza db
         * */

@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
-public class VisualizzaCategoria extends AppCompatActivity {
+public class VisualizzaCategoriaActivity extends AppCompatActivity {
 
     //impostare categoria dall'intent
     private Button buttonIndietro;
@@ -33,6 +33,7 @@ public class VisualizzaCategoria extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().setTitle("PRIMI"); nome della cat. deve venire da un intent passato dal presenter
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
+
 
     }
 
@@ -52,7 +53,6 @@ public class VisualizzaCategoria extends AppCompatActivity {
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
-        return;
     }
 
     //usato dopo per settare l'elem della recycle view
