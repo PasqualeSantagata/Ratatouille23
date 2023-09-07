@@ -52,7 +52,7 @@ public class EsploraCategorieActivity extends AppCompatActivity {
     }
 
     public void startVisualizzaCategoria(){
-        Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoria.class);
+        Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
         //intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
         startActivity(intentVisiualizzaCategoria);
     }
