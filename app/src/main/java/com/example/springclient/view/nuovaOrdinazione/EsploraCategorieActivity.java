@@ -14,15 +14,17 @@ import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.CategoriaPresenter;
 import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EsploraCategorieActivity extends AppCompatActivity {
+public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
     private Ordinazione ordinazione;
     private ImageView imageViewPrimi;
     private ImageView imageViewSecondi;
@@ -34,19 +36,19 @@ public class EsploraCategorieActivity extends AppCompatActivity {
     private Button buttonIndietro;
     private Button buttonRiepilogo;
     private CategoriaContract.Presenter categoriaPresenter;
-
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private List<Categoria> categorie;
+    //provvisorio
+    private List<Categoria> categoriaList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
-        int nPersone = Integer.valueOf(getIntent().getStringExtra("nPersone"));
-        int tavolo = Integer.valueOf(getIntent().getStringExtra("nTavolo"));
-        int sala = Integer.valueOf(getIntent().getStringExtra("nSala"));
+
+
         categoriaPresenter = new CategoriaPresenter(this);
-        ordinazione = new Ordinazione(nPersone, tavolo, sala);
+        ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
 
         initializeComponents();
     }
@@ -62,15 +64,20 @@ public class EsploraCategorieActivity extends AppCompatActivity {
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
 
         int [] images = {R.drawable.categoria_primi, R.drawable.categoria_secondi, R.drawable.categoria_bevande, R.drawable.categoria_sushi, R.drawable.categoria_pizza, R.drawable.categoria_dessert};
-        List<Categoria> categoriaList = new ArrayList<>();
-        categoriaList.add(new Categoria("primi", images[0]));
+        categoriaList = new ArrayList<>();
+        List<ElementoMenu> elementoMenuList = new ArrayList<>();
+        List<String> allergeni = new ArrayList<>();
+        allergeni.add("nessuno (forse) ehehe");
+        elementoMenuList.add(new ElementoMenu("carbonata",2.0F, "un buon piatto cos", allergeni));
+
+        categoriaList.add(new Categoria("primi", elementoMenuList,images[0]));
         categoriaList.add(new Categoria("secondi",images[1]));
         categoriaList.add(new Categoria("bevande",images[2]));
         categoriaList.add(new Categoria("sushi",images[3]));
         categoriaList.add(new Categoria("pizza",images[4]));
         categoriaList.add(new Categoria("dessert",images[5]));
 
-        RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categoriaList);
+        RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categoriaList, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
@@ -114,4 +121,12 @@ public class EsploraCategorieActivity extends AppCompatActivity {
         * */
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent intentEsploraCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
+        //intentEsploraCategoria.putExtra("categoria",categorie.get(position));
+        //provvisorio
+        intentEsploraCategoria.putExtra("categoria",categoriaList.get(position));
+        startActivity(intentEsploraCategoria);
+    }
 }

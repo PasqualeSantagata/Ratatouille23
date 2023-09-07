@@ -17,12 +17,14 @@ import java.util.List;
 
 public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleViewAdapterCategoria.MyViewHolder> {
 
+    private final IRecycleViewCategoria recycleViewCategoriaInterface;
     Context context;
     List<Categoria> categoriaList;
 
-    public RecycleViewAdapterCategoria(Context context, List<Categoria> categoriaList) {
+    public RecycleViewAdapterCategoria(Context context, List<Categoria> categoriaList, IRecycleViewCategoria recycleViewCategoriaInterface) {
         this.context = context;
         this.categoriaList = categoriaList;
+        this.recycleViewCategoriaInterface = recycleViewCategoriaInterface;
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_recycle_view_categoria, parent,false);
 
-        return new RecycleViewAdapterCategoria.MyViewHolder(view);
+        return new RecycleViewAdapterCategoria.MyViewHolder(view, recycleViewCategoriaInterface);
     }
 
     @Override
@@ -49,11 +51,26 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
 
         TextView textViewNomeCategoria;
         ImageView imageViewCategoria;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewCategoria recycleViewCategoriaInterface)  {
             super(itemView);
             textViewNomeCategoria = itemView.findViewById(R.id.textViewRecycleViewNomeCategoria);
             imageViewCategoria = itemView.findViewById(R.id.imageViewRecycleViewCategoria);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (recycleViewCategoriaInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if(pos != RecyclerView.NO_POSITION){
+                            recycleViewCategoriaInterface.onItemClick(pos);
+                        }
+
+                    }
+                }
+            });
         }
+
 
     }
 

@@ -1,8 +1,9 @@
 package com.example.springclient.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Categoria {
+public class Categoria implements Serializable {
     private Long id;
     private String nome;
     private List<ElementoMenu> elementi;
@@ -30,6 +31,12 @@ public class Categoria {
 
     public Categoria(String nome, int image) {
         this.nome = nome;
+        this.image = image;
+    }
+
+    public Categoria(String nome, List<ElementoMenu> elementi, int image) {
+        this.nome = nome;
+        this.elementi = elementi;
         this.image = image;
     }
 

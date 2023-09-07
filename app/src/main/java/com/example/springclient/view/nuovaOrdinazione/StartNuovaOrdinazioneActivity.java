@@ -164,6 +164,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
 
             ordinazione = new Ordinazione(nPersone,ntavolo,nsala);
             ordinazionePresenter.preparaOrdinazione(ordinazione);
+
             Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
             intentCategorie.putExtra("ordinazione",ordinazione);
             startActivity(intentCategorie);

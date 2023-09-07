@@ -15,7 +15,7 @@ public class ElementoMenu implements Serializable {
     private Float prezzo;
     private String descrizione;
     private List<String> elencoAllergeni;
-    public final String lingua;
+    public String lingua;
     private String tempoPreparazione;  //Magari va cambiato in float o int se li interpretiamo sempre come minuti
     private String breveNota; //nel caso dell'ordinazione??
     private Float quantita;
@@ -47,6 +47,13 @@ public class ElementoMenu implements Serializable {
     public void addAllergene(String allergene) {
         if (!elencoAllergeni.contains(allergene))
             elencoAllergeni.add(allergene);
+    }
+
+    public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni) {
+        this.nome = nome;
+        this.prezzo = prezzo;
+        this.descrizione = descrizione;
+        this.elencoAllergeni = elencoAllergeni;
     }
 
     public String getNome() {
