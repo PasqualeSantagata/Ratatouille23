@@ -28,7 +28,7 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
     @Override
     public RecycleViewAdapterElementoMenu.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.activity_visualizza_categoria_nuova_ordinazione, parent,false);
+        View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu, parent,false);
 
         return new RecycleViewAdapterElementoMenu.MyViewHolder(view);
     }

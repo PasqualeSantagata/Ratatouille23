@@ -1,30 +1,28 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
-import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.CategoriaPresenter;
 import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EsploraCategorieActivity extends AppCompatActivity {
-
-
     private Ordinazione ordinazione;
     private ImageView imageViewPrimi;
     private ImageView imageViewSecondi;
@@ -49,6 +47,7 @@ public class EsploraCategorieActivity extends AppCompatActivity {
         int sala = Integer.valueOf(getIntent().getStringExtra("nSala"));
         categoriaPresenter = new CategoriaPresenter(this);
         ordinazione = new Ordinazione(nPersone, tavolo, sala);
+
         initializeComponents();
     }
 
@@ -58,62 +57,35 @@ public class EsploraCategorieActivity extends AppCompatActivity {
         startActivity(intentVisiualizzaCategoria);
     }
 
-    private void initializeComponents() {
 
-        imageViewPrimi = findViewById(R.id.imgViewPrimiCategorieNuovaOrd);
-        imageViewSecondi = findViewById(R.id.imgViewSecondiCategorieNuovaOrd);
-        imageViewBevande = findViewById(R.id.imgViewBevandeCategorieNuovaOrd);
-        imageViewSushi  = findViewById(R.id.imgViewSushiCategorieNuovaOrd);
-        imageViewPizze  = findViewById(R.id.imgViewPizzeCategorieNuovaOrd);
-        imageViewDessert  = findViewById(R.id.imgViewDessertCategorieNuovaOrd);
+    private void initializeComponents() {
+        RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
+
+        int [] images = {R.drawable.categoria_primi, R.drawable.categoria_secondi, R.drawable.categoria_bevande, R.drawable.categoria_sushi, R.drawable.categoria_pizza, R.drawable.categoria_dessert};
+        List<Categoria> categoriaList = new ArrayList<>();
+        categoriaList.add(new Categoria("primi", images[0]));
+        categoriaList.add(new Categoria("secondi",images[1]));
+        categoriaList.add(new Categoria("bevande",images[2]));
+        categoriaList.add(new Categoria("sushi",images[3]));
+        categoriaList.add(new Categoria("pizza",images[4]));
+        categoriaList.add(new Categoria("dessert",images[5]));
+
+        RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categoriaList);
+        recyclerViewCategorie.setAdapter(adapterCategoria);
+        GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
+        recyclerViewCategorie.setLayoutManager(horizontal);
+
+        //setta i models della recycle view
+        categoriaPresenter.getAllCategorie();
+
+
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
         //magari si fa l'entity categoria cosi si leggono da db
         //e si fa un metodo per associarre imageview alla foto e al nome della categoria
         //cosi da rendere semplice l'aggiunta di categorie da parte dell'admin
-        imageViewPrimi.setOnClickListener(view -> {
-            String categoria = "primi";
-            //Deve ritornare la lista di tutte le pietanze della categoria
-            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
-        });
 
-        imageViewSecondi.setOnClickListener(view -> {
-            String categoria = "secondi";
-            //Deve ritornare la lista di tutte le pietanze della categoria
-            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
-        });
-
-        imageViewBevande.setOnClickListener(view -> {
-            String categoria = "bevande";
-            //Deve ritornare la lista di tutte le pietanze della categoria
-            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
-        });
-
-        imageViewSushi.setOnClickListener(view -> {
-            String categoria = "sushi";
-            //Deve ritornare la lista di tutte le pietanze della categoria
-            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
-        });
-
-        imageViewPizze.setOnClickListener(view -> {
-            String categoria = "pizze";
-            //Deve ritornare la lista di tutte le pietanze della categoria
-            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
-        });
-
-        imageViewDessert.setOnClickListener(view -> {
-            String categoria = "dessert";
-            //Deve settare la lista di tutte le pietanze della categoria nelle recycle view e
-            //passare la categoria , ma anche le info dell'ordinazione dall'intent della pre. activity
-            List<ElementoMenu> elementoMenuList = presenter.getElementiPerCategoria(categoria);
-        });
-//dopo la list avviano visualizza cateogria
-
-        buttonIndietro.setOnClickListener(view -> {
-            Intent intentIndietro = new Intent(this, StartNuovaOrdinazioneActivity.class);
-            startActivity(intentIndietro);
-        });
 
        /* buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
@@ -131,7 +103,7 @@ public class EsploraCategorieActivity extends AppCompatActivity {
 
         });
 */
-        categoriaPresenter.getAllCategorie();
+
     }
 
     public void setCategorie(List<Categoria> categorie){

@@ -38,6 +38,12 @@ public class ElementoMenu implements Serializable {
         this.lingua = lingua;
     }
 
+    public ElementoMenu(String nome, String descrizione, String lingua) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.lingua = lingua;
+    }
+
     public void addAllergene(String allergene) {
         if (!elencoAllergeni.contains(allergene))
             elencoAllergeni.add(allergene);

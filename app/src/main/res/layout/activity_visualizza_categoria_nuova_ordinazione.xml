@@ -36,6 +36,7 @@
             android:layout_height="58dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="70dp"
+            app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

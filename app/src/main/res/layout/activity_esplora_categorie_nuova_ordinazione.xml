@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_food_icons">
 
+
     <Button
         android:id="@+id/buttonIndietroCategorieNuovaOrd"
         android:layout_width="180dp"
@@ -17,73 +18,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgViewPrimiCategorieNuovaOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="70dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/categoria_primi" />
-
-    <ImageView
-        android:id="@+id/imgViewSecondiCategorieNuovaOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="164dp"
-        app:layout_constraintEnd_toStartOf="@+id/imgViewBevandeCategorieNuovaOrd"
-        app:layout_constraintStart_toEndOf="@+id/imgViewPrimiCategorieNuovaOrd"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/categoria_secondi" />
-
-    <ImageView
-        android:id="@+id/imgViewBevandeCategorieNuovaOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="110dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/categoria_bevande" />
-
-    <ImageView
-        android:id="@+id/imgViewSushiCategorieNuovaOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginBottom="69dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonIndietroCategorieNuovaOrd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewPrimiCategorieNuovaOrd"
-        app:srcCompat="@drawable/categoria_sushi" />
-
-    <ImageView
-        android:id="@+id/imgViewPizzeCategorieNuovaOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="177dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imgViewDessertCategorieNuovaOrd"
-        app:layout_constraintStart_toEndOf="@+id/imgViewSushiCategorieNuovaOrd"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewSecondiCategorieNuovaOrd"
-        app:srcCompat="@drawable/categoria_pizza" />
-
-    <ImageView
-        android:id="@+id/imgViewDessertCategorieNuovaOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="110dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewBevandeCategorieNuovaOrd"
-        app:srcCompat="@drawable/categoria_dessert" />
 
     <Button
         android:id="@+id/buttonRiepilogoCategorieNuovaOrd"
@@ -95,5 +29,17 @@
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecycleViewCategorie"
+        android:layout_width="1269dp"
+        android:layout_height="651dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonIndietroCategorieNuovaOrd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
