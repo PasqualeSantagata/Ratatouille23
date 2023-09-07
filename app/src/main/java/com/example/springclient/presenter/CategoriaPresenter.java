@@ -21,6 +21,7 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
         categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     }
 
+
     @Override
     public void getAllCategorie() {
         categoriaModel.getAllCategorie(new CallbackResponse<List<Categoria>>() {
@@ -37,5 +38,6 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
             }
         });
     }
+
 
 }

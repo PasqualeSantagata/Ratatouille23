@@ -148,15 +148,15 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
             //TODO Aggiungere controllo sul numero dei tavoli e sale complessivi
             Editable numPersone = etNumPersone.getText();
             String persone = numPersone.toString();
-            Integer n = Integer.getInteger(persone);
+            Integer n = Integer.valueOf(persone);
 
             Editable numTavolo = etTavolo.getText();
-            String tavolo = numPersone.toString();
-            Integer n2 = Integer.getInteger(persone);
+            String tavolo = numTavolo.toString();
+            Integer n2 = Integer.valueOf(tavolo);
 
             Editable numSala = etSala.getText();
-            String sala = numPersone.toString();
-            Integer n3 = Integer.getInteger(persone);
+            String sala = numSala.toString();
+            Integer n3 = Integer.valueOf(sala);
 
             Integer nPersone = n;
             Integer ntavolo = n2;
@@ -165,9 +165,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
             ordinazione = new Ordinazione(nPersone,ntavolo,nsala);
             ordinazionePresenter.preparaOrdinazione(ordinazione);
             Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
-            intentCategorie.putExtra("nPersone", persone);
-            intentCategorie.putExtra("nTavolo", tavolo);
-            intentCategorie.putExtra("nSala", sala);
+            intentCategorie.putExtra("ordinazione",ordinazione);
             startActivity(intentCategorie);
         });
     }
