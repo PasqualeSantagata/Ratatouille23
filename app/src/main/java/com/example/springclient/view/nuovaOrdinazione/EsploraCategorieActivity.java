@@ -1,9 +1,10 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +27,6 @@ import java.util.List;
 
 public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
     private Ordinazione ordinazione;
-    private ImageView imageViewPrimi;
-    private ImageView imageViewSecondi;
-    private ImageView imageViewBevande;
-    private ImageView imageViewSushi;
-    private ImageView imageViewPizze;
-    private ImageView imageViewDessert;
-
     private Button buttonIndietro;
     private Button buttonRiepilogo;
     private CategoriaContract.Presenter categoriaPresenter;
@@ -94,7 +88,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         //cosi da rendere semplice l'aggiunta di categorie da parte dell'admin
 
 
-       /* buttonRiepilogo.setOnClickListener(view -> {
+       buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_error_one_button);
@@ -102,14 +96,14 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 errorMessage.setText(R.string.dialog_ord_vuota);
                 dialog.show();
             } else {
-                /* starta il riepilogo ordinazione non vuota
-                Intent intentRiepilogo = new Intent(this, Riepilogo.class);
-                intentCategoria.putExtra("")
-
+                // starta il riepilogo ordinazione non vuota
+                Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazione.class);
+                intentRiepilogo.putExtra("ordinazione",ordinazione);
+                startActivity(intentRiepilogo);
             }
 
         });
-*/
+
 
     }
 
@@ -123,10 +117,11 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
     @Override
     public void onItemClick(int position) {
-        Intent intentEsploraCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
+        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
         //intentEsploraCategoria.putExtra("categoria",categorie.get(position));
         //provvisorio
-        intentEsploraCategoria.putExtra("categoria",categoriaList.get(position));
-        startActivity(intentEsploraCategoria);
+        intentVisualizzaCategoria.putExtra("categoria",categoriaList.get(position));
+        intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
+        startActivity(intentVisualizzaCategoria);
     }
 }

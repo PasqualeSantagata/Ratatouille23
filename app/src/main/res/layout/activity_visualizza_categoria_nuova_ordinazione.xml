@@ -53,6 +53,7 @@
             android:layout_height="54dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="40dp"
+            app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrezzoVisuaCatNuovaOrdinazione">
 
@@ -68,6 +69,7 @@
             android:layout_height="190dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="40dp"
+            app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAllergeniVisuaCatNuovaOrdinazione">
 
@@ -83,6 +85,7 @@
             android:layout_height="55dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="40dp"
+            app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneVisuaCatNuovaOrdinazione">
 
@@ -106,32 +109,10 @@
             app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:layout_width="474dp"
-        android:layout_height="655dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="6dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/RecyclerViewPiattiNuovaOrdinazione"
-                android:layout_width="match_parent"
-                android:layout_height="655dp" />
-        </LinearLayout>
-    </ScrollView>
-
     <ImageView
         android:id="@+id/imageView13"
         android:layout_width="7dp"
-        android:layout_height="655dp"
+        android:layout_height="755dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView14"
@@ -162,4 +143,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RecyclerViewPiattiNuovaOrdinazione"
+        android:layout_width="481dp"
+        android:layout_height="716dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView14"
+        app:layout_constraintEnd_toStartOf="@+id/imageView13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

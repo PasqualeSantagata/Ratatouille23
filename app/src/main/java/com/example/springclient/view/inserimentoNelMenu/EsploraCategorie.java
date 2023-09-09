@@ -14,5 +14,10 @@ public class EsploraCategorie extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setContentView(R.layout.activity_esplora_categorie_inserimento_nel_menu);
+
+
     }
+
+
+
 }

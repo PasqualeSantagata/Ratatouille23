@@ -1,5 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,12 +33,14 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private FloatingActionButton fabAggiungiAdOrdinazione;
     private List<ElementoMenu> elementiMenu;
     private Categoria categoria;
+    private Ordinazione ordinazione;
 
     //boolean categoriaInclusa; serve a sapere quali categorie ci sono per sapere quali mostrare nel riepilogo, non so se sarà utile quindi lo mantengo commentato per ora
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         categoria = (Categoria) getIntent().getSerializableExtra("categoria");
+        ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         getSupportActionBar().setTitle(categoria.getNome());
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
 
@@ -59,6 +63,24 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
         //Setto la recycle view
         setElementiMenuRecycleView(categoria.getElementi());
+
+        fabAggiungiAdOrdinazione.setOnClickListener(view -> {
+            //ordinazione.add(getElementoMenu());
+        });
+
+        buttonIndietro.setOnClickListener(view -> {
+            Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
+            intentEsploraCategorie.putExtra("ordinazione",ordinazione);
+            startActivity(intentEsploraCategorie);
+
+        });
+
+        buttonRiepilogo.setOnClickListener(view -> {
+            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazione.class);
+            intentRiepilogo.putExtra("ordinazione",ordinazione);
+            startActivity(intentRiepilogo);
+        });
+
     }
 
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
@@ -87,6 +109,13 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         recyclerViewPiatti.setLayoutManager(linearLayoutManager);
     }
 
+
+    private ElementoMenu getElementoMenu(){
+
+        //Prende il valore delle varie text view
+
+        return null;
+    }
 
     @Override
     public void onItemClick(int position) {
