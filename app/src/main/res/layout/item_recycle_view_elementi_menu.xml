@@ -69,7 +69,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ic_tempo"
-                app:srcCompat="@drawable/component_14" />
+                app:srcCompat="@drawable/im_infoRecycleView" />
 
             <ImageView
                 android:id="@+id/ic_quantita"
@@ -81,7 +81,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
                 app:layout_constraintStart_toEndOf="@+id/textViewTempoPreparazione"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_quantia" />
+                app:srcCompat="@drawable/ic_quantita" />
 
             <TextView
                 android:id="@+id/textViewQuantita"
