@@ -25,6 +25,8 @@ import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
 import java.util.List;
 
+import retrofit2.Response;
+
 public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
     private Ordinazione ordinazione;
     private Button buttonIndietro;
@@ -43,8 +45,8 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
         categoriaPresenter = new CategoriaPresenter(this);
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
-
-        initializeComponents();
+        categoriaPresenter.getAllCategorie();
+        //initializeComponents();
     }
 
     public void startVisualizzaCategoria(){
@@ -54,7 +56,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     }
 
 
-    private void initializeComponents() {
+    public void initializeComponents() {
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
 /*
         int [] images = {R.drawable.categoria_primi, R.drawable.categoria_secondi, R.drawable.categoria_bevande, R.drawable.categoria_sushi, R.drawable.categoria_pizza, R.drawable.categoria_dessert};
@@ -65,14 +67,12 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         elementoMenuList.add(new ElementoMenu("carbonata",2.0F, "un buon piatto cos", allergeni));
        */
         //setta i models della recycle view
-        categoriaPresenter.getAllCategorie();
 
-        RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categoriaList, this);
+
+        RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
-
-
 
 
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
@@ -106,22 +106,26 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
      */
     public void setCategorie(List<Categoria> categorie){
         //controllare che la lista abbia almeno un elemento
-        if(categorie.isEmpty()){
-            this.categorie = categorie;
+        this.categorie = categorie;
+    }
+
+    public void caricaImmagini(){
+        if(!categorie.isEmpty()){
             for(Categoria c : categorie){
                 categoriaPresenter.getFotoCategoriaById(c);
             }
         } else{
             //TODO
         }
+        initializeComponents();
     }
 
     @Override
     public void onItemClick(int position) {
         Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
-        //intentEsploraCategoria.putExtra("categoria",categorie.get(position));
+        intentVisualizzaCategoria.putExtra("categoria",categorie.get(position));
         //provvisorio
-        intentVisualizzaCategoria.putExtra("categoria",categoriaList.get(position));
+        //intentVisualizzaCategoria.putExtra("categoria",categoriaList.get(position));
         intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
         startActivity(intentVisualizzaCategoria);
     }

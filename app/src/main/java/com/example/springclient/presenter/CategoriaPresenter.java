@@ -39,6 +39,7 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
             public void onSuccess(Response<List<Categoria>> retData) {
                 if(retData.isSuccessful()){
                     esploraCategorieActivity.setCategorie(retData.body());
+                    esploraCategorieActivity.caricaImmagini();
                 }
             }
         });

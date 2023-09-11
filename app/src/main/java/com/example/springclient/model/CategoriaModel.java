@@ -8,6 +8,7 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -51,6 +52,13 @@ public class CategoriaModel implements CategoriaContract.Model {
 
     @Override
     public void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback) {
+        /*try {
+            Response<List<Categoria>> response = categoriaAPI.getAllCategorie().execute();
+            categoriaCallback.onSuccess(response);
+        }catch (IOException e){
+
+
+        }*/
         categoriaAPI.getAllCategorie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -67,6 +75,7 @@ public class CategoriaModel implements CategoriaContract.Model {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+
 
                     }
                 });
