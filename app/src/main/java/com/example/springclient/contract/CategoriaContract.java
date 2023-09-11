@@ -5,11 +5,15 @@ import com.example.springclient.entity.ElementoMenu;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
+
 public interface CategoriaContract {
     interface Model{
-        void saveCategoria(Categoria categoria, CallbackResponse<Void> callbackResponse);
+        void saveCategoria(Categoria categoria, CallbackResponse<Categoria> callbackResponse);
 
         void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback);
+
+        void getFotoCategoriaById(String id, CallbackResponse<ResponseBody> categoriaCallback);
 
 
     }
@@ -21,6 +25,8 @@ public interface CategoriaContract {
 
     interface Presenter{
         void getAllCategorie();
+        void saveCategoria(Categoria categoria);
+        void getFotoCategoriaById( String id);
 
     }
 }

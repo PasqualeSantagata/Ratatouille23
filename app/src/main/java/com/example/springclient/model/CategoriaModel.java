@@ -1,5 +1,7 @@
 package com.example.springclient.model;
 
+import android.util.Log;
+
 import com.example.springclient.RetrofitService.CategoriaAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
@@ -13,17 +15,37 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class CategoriaModel implements CategoriaContract.Model {
     private CategoriaAPI categoriaAPI;
-
     public CategoriaModel(RetrofitService retrofitService) {
         this.categoriaAPI = retrofitService.getCategoriaAPI();
     }
 
     @Override
-    public void saveCategoria(Categoria categoria, CallbackResponse<Void> categoriaCallback) {
+    public void saveCategoria(Categoria categoria, CallbackResponse<Categoria> categoriaCallback) {
+        categoriaAPI.saveCategoria(categoria)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Categoria>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Categoria> categoriaResponse) {
+                        categoriaCallback.onSuccess(categoriaResponse);
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
 
     }
 
@@ -49,5 +71,28 @@ public class CategoriaModel implements CategoriaContract.Model {
                     }
                 });
 
+    }
+
+    @Override
+    public void getFotoCategoriaById( String id, CallbackResponse<ResponseBody> categoriaCallback) {
+        categoriaAPI.getFotoCategoriaById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<ResponseBody>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+                    @Override
+                    public void onSuccess(@NonNull Response<ResponseBody> objectResponse) {
+                        categoriaCallback.onSuccess(objectResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.d("e", "error");
+
+                    }
+                });
     }
 }

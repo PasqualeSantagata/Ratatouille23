@@ -63,4 +63,8 @@ public class Categoria implements Serializable {
     public void setImage(int image) {
         this.image = image;
     }
+
+    public Long getId(){
+        return id;
+    }
 }

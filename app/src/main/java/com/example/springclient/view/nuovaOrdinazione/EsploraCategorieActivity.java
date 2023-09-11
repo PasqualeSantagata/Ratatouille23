@@ -2,8 +2,10 @@ package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -106,10 +108,13 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
     }
-
+    /*
+    la foto viene recuperata in due passaggi in caso la connessione fosse lenta
+     */
     public void setCategorie(List<Categoria> categorie){
         //controllare che la lista abbia almeno un elemento
         this.categorie = categorie;
+        categoriaPresenter.getFotoCategoriaById("7");
         /*creare un metodo che crea bottoni in automatico in base alle categorie create
         * quelle default non conviene tenerle perchè non saprei come popolarle senza db
         * */
@@ -123,5 +128,10 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         intentVisualizzaCategoria.putExtra("categoria",categoriaList.get(position));
         intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
         startActivity(intentVisualizzaCategoria);
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        ImageView imageView = findViewById(R.id.imageView2);
+        imageView.setImageBitmap(bitmap);
     }
 }
