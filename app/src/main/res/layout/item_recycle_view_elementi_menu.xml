@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="374dp"
         android:layout_height="183dp"
         android:layout_marginStart="1dp"
@@ -19,45 +20,47 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/ic_tempo"
+            app:layout_constraintTop_toTopOf="@+id/ic_tempo">
 
             <ImageView
                 android:id="@+id/ic_tempo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="60dp"
-                app:layout_constraintEnd_toStartOf="@+id/textViewTempoPreparazione"
+                android:layout_marginBottom="7dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNome"
                 app:srcCompat="@drawable/ic_tempo" />
 
             <TextView
                 android:id="@+id/textViewTempoPreparazione"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="273dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="2dp"
+                android:inputType="number"
                 android:text="TextView"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
+                app:layout_constraintEnd_toStartOf="@+id/ic_quantita"
                 app:layout_constraintStart_toEndOf="@+id/ic_tempo"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNome"
-                android:inputType="number"
-                />
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textViewNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="297dp"
                 android:fontFamily="@font/roboto"
                 android:text="TextView"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,39 +68,37 @@
                 android:id="@+id/imageViewInfoRecycleView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="121dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ic_tempo"
-                app:srcCompat="@drawable/im_infoRecycleView" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/im_info_recycle_view" />
 
             <ImageView
                 android:id="@+id/ic_quantita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="99dp"
-                android:layout_marginBottom="6dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
-                app:layout_constraintStart_toEndOf="@+id/textViewTempoPreparazione"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="9dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTempoPreparazione"
+                app:layout_constraintEnd_toEndOf="@+id/textViewNome"
+                app:layout_constraintStart_toEndOf="@+id/textViewNome"
                 app:srcCompat="@drawable/ic_quantita" />
 
             <TextView
                 android:id="@+id/textViewQuantita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="178dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="119dp"
                 android:layout_marginBottom="4dp"
+                android:inputType="numberDecimal"
                 android:text="TextView"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ic_quantita"
-                android:inputType="numberDecimal"
-                />
+                tools:ignore="TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
