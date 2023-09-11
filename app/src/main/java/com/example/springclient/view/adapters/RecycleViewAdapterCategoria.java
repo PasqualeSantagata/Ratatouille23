@@ -39,7 +39,7 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterCategoria.MyViewHolder holder, int position) {
         holder.textViewNomeCategoria.setText(categoriaList.get(position).getNome());
-        holder.imageViewCategoria.setImageResource(categoriaList.get(position).getImage());
+        holder.imageViewCategoria.setImageBitmap(categoriaList.get(position).getImage());
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.example.springclient.contract;
 
 import com.example.springclient.entity.Categoria;
-import com.example.springclient.entity.ElementoMenu;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public interface CategoriaContract {
     interface Presenter{
         void getAllCategorie();
         void saveCategoria(Categoria categoria);
-        void getFotoCategoriaById( String id);
+        void getFotoCategoriaById(Categoria categoria);
 
     }
 }

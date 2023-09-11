@@ -62,8 +62,8 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
     }
 
     @Override
-    public void getFotoCategoriaById(String id) {
-        categoriaModel.getFotoCategoriaById(id, new CallbackResponse<ResponseBody>() {
+    public void getFotoCategoriaById(Categoria categoria) {
+        categoriaModel.getFotoCategoriaById(categoria.getId().toString(), new CallbackResponse<ResponseBody>() {
 
             @Override
             public void onFailure(Throwable t) {
@@ -74,7 +74,7 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
             public void onSuccess(Response<ResponseBody> retData) {
                 if(retData.isSuccessful()){
                     Bitmap bitmap = BitmapFactory.decodeStream(retData.body().byteStream());
-                    esploraCategorieActivity.setBitmap(bitmap);
+                    categoria.setImage(bitmap);
                 }
             }
         });

@@ -17,14 +17,12 @@ import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
-import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.CategoriaPresenter;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
@@ -58,28 +56,23 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
     private void initializeComponents() {
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
-
+/*
         int [] images = {R.drawable.categoria_primi, R.drawable.categoria_secondi, R.drawable.categoria_bevande, R.drawable.categoria_sushi, R.drawable.categoria_pizza, R.drawable.categoria_dessert};
         categoriaList = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
         List<String> allergeni = new ArrayList<>();
         allergeni.add("nessuno (forse) ehehe");
         elementoMenuList.add(new ElementoMenu("carbonata",2.0F, "un buon piatto cos", allergeni));
-
-        categoriaList.add(new Categoria("primi", elementoMenuList,images[0]));
-        categoriaList.add(new Categoria("secondi",images[1]));
-        categoriaList.add(new Categoria("bevande",images[2]));
-        categoriaList.add(new Categoria("sushi",images[3]));
-        categoriaList.add(new Categoria("pizza",images[4]));
-        categoriaList.add(new Categoria("dessert",images[5]));
+       */
+        //setta i models della recycle view
+        categoriaPresenter.getAllCategorie();
 
         RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categoriaList, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
 
-        //setta i models della recycle view
-        categoriaPresenter.getAllCategorie();
+
 
 
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
@@ -113,11 +106,14 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
      */
     public void setCategorie(List<Categoria> categorie){
         //controllare che la lista abbia almeno un elemento
-        this.categorie = categorie;
-        categoriaPresenter.getFotoCategoriaById("7");
-        /*creare un metodo che crea bottoni in automatico in base alle categorie create
-        * quelle default non conviene tenerle perchè non saprei come popolarle senza db
-        * */
+        if(categorie.isEmpty()){
+            this.categorie = categorie;
+            for(Categoria c : categorie){
+                categoriaPresenter.getFotoCategoriaById(c);
+            }
+        } else{
+            //TODO
+        }
     }
 
     @Override
