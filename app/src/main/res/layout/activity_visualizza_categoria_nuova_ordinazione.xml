@@ -39,13 +39,17 @@
             android:layout_marginTop="70dp"
             app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="@string/prezzo"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textViewPrezzoVisualCategNuovaOrdinazione"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prezzo" />
+                android:editable="false"
+                tools:ignore="Deprecated"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -56,12 +60,16 @@
             android:layout_marginTop="40dp"
             app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrezzoVisuaCatNuovaOrdinazione">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrezzoVisuaCatNuovaOrdinazione"
+            android:hint="@string/allergeni"
+
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/allergeni" />
+                android:editable="false"
+                tools:ignore="Deprecated"                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -72,12 +80,16 @@
             android:layout_marginTop="40dp"
             app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAllergeniVisuaCatNuovaOrdinazione">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAllergeniVisuaCatNuovaOrdinazione"
+            android:hint="@string/descrizione"
+
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="178dp"
-                android:hint="@string/descrizione" />
+                android:editable="false"
+                tools:ignore="Deprecated"                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -88,12 +100,15 @@
             android:layout_marginTop="40dp"
             app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneVisuaCatNuovaOrdinazione">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneVisuaCatNuovaOrdinazione"
+            android:hint="@string/breve_nota"
+
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/breve_nota" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -138,7 +138,9 @@
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

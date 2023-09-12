@@ -15,6 +15,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
 
     Context context;
     List<Ordinazione> ordinazioni;
+
     @NonNull
     @Override
     public RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
