@@ -39,7 +39,6 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
             public void onSuccess(Response<List<Categoria>> retData) {
                 if(retData.isSuccessful()){
                     esploraCategorieActivity.setCategorie(retData.body());
-                    esploraCategorieActivity.caricaImmagini();
                 }
             }
         });
@@ -63,7 +62,7 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
     }
 
     @Override
-    public void getFotoCategoriaById(Categoria categoria) {
+    public void getFotoCategoriaById(Categoria categoria, int posizione) {
         categoriaModel.getFotoCategoriaById(categoria.getId().toString(), new CallbackResponse<ResponseBody>() {
 
             @Override
@@ -76,6 +75,7 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
                 if(retData.isSuccessful()){
                     Bitmap bitmap = BitmapFactory.decodeStream(retData.body().byteStream());
                     categoria.setImage(bitmap);
+                    esploraCategorieActivity.notifyAdapter(posizione);
                 }
             }
         });

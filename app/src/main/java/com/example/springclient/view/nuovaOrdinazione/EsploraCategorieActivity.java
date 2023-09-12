@@ -36,6 +36,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     private List<Categoria> categorie;
     //provvisorio
     private List<Categoria> categoriaList;
+    private RecycleViewAdapterCategoria adapterCategoria;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         //setta i models della recycle view
 
 
-        RecycleViewAdapterCategoria adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
+        adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
@@ -107,17 +108,17 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     public void setCategorie(List<Categoria> categorie){
         //controllare che la lista abbia almeno un elemento
         this.categorie = categorie;
-    }
-
-    public void caricaImmagini(){
         if(!categorie.isEmpty()){
-            for(Categoria c : categorie){
-                categoriaPresenter.getFotoCategoriaById(c);
+            for(int i = 0; i<categorie.size(); i++){
+                categoriaPresenter.getFotoCategoriaById(categorie.get(i), i);
             }
         } else{
             //TODO
         }
         initializeComponents();
+    }
+    public void notifyAdapter(int posizione){
+        adapterCategoria.notifyItemChanged(posizione);
     }
 
     @Override
@@ -130,8 +131,4 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         startActivity(intentVisualizzaCategoria);
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        ImageView imageView = findViewById(R.id.imageView2);
-        imageView.setImageBitmap(bitmap);
-    }
 }

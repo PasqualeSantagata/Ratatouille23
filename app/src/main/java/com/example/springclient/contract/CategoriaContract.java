@@ -25,7 +25,7 @@ public interface CategoriaContract {
     interface Presenter{
         void getAllCategorie();
         void saveCategoria(Categoria categoria);
-        void getFotoCategoriaById(Categoria categoria);
+        void getFotoCategoriaById(Categoria categoria, int posizione);
 
     }
 }
