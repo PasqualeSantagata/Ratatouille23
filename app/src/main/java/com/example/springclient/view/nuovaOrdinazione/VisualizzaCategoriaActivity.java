@@ -32,19 +32,19 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private TextInputLayout textInputLayoutNota;
     private FloatingActionButton fabAggiungiAdOrdinazione;
     private List<ElementoMenu> elementiMenu;
-    private Categoria categoria;
+
     private Ordinazione ordinazione;
 
     //boolean categoriaInclusa; serve a sapere quali categorie ci sono per sapere quali mostrare nel riepilogo, non so se sarà utile quindi lo mantengo commentato per ora
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categoria = (Categoria) getIntent().getSerializableExtra("categoria");
+        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementi");
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
-        getSupportActionBar().setTitle(categoria.getNome());
+        String nome = getIntent().getStringExtra("nomeCategoria");
+        getSupportActionBar().setTitle(nome);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
 
-        //elementiMenu = categoria.getElementi();
 
         initializeComponents();
 
@@ -62,7 +62,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         fabAggiungiAdOrdinazione = findViewById(R.id.fabAggiungiAdOrdinazione);
 
         //Setto la recycle view
-        setElementiMenuRecycleView(categoria.getElementi());
+        setElementiMenuRecycleView(elementiMenu);
 
         fabAggiungiAdOrdinazione.setOnClickListener(view -> {
             //ordinazione.add(getElementoMenu());
@@ -119,6 +119,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
     @Override
     public void onItemClick(int position) {
-        setParameters(categoria.getElementi().get(position));
+        setParameters(elementiMenu.get(position));
     }
 }

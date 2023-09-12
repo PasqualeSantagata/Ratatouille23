@@ -52,13 +52,6 @@ public class CategoriaModel implements CategoriaContract.Model {
 
     @Override
     public void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback) {
-        /*try {
-            Response<List<Categoria>> response = categoriaAPI.getAllCategorie().execute();
-            categoriaCallback.onSuccess(response);
-        }catch (IOException e){
-
-
-        }*/
         categoriaAPI.getAllCategorie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
