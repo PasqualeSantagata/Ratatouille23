@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_food_icons">
+    android:background="@drawable/sfondo_con_linee">
 
     <Button
         android:id="@+id/buttonIndietroVisuaCatNuovaOrdinazione"
@@ -24,11 +24,12 @@
         android:layout_width="787dp"
         android:layout_height="653dp"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView14"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRiepilogoVisualCatNuovaOrdinazione"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutPrezzoVisuaCatNuovaOrdinazione"
@@ -99,58 +100,35 @@
             android:id="@+id/fabAggiungiAdOrdinazione"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="681dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="30dp"
             android:clickable="true"
             app:backgroundTint="@color/my_green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_add_fab"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="7dp"
-        android:layout_height="755dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView14"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/line_elem_menu" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="1280dp"
-        android:layout_height="7dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="27dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonIndietroVisuaCatNuovaOrdinazione"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/line_visualizz_categ" />
 
     <Button
         android:id="@+id/buttonRiepilogoVisualCatNuovaOrdinazione"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="27dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
         android:text="@string/riepilogo"
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewPiattiNuovaOrdinazione"
-        android:layout_width="481dp"
-        android:layout_height="716dp"
+        android:layout_width="455dp"
+        android:layout_height="703dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView14"
-        app:layout_constraintEnd_toStartOf="@+id/imageView13"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

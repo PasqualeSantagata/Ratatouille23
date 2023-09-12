@@ -19,4 +19,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity {
         getActionBar().setTitle("STATO DELLE ORDINAZIONI");
         setContentView(R.layout.activity_stato_ordinazioni);
     }
+
+
 }
