@@ -17,7 +17,6 @@ public class ElementoMenu implements Serializable {
     private List<String> elencoAllergeni;
     public String lingua;
     private String tempoPreparazione;  //Magari va cambiato in float o int se li interpretiamo sempre come minuti
-    private String breveNota; //nel caso dell'ordinazione??
     private Float quantita;
     private String categoria;
 
@@ -98,14 +97,6 @@ public class ElementoMenu implements Serializable {
 
     public void setTempoPreparazione(String tempoPreparazione) {
         this.tempoPreparazione = tempoPreparazione;
-    }
-
-    public String getBreveNota() {
-        return breveNota;
-    }
-
-    public void setBreveNota(String nota){
-        this.breveNota = nota;
     }
 
     public Float getQuantita() {

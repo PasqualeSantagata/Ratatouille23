@@ -1,6 +1,7 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
@@ -43,6 +43,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         String nome = getIntent().getStringExtra("nomeCategoria");
         getSupportActionBar().setTitle(nome);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
 
 
@@ -57,7 +58,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoVisuaCatNuovaOrdinazione);
         textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniVisuaCatNuovaOrdinazione);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneVisuaCatNuovaOrdinazione);
-        textInputLayoutNota = findViewById(R.id.textInputLayoutBreveNotaVisuaCatNuovaOrdinazione);
 
         fabAggiungiAdOrdinazione = findViewById(R.id.fabAggiungiAdOrdinazione);
 
@@ -94,7 +94,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         //Attenzione controllare il to string default di List
         setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
-        setTextInputLayoutText(textInputLayoutNota, elementoMenu.getBreveNota());
     }
 
     /*
