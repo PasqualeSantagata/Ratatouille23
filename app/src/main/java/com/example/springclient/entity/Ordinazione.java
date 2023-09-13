@@ -67,4 +67,7 @@ public class Ordinazione implements Serializable {
     public void setBreveNota(String breveNota) {
         this.breveNota = breveNota;
     }
+
+
+
 }
