@@ -12,6 +12,7 @@ public class Ordinazione implements Serializable {
     private String breveNota;
 
     public Ordinazione() {
+
     }
 
     public Ordinazione(Integer numeroPersone, Integer tavolo, Integer sala) {
