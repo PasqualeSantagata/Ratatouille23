@@ -6,74 +6,90 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_food_icons">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="1220dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/grey_trasparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
-        android:layout_width="1220dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/grey_trasparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="1220dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="30dp"
-        android:background="@color/grey_trasparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewOrdiniDaEvadereStatoOrdinazioni"
+                android:layout_width="1220dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/grey_trasparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewOrdiniDaEvadereStatoOrdinazioni" />
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="658dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/im_ordini_da_evadere" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewOrdiniPrenotatiStatoOrdinazioni"
+                android:layout_width="1220dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/grey_trasparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewOrdiniPrenotatiStatoOrdinazioni" />
 
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="658dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:srcCompat="@drawable/im_ordini_prenotati" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleViewOrdiniEvasiStatoOrdinazioni"
+                android:layout_width="1220dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/grey_trasparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewOrdiniEvasiStatoOrdinazioni" />
 
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="658dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
-        app:srcCompat="@drawable/im_ordini_evasi" />
+            <ImageView
+                android:id="@+id/imageViewOrdiniDaEvadereStatoOrdinazioni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="42dp"
+                android:layout_marginEnd="658dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerViewOrdiniDaEvadereStatoOrdinazioni"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/im_ordini_da_evadere" />
+
+            <ImageView
+                android:id="@+id/imageViewOrdiniPrenotatiStatoOrdinazioni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="658dp"
+                android:layout_marginBottom="9dp"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerViewOrdiniPrenotatiStatoOrdinazioni"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewOrdiniDaEvadereStatoOrdinazioni"
+                app:srcCompat="@drawable/im_ordini_prenotati" />
+
+            <ImageView
+                android:id="@+id/imageViewOrdiniEvasiStatoOrdinazioni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="658dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewOrdiniPrenotatiStatoOrdinazioni"
+                app:srcCompat="@drawable/im_ordini_evasi" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,12 +14,14 @@ public class HomeStatoOrdinazione extends AppCompatActivity {
     RecyclerView recyclerViewOrdinazioniCorrenti;
     RecyclerView recyclerViewOrdinazioniPrenotate;
     RecyclerView recyclerViewOrdinazioniEvase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setTitle("STATO DELLE ORDINAZIONI");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_stato_ordinazioni);
+
 
 
     }
