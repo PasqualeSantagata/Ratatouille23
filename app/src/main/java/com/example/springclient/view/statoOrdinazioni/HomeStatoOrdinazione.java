@@ -1,5 +1,6 @@
 package com.example.springclient.view.statoOrdinazioni;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,8 +18,12 @@ public class HomeStatoOrdinazione extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setTitle("STATO DELLE ORDINAZIONI");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_stato_ordinazioni);
+
+
     }
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -15,6 +16,7 @@ public class OrdinazioneConclusa extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("ORDINAZIONE CONCLUSA");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_ordinazione_conclusa_nuova_ordinazione);
 
 

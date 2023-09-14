@@ -1,6 +1,7 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         String nome = getIntent().getStringExtra("nomeCategoria");
         getSupportActionBar().setTitle(nome);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
 
 
@@ -57,7 +59,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoVisuaCatNuovaOrdinazione);
         textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniVisuaCatNuovaOrdinazione);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneVisuaCatNuovaOrdinazione);
-        textInputLayoutNota = findViewById(R.id.textInputLayoutBreveNotaVisuaCatNuovaOrdinazione);
 
         fabAggiungiAdOrdinazione = findViewById(R.id.fabAggiungiAdOrdinazione);
 

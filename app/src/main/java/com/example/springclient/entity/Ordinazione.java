@@ -9,6 +9,7 @@ public class Ordinazione implements Serializable {
     private Integer tavolo;
     private Integer sala;
     private List<ElementoMenu> elementiOrdinati = new ArrayList<>();
+    private String breveNota;
 
     public Ordinazione() {
     }
@@ -58,6 +59,15 @@ public class Ordinazione implements Serializable {
     public List<ElementoMenu> getElementiOrdinati() {
         return elementiOrdinati;
     }
+
+    public String getBreveNota() {
+        return breveNota;
+    }
+
+    public void setBreveNota(String breveNota) {
+        this.breveNota = breveNota;
+    }
+
 
 
 }

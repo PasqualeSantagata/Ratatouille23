@@ -1,5 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("RIEPILOGO ORDINAZIONE");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_riepilogo_ordinazione_nuova_ordinazione);
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getNome());
