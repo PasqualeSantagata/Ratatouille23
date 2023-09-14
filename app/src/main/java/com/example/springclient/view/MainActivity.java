@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
@@ -70,6 +71,24 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         stompClient.connect();
         String elemento = new Gson().toJson(o);
 
+
+        stompClient.lifecycle().subscribe(lifecycleEvent -> {
+            switch (lifecycleEvent.getType()) {
+
+                case OPENED:
+                    Log.d("SOCKET: ", "Stomp connection opened");
+                    break;
+
+                case ERROR:
+                    Log.e("SOCKET: ", "Error", lifecycleEvent.getException());
+                    break;
+
+                case CLOSED:
+                    Log.d("SOCKET: ", "Stomp connection closed");
+                    break;
+            }
+        });
+
         stompClient.send("/app/invia-ordinazione", elemento).subscribe();
         stompClient.topic("/topic/ricevi-ordinazione")
                 .subscribeOn(Schedulers.io())
@@ -78,9 +97,6 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
                     Log.d("WS:", "Received " + ordinazione.getPayload());
                 });
         initializeComponents();
-
-
-
     }
     private void initializeComponents() {
        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmailLogin);
@@ -185,6 +201,13 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         Intent passwordDimenticataIntent = new Intent(this, PasswordDimenticataActivity.class);
         startActivity(passwordDimenticataIntent);
     }
+
+    @Override
+    protected void onDestroy() {
+        stompClient.disconnect();
+        super.onDestroy();
+    }
+
 
 
 

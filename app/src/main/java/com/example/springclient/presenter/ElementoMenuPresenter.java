@@ -11,7 +11,7 @@ import com.example.springclient.view.inserimentoNelMenu.HomeNuovoElemento;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
 import com.example.springclient.view.inserimentoNelMenu.StartInserimentoNelMenu;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
-import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazione;
+import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private HomeNuovoElemento homeNuovoElemento;
 
     private EsploraCategorieActivity esploraCategorieActivity;
-    private RiepilogoOrdinazione riepilogoOrdinazione;
+    private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
 
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         if(retrofitService == null)
@@ -47,8 +47,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         this.esploraCategorieActivity = esploraCategorieActivity;
     }
 
-    public ElementoMenuPresenter(RiepilogoOrdinazione riepilogoOrdinazione) {
-        this.riepilogoOrdinazione = riepilogoOrdinazione;
+    public ElementoMenuPresenter(RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity) {
+        this.riepilogoOrdinazioneActivity = riepilogoOrdinazioneActivity;
     }
 
     @Override

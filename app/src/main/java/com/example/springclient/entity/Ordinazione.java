@@ -8,7 +8,6 @@ public class Ordinazione implements Serializable {
     private Integer numeroPersone;
     private Integer tavolo;
     private Integer sala;
-
     private List<ElementoMenu> elementiOrdinati = new ArrayList<>();
 
     public Ordinazione() {
@@ -55,5 +54,10 @@ public class Ordinazione implements Serializable {
     public boolean ordinazioneVuota(){
         return elementiOrdinati.isEmpty();
     }
+
+    public List<ElementoMenu> getElementiOrdinati() {
+        return elementiOrdinati;
+    }
+
 
 }

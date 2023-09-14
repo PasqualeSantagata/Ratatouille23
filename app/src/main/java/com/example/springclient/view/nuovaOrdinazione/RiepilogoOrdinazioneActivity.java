@@ -1,6 +1,7 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -11,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 
-public class RiepilogoOrdinazione extends AppCompatActivity {
+public class RiepilogoOrdinazioneActivity extends AppCompatActivity {
 
     private ImageView imageViewPrimi;
     private ImageView imageViewSecondi;
@@ -31,6 +33,7 @@ public class RiepilogoOrdinazione extends AppCompatActivity {
     private RecyclerView recyclerViewSushi;
     private RecyclerView recyclerViewPizze;
     private RecyclerView recyclerViewDessert;
+    private Ordinazione ordinazione;
 
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     @Override
@@ -38,7 +41,8 @@ public class RiepilogoOrdinazione extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("RIEPILOGO ORDINAZIONE");
         setContentView(R.layout.activity_riepilogo_ordinazione_nuova_ordinazione);
-
+        ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+        Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getNome());
     }
 
     private void InitializeComponents() {

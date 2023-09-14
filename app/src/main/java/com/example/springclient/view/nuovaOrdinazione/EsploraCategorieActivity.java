@@ -2,10 +2,8 @@ package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -26,8 +24,6 @@ import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
 import java.io.Serializable;
 import java.util.List;
-
-import retrofit2.Response;
 
 public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
     private Ordinazione ordinazione;
@@ -96,7 +92,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 dialog.show();
             } else {
                 // starta il riepilogo ordinazione non vuota
-                Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazione.class);
+                Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
                 intentRiepilogo.putExtra("ordinazione",ordinazione);
                 startActivity(intentRiepilogo);
             }

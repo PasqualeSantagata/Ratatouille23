@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
@@ -34,6 +33,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private List<ElementoMenu> elementiMenu;
 
     private Ordinazione ordinazione;
+    private int elementoSelezionato = -1;
 
     //boolean categoriaInclusa; serve a sapere quali categorie ci sono per sapere quali mostrare nel riepilogo, non so se sarà utile quindi lo mantengo commentato per ora
     @Override
@@ -65,7 +65,9 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         setElementiMenuRecycleView(elementiMenu);
 
         fabAggiungiAdOrdinazione.setOnClickListener(view -> {
-            //ordinazione.add(getElementoMenu());
+            if(elementoSelezionato > -1) {
+                ordinazione.aggiungiPiatto(getElementoMenu());
+            }
         });
 
         buttonIndietro.setOnClickListener(view -> {
@@ -76,7 +78,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         });
 
         buttonRiepilogo.setOnClickListener(view -> {
-            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazione.class);
+            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
             intentRiepilogo.putExtra("ordinazione",ordinazione);
             startActivity(intentRiepilogo);
         });
@@ -92,9 +94,8 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     public void setParameters(ElementoMenu elementoMenu){
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
         //Attenzione controllare il to string default di List
-        setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
+//        setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
-        setTextInputLayoutText(textInputLayoutNota, elementoMenu.getBreveNota());
     }
 
     /*
@@ -111,14 +112,12 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
 
     private ElementoMenu getElementoMenu(){
-
-        //Prende il valore delle varie text view
-
-        return null;
+        return elementiMenu.get(elementoSelezionato);
     }
 
     @Override
     public void onItemClick(int position) {
+        elementoSelezionato = position;
         setParameters(elementiMenu.get(position));
     }
 }
