@@ -15,13 +15,13 @@ import com.example.springclient.utils.StatoDellaOrdinazione;
 
 import java.util.List;
 
-public class RecycleViewAdapterOrdinazioni extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioni.MyViewHolder> {
-    private final IRecycleViewOrdinazione iRecycleViewOrdinazione;
+public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder> {
+    private final IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti;
     Context context;
     List<StatoDellaOrdinazione> ordinazioni;
 
-    public RecycleViewAdapterOrdinazioni(IRecycleViewOrdinazione iRecycleViewOrdinazione, Context context, List<StatoDellaOrdinazione> ordinazioni) {
-        this.iRecycleViewOrdinazione = iRecycleViewOrdinazione;
+    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<StatoDellaOrdinazione> ordinazioni) {
+        this.iRecycleViewOrdinazioniCorrenti = iRecycleViewOrdinazioniCorrenti;
         this.context = context;
         this.ordinazioni = ordinazioni;
 
@@ -29,23 +29,36 @@ public class RecycleViewAdapterOrdinazioni extends RecyclerView.Adapter<RecycleV
 
     @NonNull
     @Override
-    public RecycleViewAdapterOrdinazioni.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_recycle_view_stato_ordinazioni, parent,false);
+        View view = inflater.inflate(R.layout.item_recycle_view_stato_ordinazioni_correnti, parent,false);
 
-        return new RecycleViewAdapterOrdinazioni.MyViewHolder(view, iRecycleViewOrdinazione);
+        return new RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder(view, iRecycleViewOrdinazioniCorrenti);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioni.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder holder, int position) {
         holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala());
         holder.textViewNota.setText(ordinazioni.get(position).getOrdinazione().getBreveNota());
         holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo());
         holder.textViewTempo.setText(ordinazioni.get(position).getElementoMenu().getTempoPreparazione());
         holder.textViewNomePiatto.setText(ordinazioni.get(position).getElementoMenu().getNome());
 
-        //TODO eventi button
+        holder.buttonAvanti.setOnClickListener(view -> {
+            if (iRecycleViewOrdinazioniCorrenti != null){
+                if(position != RecyclerView.NO_POSITION){
+                    iRecycleViewOrdinazioniCorrenti.onGreenButtonClickOrdinazioniCorrenti(position);
+                }
+            }
+        });
 
+        holder.buttonIndietro.setOnClickListener(view -> {
+            if (iRecycleViewOrdinazioniCorrenti != null){
+                if(position != RecyclerView.NO_POSITION){
+                    iRecycleViewOrdinazioniCorrenti.onRedButtonClickOrdinazioniCorrenti(position);
+                }
+            }
+        });
     }
 
     @Override
@@ -64,10 +77,10 @@ public class RecycleViewAdapterOrdinazioni extends RecyclerView.Adapter<RecycleV
         Button buttonAvanti;
 
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazione iRecycleViewOrdinazione) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti) {
             super(itemView);
-            buttonIndietro = itemView.findViewById(R.id.buttonAvantiRecycleViewStatoOrdinazioni);
-            buttonAvanti = itemView.findViewById(R.id.buttonIndietroRecycleViewStatoOrdinazioni);
+            buttonIndietro = itemView.findViewById(R.id.buttonIndietroRecycleViewStatoOrdinazioni);
+            buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewStatoOrdinazioni);
             textViewNomePiatto = itemView.findViewById(R.id.textViewNumeroPiattiRecycleViewStatoOrdinazioni);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewStatoOrdinazioni);
             textViewNota = itemView.findViewById(R.id.textViewNotaRecycleViewStatoOrdinazioni);
@@ -78,11 +91,11 @@ public class RecycleViewAdapterOrdinazioni extends RecyclerView.Adapter<RecycleV
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (iRecycleViewOrdinazione != null){
+                    if (iRecycleViewOrdinazioniCorrenti != null){
                         int pos = getAdapterPosition();
 
                         if(pos != RecyclerView.NO_POSITION){
-                            iRecycleViewOrdinazione.onItemClick(pos);
+                            iRecycleViewOrdinazioniCorrenti.onItemClickOrdinazioniCorrenti(pos);
                         }
                     }
                 }

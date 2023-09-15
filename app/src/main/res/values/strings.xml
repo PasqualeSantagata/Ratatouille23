@@ -37,6 +37,7 @@
     <string name="esci">esci</string>
     <string name="dialog_cambia_pass">Devi cambiare password, clicca ok e riceverai una mail per aggiornarla</string>
     <string name="dialog_email_recupero_inviata">Email inviata correttamente, controlla la tua casella di posta</string>
+    <string name="t">T</string>
 
     <string-array name="array_ruoli">
             <item>Addetto alla cucina</item>
