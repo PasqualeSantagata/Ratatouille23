@@ -8,6 +8,7 @@ public class StatoDellaOrdinazione {
     private ElementoMenu elementoMenu;
     private boolean evaso;
 
+
     public StatoDellaOrdinazione(Ordinazione ordinazione, ElementoMenu elementoMenu, boolean evaso) {
         this.ordinazione = ordinazione;
         this.elementoMenu = elementoMenu;
