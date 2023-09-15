@@ -3,6 +3,7 @@ package com.example.springclient.RetrofitService;
 import com.example.springclient.authentication.AggiungiTokenInterceptor;
 
 import com.example.springclient.authentication.TokenRefreshInterceptor;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.google.gson.Gson;
 
@@ -20,6 +21,7 @@ public class RetrofitService {
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;
     private CategoriaAPI categoriaAPI;
+    private OrdinazioneAPI ordinazioneAPI;
     private RecuperoCredenzialiAPI recuperoCredenzialiAPI;
     private OkHttpClient.Builder okHttp;
     private AggiungiTokenInterceptor aggiungiTokenInterceptor;
@@ -59,6 +61,7 @@ public class RetrofitService {
         elementoMenuAPI = retrofitClient.create(ElementoMenuAPI.class);
         categoriaAPI = retrofitClient.create(CategoriaAPI.class);
         recuperoCredenzialiAPI = retrofitClient.create(RecuperoCredenzialiAPI.class);
+        ordinazioneAPI = retrofitClient.create(OrdinazioneAPI.class);
 
     }
 
@@ -71,6 +74,11 @@ public class RetrofitService {
     }
 
     public CategoriaAPI getCategoriaAPI() { return categoriaAPI; }
+
+    public OrdinazioneAPI getOrdinazioneAPI() {
+        return ordinazioneAPI;
+    }
+
     public RecuperoCredenzialiAPI getRecuperoCredenzialiAPI(){return recuperoCredenzialiAPI;}
 
     public AggiungiTokenInterceptor getMyInterceptor(){return aggiungiTokenInterceptor;}

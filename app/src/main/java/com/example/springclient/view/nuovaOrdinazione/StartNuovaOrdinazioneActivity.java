@@ -163,7 +163,6 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
             Integer nsala = n3;
 
             ordinazione = new Ordinazione(nPersone,ntavolo,nsala);
-            ordinazionePresenter.preparaOrdinazione(ordinazione);
 
             Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
             intentCategorie.putExtra("ordinazione",ordinazione);

@@ -22,8 +22,10 @@ import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.AutenticazionePresenter;
+import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
 import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
+import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazione;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -193,7 +195,8 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
     @Override
     public void avviaDashboardAddettoCucina() {
-
+        Intent avviaCuoco = new Intent(this, HomeStatoOrdinazione.class);
+        startActivity(avviaCuoco);
     }
 
     @Override

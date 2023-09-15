@@ -11,6 +11,7 @@ public class Ordinazione implements Serializable {
     private List<ElementoMenu> elementiOrdinati = new ArrayList<>();
     private String breveNota;
 
+    private boolean evasa;
     public Ordinazione() {
 
     }
@@ -68,6 +69,14 @@ public class Ordinazione implements Serializable {
     public void setBreveNota(String breveNota) {
         this.breveNota = breveNota;
     }
+    public boolean isEvasa() {
+        return evasa;
+    }
+
+    public void setEvasa(boolean evasa) {
+        this.evasa = evasa;
+    }
+
 
 
 
