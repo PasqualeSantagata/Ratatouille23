@@ -2,22 +2,30 @@ package com.example.springclient.view.statoOrdinazioni;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.utils.StatoDellaOrdinazione;
+import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
+import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
+import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
+import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorrenti;
+import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
+import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
 import java.util.List;
 
-public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate, IRecycleViewOrdinazioniEvase {
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
-public class HomeStatoOrdinazione extends AppCompatActivity {
+public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate, IRecycleViewOrdinazioniEvase {
 
     private RecyclerView recyclerViewOrdinazioniCorrenti;
     private RecyclerView recyclerViewOrdinazioniPrenotate;
@@ -27,10 +35,10 @@ public class HomeStatoOrdinazione extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_stato_ordinazioni);
         getSupportActionBar().setTitle("STATO DELLE ORDINAZIONI");
+
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
         stompClient.connect();
 
@@ -50,11 +58,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity {
         *
         * */
     }
-
-
-
-    }
-
     public void initializeComponents() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
@@ -120,3 +123,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity {
 
     }
 }
+
+
+
+
+
