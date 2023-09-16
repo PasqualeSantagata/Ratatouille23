@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.utils.StatoDellaOrdinazione;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
@@ -18,6 +21,7 @@ import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorre
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,6 +35,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     private RecyclerView recyclerViewOrdinazioniPrenotate;
     private RecyclerView recyclerViewOrdinazioniEvase;
     private StompClient stompClient;
+    private OrdinazionePresenter ordinazionePresenter;
+    private List<Ordinazione> ordinazioniSospese;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_stato_ordinazioni);
         getSupportActionBar().setTitle("STATO DELLE ORDINAZIONI");
+        ordinazionePresenter = new OrdinazionePresenter(this);
+        ordinazionePresenter.getOrdinazioniSospese();
 
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
         stompClient.connect();
@@ -48,6 +56,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
                 .subscribe(ordinazione-> {
                     Log.d("WS2:", "Received " + ordinazione.getPayload());
                 });
+
         /*
         *  grazie all'oggetto StatoDellOrdinazione abbiamo una corrispondenza tra gli elementi che compongono un' ordinazione
         *  e gli elementi che vengono mostrati sul tablet del cuoco. Gli elementi che sono mostrati a schermo sono identificati
@@ -58,10 +67,26 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         *
         * */
     }
+
+    public void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese){
+        this.ordinazioniSospese = ordinazioniSospese;
+        initializeComponents();
+    }
+
+
+
     public void initializeComponents() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
+        List<StatoDellaOrdinazione> listStatoOrdinazione = new ArrayList<>();
+        for(Ordinazione o: ordinazioniSospese){
+            for(ElementoMenu e: o.getElementiOrdinati()) {
+                listStatoOrdinazione.add(new StatoDellaOrdinazione(o, e, false));
+            }
+        }
+
+        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, listStatoOrdinazione);
 
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
 

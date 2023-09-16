@@ -119,7 +119,6 @@
                 android:layout_width="313dp"
                 android:layout_height="5dp"
                 android:layout_marginTop="18dp"
-                android:src="@tools:sample/avatars"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewNotaRecycleViewStatoOrdinazioniPrenotate"
