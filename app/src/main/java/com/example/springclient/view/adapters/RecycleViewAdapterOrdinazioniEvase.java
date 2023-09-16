@@ -10,16 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.utils.StatoDellaOrdinazione;
+import com.example.springclient.utils.Portata;
 import java.util.List;
 
 public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniEvase.MyViewHolder>{
 
     private final IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase;
     Context context;
-    List<StatoDellaOrdinazione> ordinazioniEvase;
+    List<Portata> ordinazioniEvase;
 
-    public RecycleViewAdapterOrdinazioniEvase(IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase, Context context, List<StatoDellaOrdinazione> ordinazioniEvase) {
+    public RecycleViewAdapterOrdinazioniEvase(IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase, Context context, List<Portata> ordinazioniEvase) {
         this.iRecycleViewOrdinazioniEvase = iRecycleViewOrdinazioniEvase;
         this.context = context;
         this.ordinazioniEvase = ordinazioniEvase;

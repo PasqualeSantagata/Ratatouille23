@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.utils.StatoDellaOrdinazione;
+import com.example.springclient.utils.Portata;
 
 import java.util.List;
 
 public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder> {
     private final IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti;
     Context context;
-    List<StatoDellaOrdinazione> ordinazioni;
+    List<Portata> ordinazioni;
 
-    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<StatoDellaOrdinazione> ordinazioni) {
+    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<Portata> ordinazioni) {
         this.iRecycleViewOrdinazioniCorrenti = iRecycleViewOrdinazioniCorrenti;
         this.context = context;
         this.ordinazioni = ordinazioni;
@@ -38,11 +38,14 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder holder, int position) {
-        holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala());
-        holder.textViewNota.setText(ordinazioni.get(position).getOrdinazione().getBreveNota());
-        holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo());
-        holder.textViewTempo.setText(ordinazioni.get(position).getElementoMenu().getTempoPreparazione());
-        holder.textViewNomePiatto.setText(ordinazioni.get(position).getElementoMenu().getNome());
+        if(!ordinazioni.get(position).isEvaso()) {
+            holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
+            holder.textViewNota.setText(ordinazioni.get(position).getOrdinazione().getBreveNota());
+            holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
+            holder.textViewTempo.setText(ordinazioni.get(position).getElementoMenu().getTempoPreparazione());
+            holder.textViewNomePiatto.setText(ordinazioni.get(position).getElementoMenu().getNome());
+        }
+
 
         holder.buttonAvanti.setOnClickListener(view -> {
             if (iRecycleViewOrdinazioniCorrenti != null){
@@ -81,7 +84,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
             super(itemView);
             buttonIndietro = itemView.findViewById(R.id.buttonIndietroRecycleViewStatoOrdinazioni);
             buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewStatoOrdinazioni);
-            textViewNomePiatto = itemView.findViewById(R.id.textViewNumeroPiattiRecycleViewStatoOrdinazioni);
+            textViewNomePiatto = itemView.findViewById(R.id.textViewNomePiattoRecycleViewStatoOrdinazioni);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewStatoOrdinazioni);
             textViewNota = itemView.findViewById(R.id.textViewNotaRecycleViewStatoOrdinazioni);
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewStatoOrdinazioni);

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.utils.StatoDellaOrdinazione;
+import com.example.springclient.utils.Portata;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     private final IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate;
     Context context;
-    List<StatoDellaOrdinazione> ordinazioniPrenotate;
+    List<Portata> ordinazioniPrenotate;
 
-    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<StatoDellaOrdinazione> ordinazioniPrenotate) {
+    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<Portata> ordinazioniPrenotate) {
         this.iRecycleViewOrdinazioniPrenotate = iRecycleViewOrdinazioniPrenotate;
         this.context = context;
         this.ordinazioniPrenotate = ordinazioniPrenotate;

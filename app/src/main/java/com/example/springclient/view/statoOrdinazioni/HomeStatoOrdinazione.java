@@ -13,7 +13,7 @@ import com.example.springclient.R;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.OrdinazionePresenter;
-import com.example.springclient.utils.StatoDellaOrdinazione;
+import com.example.springclient.utils.Portata;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
@@ -37,6 +37,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     private StompClient stompClient;
     private OrdinazionePresenter ordinazionePresenter;
     private List<Ordinazione> ordinazioniSospese;
+    private List<Portata> listStatoOrdinazione;
+    RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,40 +76,43 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         initializeComponents();
     }
 
+   /* private List<Portata> generaOrdinazioniSospese(List<Ordinazione> ordinazioneList){
+
+    }*/
 
 
     public void initializeComponents() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
-        List<StatoDellaOrdinazione> listStatoOrdinazione = new ArrayList<>();
-        for(Ordinazione o: ordinazioniSospese){
-            for(ElementoMenu e: o.getElementiOrdinati()) {
-                listStatoOrdinazione.add(new StatoDellaOrdinazione(o, e, false));
-            }
-        }
-
-        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, listStatoOrdinazione);
+        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, generaOrdinazioniSospese(ordinazioniSospese));
 
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
 
     }
 
-    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<StatoDellaOrdinazione> ordinazione){
-        RecycleViewAdapterOrdinazioniCorrenti adapter = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
-        recyclerView.setAdapter(adapter);
+    //gli che vengono presi mentre sono in coda
+
+    /* 1 aggiorna l'elemento della lista statoDellOrdinazione
+     *
+     *
+     *
+     */
+    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<Portata> ordinazione){
+         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
+        recyclerView.setAdapter(adapterCorrenti);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<StatoDellaOrdinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<Portata> ordinazione){
         RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<StatoDellaOrdinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<Portata> ordinazione){
         RecycleViewAdapterOrdinazioniEvase adapter = new RecycleViewAdapterOrdinazioniEvase(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -121,6 +126,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
 
     @Override
     public void onGreenButtonClickOrdinazioniCorrenti(int position) {
+
 
     }
 
