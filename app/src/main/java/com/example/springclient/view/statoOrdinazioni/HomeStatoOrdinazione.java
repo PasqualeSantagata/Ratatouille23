@@ -66,6 +66,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         *  non evase quando questa activity viene caricata.
         *
         * */
+
     }
 
     public void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese){

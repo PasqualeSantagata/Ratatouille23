@@ -21,7 +21,6 @@ public interface AutenticazioneContract {
         void loginErrore();
 
         void dialgPrimoAccesso();
-
         void avviaDashboardAdmin();
         void avviaDashboardSupervisore();
         void avviaDashboardAddettoSala();

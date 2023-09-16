@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -75,8 +75,8 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         TextView textViewNomePiatto;
         TextView textViewTempo;
         TextView textViewNota;
-        Button buttonIndietro;
-        Button buttonAvanti;
+        ImageButton buttonIndietro;
+        ImageButton buttonAvanti;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate) {
             super(itemView);
