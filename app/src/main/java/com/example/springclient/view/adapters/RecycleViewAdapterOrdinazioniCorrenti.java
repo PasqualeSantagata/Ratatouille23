@@ -46,22 +46,20 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
             holder.textViewTempo.setText(p.getElementoMenu().getTempoPreparazione());
             holder.textViewNomePiatto.setText(p.getElementoMenu().getNome());
 
-        holder.buttonAvanti.setOnClickListener(view -> {
-            if (iRecycleViewOrdinazioniCorrenti != null){
-                if(position != RecyclerView.NO_POSITION){
-                    iRecycleViewOrdinazioniCorrenti.onGreenButtonClickOrdinazioniCorrenti(position);
+            holder.buttonAvanti.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniCorrenti != null){
+                    if(position != RecyclerView.NO_POSITION){
+                        iRecycleViewOrdinazioniCorrenti.onGreenButtonClickOrdinazioniCorrenti(position);
+                    }
                 }
-            }
-        });
-
-        holder.buttonIndietro.setOnClickListener(view -> {
-            if (iRecycleViewOrdinazioniCorrenti != null){
-                if(position != RecyclerView.NO_POSITION){
-                    iRecycleViewOrdinazioniCorrenti.onRedButtonClickOrdinazioniCorrenti(position);
+            });
+            holder.buttonIndietro.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniCorrenti != null){
+                    if(position != RecyclerView.NO_POSITION){
+                        iRecycleViewOrdinazioniCorrenti.onRedButtonClickOrdinazioniCorrenti(position);
+                    }
                 }
-            }
-        });
-
+            });
         }
     }
 

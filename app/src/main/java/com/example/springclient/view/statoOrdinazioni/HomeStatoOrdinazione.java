@@ -83,11 +83,12 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
-        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, generaOrdinazioniSospese(ordinazioniSospese));
+        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, ordinazioniSospese);
 
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
 
     }
+
 
     //gli che vengono presi mentre sono in coda
 
