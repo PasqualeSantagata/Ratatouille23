@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,7 +32,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutNota;
     private FloatingActionButton fabAggiungiAdOrdinazione;
-    private List<ElementoMenu> elementiMenu;
+    private List<Portata> elementiMenu;
 
     private Ordinazione ordinazione;
     private int elementoSelezionato = -1;
@@ -40,7 +41,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementi");
+        elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementi");
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         String nome = getIntent().getStringExtra("nomeCategoria");
         getSupportActionBar().setTitle(nome);
@@ -67,7 +68,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
         fabAggiungiAdOrdinazione.setOnClickListener(view -> {
             if(elementoSelezionato > -1) {
-                ordinazione.aggiungiPiatto(getElementoMenu());
+                ordinazione.aggiungiPiatto(new Portata(getElementoMenu(),false));
             }
         });
 
@@ -103,7 +104,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     TODO metodo che prende la lista degli elm, menu
      e li "sistema" nella recycle view,
      */
-    public void setElementiMenuRecycleView(List<ElementoMenu> listaElementiMenu){
+    public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
         RecyclerView recyclerViewPiatti = findViewById(R.id.RecyclerViewPiattiNuovaOrdinazione);
         RecycleViewAdapterElementoMenu adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
@@ -113,12 +114,12 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
 
     private ElementoMenu getElementoMenu(){
-        return elementiMenu.get(elementoSelezionato);
+        return elementiMenu.get(elementoSelezionato).getElementoMenu();
     }
 
     @Override
     public void onItemClick(int position) {
         elementoSelezionato = position;
-        setParameters(elementiMenu.get(position));
+        setParameters(elementiMenu.get(position).getElementoMenu());
     }
 }

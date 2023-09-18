@@ -96,18 +96,18 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
      *
      *
      */
-    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<Portata> ordinazione){
-         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
+    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<Ordinazione> ordinazione){
+        adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
         recyclerView.setAdapter(adapterCorrenti);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<Portata> ordinazione){
-        RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
+    /*    RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager); */
     }
 
     public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<Portata> ordinazione){

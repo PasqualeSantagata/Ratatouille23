@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,24 +18,13 @@ import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.AutenticazioneContract;
 import com.example.springclient.contract.RecuperoCredenzialiContract;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.AutenticazionePresenter;
-import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
 import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
 import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazione;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
 public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View {
@@ -62,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autenticazionePresenter = new AutenticazionePresenter(this);
         recuperoCredenzialiPresenter = new RecuperoCredenzialiPresenter(this);
-
+/*
         ElementoMenu e1 = new ElementoMenu(1L,"Spaghetti", 10.0f, "La pasta di tutti i giorni", null, "Italiano");
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
         elementoMenuList.add(e1);
@@ -97,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(ordinazione-> {
                     Log.d("WS:", "Received " + ordinazione.getPayload());
-                });
+                });*/
+
         initializeComponents();
     }
     private void initializeComponents() {

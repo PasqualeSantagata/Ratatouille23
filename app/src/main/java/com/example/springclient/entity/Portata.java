@@ -1,8 +1,5 @@
 package com.example.springclient.entity;
 
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
-
 public class Portata {
     private Long id;
     private ElementoMenu elementoMenu;
@@ -43,5 +40,6 @@ public class Portata {
     public void setPrenotato(boolean prenotato) {
         this.prenotato = prenotato;
     }
+
 }
 

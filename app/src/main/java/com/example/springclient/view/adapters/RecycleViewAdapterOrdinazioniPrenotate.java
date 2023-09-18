@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 
 import java.util.List;
@@ -19,12 +21,16 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     private final IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate;
     Context context;
-    List<Portata> ordinazioniPrenotate;
+    List<Ordinazione> ordinazioniPrenotate;
+    List<Ordinazione> ordinazione;
+    Ordinazione ordinazioneCorrente;
 
-    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<Portata> ordinazioniPrenotate) {
+    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<Ordinazione> ordinazioniPrenotate) {
         this.iRecycleViewOrdinazioniPrenotate = iRecycleViewOrdinazioniPrenotate;
         this.context = context;
         this.ordinazioniPrenotate = ordinazioniPrenotate;
+
+
     }
 
     @NonNull
@@ -41,6 +47,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala());
         holder.textViewNota.setText(ordinazioniPrenotate.get(position).getOrdinazione().getBreveNota());
         holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo());
+
         holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getElementoMenu().getTempoPreparazione());
         holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getElementoMenu().getNome());
 

@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
 public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<RecycleViewAdapterElementoMenu.MyViewHolder> {
     IRecycleViewElementoMenu recycleViewElementoMenuInterface;
     Context context;
-    List<ElementoMenu> listaElementiMenu;
+    List<Portata> listaElementiMenu;
 
-    public RecycleViewAdapterElementoMenu(Context context, List<ElementoMenu> listaElementiMenu, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
+    public RecycleViewAdapterElementoMenu(Context context, List<Portata> listaElementiMenu, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
         this.context = context;
         this.listaElementiMenu = listaElementiMenu;
         this.recycleViewElementoMenuInterface = recycleViewElementoMenuInterface;
@@ -37,9 +37,9 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.textViewNome.setText(listaElementiMenu.get(position).getNome());
-        holder.textViewTempoPreparazione.setText(listaElementiMenu.get(position).getTempoPreparazione());
-        holder.textViewQuantita.setText(String.valueOf(listaElementiMenu.get(position).getQuantita()));
+        holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
+        holder.textViewTempoPreparazione.setText(listaElementiMenu.get(position).getElementoMenu().getTempoPreparazione());
+        holder.textViewQuantita.setText(String.valueOf(listaElementiMenu.get(position).getElementoMenu().getQuantita()));
     }
 
     @Override

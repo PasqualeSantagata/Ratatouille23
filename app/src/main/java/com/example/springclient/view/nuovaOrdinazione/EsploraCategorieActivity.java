@@ -18,12 +18,14 @@ import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.CategoriaPresenter;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
@@ -58,7 +60,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
     public void initializeComponents() {
-        RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
 /*
         int [] images = {R.drawable.categoria_primi, R.drawable.categoria_secondi, R.drawable.categoria_bevande,
         R.drawable.categoria_sushi, R.drawable.categoria_pizza, R.drawable.categoria_dessert};
@@ -70,7 +71,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
        */
         //setta i models della recycle view
 
-
+        RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
         adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
@@ -126,7 +127,11 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     public void onItemClick(int position) {
         Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
         List<ElementoMenu> elementi = categorie.get(position).getElementi();
-        intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementi);
+        List<Portata> portata = new ArrayList<>();
+        for(ElementoMenu e: elementi){
+            portata.add(new Portata(e,false));
+        }
+        intentVisualizzaCategoria.putExtra("elementi", (Serializable) portata);
         intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
 
         //provvisorio

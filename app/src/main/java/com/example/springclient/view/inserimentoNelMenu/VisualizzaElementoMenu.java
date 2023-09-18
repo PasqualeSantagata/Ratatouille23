@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.google.android.material.textfield.TextInputLayout;
@@ -54,7 +55,7 @@ public class VisualizzaElementoMenu extends AppCompatActivity implements IRecycl
     }
 
 
-    public void setElementiMenuRecycleView(List<ElementoMenu> listaElementiMenu){
+    public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
         RecyclerView recyclerViewPiatti = findViewById(R.id.RecyclerViewPiattiNuovaOrdinazione);
         RecycleViewAdapterElementoMenu adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);

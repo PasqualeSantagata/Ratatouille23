@@ -8,9 +8,8 @@ public class Ordinazione implements Serializable {
     private Integer numeroPersone;
     private Integer tavolo;
     private Integer sala;
-    private List<ElementoMenu> elementiOrdinati = new ArrayList<>();
+    private List<Portata> elementiOrdinati = new ArrayList<>();
     private String breveNota;
-
     private boolean evasa;
     public Ordinazione() {
 
@@ -46,11 +45,11 @@ public class Ordinazione implements Serializable {
         this.sala = sala;
     }
 
-    public void aggiungiPiatto( ElementoMenu elementoMenu){
+    public void aggiungiPiatto(Portata elementoMenu){
         elementiOrdinati.add(elementoMenu);
     }
 
-    public void setElementiOrdinati(List<ElementoMenu> elementiOrdinati){
+    public void setElementiOrdinati(List<Portata> elementiOrdinati){
         this.elementiOrdinati = elementiOrdinati;
     }
 
@@ -58,7 +57,7 @@ public class Ordinazione implements Serializable {
         return elementiOrdinati.isEmpty();
     }
 
-    public List<ElementoMenu> getElementiOrdinati() {
+    public List<Portata> getElementiOrdinati() {
         return elementiOrdinati;
     }
 
