@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.OrdinazionePresenter;
-import com.example.springclient.utils.Portata;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
@@ -21,7 +20,6 @@ import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorre
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

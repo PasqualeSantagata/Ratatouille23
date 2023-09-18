@@ -4,6 +4,7 @@ import com.example.springclient.RetrofitService.OrdinazioneAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
@@ -43,5 +44,28 @@ public class OrdinazioneModel {
                     }
                 });
     }
+    public void savePortate(CallbackResponse<List<Portata>> portataCallback, List<Portata> portataList){
+        ordinazioneAPI.savePortate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<List<Portata>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<List<Portata>> listResponse) {
+                        portataCallback.onSuccess(listResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        portataCallback.onFailure(e);
+                    }
+                });
+
+    }
+
 
 }

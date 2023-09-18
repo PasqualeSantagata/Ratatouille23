@@ -1,4 +1,4 @@
-package com.example.springclient.utils;
+package com.example.springclient.entity;
 
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;

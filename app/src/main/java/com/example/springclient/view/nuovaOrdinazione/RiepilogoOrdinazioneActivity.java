@@ -36,7 +36,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity {
     private RecyclerView recyclerViewDessert;
     private Ordinazione ordinazione;
 
-    private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
+    private ElementoMenuContract.Presenter presenterOrdinazione;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_riepilogo_ordinazione_nuova_ordinazione);
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+        presenterOrdinazione = new ElementoMenuPresenter(this);
         Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getNome());
     }
 
