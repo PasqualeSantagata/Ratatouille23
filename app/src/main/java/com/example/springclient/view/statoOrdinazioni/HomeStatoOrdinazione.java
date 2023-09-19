@@ -11,14 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.entity.Portata;
+import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
-import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
 import java.util.List;
 
@@ -111,7 +110,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         recyclerView.setLayoutManager(linearLayoutManager); */
     }
 
-    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<Portata> ordinazione){
+    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<Ordinazione> ordinazione){
         RecycleViewAdapterOrdinazioniEvase adapter = new RecycleViewAdapterOrdinazioniEvase(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

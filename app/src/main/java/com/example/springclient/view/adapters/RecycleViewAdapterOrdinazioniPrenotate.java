@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 
@@ -22,15 +21,12 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
     private final IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate;
     Context context;
     List<Ordinazione> ordinazioniPrenotate;
-    List<Ordinazione> ordinazione;
-    Ordinazione ordinazioneCorrente;
+
 
     public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<Ordinazione> ordinazioniPrenotate) {
         this.iRecycleViewOrdinazioniPrenotate = iRecycleViewOrdinazioniPrenotate;
         this.context = context;
         this.ordinazioniPrenotate = ordinazioniPrenotate;
-
-
     }
 
     @NonNull
@@ -44,29 +40,33 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniPrenotate.MyViewHolder holder, int position) {
-        /*holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala());
-        holder.textViewNota.setText(ordinazioniPrenotate.get(position).getOrdinazione().getBreveNota());
-        holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo());
+        for(Portata p: ordinazioniPrenotate.get(position).getElementiOrdinati()) {
+            //info ordinazione
+            holder.textViewSala.setText(ordinazioniPrenotate.get(position).getSala());
+            holder.textViewNota.setText(ordinazioniPrenotate.get(position).getBreveNota());
+            holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getTavolo());
 
-        holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getElementoMenu().getTempoPreparazione());
-        holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getElementoMenu().getNome());*/
+            //info singoli piatti della stessa ordinazione
+            holder.textViewTempo.setText(p.getElementoMenu().getTempoPreparazione());
+            holder.textViewNomePiatto.setText(p.getElementoMenu().getNome());
 
 
-        holder.buttonAvanti.setOnClickListener(view -> {
-            if (iRecycleViewOrdinazioniPrenotate != null){
-                if(position != RecyclerView.NO_POSITION){
-                    iRecycleViewOrdinazioniPrenotate.onGreenButtonClickOrdinazioniPrenotate(position);
+            holder.buttonAvanti.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniPrenotate != null) {
+                    if (position != RecyclerView.NO_POSITION) {
+                        iRecycleViewOrdinazioniPrenotate.onGreenButtonClickOrdinazioniPrenotate(position);
+                    }
                 }
-            }
-        });
+            });
 
-        holder.buttonIndietro.setOnClickListener(view -> {
-            if (iRecycleViewOrdinazioniPrenotate != null){
-                if(position != RecyclerView.NO_POSITION){
-                    iRecycleViewOrdinazioniPrenotate.onRedButtonClickOrdinazioniPrenotate(position);
+            holder.buttonIndietro.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniPrenotate != null) {
+                    if (position != RecyclerView.NO_POSITION) {
+                        iRecycleViewOrdinazioniPrenotate.onRedButtonClickOrdinazioniPrenotate(position);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -92,7 +92,6 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
             textViewSala = itemView.findViewById(R.id.textViewSalaRecycleViewOrdinazioniPrenotate);
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewOrdinazioniPrenotate);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewOrdinazioniPrenotate);
-            buttonIndietro = itemView.findViewById(R.id.buttonIndietroRecycleViewOrdinazioniPrenotate);
             buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewOrdinazioniPrenotate);
 
             itemView.setOnClickListener(new View.OnClickListener() {

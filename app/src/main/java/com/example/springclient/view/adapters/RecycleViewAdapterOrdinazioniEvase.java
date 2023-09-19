@@ -10,16 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
+
 import java.util.List;
 
 public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniEvase.MyViewHolder>{
 
     private final IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase;
     Context context;
-    List<Portata> ordinazioniEvase;
+    List<Ordinazione> ordinazioniEvase;
 
-    public RecycleViewAdapterOrdinazioniEvase(IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase, Context context, List<Portata> ordinazioniEvase) {
+    public RecycleViewAdapterOrdinazioniEvase(IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase, Context context, List<Ordinazione> ordinazioniEvase) {
         this.iRecycleViewOrdinazioniEvase = iRecycleViewOrdinazioniEvase;
         this.context = context;
         this.ordinazioniEvase = ordinazioniEvase;
@@ -36,12 +38,15 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniEvase.MyViewHolder holder, int position) {
-       /* holder.textViewNomePiatto.setText(ordinazioniEvase.get(position).getElementoMenu().getNome());
-        holder.textViewNota.setText(ordinazioniEvase.get(position).getOrdinazione().getBreveNota());
-        holder.textViewTavolo.setText(ordinazioniEvase.get(position).getOrdinazione().getTavolo());
-        holder.textViewSala.setText(ordinazioniEvase.get(position).getOrdinazione().getSala());
-        holder.textViewTempo.setText(ordinazioniEvase.get(position).getElementoMenu().getTempoPreparazione());*/
+        for(Portata p: ordinazioniEvase.get(position).getElementiOrdinati()) {
+        holder.textViewNota.setText(ordinazioniEvase.get(position).getBreveNota());
+        holder.textViewTavolo.setText(ordinazioniEvase.get(position).getTavolo());
+        holder.textViewSala.setText(ordinazioniEvase.get(position).getSala());
 
+        holder.textViewNomePiatto.setText(p.getElementoMenu().getNome());
+        holder.textViewTempo.setText(p.getElementoMenu().getTempoPreparazione());
+
+        }
     }
 
     @Override
