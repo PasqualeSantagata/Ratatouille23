@@ -35,8 +35,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     private CategoriaContract.Presenter categoriaPresenter;
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private List<Categoria> categorie;
-    //provvisorio
-    private List<Categoria> categoriaList;
     private RecycleViewAdapterCategoria adapterCategoria;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -126,6 +124,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     @Override
     public void onItemClick(int position) {
         Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
+        //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
         List<ElementoMenu> elementi = categorie.get(position).getElementi();
         List<Portata> portata = new ArrayList<>();
         for(ElementoMenu e: elementi){
@@ -134,8 +133,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         intentVisualizzaCategoria.putExtra("elementi", (Serializable) portata);
         intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
 
-        //provvisorio
-        //intentVisualizzaCategoria.putExtra("categoria",categoriaList.get(position));
+        //Ordinazione con le info collezionate in precedenza
         intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
         startActivity(intentVisualizzaCategoria);
     }

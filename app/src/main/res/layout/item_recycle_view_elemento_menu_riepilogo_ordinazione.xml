@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="210dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="390dp"
+        android:layout_height="195dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:cardBackgroundColor="@color/my_green"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageViewTempoRiepilogoOrdinazione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoElemRiepilogoOrdinazione"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNomePiattoRiepilogoOrdinazione"
+                app:srcCompat="@drawable/ic_tempo" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="9dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoElemRiepilogoOrdinazione"
+                app:layout_constraintStart_toEndOf="@+id/textViewTempoRiepilogoOrdinazione"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNomePiattoRiepilogoOrdinazione"
+                app:srcCompat="@drawable/ic_quantita" />
+
+            <ImageView
+                android:id="@+id/imageViewInfoElemRiepilogoOrdinazione"
+                android:layout_width="433dp"
+                android:layout_height="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/im_info_recycle_view" />
+
+            <TextView
+                android:id="@+id/textViewTempoRiepilogoOrdinazione"
+                android:layout_width="wrap_content"
+                android:layout_height="31dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:inputType="number"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoElemRiepilogoOrdinazione"
+                app:layout_constraintStart_toEndOf="@+id/imageViewTempoRiepilogoOrdinazione"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNomePiattoRiepilogoOrdinazione"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/textViewNomePiattoRiepilogoOrdinazione"
+                android:layout_width="354dp"
+                android:layout_height="82dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="21dp"
+                android:fontFamily="@font/roboto"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewQuantitaRiepilogoOrdinazione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="125dp"
+                android:layout_marginBottom="6dp"
+                android:inputType="numberDecimal"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoElemRiepilogoOrdinazione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNomePiattoRiepilogoOrdinazione"
+                tools:ignore="TouchTargetSizeCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

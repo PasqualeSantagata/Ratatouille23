@@ -18,7 +18,7 @@ import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
-import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
+import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazione;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     private RecyclerView recyclerViewDessert;
     private Ordinazione ordinazione;
     private List<Portata> portate;
-    private RecycleViewAdapterElementoMenu adapterElementoMenu;
+    private RecycleViewAdapterRiepilogoOrdinazione adapterElementoMenu;
 
     private ElementoMenuContract.Presenter presenterOrdinazione;
     @Override
@@ -63,7 +63,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     private void InitializeComponents() {
         RecyclerView  recyclerViewRiepilogo = findViewById(R.id.RecyclerViewRiepilogoOrdinazione);
-        adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, portate, this);
+        adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazione(this,this ,portate);
         recyclerViewRiepilogo.setAdapter(adapterElementoMenu);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewRiepilogo.setLayoutManager(horizontal);
@@ -80,6 +80,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     @Override
     public void onItemClick(int position) {
+        //Aprire menu di android per far elminiare una certa pietanza dall'ordinaizone
 
     }
 }

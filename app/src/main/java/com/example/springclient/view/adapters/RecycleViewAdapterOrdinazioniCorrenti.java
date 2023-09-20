@@ -11,9 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
 import com.example.springclient.entity.StatoOrdinazione;
 
 import java.util.List;
@@ -42,15 +39,11 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder holder, int position) {
-
-            holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
-            holder.textViewNota.setText(ordinazioni.get(position).getPortata().getBreveNota());
-            holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
-            holder.textViewTempo.setText(ordinazioni.get(position).getPortata().getElementoMenu().getTempoPreparazione());
-            holder.textViewNomePiatto.setText(ordinazioni.get(position).getPortata().getElementoMenu().getNome());
-
-
-
+        holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
+        holder.textViewNota.setText(ordinazioni.get(position).getPortata().getBreveNota());
+        holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
+        holder.textViewTempo.setText(ordinazioni.get(position).getPortata().getElementoMenu().getTempoPreparazione());
+        holder.textViewNomePiatto.setText(ordinazioni.get(position).getPortata().getElementoMenu().getNome());
     }
 
     @Override
@@ -65,7 +58,6 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
         TextView textViewNomePiatto;
         TextView textViewTempo;
         TextView textViewNota;
-        ImageButton buttonIndietro;
         ImageButton buttonAvanti;
 
 

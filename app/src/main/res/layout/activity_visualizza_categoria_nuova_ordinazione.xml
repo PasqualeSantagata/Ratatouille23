@@ -36,7 +36,7 @@
             android:layout_width="610dp"
             android:layout_height="58dp"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:hint="@string/prezzo"
             app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,6 +105,23 @@
             app:srcCompat="@drawable/ic_add_fab"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="610dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="40dp"
+            app:boxBackgroundColor="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneVisuaCatNuovaOrdinazione"
+            android:hint="@string/breve_nota"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

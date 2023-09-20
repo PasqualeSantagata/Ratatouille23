@@ -11,8 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.entity.StatoOrdinazione;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     private final IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate;
     Context context;
-    List<Ordinazione> ordinazioniPrenotate;
+    List<StatoOrdinazione> ordinazioniPrenotate;
 
 
-    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<Ordinazione> ordinazioniPrenotate) {
+    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<StatoOrdinazione> ordinazioniPrenotate) {
         this.iRecycleViewOrdinazioniPrenotate = iRecycleViewOrdinazioniPrenotate;
         this.context = context;
         this.ordinazioniPrenotate = ordinazioniPrenotate;
@@ -40,34 +39,15 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniPrenotate.MyViewHolder holder, int position) {
-        /*for(Portata p: ordinazioniPrenotate.get(position).getElementiOrdinati()) {
-            //info ordinazione
-            holder.textViewSala.setText(ordinazioniPrenotate.get(position).getSala());
-            holder.textViewNota.setText(ordinazioniPrenotate.get(position).getBreveNota());
-            holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getTavolo());
-
-            //info singoli piatti della stessa ordinazione
-            holder.textViewTempo.setText(p.getElementoMenu().getTempoPreparazione());
-            holder.textViewNomePiatto.setText(p.getElementoMenu().getNome());
-
-
-            holder.buttonAvanti.setOnClickListener(view -> {
-                if (iRecycleViewOrdinazioniPrenotate != null) {
-                    if (position != RecyclerView.NO_POSITION) {
-                        iRecycleViewOrdinazioniPrenotate.onGreenButtonClickOrdinazioniPrenotate(position);
-                    }
-                }
-            });
-
-            holder.buttonIndietro.setOnClickListener(view -> {
-                if (iRecycleViewOrdinazioniPrenotate != null) {
-                    if (position != RecyclerView.NO_POSITION) {
-                        iRecycleViewOrdinazioniPrenotate.onRedButtonClickOrdinazioniPrenotate(position);
-                    }
-                }
-            });
-        }*/
+        //info ordinazione
+        holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala());
+        holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo());
+        //info singoli piatti della stessa ordinazione
+        holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getTempoPreparazione());
+        holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getNome());
+        holder.textViewNota.setText(ordinazioniPrenotate.get(position).getPortata().getBreveNota());
     }
+
 
     @Override
     public int getItemCount() {
@@ -82,7 +62,6 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         TextView textViewNomePiatto;
         TextView textViewTempo;
         TextView textViewNota;
-        ImageButton buttonIndietro;
         ImageButton buttonAvanti;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate) {
@@ -100,6 +79,14 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
                     if(pos != RecyclerView.NO_POSITION){
                         iRecycleViewOrdinazioniPrenotate.onItemClickOrdinazioniPrenotate(pos);
+                    }
+                }
+            });
+
+            buttonAvanti.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniPrenotate != null) {
+                    if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                        iRecycleViewOrdinazioniPrenotate.onGreenButtonClickOrdinazioniPrenotate(getAdapterPosition());
                     }
                 }
             });

@@ -3,5 +3,4 @@ public interface IRecycleViewOrdinazioniPrenotate {
 
     void onItemClickOrdinazioniPrenotate(int position);
     void onGreenButtonClickOrdinazioniPrenotate(int position);
-    void onRedButtonClickOrdinazioniPrenotate(int position);
 }

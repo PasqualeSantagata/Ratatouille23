@@ -19,9 +19,9 @@ import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
+import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -52,16 +52,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
 
         stompConnect();
 
-        /*
-        *  grazie all'oggetto StatoDellOrdinazione abbiamo una corrispondenza tra gli elementi che compongono un' ordinazione
-        *  e gli elementi che vengono mostrati sul tablet del cuoco. Gli elementi che sono mostrati a schermo sono identificati
-        *  dall'id dell'ordinazione, ad ogni evasione del singolo piatto si marca il corrispondente nella lista di tipo stato
-        *  dellOrdinazione come evaso = true e si fa un ciclo che controlla se tutti gli ordini sono stati evasi. Se questo avviene
-        *  si marca come evasa l'intera ordinazione e la si aggiorna nel db. A questo punto possono essere recuperate tutte le ordinazioni
-        *  non evase quando questa activity viene caricata.
-        *
-        * */
-
     }
 
     public void setOrdinazioniSospese(List<Ordinazione> ordinazioni){
@@ -78,19 +68,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     }
 
     public void aggiornaPrenotazioni(Long id){
-        /*int i = 0;
-        while (iterator.hasNext()){
-            StatoOrdinazione s = iterator.next();
-            if(s.getPortata().getId().equals(id)){
-                iterator.remove();
-                adapterCorrenti.notifyItemRemoved(i);
-                break;
-            }
-            i++;
-        }*/
         ordinazioniSospese.remove(posizione);
         adapterCorrenti.notifyItemRemoved(posizione);
-
     }
 
     public boolean concludiOrdinazione(Long id) {
@@ -107,12 +86,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         }
         return true;
     }
-
-
-   /* private List<Portata> generaOrdinazioniSospese(List<Ordinazione> ordinazioneList){
-
-    }*/
-
 
     public void initializeComponents() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
@@ -138,18 +111,16 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         recyclerView.setAdapter(adapterCorrenti);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
     }
 
-    public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<Portata> ordinazione){
-    /*    RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
+    public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
+        RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(linearLayoutManager); */
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<Ordinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
         RecycleViewAdapterOrdinazioniEvase adapter = new RecycleViewAdapterOrdinazioniEvase(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -167,14 +138,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         ordinazioniSospese.get(position).getPortata().setPrenotato(true);
         posizione = position;
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
-        /*ordinazioniSospese.remove(position);
-        adapterCorrenti.notifyItemRemoved(position);*/
-
-    }
-
-    @Override
-    public void onRedButtonClickOrdinazioniCorrenti(int position) {
-
     }
 
     @Override
@@ -192,10 +155,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
 
     }
 
-    @Override
-    public void onRedButtonClickOrdinazioniPrenotate(int position) {
-
-    }
 
     private void stompConnect(){
         if(stompClient == null) {
@@ -219,6 +178,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
                         Log.d("WS2:", "Received " + prenotazione.getPayload());
                     });
         }
+
+
     }
 
 
