@@ -38,6 +38,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     private OrdinazionePresenter ordinazionePresenter;
     private List<Ordinazione> ordinazioni;
     private List<StatoOrdinazione> ordinazioniSospese;
+    private int posizione;
     RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
 
     @Override
@@ -49,25 +50,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         ordinazionePresenter = new OrdinazionePresenter(this);
         ordinazionePresenter.getOrdinazioniSospese();
 
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
-        stompClient.connect();
-
-        stompClient.topic("/topic/ricevi-ordinazione")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(ordinazione-> {
-                    Log.d("WS2:", "Received " + ordinazione.getPayload());
-                });
-        stompClient.topic("/topic/ricevi-prenotazione")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(prenotazione-> {
-                    aggiornaPrenotazioni(Long.valueOf(prenotazione.getPayload()));
-                    if(concludiOrdinazione(Long.valueOf(prenotazione.getPayload()))){
-
-                    }
-                    Log.d("WS2:", "Received " + prenotazione.getPayload());
-                });
+        stompConnect();
 
         /*
         *  grazie all'oggetto StatoDellOrdinazione abbiamo una corrispondenza tra gli elementi che compongono un' ordinazione
@@ -95,18 +78,18 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     }
 
     public void aggiornaPrenotazioni(Long id){
-        Iterator<StatoOrdinazione> iterator = ordinazioniSospese.iterator();
-        int i = 0;
+        /*int i = 0;
         while (iterator.hasNext()){
-            i++;
             StatoOrdinazione s = iterator.next();
             if(s.getPortata().getId().equals(id)){
                 iterator.remove();
+                adapterCorrenti.notifyItemRemoved(i);
                 break;
             }
-        }
-        adapterCorrenti.notifyItemRemoved(i-1);
-
+            i++;
+        }*/
+        ordinazioniSospese.remove(posizione);
+        adapterCorrenti.notifyItemRemoved(posizione);
 
     }
 
@@ -124,10 +107,6 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         }
         return true;
     }
-
-
-
-
 
 
    /* private List<Portata> generaOrdinazioniSospese(List<Ordinazione> ordinazioneList){
@@ -186,6 +165,7 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     public void onGreenButtonClickOrdinazioniCorrenti(int position) {
         Long id = ordinazioniSospese.get(position).getPortata().getId();
         ordinazioniSospese.get(position).getPortata().setPrenotato(true);
+        posizione = position;
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
         /*ordinazioniSospese.remove(position);
         adapterCorrenti.notifyItemRemoved(position);*/
@@ -216,6 +196,66 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     public void onRedButtonClickOrdinazioniPrenotate(int position) {
 
     }
+
+    private void stompConnect(){
+        if(stompClient == null) {
+            stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
+            stompClient.connect();
+
+            stompClient.topic("/topic/ricevi-ordinazione")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(ordinazione -> {
+                        Log.d("WS2:", "Received " + ordinazione.getPayload());
+                    });
+            stompClient.topic("/topic/ricevi-prenotazione")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(prenotazione -> {
+                        aggiornaPrenotazioni(Long.valueOf(prenotazione.getPayload()));
+                        if (concludiOrdinazione(Long.valueOf(prenotazione.getPayload()))) {
+
+                        }
+                        Log.d("WS2:", "Received " + prenotazione.getPayload());
+                    });
+        }
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        stompClient.disconnect();
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onPause(){
+        stompClient.disconnect();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStart(){
+        stompConnect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume(){
+        stompConnect();
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop(){
+        stompClient.disconnect();
+        super.onStop();
+    }
+
+
+
 }
 
 
