@@ -11,17 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
+import com.example.springclient.entity.StatoOrdinazione;
 
 import java.util.List;
 
 public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder> {
     private final IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti;
     Context context;
-    List<Ordinazione> ordinazioni;
+    List<StatoOrdinazione> ordinazioni;
 
-    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<Ordinazione> ordinazioni) {
+
+    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<StatoOrdinazione> ordinazioni) {
         this.iRecycleViewOrdinazioniCorrenti = iRecycleViewOrdinazioniCorrenti;
         this.context = context;
         this.ordinazioni = ordinazioni;
@@ -39,28 +42,15 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder holder, int position) {
-        for(Portata p: ordinazioni.get(position).getElementiOrdinati()){
-            holder.textViewSala.setText(ordinazioni.get(position).getSala().toString());
-            holder.textViewNota.setText(ordinazioni.get(position).getBreveNota());
-            holder.textViewTavolo.setText(ordinazioni.get(position).getTavolo().toString());
-            holder.textViewTempo.setText(p.getElementoMenu().getTempoPreparazione());
-            holder.textViewNomePiatto.setText(p.getElementoMenu().getNome());
 
-            holder.buttonAvanti.setOnClickListener(view -> {
-                if (iRecycleViewOrdinazioniCorrenti != null){
-                    if(position != RecyclerView.NO_POSITION){
-                        iRecycleViewOrdinazioniCorrenti.onGreenButtonClickOrdinazioniCorrenti(position);
-                    }
-                }
-            });
-            holder.buttonIndietro.setOnClickListener(view -> {
-                if (iRecycleViewOrdinazioniCorrenti != null){
-                    if(position != RecyclerView.NO_POSITION){
-                        iRecycleViewOrdinazioniCorrenti.onRedButtonClickOrdinazioniCorrenti(position);
-                    }
-                }
-            });
-        }
+            holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
+            holder.textViewNota.setText(ordinazioni.get(position).getPortata().getBreveNota());
+            holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
+            holder.textViewTempo.setText(ordinazioni.get(position).getPortata().getElementoMenu().getTempoPreparazione());
+            holder.textViewNomePiatto.setText(ordinazioni.get(position).getPortata().getElementoMenu().getNome());
+
+
+
     }
 
     @Override
@@ -81,7 +71,6 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti) {
             super(itemView);
-            buttonIndietro = itemView.findViewById(R.id.buttonIndietroRecycleViewStatoOrdinazioni);
             buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewStatoOrdinazioni);
             textViewNomePiatto = itemView.findViewById(R.id.textViewNomePiattoRecycleViewStatoOrdinazioni);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewStatoOrdinazioni);
@@ -90,15 +79,20 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
             textViewSala = itemView.findViewById(R.id.textViewSalaRecycleViewStatoOrdinazioni);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (iRecycleViewOrdinazioniCorrenti != null){
-                        int pos = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniCorrenti != null){
+                    int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION){
-                            iRecycleViewOrdinazioniCorrenti.onItemClickOrdinazioniCorrenti(pos);
-                        }
+                    if(pos != RecyclerView.NO_POSITION){
+                        iRecycleViewOrdinazioniCorrenti.onItemClickOrdinazioniCorrenti(pos);
+                    }
+                }
+            });
+
+            buttonAvanti.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniCorrenti != null){
+                    if(getAdapterPosition() != RecyclerView.NO_POSITION){
+                        iRecycleViewOrdinazioniCorrenti.onGreenButtonClickOrdinazioniCorrenti(getAdapterPosition());
                     }
                 }
             });

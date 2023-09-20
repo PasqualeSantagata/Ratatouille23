@@ -40,7 +40,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniPrenotate.MyViewHolder holder, int position) {
-        for(Portata p: ordinazioniPrenotate.get(position).getElementiOrdinati()) {
+        /*for(Portata p: ordinazioniPrenotate.get(position).getElementiOrdinati()) {
             //info ordinazione
             holder.textViewSala.setText(ordinazioniPrenotate.get(position).getSala());
             holder.textViewNota.setText(ordinazioniPrenotate.get(position).getBreveNota());
@@ -66,7 +66,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
                     }
                 }
             });
-        }
+        }*/
     }
 
     @Override
@@ -94,15 +94,12 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewOrdinazioniPrenotate);
             buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewOrdinazioniPrenotate);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (iRecycleViewOrdinazioniPrenotate != null){
-                        int pos = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniPrenotate != null){
+                    int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION){
-                            iRecycleViewOrdinazioniPrenotate.onItemClickOrdinazioniPrenotate(pos);
-                        }
+                    if(pos != RecyclerView.NO_POSITION){
+                        iRecycleViewOrdinazioniPrenotate.onItemClickOrdinazioniPrenotate(pos);
                     }
                 }
             });

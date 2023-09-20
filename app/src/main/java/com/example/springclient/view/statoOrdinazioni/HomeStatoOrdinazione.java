@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
+import com.example.springclient.entity.StatoOrdinazione;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
@@ -19,6 +20,8 @@ import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,8 +36,8 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
     private RecyclerView recyclerViewOrdinazioniEvase;
     private StompClient stompClient;
     private OrdinazionePresenter ordinazionePresenter;
-    private List<Ordinazione> ordinazioniSospese;
-    private List<Portata> listStatoOrdinazione;
+    private List<Ordinazione> ordinazioni;
+    private List<StatoOrdinazione> ordinazioniSospese;
     RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
 
     @Override
@@ -55,6 +58,16 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
                 .subscribe(ordinazione-> {
                     Log.d("WS2:", "Received " + ordinazione.getPayload());
                 });
+        stompClient.topic("/topic/ricevi-prenotazione")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(prenotazione-> {
+                    aggiornaPrenotazioni(Long.valueOf(prenotazione.getPayload()));
+                    if(concludiOrdinazione(Long.valueOf(prenotazione.getPayload()))){
+
+                    }
+                    Log.d("WS2:", "Received " + prenotazione.getPayload());
+                });
 
         /*
         *  grazie all'oggetto StatoDellOrdinazione abbiamo una corrispondenza tra gli elementi che compongono un' ordinazione
@@ -68,10 +81,54 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
 
     }
 
-    public void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese){
-        this.ordinazioniSospese = ordinazioniSospese;
+    public void setOrdinazioniSospese(List<Ordinazione> ordinazioni){
+        this.ordinazioni = ordinazioni;
+        ordinazioniSospese = new ArrayList<>();
+        for(Ordinazione o: ordinazioni){
+            for(Portata p: o.getElementiOrdinati()){
+                if(!p.isPrenotato()) {
+                    ordinazioniSospese.add(new StatoOrdinazione(o, p));
+                }
+            }
+        }
         initializeComponents();
     }
+
+    public void aggiornaPrenotazioni(Long id){
+        Iterator<StatoOrdinazione> iterator = ordinazioniSospese.iterator();
+        int i = 0;
+        while (iterator.hasNext()){
+            i++;
+            StatoOrdinazione s = iterator.next();
+            if(s.getPortata().getId().equals(id)){
+                iterator.remove();
+                break;
+            }
+        }
+        adapterCorrenti.notifyItemRemoved(i-1);
+
+
+    }
+
+    public boolean concludiOrdinazione(Long id) {
+        List<Portata> portataList = new ArrayList<>();
+        for (Ordinazione o : ordinazioni) {
+            if (o.getId().equals(id)) {
+                portataList = o.getElementiOrdinati();
+            }
+        }
+        for (Portata p : portataList) {
+            if (!p.isPrenotato()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
+
 
    /* private List<Portata> generaOrdinazioniSospese(List<Ordinazione> ordinazioneList){
 
@@ -85,8 +142,9 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, ordinazioniSospese);
 
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
-
     }
+
+
 
 
     //gli che vengono presi mentre sono in coda
@@ -96,11 +154,13 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
      *
      *
      */
-    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<Ordinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
         recyclerView.setAdapter(adapterCorrenti);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+
     }
 
     public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<Portata> ordinazione){
@@ -124,7 +184,11 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
 
     @Override
     public void onGreenButtonClickOrdinazioniCorrenti(int position) {
-
+        Long id = ordinazioniSospese.get(position).getPortata().getId();
+        ordinazioniSospese.get(position).getPortata().setPrenotato(true);
+        stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
+        /*ordinazioniSospese.remove(position);
+        adapterCorrenti.notifyItemRemoved(position);*/
 
     }
 

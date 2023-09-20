@@ -4,12 +4,14 @@ public class Portata {
     private Long id;
     private ElementoMenu elementoMenu;
     private boolean prenotato;
+    private String breveNota;
 
 
-    public Portata(Long id, ElementoMenu elementoMenu, boolean prenotato) {
+    public Portata(Long id, ElementoMenu elementoMenu, boolean prenotato, String breveNota) {
         this.id = id;
         this.elementoMenu = elementoMenu;
         this.prenotato = prenotato;
+        this.breveNota = breveNota;
     }
 
     public Portata(ElementoMenu elementoMenu, boolean prenotato) {
@@ -41,5 +43,12 @@ public class Portata {
         this.prenotato = prenotato;
     }
 
+    public String getBreveNota() {
+        return breveNota;
+    }
+
+    public void setBreveNota(String breveNota) {
+        this.breveNota = breveNota;
+    }
 }
 

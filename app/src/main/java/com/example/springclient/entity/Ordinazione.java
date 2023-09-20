@@ -9,8 +9,8 @@ public class Ordinazione implements Serializable {
     private Integer tavolo;
     private Integer sala;
     private List<Portata> elementiOrdinati = new ArrayList<>();
-    private String breveNota;
     private boolean evasa;
+    private Long id;
     public Ordinazione() {
 
     }
@@ -61,13 +61,6 @@ public class Ordinazione implements Serializable {
         return elementiOrdinati;
     }
 
-    public String getBreveNota() {
-        return breveNota;
-    }
-
-    public void setBreveNota(String breveNota) {
-        this.breveNota = breveNota;
-    }
     public boolean isEvasa() {
         return evasa;
     }
@@ -76,7 +69,11 @@ public class Ordinazione implements Serializable {
         this.evasa = evasa;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-
-
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -55,7 +55,6 @@ public class OrdinazionePresenter {
             }
         });
     }
-
     public void savePortate(List<Portata> portataList){
         ordinazioneModel.savePortate(new CallbackResponse<List<Portata>>() {
             @Override

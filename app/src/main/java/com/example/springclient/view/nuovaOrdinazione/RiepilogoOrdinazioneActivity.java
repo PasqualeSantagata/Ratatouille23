@@ -57,8 +57,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         for(Portata o : ordinazione.getElementiOrdinati()){
             portate.add(o);
         }
-
-
         presenterOrdinazione = new ElementoMenuPresenter(this);
         Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getElementoMenu().getNome());
     }
