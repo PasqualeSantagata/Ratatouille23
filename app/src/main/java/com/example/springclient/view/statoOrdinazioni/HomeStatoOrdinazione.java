@@ -22,6 +22,7 @@ import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -67,25 +68,35 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
         initializeComponents();
     }
 
-    public void aggiornaPrenotazioni(Long id){
+    public void aggiornaPrenotazioni(){
         ordinazioniSospese.remove(posizione);
         adapterCorrenti.notifyItemRemoved(posizione);
     }
 
-    public boolean concludiOrdinazione(Long id) {
+    public void concludiOrdinazione(Long id) {
+        boolean completo = true;
+        long idOrdinazione = -1;
         List<Portata> portataList = new ArrayList<>();
-        for (Ordinazione o : ordinazioni) {
-            if (o.getId().equals(id)) {
-                portataList = o.getElementiOrdinati();
+        for(Ordinazione o: ordinazioni){
+            for(Portata p: o.getElementiOrdinati()){
+               if(p.getId().equals(id)){
+                   portataList = o.getElementiOrdinati();
+                   idOrdinazione = o.getId();
+               }
             }
         }
         for (Portata p : portataList) {
             if (!p.isPrenotato()) {
-                return false;
+                completo = false;
+                break;
             }
         }
-        return true;
+        if(completo && idOrdinazione > 0){
+            ordinazionePresenter.concludiOrdinazione(idOrdinazione);
+        }
     }
+
+
 
     public void initializeComponents() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
@@ -99,18 +110,13 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
 
 
 
-    //gli che vengono presi mentre sono in coda
-
-    /* 1 aggiorna l'elemento della lista statoDellOrdinazione
-     *
-     *
-     *
-     */
     public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
         recyclerView.setAdapter(adapterCorrenti);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+
     }
 
     public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
@@ -171,15 +177,11 @@ public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleV
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(prenotazione -> {
-                        aggiornaPrenotazioni(Long.valueOf(prenotazione.getPayload()));
-                        if (concludiOrdinazione(Long.valueOf(prenotazione.getPayload()))) {
-
-                        }
+                        aggiornaPrenotazioni();
+                        concludiOrdinazione(Long.valueOf(prenotazione.getPayload()));
                         Log.d("WS2:", "Received " + prenotazione.getPayload());
                     });
         }
-
-
     }
 
 

@@ -3,6 +3,7 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.OrdinazioneAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
+import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 
@@ -15,7 +16,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class OrdinazioneModel {
+public class OrdinazioneModel implements OrdinazioneContract.Model {
     private OrdinazioneAPI ordinazioneAPI;
 
     public OrdinazioneModel(RetrofitService retrofitService){
@@ -44,8 +45,11 @@ public class OrdinazioneModel {
                     }
                 });
     }
+
+
+
     public void savePortate(CallbackResponse<List<Portata>> portataCallback, List<Portata> portataList){
-        ordinazioneAPI.savePortate()
+        ordinazioneAPI.savePortate(portataList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<List<Portata>>>() {
@@ -62,6 +66,53 @@ public class OrdinazioneModel {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         portataCallback.onFailure(e);
+                    }
+                });
+
+    }
+    public void concludiOrdinazione(CallbackResponse<Ordinazione> ordinazioneCallback, Long id){
+        ordinazioneAPI.concludiOrdinazione(id.toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Ordinazione>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Ordinazione> ordinazioneResponse) {
+                        ordinazioneCallback.onSuccess(ordinazioneResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+    }
+
+    public void aggiungiOrdinazione(CallbackResponse<Void> callbackResponse,  Ordinazione ordinazione){
+        ordinazioneAPI.aggiungiOrdinazione(ordinazione)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+                        if(voidResponse.isSuccessful()){
+                            callbackResponse.onSuccess(voidResponse);
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
                     }
                 });
 

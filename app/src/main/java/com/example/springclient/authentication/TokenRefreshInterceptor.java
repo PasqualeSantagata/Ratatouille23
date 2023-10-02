@@ -63,7 +63,7 @@ public class TokenRefreshInterceptor implements Interceptor {
                 .addInterceptor(loggingInterceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.8:8080/")
+                .baseUrl("http://192.168.1.6:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(okHttpClient)

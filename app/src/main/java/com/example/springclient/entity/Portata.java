@@ -1,6 +1,8 @@
 package com.example.springclient.entity;
 
-public class Portata {
+import java.io.Serializable;
+
+public class Portata implements Serializable {
     private Long id;
     private ElementoMenu elementoMenu;
     private boolean prenotato;
@@ -17,6 +19,10 @@ public class Portata {
     public Portata(ElementoMenu elementoMenu, boolean prenotato) {
         this.elementoMenu = elementoMenu;
         this.prenotato = prenotato;
+    }
+
+    public Portata(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

@@ -3,6 +3,7 @@ package com.example.springclient.view.nuovaOrdinazione;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -14,16 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazione;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
+public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable {
 
     private ImageView imageViewPrimi;
     private ImageView imageViewSecondi;
@@ -45,7 +49,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     private List<Portata> portate;
     private RecycleViewAdapterRiepilogoOrdinazione adapterElementoMenu;
 
-    private ElementoMenuContract.Presenter presenterOrdinazione;
+    private OrdinazioneContract.Presenter presenterOrdinazione;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +61,12 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         for(Portata o : ordinazione.getElementiOrdinati()){
             portate.add(o);
         }
-        presenterOrdinazione = new ElementoMenuPresenter(this);
+        presenterOrdinazione = new OrdinazionePresenter(this);
         Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getElementoMenu().getNome());
+        buttonOk = findViewById(R.id.buttonOkRiepilogo);
+        buttonOk.setOnClickListener(view -> {
+            presenterOrdinazione.savePortate(portate);
+        });
     }
 
     private void InitializeComponents() {
@@ -67,14 +75,16 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewRiepilogo.setAdapter(adapterElementoMenu);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewRiepilogo.setLayoutManager(horizontal);
-
-
-
     }
 
     private void setHorizontalRecycleView (RecyclerView recyclerView){
         LinearLayoutManager horizontalLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayout);
+    }
+
+    public void salvaOrdinazione(List<Portata> portateOrdinazione){
+        ordinazione.setElementiOrdinati(portateOrdinazione);
+        presenterOrdinazione.aggiungiOrdinazione(ordinazione);
     }
 
 
