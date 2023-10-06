@@ -7,21 +7,12 @@ import java.util.List;
 public interface ElementoMenuContract {
 
     interface Model{
-        void salvaElementoMenu(ElementoMenu elementoMenu, ElementoMenuCallback<Void> elementoMenuCallback);
+        void salvaElementoMenu(ElementoMenu elementoMenu, CallbackResponse<Void> elementoMenuCallback);
 
-        void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback);
-
-    }
-
-    interface ElementoMenuCallback<T>{
-
-        void onFinished(List<String> errorMessage);
-
-        void onFailure(Throwable t);
-
-        void onSuccess(T returnedData);
+        void getAllElementiMenu(CallbackResponse<Void> elementoMenuCallback);
 
     }
+
 
     interface View{
      /************** TODO ******************/
@@ -36,6 +27,7 @@ public interface ElementoMenuContract {
         void saveElementoMenu(ElementoMenu elementoMenu);
         void getAllElementiMenu();
         List<ElementoMenu> getElementiPerCategoria(String categoria);
+        void rimuoviElemento(String id);
 
     }
 

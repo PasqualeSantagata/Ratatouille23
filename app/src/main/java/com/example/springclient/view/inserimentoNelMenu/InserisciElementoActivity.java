@@ -1,17 +1,21 @@
 package com.example.springclient.view.inserimentoNelMenu;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
@@ -21,9 +25,14 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.FoodFactsPresenter;
 import com.example.springclient.view.adapters.SpinnerAdapterCategorie;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,6 +59,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private ArrayAdapter<String> adapter;
     private List<ProdottoResponse> prodotti;
     private Disposable autocompDisposable;
+    private String linguaInserita;
 
 
     @Override
@@ -61,6 +71,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         elementoMenuPresenter = new ElementoMenuPresenter(this);
         foodFactsPresenter = new FoodFactsPresenter(this);
+        //linguaInserita = getIntent().getStringExtra("lingua");
         initializeComponents();
     }
 
@@ -71,6 +82,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
     @Override
     public void initializeComponents() {
+        String filename = null;/** todo */
         okButton = findViewById(R.id.buttonInserElemOk);
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
 
@@ -124,6 +136,40 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         });
         indietroButton.setOnClickListener(view -> {
         });
+
+        Dialog selezionaAllergeni = new Dialog(this);
+        Chip c = selezionaAllergeni.findViewById(R.id.chip1);
+
+        linguaInserita = "Italiano";
+        switch (linguaInserita){
+            case "Italiano":
+                selezionaAllergeni.setContentView(R.layout.dialog_seleziona_allergene);
+                filename = "allergeni";
+                break;
+            case "Inglese":
+                filename = "allergeni_eng";
+                break;
+        }
+
+        elencoAllergeniTextInputLayout.setOnClickListener(view -> {
+
+        });
+        InputStream ins = getResources().openRawResource(
+                getResources().getIdentifier(filename,
+                        "raw", getPackageName()));
+        BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(ins));
+        String eachline = null;
+        try {
+            eachline = bufferedReader.readLine();
+            while (eachline != null) {
+                String[] words = eachline.split("\\n ");
+                eachline = bufferedReader.readLine();
+                Log.d("allergens: ", words[0]);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.widget.Button
-        android:id="@+id/button6"
+        android:id="@+id/cercaHomeModificaButton"
         android:layout_width="750dp"
         android:layout_height="100dp"
         android:layout_marginStart="265dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.Button
-        android:id="@+id/button7"
+        android:id="@+id/espoloraCategoriaHomeModificaButton"
         android:layout_width="750dp"
         android:layout_height="100dp"
         android:layout_marginStart="265dp"
@@ -51,5 +51,5 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/cercaHomeModificaButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

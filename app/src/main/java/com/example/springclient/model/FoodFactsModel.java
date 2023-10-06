@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.springclient.RetrofitService.FoodFactsAPI;
 import com.example.springclient.RetrofitService.FoodFactsRetrofit;
 import com.example.springclient.apiUtils.FoodFactsResponse;
+import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class FoodFactsModel {
         foodFactsAPI = foodFactsRetrofit.getFoodFactsAPI();
     }
 
-    public void getElementoMenuDetails(String nome, ElementoMenuContract.ElementoMenuCallback<FoodFactsResponse> callback){
+    public void getElementoMenuDetails(String nome, CallbackResponse<FoodFactsResponse> callback){
         foodFactsAPI.getElementoMenuDetails(nome)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -36,7 +37,7 @@ public class FoodFactsModel {
 
                     @Override
                     public void onSuccess(@NonNull Response<FoodFactsResponse> foodFactsResponseResponse) {
-                        callback.onSuccess(foodFactsResponseResponse.body());
+                        callback.onSuccess(foodFactsResponseResponse);
 
                     }
 

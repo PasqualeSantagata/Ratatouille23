@@ -33,7 +33,7 @@ public class AggiungiTokenInterceptor implements Interceptor {
             Log.d("no-auth", "no");
             token = preferences.getString("accessToken", "");
 
-            if (token.isEmpty() || token == null) {
+            if ( token == null || token.isEmpty() ) {
                 throw new RuntimeException("Session token should be defined for auth apis");
             } else {
                 requestBuilder.header("Authorization", "Bearer " + token);

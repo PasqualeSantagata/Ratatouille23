@@ -33,7 +33,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     private Button buttonIndietro;
     private Button buttonRiepilogo;
     private CategoriaContract.Presenter categoriaPresenter;
-    private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
+
     private List<Categoria> categorie;
     private RecycleViewAdapterCategoria adapterCategoria;
     @Override

@@ -19,7 +19,7 @@ public interface CategoriaContract {
 
     interface View{
         void initializeComponents();
-        void cleanFields();
+
     }
 
     interface Presenter{

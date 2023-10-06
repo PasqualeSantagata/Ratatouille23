@@ -2,9 +2,13 @@ package com.example.springclient.RetrofitService;
 
 import com.example.springclient.entity.ElementoMenu;
 
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ElementoMenuAPI {
 
@@ -13,5 +17,15 @@ public interface ElementoMenuAPI {
 
   /*  @GET("api/v1/elementoMenu")
     Single<Response<List<ElementoMenu>>> getAllElementoMenu();*/
+
+    @GET("api/v1/elementoMenu/rimuoviElemento/{id}")
+    Single<Response<Void>> rimuoviElemento(@Path(value = "id", encoded = true)String id);
+
+    @POST("api/v1/elementoMenu/aggiungiLingua/{id}")
+    Single<Response<Void>> aggiungiLingua(@Path(value = "id", encoded = true)String id, @Body ElementoMenu elementoMenu);
+    @GET("api/v1/elementoMenu/restituisciTraduzione/{id}")
+    Single<Response<ElementoMenu>> restituisciTraduzione(@Path(value = "id", encoded = true)String id);
+    @POST("api/v1/elementoMenu/restituisciLinguaBase/{id}")
+    Single<Response<ElementoMenu>> restituisciLinguaBase(@Path(value = "id", encoded = true)String id);
 
 }
