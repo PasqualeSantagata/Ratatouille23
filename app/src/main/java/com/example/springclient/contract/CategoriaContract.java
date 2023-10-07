@@ -26,6 +26,7 @@ public interface CategoriaContract {
         void getAllCategorie();
         void saveCategoria(Categoria categoria);
         void getFotoCategoriaById(Categoria categoria, int posizione);
+        void getNomiCategorie();
 
     }
 }

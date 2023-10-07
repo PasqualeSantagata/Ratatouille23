@@ -80,4 +80,23 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             }
         });
     }
+    @Override
+    public void getNomiCategorie(){
+        categoriaModel.getNomiCategorie(new CallbackResponse<List<String>>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<List<String>> retData) {
+                if(retData.isSuccessful()){
+                    for(String s: retData.body()) {
+                        Log.d("nome cat: ", s);
+                    }
+                }
+            }
+        });
+
+    }
 }

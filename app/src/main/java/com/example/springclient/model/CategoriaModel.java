@@ -97,4 +97,28 @@ public class CategoriaModel implements CategoriaContract.Model {
                     }
                 });
     }
+
+    public void getNomiCategorie(CallbackResponse<List<String>> callbackResponse){
+        categoriaAPI.getNomiCategorie()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<List<String>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<List<String>> listResponse) {
+                        callbackResponse.onSuccess(listResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+
+    }
 }

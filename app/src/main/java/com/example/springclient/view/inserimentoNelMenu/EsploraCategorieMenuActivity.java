@@ -13,6 +13,7 @@ import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
+import com.example.springclient.presenter.CategoriaPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
@@ -32,6 +33,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
         categoriaMenuPresenter = new CategoriaMenuPresenter(this);
         categoriaMenuPresenter.getAllCategorie();
+        categoriaMenuPresenter.getNomiCategorie();
     }
 
     public void setCategorie(List<Categoria> categorie){

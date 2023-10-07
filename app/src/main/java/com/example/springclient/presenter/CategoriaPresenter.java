@@ -9,6 +9,7 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.model.CategoriaModel;
+import com.example.springclient.view.inserimentoNelMenu.EsploraCategorieMenuActivity;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 
 import java.util.List;
@@ -20,6 +21,14 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
 
     private CategoriaModel categoriaModel;
     private EsploraCategorieActivity esploraCategorieActivity;
+    private EsploraCategorieMenuActivity esploraCategorieMenuActivity;
+
+    public CategoriaPresenter(EsploraCategorieMenuActivity esploraCategorieMenuActivity) {
+        this.esploraCategorieMenuActivity = esploraCategorieMenuActivity;
+        categoriaModel = new CategoriaModel(RetrofitService.getIstance());
+    }
+
+
 
     public CategoriaPresenter(EsploraCategorieActivity esploraCategorieActivity) {
         this.esploraCategorieActivity = esploraCategorieActivity;
@@ -79,6 +88,25 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
                 }
             }
         });
+    }
+
+    public void getNomiCategorie(){
+        categoriaModel.getNomiCategorie(new CallbackResponse<List<String>>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<List<String>> retData) {
+                if(retData.isSuccessful()){
+                    for(String s: retData.body()) {
+                        Log.d("nome cat: ", s);
+                    }
+                }
+            }
+        });
+
     }
 
 

@@ -30,6 +30,8 @@ public interface CategoriaAPI {
     @GET("api/v1/categoria/getFoto/{id}")
     Single<Response<ResponseBody>> getFotoCategoriaById(@Path(value = "id", encoded = true)String id);
 
+    @GET("api/v1/categoria/getNomiCategorie")
+    Single<Response<List<String>>> getNomiCategorie();
 
 
 }
