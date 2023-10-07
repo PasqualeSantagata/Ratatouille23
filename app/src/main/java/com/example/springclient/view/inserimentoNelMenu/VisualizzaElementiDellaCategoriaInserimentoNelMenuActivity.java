@@ -21,6 +21,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
+import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -39,7 +40,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     private RecyclerView recyclerView;
     private int elementoSelezionato = -1;
     private ElementoMenuPresenter elementoMenuPresenter;
-    private  RecycleViewAdapterElementoMenu adapterElementoMenu;
+    private  RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
         textInputLayoutDescrizione  = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
         textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniInserimNelMenu);
         fabModifica = findViewById(R.id.fabModificaInserNelMenu);
-
+        setElementiMenuRecycleView();
         fabModifica.setOnClickListener(view -> {
             //prende l'elemento corrente e passa le info a modifica elemento
         });
@@ -84,23 +85,23 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     }
 
 
-    public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
+    public void setElementiMenuRecycleView(){
         RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewPiattiCategoriaInserimentoNelMenu);
-        adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
+        adapterElementoMenu = new RecycleViewAdapterGestioneElementoMenu(this, elementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewPiatti.setLayoutManager(linearLayoutManager);
 
         //Dovrebbe implementare la funzione drug and drop
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerViewPiatti.addItemDecoration(dividerItemDecoration);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerViewPiatti);
+        //DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        //recyclerViewPiatti.addItemDecoration(dividerItemDecoration);
+        //ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        //itemTouchHelper.attachToRecyclerView(recyclerViewPiatti);
 
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
+   /* ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
 
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -116,7 +117,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
         }
-    };
+    };*/
 
     public void setParameters(ElementoMenu elementoMenu){
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
