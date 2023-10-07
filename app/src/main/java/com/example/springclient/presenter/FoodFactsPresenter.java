@@ -6,9 +6,8 @@ import com.example.springclient.RetrofitService.FoodFactsRetrofit;
 import com.example.springclient.apiUtils.FoodFactsResponse;
 import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.model.FoodFactsModel;
-import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
+import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
 
 import java.util.ArrayList;
 import java.util.List;

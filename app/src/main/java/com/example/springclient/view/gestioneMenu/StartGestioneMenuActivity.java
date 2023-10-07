@@ -1,4 +1,4 @@
-package com.example.springclient.view.inserimentoNelMenu;
+package com.example.springclient.view.gestioneMenu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,7 +12,7 @@ import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 
-public class GestioneMenuActivity extends AppCompatActivity {
+public class StartGestioneMenuActivity extends AppCompatActivity {
     private Button buttonIndietro;
     private Button buttonAggiungiElementi;
     private Button buttonModificaElementi;

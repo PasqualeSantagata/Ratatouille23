@@ -9,10 +9,10 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
-import com.example.springclient.view.inserimentoNelMenu.GestioneMenuActivity;
-import com.example.springclient.view.inserimentoNelMenu.HomeNuovoElemento;
-import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
-import com.example.springclient.view.inserimentoNelMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity;
+import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
+import com.example.springclient.view.gestioneMenu.HomeNuovoElemento;
+import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
+import com.example.springclient.view.gestioneMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
 import com.google.gson.Gson;
@@ -27,7 +27,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
     private RetrofitService retrofitService;
     private InserisciElementoActivity inserisciElementoActivity;
-    private GestioneMenuActivity gestioneMenuActivity;
+    private StartGestioneMenuActivity gestioneMenuActivity;
     private HomeNuovoElemento homeNuovoElemento;
 
     private EsploraCategorieActivity esploraCategorieActivity;
@@ -39,7 +39,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         this.inserisciElementoActivity = inserisciElementoActivity;
     }
 
-    public ElementoMenuPresenter(GestioneMenuActivity gestioneMenuActivity){
+    public ElementoMenuPresenter(StartGestioneMenuActivity gestioneMenuActivity){
         this.gestioneMenuActivity = gestioneMenuActivity;
     }
 

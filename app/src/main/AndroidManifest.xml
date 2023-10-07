@@ -38,7 +38,7 @@
 
 
         <activity
-            android:name=".view.inserimentoNelMenu.InserisciElementoActivity"
+            android:name=".view.gestioneMenu.InserisciElementoActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -93,7 +93,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.inserimentoNelMenu.ElementoInseritoCorrettamente"
+            android:name=".view.gestioneMenu.ElementoInseritoCorrettamente"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -170,7 +170,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.inserimentoNelMenu.GestioneMenuActivity"
+            android:name=".view.gestioneMenu.StartGestioneMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -182,7 +182,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.inserimentoNelMenu.HomeModificaElemMenuActivity"
+            android:name=".view.gestioneMenu.HomeModificaElemMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -194,7 +194,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.inserimentoNelMenu.EsploraCategorieMenuActivity"
+            android:name=".view.gestioneMenu.EsploraCategorieMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -207,7 +207,7 @@
         </activity>
 
         <activity
-            android:name=".view.inserimentoNelMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity"
+            android:name=".view.gestioneMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"

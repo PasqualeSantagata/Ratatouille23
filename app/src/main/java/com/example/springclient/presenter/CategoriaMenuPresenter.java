@@ -9,7 +9,8 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.model.CategoriaModel;
-import com.example.springclient.view.inserimentoNelMenu.EsploraCategorieMenuActivity;
+import com.example.springclient.view.gestioneMenu.EsploraCategorieMenuActivity;
+import com.example.springclient.view.gestioneMenu.HomeNuovoElemento;
 
 import java.util.List;
 
@@ -17,14 +18,18 @@ import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
-    private CategoriaModel categoriaModel;
+    private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());;
     private EsploraCategorieMenuActivity esploraCategorieMenuActivity;
+    private HomeNuovoElemento homeNuovoElemento;
 
 
 
     public CategoriaMenuPresenter(EsploraCategorieMenuActivity esploraCategorieMenuActivity) {
         this.esploraCategorieMenuActivity = esploraCategorieMenuActivity;
-        categoriaModel = new CategoriaModel(RetrofitService.getIstance());
+    }
+
+    public CategoriaMenuPresenter(HomeNuovoElemento homeNuovoElemento) {
+        this.homeNuovoElemento = homeNuovoElemento;
     }
 
     @Override
@@ -91,9 +96,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             @Override
             public void onSuccess(Response<List<String>> retData) {
                 if(retData.isSuccessful()){
-                    for(String s: retData.body()) {
-                        Log.d("nome cat: ", s);
-                    }
+                    homeNuovoElemento.setCategorie(retData.body());
                 }
             }
         });

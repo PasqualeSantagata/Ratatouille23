@@ -1,4 +1,4 @@
-package com.example.springclient.view.inserimentoNelMenu;
+package com.example.springclient.view.gestioneMenu;
 
 import android.os.Bundle;
 
@@ -7,12 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 
-public class SelezioneNuovaLingua extends AppCompatActivity {
+public class NuovoElementoNuovaLingua extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("SELEZIONA LINGUA");
-        setContentView(R.layout.activity_nuova_lingua_inserimento_nel_menu);
+        getSupportActionBar().setTitle("NUOVO ELEMENTO DEL MENU");
+        setContentView(R.layout.activity_aggiungi_elem_in_nuova_lingua_inserimento_nel_menu);
+
     }
 }

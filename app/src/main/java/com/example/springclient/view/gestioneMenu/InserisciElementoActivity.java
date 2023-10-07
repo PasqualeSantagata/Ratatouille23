@@ -1,4 +1,4 @@
-package com.example.springclient.view.inserimentoNelMenu;
+package com.example.springclient.view.gestioneMenu;
 
 
 import android.app.Dialog;
@@ -7,15 +7,12 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;

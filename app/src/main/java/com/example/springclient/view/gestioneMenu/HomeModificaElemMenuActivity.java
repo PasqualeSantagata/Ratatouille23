@@ -1,4 +1,4 @@
-package com.example.springclient.view.inserimentoNelMenu;
+package com.example.springclient.view.gestioneMenu;
 
 import android.content.Intent;
 import android.os.Bundle;

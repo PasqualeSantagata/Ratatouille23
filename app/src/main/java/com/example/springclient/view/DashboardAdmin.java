@@ -11,8 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.springclient.R;
 import com.example.springclient.presenter.AdminPresenter;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
-import com.example.springclient.view.inserimentoNelMenu.GestioneMenuActivity;
-import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
+import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
 
 public class DashboardAdmin extends AppCompatActivity {
     private ImageView imageViewMenu;
@@ -43,7 +42,7 @@ public class DashboardAdmin extends AppCompatActivity {
         imageViewNuovaUtenza = findViewById(R.id.imageViewNewUserDash);
 
         imageViewMenu.setOnClickListener(view -> {
-            Intent intentMenu = new Intent(this, GestioneMenuActivity.class);
+            Intent intentMenu = new Intent(this, StartGestioneMenuActivity.class);
             startActivity(intentMenu);
            /* Intent intentMenu = new Intent(this, InserisciElementoActivity.class);// aggiungere navigazione
             */

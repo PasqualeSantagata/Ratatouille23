@@ -1,11 +1,10 @@
-package com.example.springclient.view.inserimentoNelMenu;
+package com.example.springclient.view.gestioneMenu;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,18 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
-import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
 
@@ -92,6 +87,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
         textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniInserimNelMenu);
         fabModifica = findViewById(R.id.fabModificaInserNelMenu);
         setElementiMenuRecycleView();
+
         fabModifica.setOnClickListener(view -> {
             //prende l'elemento corrente e passa le info a modifica elemento
         });
@@ -126,7 +122,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     public void setParameters(ElementoMenu elementoMenu){
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
         //Attenzione controllare il to string default di List
-        //setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
+        setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
     }
 

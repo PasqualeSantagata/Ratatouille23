@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_food_icons"
-    tools:context=".view.inserimentoNelMenu.InserisciElementoActivity">
+    tools:context=".view.gestioneMenu.InserisciElementoActivity">
 
     <Button
         android:id="@+id/buttonInserElemOk"

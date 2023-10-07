@@ -9,7 +9,7 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.model.CategoriaModel;
-import com.example.springclient.view.inserimentoNelMenu.EsploraCategorieMenuActivity;
+import com.example.springclient.view.gestioneMenu.EsploraCategorieMenuActivity;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 
 import java.util.List;
