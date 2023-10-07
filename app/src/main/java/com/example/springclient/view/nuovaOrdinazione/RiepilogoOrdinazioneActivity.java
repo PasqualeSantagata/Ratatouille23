@@ -65,6 +65,8 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getElementoMenu().getNome());
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
         buttonOk.setOnClickListener(view -> {
+            /* tradurre gli elementi delle ordinazioni */
+
             presenterOrdinazione.savePortate(portate);
         });
     }

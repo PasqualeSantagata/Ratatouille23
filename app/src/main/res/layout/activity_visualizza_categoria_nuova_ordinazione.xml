@@ -87,7 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="178dp"
                 android:editable="false"
-                tools:ignore="Deprecated" />
+                tools:ignore="Deprecated"
+                android:gravity="top|left"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

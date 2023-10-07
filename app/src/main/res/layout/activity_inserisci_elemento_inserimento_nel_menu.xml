@@ -47,7 +47,6 @@
         app:boxStrokeColor="@color/my_green"
         app:hintTextColor="@color/my_green"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -146,11 +145,11 @@
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:singleLine="false"
-            android:textAlignment="viewStart"
             android:textColorLink="#4CAF50"
             android:inputType="textMultiLine"
             android:maxLines="@integer/material_motion_duration_long_1"
             android:background="@drawable/desing_rounded_green_tf"
+            android:gravity="top|left"
 
             />
     </com.google.android.material.textfield.TextInputLayout>
