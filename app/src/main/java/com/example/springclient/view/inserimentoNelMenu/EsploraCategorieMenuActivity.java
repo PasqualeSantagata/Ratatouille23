@@ -1,9 +1,7 @@
 package com.example.springclient.view.inserimentoNelMenu;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,15 +12,11 @@ import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
-import com.example.springclient.view.nuovaOrdinazione.VisualizzaCategoriaActivity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EsploraCategorieMenuActivity extends AppCompatActivity implements CategoriaContract.View, IRecycleViewCategoria {
@@ -70,7 +64,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
 
     @Override
     public void onItemClick(int position) {
-        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaMenuActivity.class);
+        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity.class);
         //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
         List<ElementoMenu> elementi = categorie.get(position).getElementi();
         intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementi);

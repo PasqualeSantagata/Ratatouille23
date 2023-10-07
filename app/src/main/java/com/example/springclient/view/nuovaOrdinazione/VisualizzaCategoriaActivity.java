@@ -105,7 +105,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
      e li "sistema" nella recycle view,
      */
     public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
-        RecyclerView recyclerViewPiatti = findViewById(R.id.RecyclerViewPiattiNuovaOrdinazione);
+        RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewElemMenuNuovaOrdinazione);
         RecycleViewAdapterElementoMenu adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

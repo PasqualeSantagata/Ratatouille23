@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/lingue"
+        android:title="@string/visualizza_altre_lingue" />
+
+    <item
+        android:id="@+id/riordinare"
+        android:title="@string/riordina_elementi" />
+
+
+</menu>

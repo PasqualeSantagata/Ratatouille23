@@ -1,6 +1,9 @@
 package com.example.springclient.view.inserimentoNelMenu;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -15,36 +18,62 @@ import com.example.springclient.R;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Portata;
+import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Collections;
 import java.util.List;
 
-public class VisualizzaElementoMenu extends AppCompatActivity implements IRecycleViewElementoMenu {
+public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
 
     private TextInputLayout textInputLayoutPrezzo;
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutAllergeni;
+    private FloatingActionButton fabModifica;
 
     private List<ElementoMenu> elementiMenu;
     private Categoria categoria;
+    private RecyclerView recyclerView;
+    private int elementoSelezionato = -1;
+    private ElementoMenuPresenter elementoMenuPresenter;
+    private  RecycleViewAdapterElementoMenu adapterElementoMenu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().setTitle("PRIMI"); CATEGORIA PASSATA DALLA ACTIVITY PRECEDENTE (ESPLORA CATEGORIE)
-        setContentView(R.layout.activity_visualizza_elem_menu_inserimento_nel_menu);
+        //verifica l'acrtivity prececente
+        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementi");
+        String nome = getIntent().getStringExtra("nomeCategoria");
+        getSupportActionBar().setTitle(nome);
+        setContentView(R.layout.activity_visualizza_cagtegoria_inserimento_nel_menu);
+        elementoMenuPresenter = new ElementoMenuPresenter(this);
+
 
         initializeComponents();
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
     private void initializeComponents(){
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
         textInputLayoutDescrizione  = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
         textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniInserimNelMenu);
+        fabModifica = findViewById(R.id.fabModificaInserNelMenu);
+
+        fabModifica.setOnClickListener(view -> {
+            //prende l'elemento corrente e passa le info a modifica elemento
+        });
+
 
 
     }
@@ -56,8 +85,8 @@ public class VisualizzaElementoMenu extends AppCompatActivity implements IRecycl
 
 
     public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
-        RecyclerView recyclerViewPiatti = findViewById(R.id.RecyclerViewPiattiNuovaOrdinazione);
-        RecycleViewAdapterElementoMenu adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
+        RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewPiattiCategoriaInserimentoNelMenu);
+        adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -96,8 +125,31 @@ public class VisualizzaElementoMenu extends AppCompatActivity implements IRecycl
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
     }
 
+    private ElementoMenu getElementoMenu(){
+        return elementiMenu.get(elementoSelezionato);
+    }
+
     @Override
     public void onItemClick(int position) {
+        elementoSelezionato = position;
+        setParameters(elementiMenu.get(position));
+        elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(position).getId().toString());
 
     }
+
+    @Override
+    public void onButtonDeleted(int position) {
+        elementoSelezionato = position;
+        elementoMenuPresenter.rimuoviElemento(elementiMenu.get(position).getId().toString());
+    }
+
+    public void cancellaElemento(){
+        elementiMenu.remove(elementoSelezionato);
+        adapterElementoMenu.notifyItemChanged(elementoSelezionato);
+    }
+
+    public void mostraTraduzione(ElementoMenu elementoMenu){
+        Log.d("Traduzione: ", elementoMenu.getNome() + " " + elementoMenu.getDescrizione());
+    }
+
 }

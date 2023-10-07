@@ -24,7 +24,6 @@
         android:layout_width="792dp"
         android:layout_height="644dp"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonRiepilogoVisualCatNuovaOrdinazione"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,16 +111,14 @@
             android:layout_height="58dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="40dp"
+            android:hint="@string/breve_nota"
             app:boxBackgroundColor="@color/grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneVisuaCatNuovaOrdinazione"
-            android:hint="@string/breve_nota"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneVisuaCatNuovaOrdinazione">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,10 +134,11 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewPiattiNuovaOrdinazione"
-        android:layout_width="455dp"
-        android:layout_height="703dp"
+        android:id="@+id/recycleViewElemMenuNuovaOrdinazione"
+        android:layout_width="450dp"
+        android:layout_height="697dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

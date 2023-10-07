@@ -4,14 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_food_icons">
+    android:background="@drawable/sfondo_con_linee">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewPiattiCategoriaInserimentoNelMenu"
+        android:layout_width="450dp"
+        android:layout_height="697dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="53dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonIndietroElemInserNelMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="787dp"
         android:layout_height="653dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        android:layout_marginTop="77dp"
+        android:layout_marginBottom="170dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -83,26 +94,6 @@
             tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="474dp"
-        android:layout_height="655dp"
-        android:layout_marginEnd="6dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="655dp" />
-        </LinearLayout>
-    </ScrollView>
-
     <Button
         android:id="@+id/buttonIndietroElemInserNelMenu"
         android:layout_width="180dp"
@@ -113,25 +104,5 @@
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="7dp"
-        android:layout_height="655dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView11"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/line_elem_menu" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="1280dp"
-        android:layout_height="7dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonIndietroElemInserNelMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/line_visualizz_categ" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

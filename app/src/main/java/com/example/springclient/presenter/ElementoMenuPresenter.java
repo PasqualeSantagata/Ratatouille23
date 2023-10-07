@@ -9,10 +9,10 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
+import com.example.springclient.view.inserimentoNelMenu.GestioneMenuActivity;
 import com.example.springclient.view.inserimentoNelMenu.HomeNuovoElemento;
 import com.example.springclient.view.inserimentoNelMenu.InserisciElementoActivity;
-import com.example.springclient.view.inserimentoNelMenu.GestioneMenuActivity;
-import com.example.springclient.view.inserimentoNelMenu.VisualizzaCategoriaMenuActivity;
+import com.example.springclient.view.inserimentoNelMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
 import com.google.gson.Gson;
@@ -32,7 +32,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     private EsploraCategorieActivity esploraCategorieActivity;
     private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
-    private VisualizzaCategoriaMenuActivity visualizzaCategoriaMenuActivity;
+    private VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity visualizzaElementiDellaCategoriaInserimentoNelMenuActivity;
+
 
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         this.inserisciElementoActivity = inserisciElementoActivity;
@@ -54,8 +55,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         this.riepilogoOrdinazioneActivity = riepilogoOrdinazioneActivity;
     }
 
-    public ElementoMenuPresenter(VisualizzaCategoriaMenuActivity visualizzaCategoriaMenuActivity) {
-        this.visualizzaCategoriaMenuActivity = visualizzaCategoriaMenuActivity;
+    public ElementoMenuPresenter(VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity visualizzaElementiDellaCategoriaInserimentoNelMenuActivity) {
+        this.visualizzaElementiDellaCategoriaInserimentoNelMenuActivity = visualizzaElementiDellaCategoriaInserimentoNelMenuActivity;
     }
 
     @Override
@@ -122,7 +123,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    visualizzaCategoriaMenuActivity.cancellaElemento();
+                    visualizzaElementiDellaCategoriaInserimentoNelMenuActivity.cancellaElemento();
                 }
             }
         }, id);
@@ -153,7 +154,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
                 if(retData.isSuccessful()) {
-                    visualizzaCategoriaMenuActivity.mostraTraduzione(retData.body());
+                    visualizzaElementiDellaCategoriaInserimentoNelMenuActivity.mostraTraduzione(retData.body());
                 }
             }
         }, id);
