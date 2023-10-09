@@ -8,60 +8,70 @@
 
     <Button
         android:id="@+id/buttonOkNuovoElemento"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
         android:text="@android:string/ok"
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonIndietroNuovoElemento"
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton3" />
 
     <Button
         android:id="@+id/buttonIndietroNuovoElemento"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="100dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="720dp"
         android:text="@string/indietro"
         app:cornerRadius="@android:dimen/app_icon_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonOkNuovoElemento"
+        app:layout_constraintEnd_toStartOf="@+id/buttonOkNuovoElemento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonOkNuovoElemento" />
 
     <Spinner
         android:id="@+id/spinnerLinguaHomeInserimentoNelMenu"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:layout_marginTop="145dp"
+        android:layout_marginBottom="215dp"
         android:background="@drawable/design_item_spinner"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         app:layout_constraintEnd_toEndOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         app:layout_constraintStart_toStartOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerCategoriaHomeInserimentoNelMenu"
-        android:layout_width="500dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="404dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="420dp"
         android:background="@drawable/design_item_spinner"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLinguaHomeInserimentoNelMenu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAggiungiCategoriaNuovoElementoGestioneMenu"
+        android:id="@+id/floatingActionButton3"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginEnd="280dp"
-        android:layout_marginBottom="424dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="421dp"
+        android:layout_marginEnd="273dp"
+        android:layout_marginBottom="313dp"
         android:clickable="true"
-        android:tint="@color/white"
         app:backgroundTint="@color/my_green"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOkNuovoElemento"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_fab"
         app:tint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
