@@ -9,6 +9,7 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.model.CategoriaModel;
+import com.example.springclient.view.gestioneMenu.CreaCategoriaActivity;
 import com.example.springclient.view.gestioneMenu.EsploraCategorieMenuActivity;
 import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
 
@@ -21,7 +22,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());;
     private EsploraCategorieMenuActivity esploraCategorieMenuActivity;
     private HomeNuovoElementoActivity homeNuovoElementoActivity;
-
+    private CreaCategoriaActivity creaCategoriaActivity;
 
 
     public CategoriaMenuPresenter(EsploraCategorieMenuActivity esploraCategorieMenuActivity) {
@@ -30,6 +31,10 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
 
     public CategoriaMenuPresenter(HomeNuovoElementoActivity homeNuovoElementoActivity) {
         this.homeNuovoElementoActivity = homeNuovoElementoActivity;
+    }
+
+    public CategoriaMenuPresenter(CreaCategoriaActivity creaCategoriaActivity) {
+        this.creaCategoriaActivity = creaCategoriaActivity;
     }
 
     @Override

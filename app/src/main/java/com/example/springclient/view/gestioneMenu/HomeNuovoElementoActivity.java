@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,12 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     private Spinner spinnerCategoria;
     private Button buttonIndietro;
     private Button buttonOk;
+    private FloatingActionButton fabAggiungiCategoria;
     private CategoriaContract.Presenter categoriaPresenter;
     private List<String> categorie;
     private List<String> lingue;
     private String categoriaSelezionata;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         spinnerCategoria = findViewById(R.id.spinnerCategoriaHomeInserimentoNelMenu);
         spinnerCategoria.setOnItemSelectedListener(this);
         spinnerLingua =  findViewById(R.id.spinnerLinguaHomeInserimentoNelMenu);
+        fabAggiungiCategoria = findViewById(R.id.fabAggiungiCategoriaNuovoElementoGestioneMenu);
+
         spinnerLingua.setOnItemSelectedListener(this);
         categoriaPresenter.getNomiCategorie();
         lingue = new ArrayList<>();
@@ -70,6 +75,10 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
             startActivity(intent);
         });
 
+        fabAggiungiCategoria.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CreaCategoriaActivity.class);
+            startActivity(intent);
+        });
 
 
     }
