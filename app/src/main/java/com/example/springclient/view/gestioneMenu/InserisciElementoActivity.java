@@ -63,7 +63,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("INSERISCI ELEMENTO");
-        setContentView(R.layout.activity_inserisci_elemento_inserimento_nel_menu);
+        setContentView(R.layout.activity_inserisci_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         elementoMenuPresenter = new ElementoMenuPresenter(this);
@@ -73,7 +73,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     }
 
     public void elementoSalvatoCorrettamente() {
-        Intent intentElemCaricato = new Intent(this, ElementoInseritoCorrettamente.class);
+        Intent intentElemCaricato = new Intent(this, ElementoInseritoCorrettamenteActivity.class);
         startActivity(intentElemCaricato);
     }
 

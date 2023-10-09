@@ -10,7 +10,7 @@ import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.view.gestioneMenu.EsploraCategorieMenuActivity;
-import com.example.springclient.view.gestioneMenu.HomeNuovoElemento;
+import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());;
     private EsploraCategorieMenuActivity esploraCategorieMenuActivity;
-    private HomeNuovoElemento homeNuovoElemento;
+    private HomeNuovoElementoActivity homeNuovoElementoActivity;
 
 
 
@@ -28,8 +28,8 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
         this.esploraCategorieMenuActivity = esploraCategorieMenuActivity;
     }
 
-    public CategoriaMenuPresenter(HomeNuovoElemento homeNuovoElemento) {
-        this.homeNuovoElemento = homeNuovoElemento;
+    public CategoriaMenuPresenter(HomeNuovoElementoActivity homeNuovoElementoActivity) {
+        this.homeNuovoElementoActivity = homeNuovoElementoActivity;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             @Override
             public void onSuccess(Response<List<String>> retData) {
                 if(retData.isSuccessful()){
-                    homeNuovoElemento.setCategorie(retData.body());
+                    homeNuovoElementoActivity.setCategorie(retData.body());
                 }
             }
         });

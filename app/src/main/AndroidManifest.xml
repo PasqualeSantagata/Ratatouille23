@@ -49,7 +49,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.DashboardAdmin"
+            android:name=".view.DashboardAdminActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -60,7 +60,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.creaNuovaUtenza.CreaNuovaUtenza"
+            android:name=".view.creaNuovaUtenza.CreaNuovaUtenzaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -82,7 +82,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.creaNuovaUtenza.RegistrazioneCompletaNuovaUtenza"
+            android:name=".view.creaNuovaUtenza.RegistrazioneCompletaNuovaUtenzaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -93,7 +93,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.ElementoInseritoCorrettamente"
+            android:name=".view.gestioneMenu.ElementoInseritoCorrettamenteActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -158,7 +158,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.statoOrdinazioni.HomeStatoOrdinazione"
+            android:name=".view.statoOrdinazioni.HomeStatoOrdinazioneActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -219,8 +219,18 @@
                 android:value="" />
         </activity>
 
-
-
+        <activity
+            android:name=".view.gestioneMenu.RiordinaElementiActivity"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:screenOrientation= "landscape"
+            tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

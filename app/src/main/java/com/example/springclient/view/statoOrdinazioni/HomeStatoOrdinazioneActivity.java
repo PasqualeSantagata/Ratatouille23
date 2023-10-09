@@ -22,7 +22,6 @@ import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
-public class HomeStatoOrdinazione extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate, IRecycleViewOrdinazioniEvase {
+public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate, IRecycleViewOrdinazioniEvase {
 
     private RecyclerView recyclerViewOrdinazioniCorrenti;
     private RecyclerView recyclerViewOrdinazioniPrenotate;

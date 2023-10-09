@@ -23,7 +23,7 @@ public class StartGestioneMenuActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Elementi del Menù");
-        setContentView(R.layout.activity_start_inserimento_nel_menu);
+        setContentView(R.layout.activity_start_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initializeComponents();
 

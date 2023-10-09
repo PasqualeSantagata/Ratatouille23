@@ -10,7 +10,7 @@ import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
-import com.example.springclient.view.gestioneMenu.HomeNuovoElemento;
+import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
 import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
 import com.example.springclient.view.gestioneMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
@@ -28,7 +28,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private RetrofitService retrofitService;
     private InserisciElementoActivity inserisciElementoActivity;
     private StartGestioneMenuActivity gestioneMenuActivity;
-    private HomeNuovoElemento homeNuovoElemento;
+    private HomeNuovoElementoActivity homeNuovoElementoActivity;
 
     private EsploraCategorieActivity esploraCategorieActivity;
     private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
@@ -43,8 +43,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         this.gestioneMenuActivity = gestioneMenuActivity;
     }
 
-    public ElementoMenuPresenter(HomeNuovoElemento homeNuovoElemento){
-        this.homeNuovoElemento = homeNuovoElemento;
+    public ElementoMenuPresenter(HomeNuovoElementoActivity homeNuovoElementoActivity){
+        this.homeNuovoElementoActivity = homeNuovoElementoActivity;
     }
 
     public ElementoMenuPresenter(EsploraCategorieActivity esploraCategorieActivity){

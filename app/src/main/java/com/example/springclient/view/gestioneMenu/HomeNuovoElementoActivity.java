@@ -19,7 +19,7 @@ import com.example.springclient.presenter.CategoriaMenuPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeNuovoElemento extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Spinner spinnerLingua;
     private Spinner spinnerCategoria;
@@ -34,7 +34,7 @@ public class HomeNuovoElemento extends AppCompatActivity implements AdapterView.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("NUOVO ELEMENTO DEL MENÚ");
-        setContentView(R.layout.activity_home_nuovo_elemento_inserimento_nel_menu);
+        setContentView(R.layout.activity_home_nuovo_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         categoriaPresenter = new CategoriaMenuPresenter(this);
 

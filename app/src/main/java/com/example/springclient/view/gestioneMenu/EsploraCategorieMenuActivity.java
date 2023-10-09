@@ -1,6 +1,7 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
         categoriaMenuPresenter = new CategoriaMenuPresenter(this);
         categoriaMenuPresenter.getAllCategorie();

@@ -1,9 +1,12 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -40,15 +43,17 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     private ElementoMenuPresenter elementoMenuPresenter;
     private  RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
     private ItemTouchHelper.SimpleCallback simpleCallback;
+    private String nome;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //verifica l'acrtivity prececente
         elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementi");
-        String nome = getIntent().getStringExtra("nomeCategoria");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        nome = getIntent().getStringExtra("nomeCategoria");
         getSupportActionBar().setTitle(nome);
-        setContentView(R.layout.activity_visualizza_cagtegoria_inserimento_nel_menu);
+        setContentView(R.layout.activity_visualizza_cagtegoria_gestione_menu);
         elementoMenuPresenter = new ElementoMenuPresenter(this);
 
         simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN
@@ -77,9 +82,23 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = new MenuInflater(this);
         inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.riordinare:
+                Intent intent = new Intent(this, RiordinaElementiActivity.class);
+                intent.putExtra("categoria", nome);
+                startActivity(intent);
+                break;
+            case R.id.lingue:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void initializeComponents(){
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);

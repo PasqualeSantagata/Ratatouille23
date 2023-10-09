@@ -5,19 +5,19 @@ import com.example.springclient.contract.AdminContract;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.entity.Utente;
 import com.example.springclient.model.AutenticazioneModel;
-import com.example.springclient.view.DashboardAdmin;
+import com.example.springclient.view.DashboardAdminActivity;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
 import com.google.gson.Gson;
 
 import retrofit2.Response;
 
 public class AdminPresenter implements AdminContract.Presenter {
-    private DashboardAdmin dashboardAdmin;
+    private DashboardAdminActivity dashboardAdminActivity;
     private StartNuovaUtenzaActivity startNuovaUtenzaActivity;
     private AutenticazioneModel autenticazioneModel = AutenticazioneModel.getIstance();
 
-    public AdminPresenter(DashboardAdmin dashboardAdmin){
-        this.dashboardAdmin = dashboardAdmin;
+    public AdminPresenter(DashboardAdminActivity dashboardAdminActivity){
+        this.dashboardAdminActivity = dashboardAdminActivity;
     }
     public AdminPresenter(StartNuovaUtenzaActivity startNuovaUtenzaActivity){
         this.startNuovaUtenzaActivity = startNuovaUtenzaActivity;

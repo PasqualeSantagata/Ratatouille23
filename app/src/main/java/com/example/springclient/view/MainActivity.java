@@ -21,7 +21,7 @@ import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
 import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
-import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazione;
+import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazioneActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     @Override
     public void avviaDashboardAdmin(){
         progressBar.setVisibility(View.GONE);
-        Intent dashIntent = new Intent(this, DashboardAdmin.class);
+        Intent dashIntent = new Intent(this, DashboardAdminActivity.class);
         startActivity(dashIntent);
 
     }
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
     @Override
     public void avviaDashboardAddettoCucina() {
-        Intent avviaCuoco = new Intent(this, HomeStatoOrdinazione.class);
+        Intent avviaCuoco = new Intent(this, HomeStatoOrdinazioneActivity.class);
         startActivity(avviaCuoco);
     }
 

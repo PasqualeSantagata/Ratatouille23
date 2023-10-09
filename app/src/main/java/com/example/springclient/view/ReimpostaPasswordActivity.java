@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.springclient.R;
 import com.example.springclient.presenter.AutenticazionePresenter;
 
-public class ReimpostaPassword extends AppCompatActivity {
+public class ReimpostaPasswordActivity extends AppCompatActivity {
 
     private EditText EditTextNuovaPassword;
     private EditText EditTextRipetiPassword;

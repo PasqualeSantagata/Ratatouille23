@@ -21,7 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Arrays;
 
-public class CreaNuovaUtenza extends AppCompatActivity {
+public class CreaNuovaUtenzaActivity extends AppCompatActivity {
 
     private Spinner spinnerRuolo;
     private SpinnerAdapterRuoli spinnerAdapterRuoli;

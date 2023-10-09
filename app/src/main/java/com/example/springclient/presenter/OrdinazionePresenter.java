@@ -11,7 +11,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
 import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
-import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazione;
+import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazioneActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +23,15 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     private Ordinazione ordinazione;
     private EsploraCategorieActivity esploraCategorieActivity;
     private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
-    private HomeStatoOrdinazione homeStatoOrdinazione;
+    private HomeStatoOrdinazioneActivity homeStatoOrdinazioneActivity;
     private OrdinazioneModel ordinazioneModel = new OrdinazioneModel(RetrofitService.getIstance());
 
 
     public OrdinazionePresenter(StartNuovaOrdinazioneActivity startNuovaOrdinazioneActivity){
         this.startNuovaOrdinazioneActivity = startNuovaOrdinazioneActivity;
     }
-    public OrdinazionePresenter(HomeStatoOrdinazione homeStatoOrdinazione){
-        this.homeStatoOrdinazione = homeStatoOrdinazione;
+    public OrdinazionePresenter(HomeStatoOrdinazioneActivity homeStatoOrdinazioneActivity){
+        this.homeStatoOrdinazioneActivity = homeStatoOrdinazioneActivity;
     }
     public OrdinazionePresenter(RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity){
        this.riepilogoOrdinazioneActivity = riepilogoOrdinazioneActivity;
@@ -51,7 +51,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
             public void onSuccess(Response<List<Ordinazione>> retData) {
                 if(retData.isSuccessful()){
                     Log.d("ORDINAZIONI: ", retData.body().toString());
-                    homeStatoOrdinazione.setOrdinazioniSospese(retData.body());
+                    homeStatoOrdinazioneActivity.setOrdinazioniSospese(retData.body());
                     //invia alla schermata dei cuochi
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.creaNuovaUtenza;
 
 import android.os.Bundle;
 
@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 
-public class ModificaElemento extends AppCompatActivity {
+public class RegistrazioneCompletaNuovaUtenzaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("MODIFICA ELEMENTO NEL MENU");
-        setContentView(R.layout.activity_modifica_elemento_inserimento_nel_menu);
+        getSupportActionBar().setTitle("REGISTRAZIONE COMPLETATA");
+        setContentView(R.layout.activity_registrazione_completa_nuova_utenza);
     }
 }

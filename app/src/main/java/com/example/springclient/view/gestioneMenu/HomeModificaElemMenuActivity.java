@@ -1,6 +1,7 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -20,7 +21,8 @@ public class HomeModificaElemMenuActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Modifica Elemento del Menù");
-        setContentView(R.layout.activity_home_modifica_elem_inserimento_nel_menu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setContentView(R.layout.activity_home_modifica_elem_gestione_menu);
         initializeComponents();
 
     }

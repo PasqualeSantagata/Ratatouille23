@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 
-public class OrdinazioneConclusa extends AppCompatActivity {
+public class OrdinazioneConclusaActivity extends AppCompatActivity {
     private ImageView imageViewFeedbackOrdinazione;
 
     @Override
