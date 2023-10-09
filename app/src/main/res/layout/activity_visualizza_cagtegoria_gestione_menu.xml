@@ -8,10 +8,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewPiattiCategoriaInserimentoNelMenu"
-        android:layout_width="450dp"
-        android:layout_height="697dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="53dp"
+        android:layout_width="447dp"
+        android:layout_height="665dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="90dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonIndietroElemInserNelMenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
