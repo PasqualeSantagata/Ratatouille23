@@ -100,9 +100,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="260dp"
         android:layout_height="105dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="82dp"
         android:gravity="right"
-        tools:layout_editor_absoluteX="938dp"
-        tools:layout_editor_absoluteY="47dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,7 +122,6 @@
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:background="@color/my_green"
-                android:gravity="left"
                 android:hint="Lang"
                 android:textAlignment="center"
                 android:textAllCaps="false"
