@@ -1,5 +1,6 @@
 package com.example.springclient.model;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.springclient.RetrofitService.CategoriaAPI;
@@ -49,6 +50,12 @@ public class CategoriaModel implements CategoriaContract.Model {
                 });
 
     }
+    public void addFotoCategoria(String id, Bitmap foto){
+    
+
+
+    }
+
 
     @Override
     public void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback) {

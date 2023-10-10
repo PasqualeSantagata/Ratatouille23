@@ -26,6 +26,7 @@ import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElemento
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -91,7 +92,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
         switch (item.getItemId()){
             case R.id.riordinare:
                 Intent intent = new Intent(this, RiordinaElementiActivity.class);
-                intent.putExtra("categoria", nome);
+                intent.putExtra("elementiMenu",(Serializable) elementiMenu);
                 startActivity(intent);
                 break;
             case R.id.lingue:
@@ -141,7 +142,7 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     public void setParameters(ElementoMenu elementoMenu){
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
         //Attenzione controllare il to string default di List
-        setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
+       // setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
     }
 
@@ -153,8 +154,6 @@ public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends 
     public void onItemClick(int position) {
         elementoSelezionato = position;
         setParameters(elementiMenu.get(position));
-        elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(position).getId().toString());
-
     }
 
     @Override

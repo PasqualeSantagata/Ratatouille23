@@ -40,8 +40,8 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         setContentView(R.layout.activity_home_nuovo_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         categoriaPresenter = new CategoriaMenuPresenter(this);
+        categoriaPresenter.getNomiCategorie();
 
-        initializeComponents();
     }
 
     private void initializeComponents() {
@@ -53,11 +53,11 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         fabAggiungiCategoria = findViewById(R.id.fabAggiungiCategoriaNuovoElementoGestioneMenu);
 
         spinnerLingua.setOnItemSelectedListener(this);
-        categoriaPresenter.getNomiCategorie();
+
         lingue = new ArrayList<>();
 
         ArrayAdapter adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorie);
-        adapterCategorie.setDropDownViewResource(R.layout.item_spinner_categorie);
+        adapterCategorie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapterCategorie);
 
         //List<Categoria> categoriaList = elementoMenuPresenter.;
@@ -85,6 +85,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
 
     public void setCategorie(List<String> categorie) {
         this.categorie = categorie;
+        initializeComponents();
     }
 
     @Override
