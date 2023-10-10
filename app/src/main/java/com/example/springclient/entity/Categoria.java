@@ -31,6 +31,10 @@ public class Categoria implements Serializable {
 
     }
 
+    public Categoria(Bitmap image) {
+        this.image = image;
+    }
+
     public Bitmap getImage() {
         return image;
     }

@@ -2,6 +2,7 @@ package com.example.springclient.view.gestioneMenu;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ public class CreaCategoriaActivity extends AppCompatActivity {
     private Button buttonOk;
     private Button buttonIndietro;
     private CategoriaContract.Presenter categoriaPresenter;
+    private Bitmap immagine = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +42,11 @@ public class CreaCategoriaActivity extends AppCompatActivity {
         textViewAggiungiImmagine = findViewById(R.id.textViewAggiungiImgCreaCategoriaGestioneMenu);
         buttonIndietro = findViewById(R.id.buttonIndietroCreaCategoriaGestioneMenu);
         buttonOk = findViewById(R.id.buttonOkCreaCategoriaGestioneMenu);
+        immagine = (Bitmap) getIntent().getParcelableExtra("immagine");
+
+        if (immagine != null){
+            imageViewAggiungiImmagine.setImageBitmap(immagine);
+        }
 
         buttonOk.setOnClickListener(view -> {
             Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
@@ -49,6 +56,11 @@ public class CreaCategoriaActivity extends AppCompatActivity {
 
         buttonIndietro.setOnClickListener(view -> {
             Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
+            startActivity(intent);
+        });
+
+        imageViewAggiungiImmagine.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SelezionaImmagineCategoriaActivity.class);
             startActivity(intent);
         });
     }
