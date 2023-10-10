@@ -9,8 +9,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewPiattiCategoriaInserimentoNelMenu"
         android:layout_width="455dp"
-        android:layout_height="619dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="623dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

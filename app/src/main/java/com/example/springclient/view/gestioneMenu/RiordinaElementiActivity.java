@@ -18,6 +18,7 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class RiordinaElementiActivity extends AppCompatActivity implements IRecy
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riordina_elementi_menu_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
+        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementiMenu");
         //abilita drag and drop recycle view
         simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN
                 | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
@@ -60,6 +61,7 @@ public class RiordinaElementiActivity extends AppCompatActivity implements IRecy
     private void initializeComponents() {
         buttonOk = findViewById(R.id.buttonOkRiordinaElementiGestioneMenu);
         buttonIndietro = findViewById(R.id.buttonIndietroRiordinaElementiGestioneMenu);
+        setElementiMenuRecycleView();
 
         buttonOk.setOnClickListener(view -> {
             Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity.class);
@@ -69,6 +71,7 @@ public class RiordinaElementiActivity extends AppCompatActivity implements IRecy
 
         buttonIndietro.setOnClickListener(view -> {
             Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity.class);
+            intent.putExtra("elementi", (Serializable) elementiMenu);
             startActivity(intent);
         });
 

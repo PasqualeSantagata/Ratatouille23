@@ -70,6 +70,15 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
         });
     }
 
+    public void addFotoCategoria(String id, Bitmap foto){
+
+
+
+
+
+    }
+
+
     @Override
     public void getFotoCategoriaById(Categoria categoria, int posizione) {
         categoriaModel.getFotoCategoriaById(categoria.getId().toString(), new CallbackResponse<ResponseBody>() {
@@ -108,6 +117,8 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
         });
 
     }
+
+
 
 
 }

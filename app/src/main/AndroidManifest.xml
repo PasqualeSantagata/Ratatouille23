@@ -218,9 +218,37 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".view.gestioneMenu.HomeNuovoElementoActivity"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:screenOrientation= "landscape"
+            tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
 
         <activity
             android:name=".view.gestioneMenu.RiordinaElementiActivity"
+            android:exported="false"
+            android:configChanges="orientation"
+            android:screenOrientation= "landscape"
+            tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name=".view.gestioneMenu.CreaCategoriaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"

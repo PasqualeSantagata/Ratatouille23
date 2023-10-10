@@ -34,7 +34,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
         categoriaMenuPresenter = new CategoriaMenuPresenter(this);
         categoriaMenuPresenter.getAllCategorie();
-        categoriaMenuPresenter.getNomiCategorie();
+
     }
 
     public void setCategorie(List<Categoria> categorie){
@@ -57,6 +57,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
+
 
     }
 

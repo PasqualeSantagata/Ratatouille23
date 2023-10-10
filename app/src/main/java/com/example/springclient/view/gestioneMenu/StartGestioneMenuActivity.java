@@ -40,7 +40,7 @@ public class StartGestioneMenuActivity extends AppCompatActivity {
         });
 
         buttonAggiungiElementi.setOnClickListener(view -> {
-            Intent intent = new Intent(this, InserisciElementoActivity.class);
+            Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
             startActivity(intent);
         });
 

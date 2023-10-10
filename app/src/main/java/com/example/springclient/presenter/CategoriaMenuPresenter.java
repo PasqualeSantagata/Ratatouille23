@@ -19,7 +19,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
-    private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());;
+    private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     private EsploraCategorieMenuActivity esploraCategorieMenuActivity;
     private HomeNuovoElementoActivity homeNuovoElementoActivity;
     private CreaCategoriaActivity creaCategoriaActivity;

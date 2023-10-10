@@ -14,7 +14,9 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface CategoriaAPI {
@@ -32,6 +34,11 @@ public interface CategoriaAPI {
 
     @GET("api/v1/categoria/getNomiCategorie")
     Single<Response<List<String>>> getNomiCategorie();
+
+    @POST("api/v1/categoria/addFoto/{categoriaId}")
+    @Multipart
+    Single<Response<Void>> addFotoCategoria(@Path(value = "categoriaId", encoded = true)String id,
+                                            @Part("image") MultipartBody.Part filepart);
 
 
 }

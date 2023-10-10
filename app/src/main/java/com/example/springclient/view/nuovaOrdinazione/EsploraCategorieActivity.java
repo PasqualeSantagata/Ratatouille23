@@ -77,7 +77,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
-        buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
         //magari si fa l'entity categoria cosi si leggono da db
         //e si fa un metodo per associarre imageview alla foto e al nome della categoria

@@ -30,7 +30,7 @@ public class CreaCategoriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_categoria_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        getActionBar().setTitle("CREA CATEGORIA");
+        getSupportActionBar().setTitle("CREA CATEGORIA");
         categoriaPresenter = new CategoriaMenuPresenter(this);
 
         initializeComponents();
