@@ -22,6 +22,7 @@ import java.util.List;
 public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewCategoria {
     private RecyclerView recyclerViewImmagini;
     private RecycleViewAdapterCategoria adapterCategoria;
+
     private List<Categoria> categorieList ;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
