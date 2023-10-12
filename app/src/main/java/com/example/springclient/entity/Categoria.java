@@ -19,6 +19,11 @@ public class Categoria implements Serializable {
         this.id = id;
     }
 
+    public Categoria(String nome, Bitmap image) {
+        this.nome = nome;
+        this.image = image;
+    }
+
     public Categoria(String nome, List<ElementoMenu> elementi) {
         this.nome = nome;
         this.elementi = elementi;

@@ -38,7 +38,7 @@ public interface CategoriaAPI {
     @POST("api/v1/categoria/addFoto/{categoriaId}")
     @Multipart
     Single<Response<Void>> addFotoCategoria(@Path(value = "categoriaId", encoded = true)String id,
-                                            @Part("image") MultipartBody.Part filepart);
+                                            @Part MultipartBody.Part filepart);
 
 
 }

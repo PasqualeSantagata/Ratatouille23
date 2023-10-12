@@ -13,6 +13,7 @@ import com.example.springclient.view.gestioneMenu.CreaCategoriaActivity;
 import com.example.springclient.view.gestioneMenu.EsploraCategorieMenuActivity;
 import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
 
+import java.io.File;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -65,10 +66,28 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             @Override
             public void onSuccess(Response<Categoria> retData) {
                 if(retData.isSuccessful()){
+                    creaCategoriaActivity.salvaImmagine(retData.body().getId());
                     Log.d("retData: ", retData.body().toString());
                 }
             }
         });
+    }
+
+    public void addFotoCategoria(String id, File foto){
+        categoriaModel.addFotoCategoria(id, foto, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    creaCategoriaActivity.continuaInserimento();
+                }
+            }
+        });
+
     }
 
     @Override

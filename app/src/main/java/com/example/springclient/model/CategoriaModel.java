@@ -9,6 +9,7 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,6 +18,9 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
@@ -50,10 +54,28 @@ public class CategoriaModel implements CategoriaContract.Model {
                 });
 
     }
-    public void addFotoCategoria(String id, Bitmap foto){
-    
+    public void addFotoCategoria(String id, File foto, CallbackResponse<Void> categoriaCallback){
+        RequestBody requestFile = RequestBody.create(foto, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part fileBody = MultipartBody.Part.createFormData("image", foto.getName(), requestFile);
+        categoriaAPI.addFotoCategoria(id, fileBody)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
+                    }
 
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> response) {
+                        categoriaCallback.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
     }
 
 

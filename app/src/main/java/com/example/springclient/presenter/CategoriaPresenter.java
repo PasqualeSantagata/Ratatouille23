@@ -70,13 +70,7 @@ public class CategoriaPresenter implements CategoriaContract.Presenter {
         });
     }
 
-    public void addFotoCategoria(String id, Bitmap foto){
 
-
-
-
-
-    }
 
 
     @Override
