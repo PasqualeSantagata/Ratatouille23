@@ -41,6 +41,7 @@
     <string name="visualizza_altre_lingue">Visualizza altre lingue</string>
     <string name="riordina_elementi">Riordina elementi</string>
     <string name="salva">salva</string>
+    <string name="cercaEmoji">Cerca🔍</string>
 
     <string-array name="array_ruoli">
             <item>Addetto alla cucina</item>

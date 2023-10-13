@@ -64,13 +64,13 @@ public class RiordinaElementiActivity extends AppCompatActivity implements IRecy
         setElementiMenuRecycleView();
 
         buttonOk.setOnClickListener(view -> {
-            Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity.class);
+            Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
             //TODO Salva il nuovo ordine del menu
             startActivity(intent);
         });
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity.class);
+            Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
             intent.putExtra("elementi", (Serializable) elementiMenu);
             startActivity(intent);
         });

@@ -92,6 +92,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginBottom="50dp"
         android:text="@string/indietro"
+        app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -121,11 +122,13 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxArachidi"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/tfArachidi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -142,11 +145,13 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxAnidrideSolforosa"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/tfAnidride"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -168,11 +173,13 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxCrostacei"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/tfCrostacei"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -189,11 +196,13 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxFruttaGuscio"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/tfFruttaGuscio"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -215,11 +224,13 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxGlutine"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/tfGlutine"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -236,11 +247,13 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxLatte"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/tfLatte"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -262,6 +275,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxLupini"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -283,6 +297,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxMolluschi"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -309,6 +324,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxPesce"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -330,6 +346,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxSedano"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -356,6 +373,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxSenape"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -377,6 +395,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxSesamo"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -403,6 +422,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxSoia"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -424,6 +444,7 @@
                 android:gravity="left">
 
                 <CheckBox
+                    android:id="@+id/checkBoxUova"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left" />
@@ -465,6 +486,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
         android:text="@android:string/ok"
+        app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

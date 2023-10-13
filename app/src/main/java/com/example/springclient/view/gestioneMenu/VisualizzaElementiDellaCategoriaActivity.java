@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
+public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
 
     private TextInputLayout textInputLayoutPrezzo;
     private TextInputLayout textInputLayoutDescrizione;

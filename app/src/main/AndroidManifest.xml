@@ -207,7 +207,7 @@
         </activity>
 
         <activity
-            android:name=".view.gestioneMenu.VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity"
+            android:name=".view.gestioneMenu.VisualizzaElementiDellaCategoriaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"

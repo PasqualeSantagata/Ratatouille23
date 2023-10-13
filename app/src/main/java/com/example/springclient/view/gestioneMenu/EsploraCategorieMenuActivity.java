@@ -68,7 +68,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
 
     @Override
     public void onItemClick(int position) {
-        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaInserimentoNelMenuActivity.class);
+        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
         //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
         List<ElementoMenu> elementi = categorie.get(position).getElementi();
         intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementi);

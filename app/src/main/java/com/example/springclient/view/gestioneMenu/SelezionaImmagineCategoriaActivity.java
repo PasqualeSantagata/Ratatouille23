@@ -1,13 +1,13 @@
 package com.example.springclient.view.gestioneMenu;
 
+import static android.graphics.BitmapFactory.decodeResource;
+
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -15,7 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
@@ -50,7 +49,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                 R.drawable.categoria_pizza, R.drawable.categoria_secondi, R.drawable.categoria_sushi};
 
         for (int i : immagini){
-            categorieList.add(new Categoria(BitmapFactory.decodeResource(getResources(), i)));
+            categorieList.add(new Categoria(decodeResource(getResources(), i)));
         }
 
     }
