@@ -39,7 +39,6 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         this.inserisciElementoActivity = inserisciElementoActivity;
     }
-
     public ElementoMenuPresenter(StartGestioneMenuActivity gestioneMenuActivity){
         this.gestioneMenuActivity = gestioneMenuActivity;
     }
