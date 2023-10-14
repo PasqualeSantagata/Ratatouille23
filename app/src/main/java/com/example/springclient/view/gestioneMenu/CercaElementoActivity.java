@@ -3,6 +3,7 @@ package com.example.springclient.view.gestioneMenu;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -14,7 +15,7 @@ import com.example.springclient.R;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
-import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
+import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenuInfoBtn;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     private Button buttonCerca;
     private RecyclerView recyclerViewElementi;
     private ImageView imageViewButtonOnItem;
-    private RecycleViewAdapterGestioneElementoMenu adapter;
+    private RecycleViewAdapterGestioneElementoMenuInfoBtn adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
     private ElementoMenuPresenter presenter;
@@ -45,12 +46,9 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
         buttonCerca = findViewById(R.id.buttonCercaElemento);
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
-        imageViewButtonOnItem = findViewById(R.id.cancellaElementoImageView);
-        //Forse va messo dopo l'istanziazione della recycle view
-        imageViewButtonOnItem.setImageResource(R.drawable.ic_info);
 
         recyclerViewElementi = findViewById(R.id.recyclerViewElementiRicercati);
-        adapter = new RecycleViewAdapterGestioneElementoMenu(this, elementoMenuList, this);
+        adapter = new RecycleViewAdapterGestioneElementoMenuInfoBtn(this, elementoMenuList, this);
         recyclerViewElementi.setAdapter(adapter);
 
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
@@ -64,6 +62,16 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     public void setElementi(List<ElementoMenu> elementoMenuList){
         this.elementoMenuList = elementoMenuList;
         initializeComponents();
+    }
+
+    private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
+        EditText editText = textInputLayout.getEditText();
+        editText.setText(text);
+    }
+
+    private String getTextInputLayoutText (TextInputLayout textInputLayout){
+        EditText editText = textInputLayout.getEditText();
+        return editText.getText().toString();
     }
 
     @Override
