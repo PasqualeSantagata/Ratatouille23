@@ -3,6 +3,7 @@ package com.example.springclient.view.gestioneMenu;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     private Button buttonInditero;
     private Button buttonCerca;
     private RecyclerView recyclerViewElementi;
+    private ImageView imageViewButtonOnItem;
     private RecycleViewAdapterGestioneElementoMenu adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
@@ -43,6 +45,9 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
         buttonCerca = findViewById(R.id.buttonCercaElemento);
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
+        imageViewButtonOnItem = findViewById(R.id.cancellaElementoImageView);
+        //Forse va messo dopo l'istanziazione della recycle view
+        imageViewButtonOnItem.setImageResource(R.drawable.ic_info);
 
         recyclerViewElementi = findViewById(R.id.recyclerViewElementiRicercati);
         adapter = new RecycleViewAdapterGestioneElementoMenu(this, elementoMenuList, this);
@@ -50,6 +55,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewElementi.setLayoutManager(horizontal);
+
 
 
 
@@ -62,6 +68,11 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public void onButtonDeleted(int position){
 
     }
 }

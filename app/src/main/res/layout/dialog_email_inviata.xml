@@ -30,7 +30,7 @@
         android:text="@string/dialog_email_recupero_inviata"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/design_default_color_on_secondary"
-        android:textSize="26sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,9 +41,19 @@
         android:layout_width="334dp"
         android:layout_height="78dp"
         android:layout_marginTop="28dp"
-        android:text="Ok"
+        android:text="@android:string/ok"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewDialogEmailInviata"
         app:layout_constraintStart_toStartOf="@+id/textViewDialogEmailInviata"
         app:layout_constraintTop_toBottomOf="@+id/textViewDialogEmailInviata" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="111dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_esito_positivo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
