@@ -36,6 +36,10 @@ public class HomeModificaElemMenuActivity extends AppCompatActivity {
             Intent categorie = new Intent(this, EsploraCategorieMenuActivity.class);
             startActivity(categorie);
         });
+        buttonCerca.setOnClickListener(view -> {
+            Intent cerca = new Intent(this, CercaElementoActivity.class);
+            startActivity(cerca);
+        });
 
 
     }

@@ -66,7 +66,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu) {
-        elementoMenuModel.getAllElementiMenu(new CallbackResponse<Void>() {
+        elementoMenuModel.salvaElementoMenu(elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
@@ -95,20 +95,20 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     }
     @Override
     public void getAllElementiMenu() {
-        elementoMenuModel.getAllElementiMenu(new CallbackResponse<Void>() {
+        elementoMenuModel.getAllElementiMenu(new CallbackResponse<List<ElementoMenu>>() {
             @Override
             public void onFailure(Throwable t) {
-                Log.d("onFailure", t.getMessage());
+
             }
 
             @Override
-            public void onSuccess(Response<Void> retData) {
+            public void onSuccess(Response<List<ElementoMenu>> retData) {
                 if(retData.isSuccessful()){
-
-
+                    cercaElementoActivity.setElementi(retData.body());
                 }
             }
         });
+
     }
 
     @Override

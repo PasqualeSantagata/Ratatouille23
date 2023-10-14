@@ -40,39 +40,29 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
         });
     }
 
-    @Override
-    public void getAllElementiMenu(CallbackResponse<Void> elementoMenuCallback) {
 
-    }
-  /*  @Override
-    public void getAllElementiMenu(ElementoMenuCallback elementoMenuCallback) {
+    @Override
+    public void getAllElementiMenu(CallbackResponse<List<ElementoMenu>> elementoMenuCallback) {
         elementoMenuAPI.getAllElementoMenu()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<List<ElementoMenu>>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+
                     }
+
                     @Override
-                    public void onSuccess(@NonNull Response<List<ElementoMenu>> elementoMenus) {
-                        if(elementoMenus.isSuccessful()){
-                            elementoMenuCallback.onSuccess(elementoMenus.body());
-                        }
-                        else{
-                            assert elementoMenus.errorBody() != null;
-                            ApiError[] apiError = new Gson().fromJson(elementoMenus.errorBody().charStream(), ApiError[].class);
-                            List<String> listOfError = new ArrayList<>();
-                            for(ApiError a: apiError)
-                                listOfError.add(a.getMessage());
-                            elementoMenuCallback.onFinished(listOfError);
-                        }
+                    public void onSuccess(@NonNull Response<List<ElementoMenu>> listResponse) {
+                        elementoMenuCallback.onSuccess(listResponse);
                     }
+
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        elementoMenuCallback.onFailure(e);
+
                     }
                 });
-    }*/
+    }
 
     public void rimuoviElemento(CallbackResponse<Void> response, String id){
         elementoMenuAPI.rimuoviElemento(id)

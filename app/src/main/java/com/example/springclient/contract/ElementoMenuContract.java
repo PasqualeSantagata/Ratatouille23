@@ -9,7 +9,7 @@ public interface ElementoMenuContract {
     interface Model{
         void salvaElementoMenu(ElementoMenu elementoMenu, CallbackResponse<Void> elementoMenuCallback);
 
-        void getAllElementiMenu(CallbackResponse<Void> elementoMenuCallback);
+        void getAllElementiMenu(CallbackResponse<List<ElementoMenu>> elementoMenuCallback);
 
     }
 

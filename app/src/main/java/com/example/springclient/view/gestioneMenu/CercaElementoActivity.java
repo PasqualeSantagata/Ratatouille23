@@ -35,9 +35,8 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         getSupportActionBar().setTitle("CERCA ELEMENTO MENU");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         presenter = new ElementoMenuPresenter(this);
-       // elementoMenuList = presenter.getAllElementiMenu(); non cosi ma la list è da riempire
+        presenter.getAllElementiMenu();
 
-        initializeComponents();
     }
 
     private void initializeComponents() {
@@ -56,6 +55,10 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     }
 
+    public void setElementi(List<ElementoMenu> elementoMenuList){
+        this.elementoMenuList = elementoMenuList;
+        initializeComponents();
+    }
 
     @Override
     public void onItemClick(int position) {

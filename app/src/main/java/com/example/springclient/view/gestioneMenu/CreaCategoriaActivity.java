@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -68,11 +70,11 @@ public class CreaCategoriaActivity extends AppCompatActivity {
                 String nomeCategoria = textInputLayoutNomeCategoria.getEditText().getText().toString();
                 Categoria categoria = new Categoria(nomeCategoria);
                 if(immagineCategoria != null){
-                    immagineFile = new File(getApplicationContext().getFilesDir(), nomeCategoria + ".png");
+                    immagineFile = new File(getApplicationContext().getFilesDir(), nomeCategoria + ".jpeg");
                     OutputStream os;
                     try {
                         os = Files.newOutputStream(immagineFile.toPath());
-                        immagine.compress(Bitmap.CompressFormat.PNG, 100, os);
+                        immagine.compress(Bitmap.CompressFormat.JPEG, 100, os);
                         os.flush();
                         os.close();
                     } catch (Exception ignored){

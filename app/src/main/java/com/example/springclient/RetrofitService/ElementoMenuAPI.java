@@ -2,6 +2,8 @@ package com.example.springclient.RetrofitService;
 
 import com.example.springclient.entity.ElementoMenu;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -15,8 +17,8 @@ public interface ElementoMenuAPI {
     @POST("api/v1/elementoMenu")
     Call<Void> salvaElementoMenu(@Body ElementoMenu elementoMenu);
 
-  /*  @GET("api/v1/elementoMenu")
-    Single<Response<List<ElementoMenu>>> getAllElementoMenu();*/
+    @GET("api/v1/elementoMenu")
+    Single<Response<List<ElementoMenu>>> getAllElementoMenu();
 
     @GET("api/v1/elementoMenu/rimuoviElemento/{id}")
     Single<Response<Void>> rimuoviElemento(@Path(value = "id", encoded = true)String id);

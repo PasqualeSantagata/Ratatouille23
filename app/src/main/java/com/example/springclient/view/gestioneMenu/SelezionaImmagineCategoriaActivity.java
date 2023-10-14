@@ -24,6 +24,7 @@ import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +64,16 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                     if (uri != null) {
                         try {
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                            byte[] bytes = convertiImmagine(bitmap);
-                            caricaImmagine(bytes);
+                            int w = bitmap.getHeight();
+                            int h = bitmap.getHeight();
+                            if (h >= 200 && h <= 500 && w >= 200 && w <= 500) {
+                                byte[] bytes = convertiImmagine(bitmap);
+                                caricaImmagine(bytes);
+                            }
+                        } catch(IOException e){
+                                throw new RuntimeException(e);
+                            }
 
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
                         Log.d("PhotoPicker", "Selected URI: " + uri);
                     } else {
                         Log.d("PhotoPicker", "No media selected");
@@ -79,9 +84,8 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
             pickMedia.launch(new PickVisualMediaRequest.Builder()
                     .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                     .build());
+
         });
-
-
         setImmaginiRecycleView();
     }
 
@@ -97,9 +101,8 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
 
     public byte[] convertiImmagine(Bitmap bitmap){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] bytes = stream.toByteArray();
-        return bytes;
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        return stream.toByteArray();
     }
 
     public void caricaImmagine(byte[] immagine){
