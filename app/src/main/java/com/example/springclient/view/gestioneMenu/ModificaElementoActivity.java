@@ -1,5 +1,6 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,6 @@ import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ModificaElementoActivity extends AppCompatActivity implements CategoriaContract.View, AdapterView.OnItemSelectedListener {
@@ -28,6 +28,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     private TextInputLayout textInputLayoutPrezzo;
     private Button buttonOk;
     private Button buttonIndietro;
+    private Button buttonModificaAllergeni;
     private Spinner spinnerCategoria;
     private FloatingActionButton fabAggiungiCategoria;
     private ElementoMenu elementoMenu;
@@ -54,6 +55,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         textInputLayoutDescrizione.getEditText().setText((elementoMenu.getDescrizione()));
         textInputLayoutPrezzo.getEditText().setText(elementoMenu.getPrezzo().toString());
         fabAggiungiCategoria = findViewById(R.id.floatingModificaCategoria);
+        buttonModificaAllergeni = findViewById(R.id.buttonModificaAllergeni);
 
         spinnerCategoria = findViewById(R.id.spinnerCategoriaInserimentoNelMenu);
         spinnerCategoria.setOnItemSelectedListener(this);
@@ -70,6 +72,13 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
             }
         });
 
+        buttonModificaAllergeni.setOnClickListener(view -> {
+            Dialog dialogAllergeni = new Dialog(this);
+            dialogAllergeni.setContentView(R.layout.dialog_seleziona_allergene);
+
+            //bisogna associare le check box e le text view della tabella
+
+        });
 
     }
 
@@ -81,6 +90,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
     @Override
     public void setCategorie(List<Categoria> categorie) {
+
 
     }
 
