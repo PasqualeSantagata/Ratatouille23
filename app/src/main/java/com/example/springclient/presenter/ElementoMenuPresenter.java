@@ -3,6 +3,8 @@ package com.example.springclient.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.compose.ui.node.ModifiedFocusOrderNode;
+
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
@@ -10,6 +12,7 @@ import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.gestioneMenu.CercaElementoActivity;
+import com.example.springclient.view.gestioneMenu.ModificaElementoActivity;
 import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
 import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
 import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
@@ -35,6 +38,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
     private VisualizzaElementiDellaCategoriaActivity visualizzaElementiDellaCategoriaActivity;
     private CercaElementoActivity cercaElementoActivity;
+    private ModificaElementoActivity modificaElementoActivity;
 
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         this.inserisciElementoActivity = inserisciElementoActivity;
@@ -61,6 +65,9 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     public ElementoMenuPresenter(CercaElementoActivity cercaElementoActivity) {
         this.cercaElementoActivity = cercaElementoActivity;
+    }
+    public ElementoMenuPresenter(ModificaElementoActivity modificaElementoActivity){
+        this.modificaElementoActivity = modificaElementoActivity;
     }
 
     @Override
@@ -178,6 +185,21 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         }, id);
     }
 
+    public void modificaElementoMenu(ElementoMenu elementoMenu){
+        elementoMenuModel.modificaElementoMenu(elementoMenu, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    /* schermata modifica confermata sulla modificaElementoActivity*/
+                }
+            }
+        });
+    }
 
 
 

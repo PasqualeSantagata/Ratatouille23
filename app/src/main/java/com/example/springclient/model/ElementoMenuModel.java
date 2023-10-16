@@ -154,6 +154,28 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                 });
 
     }
+    public void modificaElementoMenu(ElementoMenu elementoMenu, CallbackResponse<Void> callbackResponse){
+        elementoMenuAPI.modificaElementoMenu(elementoMenu)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> response) {
+                        callbackResponse.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+    }
 
 
 }

@@ -82,6 +82,7 @@ public class ElementoMenu implements Serializable {
         return elencoAllergeni;
     }
 
+
     public void setElencoAllergeni(List<String> elencoAllergeni) {
         this.elencoAllergeni = elencoAllergeni;
     }

@@ -29,5 +29,8 @@ public interface ElementoMenuAPI {
     Single<Response<ElementoMenu>> restituisciTraduzione(@Path(value = "id", encoded = true)String id);
     @POST("api/v1/elementoMenu/restituisciLinguaBase/{id}")
     Single<Response<ElementoMenu>> restituisciLinguaBase(@Path(value = "id", encoded = true)String id);
+    @POST("api/v1/elementoMenu/modificaElemento")
+    Single<Response<Void>> modificaElementoMenu(@Body ElementoMenu elementoMenu);
+
 
 }

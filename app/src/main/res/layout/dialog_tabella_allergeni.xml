@@ -23,11 +23,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="left">
+
                 <CheckBox
                     android:id="@+id/checkBoxArachidi"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Peanuts" />
 
 
                 <ImageView
@@ -57,7 +59,8 @@
                     android:id="@+id/checkBoxAnidrideSolforosa"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Sulphites" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -92,7 +95,8 @@
                     android:id="@+id/checkBoxCrostacei"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="crustaceans" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -121,7 +125,8 @@
                     android:id="@+id/checkBoxFruttaGuscio"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Tree nuts" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -155,7 +160,8 @@
                     android:id="@+id/checkBoxGlutine"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Gluten" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -184,7 +190,8 @@
                     android:id="@+id/checkBoxLatte"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Milk" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -218,7 +225,8 @@
                     android:id="@+id/checkBoxLupini"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Lupin" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -247,7 +255,8 @@
                     android:id="@+id/checkBoxMolluschi"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Molluscs" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -281,7 +290,8 @@
                     android:id="@+id/checkBoxPesce"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Fish" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -310,7 +320,8 @@
                     android:id="@+id/checkBoxSedano"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Celery" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -344,7 +355,8 @@
                     android:id="@+id/checkBoxSenape"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Mustard" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -373,7 +385,8 @@
                     android:id="@+id/checkBoxSesamo"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Sesame" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -407,7 +420,8 @@
                     android:id="@+id/checkBoxSoia"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Soya" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -436,7 +450,8 @@
                     android:id="@+id/checkBoxUova"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="left" />
+                    android:layout_gravity="left"
+                    android:tag="Eggs" />
 
                 <ImageView
                     android:layout_width="wrap_content"

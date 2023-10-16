@@ -4,22 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_food_icons">
+    android:background="@drawable/background_food_icons"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="28dp">
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
         android:background="@drawable/design_button_rounded_green"
         android:text="@string/aggiungi_ad_un_altra_categoria"
         android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerCategoriaInserimentoNelMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
+        app:layout_constraintHorizontal_bias="0.314"
         app:layout_constraintStart_toEndOf="@+id/textInputLayoutModificaNome"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingModificaCategoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="152dp"
+        android:clickable="true"
+        app:backgroundTint="@color/my_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCategoriaInserimentoNelMenu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_add_fab"
+        app:tint="@color/white" />
+
+    <Spinner
+        android:id="@+id/spinnerCategoriaInserimentoNelMenu"
+        android:layout_width="489dp"
+        android:layout_height="63dp"
+
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/design_item_spinner"
+        app:layout_constraintBottom_toBottomOf="@+id/floatingModificaCategoria"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView8" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutModificaDescrizione"
@@ -45,10 +75,9 @@
         android:layout_height="52dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutModificaNome"
         android:hint="@string/prezzo"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutModificaNome">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="430dp"
@@ -63,43 +92,15 @@
         android:layout_height="52dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:hint="@string/nome"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="430dp"
             android:layout_height="match_parent"
-            android:background="@drawable/desing_rounded_green_tf"
-           />
+            android:background="@drawable/desing_rounded_green_tf" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/spinnerCategoriaInserimentoNelMenu"
-        android:layout_width="489dp"
-        android:layout_height="63dp"
-
-        android:background="@drawable/design_item_spinner"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingModificaCategoria"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintHorizontal_bias="0.268"
-        app:layout_constraintStart_toStartOf="@+id/textView8" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingModificaCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="108dp"
-        android:clickable="true"
-        app:backgroundTint="@color/my_green"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/spinnerCategoriaInserimentoNelMenu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_fab"
-        app:tint="@color/white" />
 
     <Button
         android:id="@+id/button8"
@@ -114,7 +115,7 @@
 
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/buttonOkModifica"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginEnd="100dp"
