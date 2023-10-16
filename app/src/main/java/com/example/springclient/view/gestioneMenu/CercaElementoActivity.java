@@ -1,9 +1,11 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,8 +22,15 @@ import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenuInfoBtn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.jakewharton.rxbinding4.widget.RxTextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
 
@@ -33,6 +42,9 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
     private ElementoMenuPresenter presenter;
+    private AutoCompleteTextView autoTextView;
+    private List<ElementoMenu> risultatiCerca;
+    private List<ElementoMenu> elementoMenuListApp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +57,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     }
 
+    @SuppressLint("CheckResult")
     private void initializeComponents() {
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
         buttonCerca = findViewById(R.id.buttonCercaElemento);
@@ -57,13 +70,39 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewElementi.setLayoutManager(horizontal);
 
+        autoTextView = (AutoCompleteTextView) textInputLayoutRicercaNome.getEditText();
+        RxTextView.textChanges(autoTextView)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        charSequence -> {
+                            if (charSequence != null && !charSequence.toString().isEmpty()) {
+                                for(ElementoMenu e: elementoMenuListApp){
+                                    if(!e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && elementoMenuList.contains(e)){
+                                        elementoMenuList.remove(e);
+                                    } else if (e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && !elementoMenuList.contains(e)) {
+                                        elementoMenuList.add(e);
+                                    }
+                                }
 
+                            }
+                            else{
+                                for(ElementoMenu e: elementoMenuListApp){
+                                    if(!elementoMenuList.contains(e)){
+                                        elementoMenuList.add(e);
+                                    }
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        });
 
 
     }
 
     public void setElementi(List<ElementoMenu> elementoMenuList){
         this.elementoMenuList = elementoMenuList;
+        this.elementoMenuListApp = new ArrayList<>();
+        elementoMenuListApp.addAll(elementoMenuList);
         initializeComponents();
     }
 
@@ -82,15 +121,15 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);
 
         //setto le text view e i buttons
-        FloatingActionButton fabModifica = findViewById(R.id.fabDialogDettagli);
-        Button buttonIndietro = findViewById(R.id.buttonIndietroDialogDettagli);
-        TextInputLayout textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
-        TextInputLayout textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniDialogDettagli);
-        TextInputLayout textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
+        FloatingActionButton fabModifica = dialogDettagli.findViewById(R.id.fabDialogDettagli);
+        Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagli);
+        TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
+        TextInputLayout textInputLayoutAllergeni = dialogDettagli.findViewById(R.id.textInputLayoutAllergeniDialogDettagli);
+        TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
 
         //Setto l'elemento menu di cui voglio vedere i dettagli
         setTextInputLayoutText(textInputLayoutPrezzo,elementoMenu.getPrezzo().toString());
-        setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
+        //setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
         dialogDettagli.show();
@@ -109,7 +148,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     public void onItemClick(int position) {
-
 
     }
 

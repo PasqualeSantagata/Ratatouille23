@@ -8,12 +8,16 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.view.gestioneMenu.CreaCategoriaActivity;
 import com.example.springclient.view.gestioneMenu.EsploraCategorieMenuActivity;
 import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
+import com.example.springclient.view.gestioneMenu.ModificaElementoActivity;
+import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -24,6 +28,9 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
     private EsploraCategorieMenuActivity esploraCategorieMenuActivity;
     private HomeNuovoElementoActivity homeNuovoElementoActivity;
     private CreaCategoriaActivity creaCategoriaActivity;
+    private List<String> nomiCategoria = new ArrayList<>();
+
+    private CategoriaContract.View categoriaView;
 
 
     public CategoriaMenuPresenter(EsploraCategorieMenuActivity esploraCategorieMenuActivity) {
@@ -37,6 +44,14 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
     public CategoriaMenuPresenter(CreaCategoriaActivity creaCategoriaActivity) {
         this.creaCategoriaActivity = creaCategoriaActivity;
     }
+    public CategoriaMenuPresenter(EsploraCategorieActivity esploraCategorieActivity){
+        this.categoriaView = esploraCategorieActivity;
+    }
+
+
+    public CategoriaMenuPresenter(ModificaElementoActivity modificaElementoActivity){
+        this.categoriaView = modificaElementoActivity;
+    };
 
     @Override
     public void getAllCategorie() {
@@ -120,10 +135,46 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             @Override
             public void onSuccess(Response<List<String>> retData) {
                 if(retData.isSuccessful()){
-                    homeNuovoElementoActivity.setCategorie(retData.body());
+                    categoriaView.setNomiCategorie(retData.body());
                 }
             }
         });
 
     }
+    public void getNomiCategoriaDisponibili(String id){
+        categoriaModel.getNomiCategoriaDisponibili(id, new CallbackResponse<List<String>>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<List<String>> retData) {
+                if(retData.isSuccessful()){
+                    categoriaView.setNomiCategorie(retData.body());
+                }
+            }
+        });
+
+    }
+    public void aggiungiElemento(String nome, ElementoMenu elementoMenu){
+        categoriaModel.aggiungiElemento(nome, elementoMenu, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    //elemento salvato correttamente
+                }
+            }
+        });
+    }
+
+
+
+
+
 }

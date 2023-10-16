@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
-import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
-import com.example.springclient.presenter.CategoriaPresenter;
-import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
@@ -28,11 +26,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria {
+public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria, CategoriaContract.View {
     private Ordinazione ordinazione;
     private Button buttonIndietro;
     private Button buttonRiepilogo;
-    private CategoriaContract.Presenter categoriaPresenter;
+    private CategoriaMenuPresenter categoriaPresenter;
 
     private List<Categoria> categorie;
     private RecycleViewAdapterCategoria adapterCategoria;
@@ -44,7 +42,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
 
 
-        categoriaPresenter = new CategoriaPresenter(this);
+        categoriaPresenter = new CategoriaMenuPresenter(this);
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         categoriaPresenter.getAllCategorie();
         //initializeComponents();
@@ -101,6 +99,12 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
     }
+
+    @Override
+    public void setNomiCategorie(List<String> nomiCategorie) {
+
+    }
+
     /*
     la foto viene recuperata in due passaggi in caso la connessione fosse lenta
      */

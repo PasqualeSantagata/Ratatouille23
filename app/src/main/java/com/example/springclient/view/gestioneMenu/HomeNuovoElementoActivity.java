@@ -14,13 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, CategoriaContract.View {
 
     private Spinner spinnerLingua;
     private Spinner spinnerCategoria;
@@ -44,7 +45,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
 
     }
 
-    private void initializeComponents() {
+    public void initializeComponents() {
         buttonIndietro = findViewById(R.id.buttonIndietroNuovoElemento);
         buttonOk = findViewById(R.id.buttonOkNuovoElemento);
         spinnerCategoria = findViewById(R.id.spinnerCategoriaHomeInserimentoNelMenu);
@@ -83,10 +84,17 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
 
     }
 
-    public void setCategorie(List<String> categorie) {
-        this.categorie = categorie;
+    @Override
+    public void setNomiCategorie(List<String> nomiCategorie) {
+        this.categorie = nomiCategorie;
         initializeComponents();
     }
+
+    @Override
+    public void setCategorie(List<Categoria> categorie) {
+
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

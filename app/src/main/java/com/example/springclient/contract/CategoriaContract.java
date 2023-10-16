@@ -19,6 +19,8 @@ public interface CategoriaContract {
 
     interface View{
         void initializeComponents();
+        void setNomiCategorie(List<String> nomiCategorie);
+        void setCategorie(List<Categoria> categorie);
 
     }
 

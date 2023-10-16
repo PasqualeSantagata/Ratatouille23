@@ -1,6 +1,7 @@
 package com.example.springclient.RetrofitService;
 
 import com.example.springclient.entity.Categoria;
+import com.example.springclient.entity.ElementoMenu;
 
 import java.util.List;
 
@@ -40,5 +41,9 @@ public interface CategoriaAPI {
     Single<Response<Void>> addFotoCategoria(@Path(value = "categoriaId", encoded = true)String id,
                                             @Part MultipartBody.Part filepart);
 
+    @GET("api/v1/categoria/getNomiCategorie/{id}")
+    Single<Response<List<String>>> getNomiCategoriaDisponibili(@Path(value = "id", encoded = true)String id);
+    @POST("api/v1/categoria/aggiungiElementoAllaCategoria/{categoria}")
+    Single<Response<Void>> aggiungiElemento(@Path(value = "categoria", encoded = true)String nome, @Body ElementoMenu elementoMenu);
 
 }

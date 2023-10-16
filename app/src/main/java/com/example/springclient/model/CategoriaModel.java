@@ -8,6 +8,7 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
+import com.example.springclient.entity.ElementoMenu;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -150,4 +152,51 @@ public class CategoriaModel implements CategoriaContract.Model {
 
 
     }
+    public void getNomiCategoriaDisponibili(String id, CallbackResponse<List<String>> callbackResponse){
+        categoriaAPI.getNomiCategoriaDisponibili(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<List<String>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<List<String>> responseBodyResponse) {
+                        callbackResponse.onSuccess(responseBodyResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+    }
+    public void aggiungiElemento(String nome, ElementoMenu elementoMenu, CallbackResponse<Void> callbackResponse){
+        categoriaAPI.aggiungiElemento(nome, elementoMenu)
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> response) {
+                        callbackResponse.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+
+    }
+
+
+
 }

@@ -30,7 +30,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prezzo" />
+                    android:hint="@string/prezzo"
+                    android:editable="false"
+                    tools:ignore="Deprecated"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +47,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/allergeni" />
+                    android:hint="@string/allergeni"
+                    android:editable="false"
+                    tools:ignore="Deprecated"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +64,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:hint="@string/descrizione" />
+                    android:hint="@string/descrizione"
+                    android:gravity="top|left"
+                    android:editable="false"
+                    tools:ignore="Deprecated"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton

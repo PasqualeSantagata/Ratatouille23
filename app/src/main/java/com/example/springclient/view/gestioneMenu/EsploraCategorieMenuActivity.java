@@ -61,6 +61,11 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
 
     }
 
+    @Override
+    public void setNomiCategorie(List<String> nomiCategori) {
+
+    }
+
     public void notifyAdapter(int posizione){
         adapterCategoria.notifyItemChanged(posizione);
     }
