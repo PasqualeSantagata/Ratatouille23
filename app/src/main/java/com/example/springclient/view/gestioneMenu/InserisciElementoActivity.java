@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -57,6 +58,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private List<ProdottoResponse> prodotti;
     private Disposable autocompDisposable;
     private String linguaInserita;
+    private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
+            checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
+            checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
+    private List<String> allergeni;
+    private List<CheckBox> checkBoxes;
 
 
     @Override
@@ -181,11 +187,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-        elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
+        //elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
         Log.e("prezzo:", prezzoElemento);
-        Collections.addAll(listOfAllergeni, elencoAllergeni);
-        elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, listOfAllergeni, lingua);
+        elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, allergeni, lingua);
         return  elementoMenu;
     }
 
@@ -197,7 +202,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-        elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
+       // elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
 
         if(nomeElemento.equals("")){
@@ -252,6 +257,65 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         adapter.notifyDataSetChanged();
 
 
+    }
+
+    public void listenerAllergeni(){
+        allergeni = new ArrayList<>();
+        checkBoxes = new ArrayList<>();
+        checkBoxes.add(checkBoxArachidi);
+        checkBoxes.add(checkBoxAnidrideSolforosa);
+        checkBoxes.add(checkBoxCrostacei);
+        checkBoxes.add(checkBoxFruttaGuscio);
+        checkBoxes.add(checkBoxGlutine);
+        checkBoxes.add(checkBoxLatte);
+        checkBoxes.add(checkBoxLupini);
+        checkBoxes.add(checkBoxMolluschi);
+        checkBoxes.add(checkBoxPesce);
+        checkBoxes.add(checkBoxSedano);
+        checkBoxes.add(checkBoxSenape);
+        checkBoxes.add(checkBoxSesamo);
+        checkBoxes.add(checkBoxSoia);
+        checkBoxes.add(checkBoxUova);
+        for(CheckBox c: checkBoxes){
+            String valore = (String)c.getTag();
+            if(allergeni.contains(valore)){
+                c.setChecked(true);
+            }
+            c.setOnCheckedChangeListener((compoundButton, b) -> {
+                if(b){
+                    if(!allergeni.contains(valore)){
+                        allergeni.add(valore);
+                    }
+                }
+                else{
+                    allergeni.remove(valore);
+                }
+            });
+
+        }
+
+    }
+
+
+    public void dialogAllergeni(){
+        Dialog dialogAllergeni = new Dialog(this);
+        dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
+        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxArachidi);
+        checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
+        checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
+        checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);
+        checkBoxGlutine = dialogAllergeni.findViewById(R.id.checkBoxGlutine);
+        checkBoxLatte = dialogAllergeni.findViewById(R.id.checkBoxLatte);
+        checkBoxLupini = dialogAllergeni.findViewById(R.id.checkBoxLupini);
+        checkBoxMolluschi = dialogAllergeni.findViewById(R.id.checkBoxMolluschi);
+        checkBoxPesce = dialogAllergeni.findViewById(R.id.checkBoxPesce);
+        checkBoxSedano = dialogAllergeni.findViewById(R.id.checkBoxSedano);
+        checkBoxSenape = dialogAllergeni.findViewById(R.id.checkBoxSenape);
+        checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
+        checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
+        checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
+        listenerAllergeni();
+        dialogAllergeni.show();
     }
 
     @Override

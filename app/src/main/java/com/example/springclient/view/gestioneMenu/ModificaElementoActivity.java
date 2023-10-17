@@ -152,7 +152,6 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
         listenerAllergeni();
         dialogAllergeni.show();
-
     }
 
     @Override
