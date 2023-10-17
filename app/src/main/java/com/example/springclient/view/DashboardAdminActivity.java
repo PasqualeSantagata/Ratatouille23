@@ -31,8 +31,6 @@ public class DashboardAdminActivity extends AppCompatActivity {
         initializeComponents();
 
 
-
-
     }
 
 
