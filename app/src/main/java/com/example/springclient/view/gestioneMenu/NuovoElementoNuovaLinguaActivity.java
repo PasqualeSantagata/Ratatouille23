@@ -27,7 +27,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
     private void initializeComponents() {
         textInputLayoutNome = findViewById(R.id.textInputLayout8);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneNuovaLinguaGestioneMenu);
-        textInputLayoutPrezzo =findViewById(R.id.textInputLayoutPrezzoNovaLingua);
+        textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoNovaLingua);
 
 
     }

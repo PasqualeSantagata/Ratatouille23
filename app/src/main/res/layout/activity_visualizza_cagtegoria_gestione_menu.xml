@@ -8,10 +8,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewPiattiCategoriaInserimentoNelMenu"
-        android:layout_width="455dp"
-        android:layout_height="623dp"
-        android:layout_marginStart="30dp"
+        android:layout_width="456dp"
+        android:layout_height="682dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonIndietroElemInserNelMenu"
         app:layout_constraintEnd_toStartOf="@+id/constraintLayout2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,42 +22,47 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="787dp"
         android:layout_height="653dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPrezzoInserimNelMenu"
+            android:id="@+id/textInputLayoutNomeInserimNelMenu"
             android:layout_width="610dp"
             android:layout_height="55dp"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="70dp"
-            android:hint="@string/prezzo"
+            android:layout_marginTop="30dp"
+            android:hint="@string/nome"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
+                android:background="@drawable/desing_rounded_green_tf"
+                android:editable="false"
+                tools:ignore="Deprecated" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutAllergeniInserimNelMenu"
+            android:id="@+id/textInputLayoutPrezzoInserimNelMenu"
             android:layout_width="610dp"
             android:layout_height="55dp"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="40dp"
-            android:hint="@string/allergeni"
+            android:layout_marginTop="50dp"
+            android:hint="@string/prezzo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrezzoInserimNelMenu">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomeInserimNelMenu">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/desing_rounded_green_tf"
+                android:editable="false"
+                android:inputType="numberDecimal"
+                tools:ignore="Deprecated" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -64,15 +70,18 @@
             android:layout_width="610dp"
             android:layout_height="190dp"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:hint="@string/descrizione"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAllergeniInserimNelMenu">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrezzoInserimNelMenu">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="179dp"
-                android:gravity="top|left"/>
+                android:background="@drawable/desing_rounded_green_tf"
+                android:editable="false"
+                android:gravity="top|left"
+                tools:ignore="Deprecated" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,6 +102,22 @@
             app:srcCompat="@android:drawable/ic_menu_edit"
             app:tint="@color/white"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/textViewAllergeniElementoGestioneMenu"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/design_button_rounded_green"
+            android:text="@string/allergeni"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.115"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneInserimNelMenu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

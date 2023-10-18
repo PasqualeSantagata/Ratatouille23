@@ -1,13 +1,15 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,16 +29,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
 
-    private TextInputLayout textInputLayoutPrezzo;
+    private TextInputLayout textInputLayouNome;
     private TextInputLayout textInputLayoutDescrizione;
-    private TextInputLayout textInputLayoutAllergeni;
+    private TextInputLayout textInputLayoutPrezzo;
     private FloatingActionButton fabModifica;
+    private TextView allergeniButton;
+    private List<String> allergeni;
+    private List<CheckBox> checkBoxes;
 
+    private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
+            checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
+            checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<ElementoMenu> elementiMenu;
     private Categoria categoria;
     private RecyclerView recyclerView;
@@ -96,15 +105,17 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                 startActivity(intent);
                 break;
             case R.id.lingue:
+                elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void initializeComponents(){
-        textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
+        textInputLayouNome = findViewById(R.id.textInputLayoutNomeInserimNelMenu);
         textInputLayoutDescrizione  = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
-        textInputLayoutAllergeni = findViewById(R.id.textInputLayoutAllergeniInserimNelMenu);
+        textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
+        allergeniButton = findViewById(R.id.textViewAllergeniElementoGestioneMenu);
         fabModifica = findViewById(R.id.fabModificaInserNelMenu);
         setElementiMenuRecycleView();
 
@@ -114,9 +125,73 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
             startActivity(intentModElemento);
         });
 
+        allergeniButton.setOnClickListener(view -> {
+            dialogAllergeni();
+        });
 
 
     }
+
+    public void listenerAllergeni(){
+        allergeni = new ArrayList<>();
+        checkBoxes = new ArrayList<>();
+        checkBoxes.add(checkBoxArachidi);
+        checkBoxes.add(checkBoxAnidrideSolforosa);
+        checkBoxes.add(checkBoxCrostacei);
+        checkBoxes.add(checkBoxFruttaGuscio);
+        checkBoxes.add(checkBoxGlutine);
+        checkBoxes.add(checkBoxLatte);
+        checkBoxes.add(checkBoxLupini);
+        checkBoxes.add(checkBoxMolluschi);
+        checkBoxes.add(checkBoxPesce);
+        checkBoxes.add(checkBoxSedano);
+        checkBoxes.add(checkBoxSenape);
+        checkBoxes.add(checkBoxSesamo);
+        checkBoxes.add(checkBoxSoia);
+        checkBoxes.add(checkBoxUova);
+        for(CheckBox c: checkBoxes){
+            String valore = (String)c.getTag();
+            c.setClickable(false);
+            if(allergeni.contains(valore)){
+                c.setChecked(true);
+            }
+            c.setOnCheckedChangeListener((compoundButton, b) -> {
+                if(b){
+                    if(!allergeni.contains(valore)){
+                        allergeni.add(valore);
+                    }
+                }
+                else{
+                    allergeni.remove(valore);
+                }
+            });
+
+        }
+
+    }
+
+
+    public void dialogAllergeni(){
+        Dialog dialogAllergeni = new Dialog(this);
+        dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
+        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxArachidi);
+        checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
+        checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
+        checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);
+        checkBoxGlutine = dialogAllergeni.findViewById(R.id.checkBoxGlutine);
+        checkBoxLatte = dialogAllergeni.findViewById(R.id.checkBoxLatte);
+        checkBoxLupini = dialogAllergeni.findViewById(R.id.checkBoxLupini);
+        checkBoxMolluschi = dialogAllergeni.findViewById(R.id.checkBoxMolluschi);
+        checkBoxPesce = dialogAllergeni.findViewById(R.id.checkBoxPesce);
+        checkBoxSedano = dialogAllergeni.findViewById(R.id.checkBoxSedano);
+        checkBoxSenape = dialogAllergeni.findViewById(R.id.checkBoxSenape);
+        checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
+        checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
+        checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
+        listenerAllergeni();
+        dialogAllergeni.show();
+    }
+
 
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
@@ -143,8 +218,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     public void setParameters(ElementoMenu elementoMenu){
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
-        //Attenzione controllare il to string default di List
-       // setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
+        setTextInputLayoutText(textInputLayouNome, elementoMenu.getNome());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
     }
 
@@ -170,7 +244,8 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     public void mostraTraduzione(ElementoMenu elementoMenu){
-        Log.d("Traduzione: ", elementoMenu.getNome() + " " + elementoMenu.getDescrizione());
+      //  Log.d("Traduzione: ", elementoMenu.getNome() + " " + elementoMenu.getDescrizione());
+        setParameters(elementoMenu);
     }
 
 }

@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,7 +53,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
             checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
-    private Spinner spinnerLingua;
     private String linguaSelezionata;
     private List<String> lingue;
     private String categoriaSelezionata;
@@ -90,7 +88,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         //adapter suggeritore nome elementi
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setThreshold(3);
-
         autocompDisposable =
             RxTextView.afterTextChangeEvents(autoTextView)
             .debounce(500, TimeUnit.MILLISECONDS)

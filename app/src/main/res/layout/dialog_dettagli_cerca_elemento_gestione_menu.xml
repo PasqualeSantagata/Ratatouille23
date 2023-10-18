@@ -36,49 +36,32 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutAllergeniDialogDettagli"
+                android:id="@+id/textInputLayoutDescrizioneDialogDettagli"
                 android:layout_width="430dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="42dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPrezzoDialogDettagli">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/allergeni"
-                    android:editable="false"
-                    tools:ignore="Deprecated"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutDescrizioneDialogDettagli"
-                android:layout_width="430dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="42dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutAllergeniDialogDettagli">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:hint="@string/descrizione"
-                    android:gravity="top|left"
                     android:editable="false"
-                    tools:ignore="Deprecated"/>
+                    android:gravity="top|left"
+                    android:hint="@string/descrizione"
+                    tools:ignore="Deprecated" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabDialogDettagli"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="156dp"
                 android:clickable="true"
                 app:backgroundTint="@color/my_green"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.889"
+                app:layout_constraintHorizontal_bias="0.886"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneDialogDettagli"
                 app:srcCompat="@android:drawable/ic_menu_edit"
