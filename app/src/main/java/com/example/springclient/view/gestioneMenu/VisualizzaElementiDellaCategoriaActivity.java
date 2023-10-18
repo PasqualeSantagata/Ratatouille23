@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -188,6 +189,11 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
         checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
         checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
+        Button buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
+        buttonOkDialog.setOnClickListener(view -> {
+            dialogAllergeni.dismiss();
+        });
+
         listenerAllergeni();
         dialogAllergeni.show();
     }
