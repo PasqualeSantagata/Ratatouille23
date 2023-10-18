@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +24,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -35,9 +32,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
 
     private Button buttonInditero;
-    private Button buttonCerca;
     private RecyclerView recyclerViewElementi;
-    private ImageView imageViewButtonOnItem;
     private RecycleViewAdapterGestioneElementoMenuInfoBtn adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
@@ -55,12 +50,12 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         presenter = new ElementoMenuPresenter(this);
         presenter.getAllElementiMenu();
 
+
     }
 
     @SuppressLint("CheckResult")
     private void initializeComponents() {
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
-        buttonCerca = findViewById(R.id.buttonCercaElemento);
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
 
         recyclerViewElementi = findViewById(R.id.recyclerViewElementiRicercati);
@@ -96,6 +91,11 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                             adapter.notifyDataSetChanged();
                         });
 
+
+        buttonInditero.setOnClickListener(view -> {
+            Intent intent = new Intent(this, StartGestioneMenuActivity.class);
+            startActivity(intent);
+        });
 
     }
 

@@ -1,15 +1,14 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
@@ -43,6 +42,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
             checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
             checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
+    private Button buttonOkDialog;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
     private ElementoMenuPresenter elementoMenuPresenter;
@@ -56,6 +56,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         categoriaMenuPresenter = new CategoriaMenuPresenter(this);
         elementoMenuPresenter = new ElementoMenuPresenter(this);
         categoriaMenuPresenter.getNomiCategoriaDisponibili(elementoMenu.getId().toString());
+
     }
 
     public void initializeComponents() {
@@ -67,7 +68,9 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         textInputLayoutPrezzo.getEditText().setText(elementoMenu.getPrezzo().toString());
         fabAggiungiCategoria = findViewById(R.id.floatingModificaCategoria);
         buttonModificaAllergeni = findViewById(R.id.buttonModificaAllergeni);
-        buttonOk = findViewById(R.id.buttonOkModifica);
+        buttonIndietro = findViewById(R.id.buttonIndietroModElemGestioneMenu);
+      //  buttonOk = findViewById(R.id.buttonOkModifica);
+
 
         spinnerCategoria = findViewById(R.id.spinnerCategoriaInserimentoNelMenu);
         spinnerCategoria.setOnItemSelectedListener(this);
@@ -90,6 +93,10 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         buttonOk.setOnClickListener(view -> {
             elementoMenuPresenter.modificaElementoMenu(elementoMenu);
 
+        });
+        buttonIndietro.setOnClickListener(view -> {
+            Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
+            startActivity(intent);
         });
 
     }
@@ -136,6 +143,8 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     public void dialogAllergeni(){
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
+
+        buttonOkDialog = findViewById(R.id.buttonOkTabellaAllergeniDialog);
         checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxArachidi);
         checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
         checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
@@ -152,6 +161,10 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
         listenerAllergeni();
         dialogAllergeni.show();
+
+        buttonOkDialog.setOnClickListener(view -> {
+            dialogAllergeni.dismiss();
+        });
     }
 
     @Override

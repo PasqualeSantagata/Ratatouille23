@@ -109,7 +109,9 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         setElementiMenuRecycleView();
 
         fabModifica.setOnClickListener(view -> {
-            //prende l'elemento corrente e passa le info a modifica elemento
+            Intent intentModElemento = new Intent(this, ModificaElementoActivity.class);
+            intentModElemento.putExtra("elementoMenu", elementoSelezionato);
+            startActivity(intentModElemento);
         });
 
 

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.view.DashboardAdminActivity;
 
 public class StartGestioneMenuActivity extends AppCompatActivity {
     private Button buttonIndietro;
@@ -27,6 +28,7 @@ public class StartGestioneMenuActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initializeComponents();
 
+
     }
 
     private void initializeComponents(){
@@ -35,8 +37,8 @@ public class StartGestioneMenuActivity extends AppCompatActivity {
         buttonModificaElementi = findViewById(R.id.buttonModElemMenù);
 
         buttonIndietro.setOnClickListener(view -> {
-            /*Intent intent = new Intent(this, InserisciElementoActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(this, DashboardAdminActivity.class);
+            startActivity(intent);
         });
 
         buttonAggiungiElementi.setOnClickListener(view -> {

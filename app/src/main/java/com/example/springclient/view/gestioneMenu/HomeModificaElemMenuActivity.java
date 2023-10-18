@@ -23,14 +23,15 @@ public class HomeModificaElemMenuActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Modifica Elemento del Menù");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_home_modifica_elem_gestione_menu);
-        initializeComponents();
 
+        initializeComponents();
     }
 
 
     private void initializeComponents() {
         buttonCategorie = findViewById(R.id.espoloraCategoriaHomeModificaButton);
         buttonCerca = findViewById(R.id.cercaHomeModificaButton);
+        buttonIndietro = findViewById(R.id.buttonIndietroHomeModElemGestioneMenu);
 
         buttonCategorie.setOnClickListener(view -> {
             Intent categorie = new Intent(this, EsploraCategorieMenuActivity.class);
@@ -40,7 +41,10 @@ public class HomeModificaElemMenuActivity extends AppCompatActivity {
             Intent cerca = new Intent(this, CercaElementoActivity.class);
             startActivity(cerca);
         });
-
+        buttonIndietro.setOnClickListener(view -> {
+            Intent indietro = new Intent(this, HomeNuovoElementoActivity.class);
+            startActivity(indietro);
+        });
 
     }
 }

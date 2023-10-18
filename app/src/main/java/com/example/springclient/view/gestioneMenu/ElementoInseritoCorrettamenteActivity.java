@@ -20,11 +20,13 @@ public class ElementoInseritoCorrettamenteActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_elem_inserito_gestione_menu);
 
-
         buttonOk = findViewById(R.id.buttonOkElemInserito);
         buttonOk.setOnClickListener(view -> {
             Intent dashIntent = new Intent(this, DashboardAdminActivity.class);
             startActivity(dashIntent);
         });
     }
+
+
+
 }
