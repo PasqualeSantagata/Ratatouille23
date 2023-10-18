@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,6 +34,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View , AdapterView.OnItemSelectedListener{
+
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
@@ -53,6 +54,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
             checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
+    private Spinner spinnerLingua;
     private String linguaSelezionata;
     private List<String> lingue;
     private String categoriaSelezionata;
@@ -87,9 +89,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         //adapter suggeritore nome elementi
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggeriti);
-        autoTextView.setThreshold(3);
+
+
         autocompDisposable =
-            RxTextView.afterTextChangeEvents(autoTextView)
+            RxTextView.textChangeEvents(autoTextView)
             .debounce(500, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -99,25 +102,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
                             foodFactsPresenter.getElementoMenuDetails(editable.toString());
                         }
                     });
-
-
-        autoTextView.setOnItemClickListener(
-                (adapterView, view, i, l) -> {
-                    String descrizione = prodotti.get(i).getGeneric_name();
-                    if(descrizione == null) {
-                        Toast.makeText(this, "Descrizione non disponibile", Toast.LENGTH_SHORT).show();
-
-                    }
-                    descrizioneTextInputLayout.getEditText().setText(descrizione);
-                    if (prodotti.get(i).getAllergens()!= null){
-                        /** traduci allergeni da allergens.json*/
-
-
-                    }
-                    else{
-                        //elencoAllergeniTextInputLayout.setHint("allergeni non trovati");
-                    }
-                });
 
         //Buttons
         okButton = findViewById(R.id.buttonInserElemOk);
@@ -142,19 +126,15 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     @Override
     public ElementoMenu getElementoValues() {
         String nomeElemento, prezzoElemento;
-        String[] elencoAllergeni;
-        String descrizione, lingua = "Italiano";
+        String descrizione;
 
         ElementoMenu elementoMenu;
 
-        List<String> listOfAllergeni = new ArrayList<>();
 
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-        //elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
-        Log.e("prezzo:", prezzoElemento);
-        elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, allergeni, lingua);
+        elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, allergeni, linguaSelezionata);
         return  elementoMenu;
     }
 
@@ -221,7 +201,9 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     }
 
     public void listenerAllergeni(){
-        allergeni = new ArrayList<>();
+        if(allergeni == null) {
+            allergeni = new ArrayList<>();
+        }
         checkBoxes = new ArrayList<>();
         checkBoxes.add(checkBoxArachidi);
         checkBoxes.add(checkBoxAnidrideSolforosa);
@@ -275,6 +257,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
         checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
         checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
+        Button buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
+        buttonOkDialog.setOnClickListener(view -> {
+            dialogAllergeni.dismiss();
+        });
+
         listenerAllergeni();
         dialogAllergeni.show();
     }

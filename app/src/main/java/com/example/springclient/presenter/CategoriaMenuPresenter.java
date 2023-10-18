@@ -38,7 +38,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
     }
 
     public CategoriaMenuPresenter(HomeNuovoElementoActivity homeNuovoElementoActivity) {
-        this.homeNuovoElementoActivity = homeNuovoElementoActivity;
+        this.categoriaView = homeNuovoElementoActivity;
     }
 
     public CategoriaMenuPresenter(CreaCategoriaActivity creaCategoriaActivity) {
