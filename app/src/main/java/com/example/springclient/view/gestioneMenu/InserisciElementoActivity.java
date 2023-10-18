@@ -139,40 +139,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         });
         indietroButton.setOnClickListener(view -> {
         });
-
-        Dialog selezionaAllergeni = new Dialog(this);
-        Chip c = selezionaAllergeni.findViewById(R.id.chip1);
-
-        linguaInserita = "Italiano";
-        switch (linguaInserita){
-            case "Italiano":
-                selezionaAllergeni.setContentView(R.layout.dialog_seleziona_allergene);
-                filename = "allergeni";
-                break;
-            case "Inglese":
-                filename = "allergeni_eng";
-                break;
-        }
-
-        elencoAllergeniTextInputLayout.setOnClickListener(view -> {
-
-        });
-        InputStream ins = getResources().openRawResource(
-                getResources().getIdentifier(filename,
-                        "raw", getPackageName()));
-        BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(ins));
-        String eachline = null;
-        try {
-            eachline = bufferedReader.readLine();
-            while (eachline != null) {
-                String[] words = eachline.split("\\n ");
-                eachline = bufferedReader.readLine();
-                Log.d("allergens: ", words[0]);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        
     }
 
     @Override
