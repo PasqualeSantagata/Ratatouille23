@@ -63,4 +63,15 @@
             <item>Supervisore </item>
         </string-array>
 
+    <string-array name="array_lingue">
+        <item>Italiano</item>
+        <item>English</item>
+        <item>Español</item>
+        <item>Deutsch </item>
+        <item>Português </item>
+        <item>Français </item>
+        <item>Polski </item>
+        <item>Nederlands </item>
+    </string-array>
+
 </resources>

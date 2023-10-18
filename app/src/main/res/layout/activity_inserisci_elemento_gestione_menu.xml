@@ -74,20 +74,19 @@
         android:id="@+id/TextInputLayoutPrezzoInserisciElementoMenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
         android:hint="@string/prezzo"
         app:boxStrokeColor="@color/my_green"
         app:hintTextColor="@color/my_green"
+
         app:layout_constraintEnd_toEndOf="parent"
 
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutNomeInserisciElementoMenu"
-
-
-        >
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutNomeInserisciElementoMenu">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditTextPrezzoInserisciElementoMenu"
@@ -119,7 +118,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputTextFieldDescrizioneInserisciElementoMenu"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="match_parent"
             android:background="@drawable/desing_rounded_green_tf"
             android:gravity="top|left"
             android:inputType="textMultiLine"
@@ -157,5 +156,32 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonInserisciElementoGestioneMenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutPrezzoInserisciElementoMenu" />
+
+    <Spinner
+        android:id="@+id/spinnerLingueInserisciElemento"
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toEndOf="@+id/TextInputLayoutNomeInserisciElementoMenu"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="376dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="243dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/design_button_rounded_green"
+        android:text="Lingue"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/TextInputLayoutNomeInserisciElementoMenu"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

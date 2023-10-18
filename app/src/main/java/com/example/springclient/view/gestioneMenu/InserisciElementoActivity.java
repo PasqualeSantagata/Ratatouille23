@@ -7,10 +7,13 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,18 +28,18 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View {
+public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View , AdapterView.OnItemSelectedListener{
 
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
-    private TextInputLayout elencoAllergeniTextInputLayout;
     private TextInputLayout descrizioneTextInputLayout;
     private Button okButton;
     private Button indietroButton;
@@ -48,12 +51,14 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private ArrayAdapter<String> adapter;
     private List<ProdottoResponse> prodotti;
     private Disposable autocompDisposable;
-    private String linguaInserita;
     private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
             checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
             checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
+    private Spinner spinnerLingua;
+    private String linguaSelezionata;
+    private List<String> lingue;
 
 
     @Override
@@ -79,6 +84,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         okButton = findViewById(R.id.buttonInserElemOk);
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
         inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
+        spinnerLingua = findViewById(R.id.spinnerLingueInserisciElemento);
+        spinnerLingua.setOnItemSelectedListener(this);
+
+        lingue = Arrays.asList(getResources().getStringArray(R.array.array_lingue));
+        ArrayAdapter adapterLingue = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lingue);
+        adapterLingue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLingua.setAdapter(adapterLingue);
 
 
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
@@ -117,7 +129,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
                     }
                     else{
-                        elencoAllergeniTextInputLayout.setHint("allergeni non trovati");
+                        //elencoAllergeniTextInputLayout.setHint("allergeni non trovati");
                     }
                 });
 
@@ -198,7 +210,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     public void cleanFields() {
         nomeElementoTextInputLayout.getEditText().setText("");
         prezzoElementoTextInputLayout.getEditText().setText("");
-        elencoAllergeniTextInputLayout.getEditText().setText("");
         descrizioneTextInputLayout.getEditText().setText("");
     }
 
@@ -285,5 +296,15 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     protected void onDestroy() {
         super.onDestroy();
         autocompDisposable.dispose();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        linguaSelezionata = lingue.get(i);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
