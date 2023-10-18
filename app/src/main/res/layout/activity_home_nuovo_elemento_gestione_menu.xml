@@ -31,41 +31,67 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerLinguaHomeInserimentoNelMenu"
+        android:id="@+id/spinnerLingueHomeInserisciElemento"
         android:layout_width="500dp"
         android:layout_height="60dp"
-        android:layout_marginStart="390dp"
-        android:layout_marginEnd="376dp"
-        android:layout_marginBottom="96dp"
-        android:background="@drawable/design_item_spinner"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
+        android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <Spinner
         android:id="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         android:layout_width="500dp"
         android:layout_height="60dp"
-        android:layout_marginStart="390dp"
-        android:layout_marginBottom="312dp"
-        android:background="@drawable/design_item_spinner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAggiungiCategoriaNuovoElementoGestioneMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="300dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="144dp"
         android:clickable="true"
         app:backgroundTint="@color/my_green"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerLinguaHomeInserimentoNelMenu"
-        app:layout_constraintVertical_bias="0.98"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOkNuovoElemento"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCategoriaHomeInserimentoNelMenu"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLingueHomeInserisciElemento"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_add_fab"
         app:tint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="376dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="176dp"
+        android:background="@drawable/design_button_rounded_green"
+        android:text="@string/lingue"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="376dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/design_button_rounded_green"
+        android:text="@string/categorie"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLingueHomeInserisciElemento" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

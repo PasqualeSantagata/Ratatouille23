@@ -69,7 +69,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         fabAggiungiCategoria = findViewById(R.id.floatingModificaCategoria);
         buttonModificaAllergeni = findViewById(R.id.buttonModificaAllergeni);
         buttonIndietro = findViewById(R.id.buttonIndietroModElemGestioneMenu);
-      //  buttonOk = findViewById(R.id.buttonOkModifica);
+        buttonOk = findViewById(R.id.buttonOkModifica);
 
 
         spinnerCategoria = findViewById(R.id.spinnerCategoriaInserimentoNelMenu);
@@ -144,7 +144,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
 
-        buttonOkDialog = findViewById(R.id.buttonOkTabellaAllergeniDialog);
+        buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
         checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxArachidi);
         checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
         checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);

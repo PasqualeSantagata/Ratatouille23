@@ -28,7 +28,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +35,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View , AdapterView.OnItemSelectedListener{
-
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
@@ -59,7 +57,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private Spinner spinnerLingua;
     private String linguaSelezionata;
     private List<String> lingue;
-
+    private String categoriaSelezionata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +68,9 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
         elementoMenuPresenter = new ElementoMenuPresenter(this);
         foodFactsPresenter = new FoodFactsPresenter(this);
-        //linguaInserita = getIntent().getStringExtra("lingua");
+        linguaSelezionata = getIntent().getStringExtra("lingua");
+        categoriaSelezionata = getIntent().getStringExtra("categoria");
+
         initializeComponents();
     }
 
@@ -81,18 +81,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
     @Override
     public void initializeComponents() {
-        okButton = findViewById(R.id.buttonInserElemOk);
-        indietroButton = findViewById(R.id.buttonInserElemIndietro);
-        inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
-        spinnerLingua = findViewById(R.id.spinnerLingueInserisciElemento);
-        spinnerLingua.setOnItemSelectedListener(this);
-
-        lingue = Arrays.asList(getResources().getStringArray(R.array.array_lingue));
-        ArrayAdapter adapterLingue = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lingue);
-        adapterLingue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerLingua.setAdapter(adapterLingue);
-
-
+        //Text
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
         prezzoElementoTextInputLayout = findViewById(R.id.TextInputLayoutPrezzoInserisciElementoMenu);
         descrizioneTextInputLayout = findViewById(R.id.TextInputLayoutDescrizioneInserisciElementoMenu);
@@ -133,7 +122,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
                     }
                 });
 
-
+        //Buttons
+        okButton = findViewById(R.id.buttonInserElemOk);
+        indietroButton = findViewById(R.id.buttonInserElemIndietro);
+        inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
         okButton.setOnClickListener(view -> {
             if(checkFields()) {
                 ElementoMenu elementoMenu = getElementoValues();
@@ -229,8 +221,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         adapter = new ArrayAdapter<>(InserisciElementoActivity.this,android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-
     }
 
     public void listenerAllergeni(){

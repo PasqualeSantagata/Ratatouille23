@@ -18,7 +18,7 @@ import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, CategoriaContract.View {
@@ -32,6 +32,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     private List<String> categorie;
     private List<String> lingue;
     private String categoriaSelezionata;
+    private String linguaSelezionata;
 
 
     @Override
@@ -46,17 +47,17 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     }
 
     public void initializeComponents() {
-        buttonIndietro = findViewById(R.id.buttonIndietroNuovoElemento);
-        buttonOk = findViewById(R.id.buttonOkNuovoElemento);
+        //Spinner lingua
+        spinnerLingua = findViewById(R.id.spinnerLingueHomeInserisciElemento);
+        spinnerLingua.setOnItemSelectedListener(this);
+        lingue = Arrays.asList(getResources().getStringArray(R.array.array_lingue));
+        ArrayAdapter adapterLingue = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lingue);
+        adapterLingue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLingua.setAdapter(adapterLingue);
+
+        //Spinner categoria
         spinnerCategoria = findViewById(R.id.spinnerCategoriaHomeInserimentoNelMenu);
         spinnerCategoria.setOnItemSelectedListener(this);
-        spinnerLingua =  findViewById(R.id.spinnerLinguaHomeInserimentoNelMenu);
-        fabAggiungiCategoria = findViewById(R.id.fabAggiungiCategoriaNuovoElementoGestioneMenu);
-
-        spinnerLingua.setOnItemSelectedListener(this);
-
-        lingue = new ArrayList<>();
-
         ArrayAdapter adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorie);
         adapterCategorie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapterCategorie);
@@ -65,9 +66,14 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         //SpinnerAdapterCategorie spinnerAdapterCategorie = new SpinnerAdapterCategorie(this,categorie);
         //spinnerCategoria.setAdapter(spinnerAdapterCategorie);
 
+        //Buttons
+        buttonIndietro = findViewById(R.id.buttonIndietroNuovoElemento);
+        buttonOk = findViewById(R.id.buttonOkNuovoElemento);
+        fabAggiungiCategoria = findViewById(R.id.fabAggiungiCategoriaNuovoElementoGestioneMenu);
         buttonOk.setOnClickListener(view -> {
             Intent intent = new Intent(this, InserisciElementoActivity.class);
             intent.putExtra("categoria", categoriaSelezionata);
+            intent.putExtra("lingua", linguaSelezionata);
             startActivity(intent);
         });
 
@@ -95,10 +101,14 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
 
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        categoriaSelezionata = categorie.get(i);
+        if (adapterView.getId() == R.id.spinnerCategoriaHomeInserimentoNelMenu) {
+            categoriaSelezionata = categorie.get(i);
+        } else if (adapterView.getId()  == R.id.spinnerLingueHomeInserisciElemento) {
+            linguaSelezionata = lingue.get(i);
+        }
+
     }
 
     @Override

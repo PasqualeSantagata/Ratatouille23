@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_food_icons">
 
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="376dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="176dp"
+        android:background="@drawable/design_button_rounded_green"
+        android:text="@string/lingue"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/buttonOkSelezionaLinguaGestioneMenu"
         android:layout_width="180dp"
@@ -32,9 +47,8 @@
         android:id="@+id/spinnerSelezionaLinguaGestioneMenu"
         android:layout_width="500dp"
         android:layout_height="60dp"
-        android:layout_marginTop="209dp"
-        android:background="@drawable/design_item_spinner"
+        android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 </androidx.constraintlayout.widget.ConstraintLayout>

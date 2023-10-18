@@ -56,6 +56,8 @@
     <string name="sesame">"  Sesame"</string>
     <string name="eggs">"  Eggs"</string>
     <string name="aggiungi_ad_un_altra_categoria">"  Aggiungi ad un'altra categoria  "</string>
+    <string name="categorie">Categorie</string>
+    <string name="lingue">Lingue</string>
 
     <string-array name="array_ruoli">
             <item>Addetto alla cucina</item>
