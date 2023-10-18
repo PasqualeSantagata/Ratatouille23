@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,17 +21,10 @@ import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.FoodFactsPresenter;
-import com.example.springclient.view.adapters.SpinnerAdapterCategorie;
-import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -48,10 +40,9 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
     private TextInputLayout descrizioneTextInputLayout;
     private Button okButton;
     private Button indietroButton;
+    private Button inserisciButton;
     private ElementoMenuPresenter elementoMenuPresenter;
     private FoodFactsPresenter foodFactsPresenter;
-    private Spinner spinnerCategorie;
-    private SpinnerAdapterCategorie spinnerAdapterCategorie;
     private AutoCompleteTextView autoTextView;
     private List<String> suggeriti;
     private ArrayAdapter<String> adapter;
@@ -85,13 +76,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
 
     @Override
     public void initializeComponents() {
-        String filename = null;/** todo */
         okButton = findViewById(R.id.buttonInserElemOk);
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
+        inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
+
 
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
         prezzoElementoTextInputLayout = findViewById(R.id.TextInputLayoutPrezzoInserisciElementoMenu);
-        elencoAllergeniTextInputLayout = findViewById(R.id.TextInputLayoutAllergeniInserisciElementoMenu);
         descrizioneTextInputLayout = findViewById(R.id.TextInputLayoutDescrizioneInserisciElementoMenu);
         autoTextView = (AutoCompleteTextView) nomeElementoTextInputLayout.getEditText();
 
@@ -138,6 +129,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
             }
         });
         indietroButton.setOnClickListener(view -> {
+            Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
+            startActivity(intentHome);
+        });
+        inserisciButton.setOnClickListener(view -> {
+            dialogAllergeni();
         });
         
     }

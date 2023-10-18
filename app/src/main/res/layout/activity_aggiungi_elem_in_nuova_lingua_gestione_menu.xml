@@ -30,6 +30,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/desing_rounded_green_tf"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,6 +48,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/desing_rounded_green_tf"
 
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,6 +67,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/desing_rounded_green_tf"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
+            android:background="@drawable/desing_rounded_green_tf"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -119,6 +124,7 @@
                 app:srcCompat="@drawable/cambia_lingua_new" />
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputLayoutLinguaCorrenteInserisciElemSecondaLingua"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:background="@color/my_green"
