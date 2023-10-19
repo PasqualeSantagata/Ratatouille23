@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
@@ -29,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
-public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
+public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu, ElementoMenuContract.View {
 
     private Button buttonInditero;
     private RecyclerView recyclerViewElementi;
@@ -54,7 +55,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     }
 
     @SuppressLint("CheckResult")
-    private void initializeComponents() {
+    public void initializeComponents() {
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
 
@@ -99,6 +100,11 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     }
 
+    @Override
+    public void mostraTraduzione(ElementoMenu elementoMenu) {
+
+    }
+
     public void setElementi(List<ElementoMenu> elementoMenuList){
         this.elementoMenuList = elementoMenuList;
         this.elementoMenuListApp = new ArrayList<>();
@@ -124,7 +130,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         FloatingActionButton fabModifica = dialogDettagli.findViewById(R.id.fabDialogDettagli);
         Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagli);
         TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
-        TextInputLayout textInputLayoutAllergeni = dialogDettagli.findViewById(R.id.textInputLayoutAllergeniDialogDettagli);
         TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
 
         //Setto l'elemento menu di cui voglio vedere i dettagli

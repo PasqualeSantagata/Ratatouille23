@@ -27,8 +27,8 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
         this.elementoMenuAPI = retrofitService.getElementoMenuAPI();
     }
     @Override
-    public void salvaElementoMenu(ElementoMenu elementoMenu, CallbackResponse<Void> elementoMenuCallback) {
-        elementoMenuAPI.salvaElementoMenu(elementoMenu).enqueue(new Callback<Void>() {
+    public void salvaElementoMenu(ElementoMenu elementoMenu, String categoria, CallbackResponse<Void> elementoMenuCallback) {
+        elementoMenuAPI.salvaElementoMenu(elementoMenu, categoria).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 elementoMenuCallback.onSuccess(response);

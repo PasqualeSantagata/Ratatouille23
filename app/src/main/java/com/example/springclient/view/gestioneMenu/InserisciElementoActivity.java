@@ -110,7 +110,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         okButton.setOnClickListener(view -> {
             if(checkFields()) {
                 ElementoMenu elementoMenu = getElementoValues();
-                elementoMenuPresenter.saveElementoMenu(elementoMenu);
+                elementoMenuPresenter.saveElementoMenu(elementoMenu, categoriaSelezionata);
             }
         });
         indietroButton.setOnClickListener(view -> {
@@ -123,7 +123,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         
     }
 
-    @Override
+
     public ElementoMenu getElementoValues() {
         String nomeElemento, prezzoElemento;
         String descrizione;
@@ -175,7 +175,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         return checked;
     }
 
-    @Override
+
     public void cleanFields() {
         nomeElementoTextInputLayout.getEditText().setText("");
         prezzoElementoTextInputLayout.getEditText().setText("");

@@ -14,8 +14,8 @@ import retrofit2.http.Path;
 
 public interface ElementoMenuAPI {
 
-    @POST("api/v1/elementoMenu")
-    Call<Void> salvaElementoMenu(@Body ElementoMenu elementoMenu);
+    @POST("api/v1/elementoMenu/addElemento/{categoria}")
+    Call<Void> salvaElementoMenu(@Body ElementoMenu elementoMenu, @Path(value = "categoria", encoded = true) String categoria);
 
     @GET("api/v1/elementoMenu")
     Single<Response<List<ElementoMenu>>> getAllElementoMenu();

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ElementoMenuPresenter;
@@ -34,7 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
+public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, ElementoMenuContract.View {
 
     private TextInputLayout textInputLayouNome;
     private TextInputLayout textInputLayoutDescrizione;
@@ -106,13 +108,18 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                 startActivity(intent);
                 break;
             case R.id.lingue:
-                elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
+                    if(elementoSelezionato != -1) {
+                        elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
+                    }
+                    else{
+                        Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
+                    }
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void initializeComponents(){
+    public void initializeComponents(){
         textInputLayouNome = findViewById(R.id.textInputLayoutNomeInserimNelMenu);
         textInputLayoutDescrizione  = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
@@ -134,7 +141,9 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     public void listenerAllergeni(){
-        allergeni = new ArrayList<>();
+        if(allergeni == null) {
+            allergeni = new ArrayList<>();
+        }
         checkBoxes = new ArrayList<>();
         checkBoxes.add(checkBoxArachidi);
         checkBoxes.add(checkBoxAnidrideSolforosa);
@@ -223,6 +232,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     public void setParameters(ElementoMenu elementoMenu){
+        allergeni = elementoMenu.getElencoAllergeni();
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
         setTextInputLayoutText(textInputLayouNome, elementoMenu.getNome());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
@@ -249,6 +259,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         adapterElementoMenu.notifyItemChanged(elementoSelezionato);
     }
 
+    @Override
     public void mostraTraduzione(ElementoMenu elementoMenu){
       //  Log.d("Traduzione: ", elementoMenu.getNome() + " " + elementoMenu.getDescrizione());
         setParameters(elementoMenu);

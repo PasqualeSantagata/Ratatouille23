@@ -7,7 +7,7 @@ import java.util.List;
 public interface ElementoMenuContract {
 
     interface Model{
-        void salvaElementoMenu(ElementoMenu elementoMenu, CallbackResponse<Void> elementoMenuCallback);
+        void salvaElementoMenu(ElementoMenu elementoMenu, String categoria, CallbackResponse<Void> elementoMenuCallback);
 
         void getAllElementiMenu(CallbackResponse<List<ElementoMenu>> elementoMenuCallback);
 
@@ -17,14 +17,14 @@ public interface ElementoMenuContract {
     interface View{
      /************** TODO ******************/
      void initializeComponents();
-     void cleanFields();
-     ElementoMenu getElementoValues();
+
+     default void mostraTraduzione(ElementoMenu elementoMenu){};
 
     }
 
     interface Presenter{
 
-        void saveElementoMenu(ElementoMenu elementoMenu);
+        void saveElementoMenu(ElementoMenu elementoMenu, String categoria);
         void getAllElementiMenu();
         List<ElementoMenu> getElementiPerCategoria(String categoria);
         void rimuoviElemento(String id);

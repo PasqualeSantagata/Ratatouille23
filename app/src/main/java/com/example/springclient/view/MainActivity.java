@@ -50,42 +50,6 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autenticazionePresenter = new AutenticazionePresenter(this);
         recuperoCredenzialiPresenter = new RecuperoCredenzialiPresenter(this);
-/*
-        ElementoMenu e1 = new ElementoMenu(1L,"Spaghetti", 10.0f, "La pasta di tutti i giorni", null, "Italiano");
-        List<ElementoMenu> elementoMenuList = new ArrayList<>();
-        elementoMenuList.add(e1);
-        Ordinazione o = new Ordinazione(3,4,2);
-        o.setElementiOrdinati(elementoMenuList);
-
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
-        stompClient.connect();
-        String elemento = new Gson().toJson(o);
-
-
-        stompClient.lifecycle().subscribe(lifecycleEvent -> {
-            switch (lifecycleEvent.getType()) {
-
-                case OPENED:
-                    Log.d("SOCKET: ", "Stomp connection opened");
-                    break;
-
-                case ERROR:
-                    Log.e("SOCKET: ", "Error", lifecycleEvent.getException());
-                    break;
-
-                case CLOSED:
-                    Log.d("SOCKET: ", "Stomp connection closed");
-                    break;
-            }
-        });
-
-        stompClient.send("/app/invia-ordinazione", elemento).subscribe();
-        stompClient.topic("/topic/ricevi-ordinazione")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(ordinazione-> {
-                    Log.d("WS:", "Received " + ordinazione.getPayload());
-                });*/
 
         initializeComponents();
     }

@@ -3,7 +3,7 @@ package com.example.springclient.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.compose.ui.node.ModifiedFocusOrderNode;
+
 
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
@@ -39,7 +39,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private VisualizzaElementiDellaCategoriaActivity visualizzaElementiDellaCategoriaActivity;
     private CercaElementoActivity cercaElementoActivity;
     private ModificaElementoActivity modificaElementoActivity;
-
+    private ElementoMenuContract.View viewElementoMenu;
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         this.inserisciElementoActivity = inserisciElementoActivity;
     }
@@ -60,19 +60,19 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     }
 
     public ElementoMenuPresenter(VisualizzaElementiDellaCategoriaActivity visualizzaElementiDellaCategoriaActivity) {
-        this.visualizzaElementiDellaCategoriaActivity = visualizzaElementiDellaCategoriaActivity;
+        this.viewElementoMenu = visualizzaElementiDellaCategoriaActivity;
     }
 
     public ElementoMenuPresenter(CercaElementoActivity cercaElementoActivity) {
-        this.cercaElementoActivity = cercaElementoActivity;
+        this.viewElementoMenu = cercaElementoActivity;
     }
     public ElementoMenuPresenter(ModificaElementoActivity modificaElementoActivity){
         this.modificaElementoActivity = modificaElementoActivity;
     }
 
     @Override
-    public void saveElementoMenu(ElementoMenu elementoMenu) {
-        elementoMenuModel.salvaElementoMenu(elementoMenu, new CallbackResponse<Void>() {
+    public void saveElementoMenu(ElementoMenu elementoMenu, String categoria) {
+        elementoMenuModel.salvaElementoMenu(elementoMenu, categoria, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
@@ -165,7 +165,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
                 if(retData.isSuccessful()) {
-                    visualizzaElementiDellaCategoriaActivity.mostraTraduzione(retData.body());
+                    viewElementoMenu.mostraTraduzione(retData.body());
                 }
             }
         }, id);
