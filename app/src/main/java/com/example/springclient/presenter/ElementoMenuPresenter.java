@@ -110,7 +110,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             @Override
             public void onSuccess(Response<List<ElementoMenu>> retData) {
                 if(retData.isSuccessful()){
-                    cercaElementoActivity.setElementi(retData.body());
+                    viewElementoMenu.setElementi(retData.body());
                 }
             }
         });

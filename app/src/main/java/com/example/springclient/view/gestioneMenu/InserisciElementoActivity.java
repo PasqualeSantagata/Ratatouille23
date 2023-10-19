@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class InserisciElementoActivity extends AppCompatActivity implements ElementoMenuContract.View , AdapterView.OnItemSelectedListener{
+public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
@@ -79,7 +79,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Elem
         startActivity(intentElemCaricato);
     }
 
-    @Override
+
     public void initializeComponents() {
         //Text
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);

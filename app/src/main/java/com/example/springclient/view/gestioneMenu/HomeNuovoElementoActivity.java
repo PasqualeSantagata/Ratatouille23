@@ -34,7 +34,6 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     private String categoriaSelezionata;
     private String linguaSelezionata;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

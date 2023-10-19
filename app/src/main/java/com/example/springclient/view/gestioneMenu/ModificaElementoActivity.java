@@ -21,6 +21,7 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -30,11 +31,13 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     private TextInputLayout textInputLayoutNome;
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutPrezzo;
+    private TextInputEditText textInputEditTextLingua;
     private Button buttonOk;
     private Button buttonIndietro;
     private Button buttonModificaAllergeni;
     private Spinner spinnerCategoria;
     private FloatingActionButton fabAggiungiCategoria;
+    private FloatingActionButton fabAggiungiLingua;
     private ElementoMenu elementoMenu;
     private List<String> nomiCategoria;
     private CategoriaMenuPresenter categoriaMenuPresenter;
@@ -69,6 +72,8 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         fabAggiungiCategoria = findViewById(R.id.floatingModificaCategoria);
         buttonModificaAllergeni = findViewById(R.id.buttonModificaAllergeni);
         buttonIndietro = findViewById(R.id.buttonIndietroModElemGestioneMenu);
+        textInputEditTextLingua = findViewById(R.id.textInputEditTextLinguaCorrenteModificaElemGestioneMenu);
+        fabAggiungiLingua = findViewById(R.id.floatingActionButtonAggiungiLingua);
         buttonOk = findViewById(R.id.buttonOkModifica);
 
 
@@ -77,7 +82,13 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         ArrayAdapter adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nomiCategoria);
         adapterCategorie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapterCategorie);
-        fabAggiungiCategoria.setVisibility(View.INVISIBLE);
+        textInputEditTextLingua.setText(elementoMenu.getLingua());
+
+        fabAggiungiLingua.setOnClickListener(view -> {
+            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+            nuovaLingua.putExtra("elemento", elementoMenu);
+            startActivity(nuovaLingua);
+        });
 
 
         fabAggiungiCategoria.setOnClickListener(view -> {

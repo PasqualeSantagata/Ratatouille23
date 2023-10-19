@@ -96,7 +96,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                             adapter.notifyDataSetChanged();
                         });
 
-
         buttonInditero.setOnClickListener(view -> {
             Intent intent = new Intent(this, StartGestioneMenuActivity.class);
             startActivity(intent);

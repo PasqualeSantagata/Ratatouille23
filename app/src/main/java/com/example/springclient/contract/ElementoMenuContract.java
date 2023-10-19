@@ -18,9 +18,10 @@ public interface ElementoMenuContract {
      /************** TODO ******************/
      void initializeComponents();
 
-     default void mostraTraduzione(ElementoMenu elementoMenu){};
+     default void mostraTraduzione(ElementoMenu elementoMenu){}
 
-        void traduzioneAssente();
+     default void traduzioneAssente(){}
+     default void setElementi(List<ElementoMenu> elementi){}
 
     }
 

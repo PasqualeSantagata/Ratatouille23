@@ -174,7 +174,7 @@
                 app:srcCompat="@drawable/cambia_lingua_new" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputLayoutLinguaCorrenteModificaElemGestioneMenu"
+                android:id="@+id/textInputEditTextLinguaCorrenteModificaElemGestioneMenu"
                 android:layout_width="400dp"
                 android:layout_height="match_parent"
                 android:background="@color/my_green"
@@ -187,7 +187,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/floatingActionButtonAggiungiLingua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="123dp"
