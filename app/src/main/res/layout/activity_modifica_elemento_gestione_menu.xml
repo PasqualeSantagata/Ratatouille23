@@ -12,6 +12,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="45dp"
         android:background="@drawable/design_button_rounded_green"
         android:text="@string/aggiungi_ad_un_altra_categoria"
@@ -29,12 +30,12 @@
         android:id="@+id/floatingModificaCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="80dp"
         android:clickable="true"
         app:backgroundTint="@color/my_green"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/spinnerCategoriaInserimentoNelMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_fab"
@@ -45,13 +46,10 @@
         android:id="@+id/spinnerCategoriaInserimentoNelMenu"
         android:layout_width="510dp"
         android:layout_height="64dp"
-
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/design_item_spinner"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingModificaCategoria"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutModificaDescrizione"
@@ -142,8 +140,8 @@
         android:id="@+id/textView3"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="136dp"
         android:background="@drawable/design_button_rounded_green"
         android:text="@string/allergeni"
         android:textAlignment="center"
@@ -157,12 +155,11 @@
         android:id="@+id/textInputLayout"
         android:layout_width="524dp"
         android:layout_height="212dp"
-        android:layout_marginTop="50dp"
         android:gravity="right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.427"
         app:layout_constraintStart_toEndOf="@+id/textInputLayoutModificaDescrizione"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaInserimentoNelMenu">
+        app:layout_constraintTop_toBottomOf="@+id/textView19">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -193,13 +190,28 @@
         android:id="@+id/floatingActionButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginEnd="80dp"
         android:clickable="true"
+        app:backgroundTint="@color/my_green"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/floatingModificaCategoria"
         app:srcCompat="@drawable/ic_add_fab"
+        app:tint="@color/white"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/design_button_rounded_green"
+        android:text="@string/aggiungi_un_altra_lingua"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayoutModificaDescrizione"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaInserimentoNelMenu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
