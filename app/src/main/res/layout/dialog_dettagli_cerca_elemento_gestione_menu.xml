@@ -57,11 +57,11 @@
                 android:id="@+id/fabDialogDettagli"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="156dp"
+                android:layout_marginTop="140dp"
                 android:clickable="true"
                 app:backgroundTint="@color/my_green"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.886"
+                app:layout_constraintHorizontal_bias="0.889"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneDialogDettagli"
                 app:srcCompat="@android:drawable/ic_menu_edit"
@@ -92,6 +92,19 @@
                 app:cornerRadius="@android:dimen/app_icon_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/buttonLingua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="443dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="50dp"
+                android:text="Altra Lingua"
+                app:cornerRadius="@android:dimen/app_icon_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonIndietroDialogDettagli" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

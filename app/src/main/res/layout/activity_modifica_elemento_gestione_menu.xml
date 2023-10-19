@@ -38,12 +38,13 @@
         app:layout_constraintStart_toEndOf="@+id/spinnerCategoriaInserimentoNelMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_fab"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinnerCategoriaInserimentoNelMenu"
-        android:layout_width="489dp"
-        android:layout_height="63dp"
+        android:layout_width="510dp"
+        android:layout_height="64dp"
 
         android:layout_marginBottom="4dp"
         android:background="@drawable/design_item_spinner"
@@ -61,7 +62,7 @@
         android:layout_marginTop="50dp"
         android:hint="@string/descrizione"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutModificaPrezzo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -126,13 +127,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/buttonModificaAllergeni"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="184dp"
+        android:text="Modifica"
+        app:cornerRadius="@android:dimen/app_icon_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="76dp"
         android:background="@drawable/design_button_rounded_green"
         android:text="@string/allergeni"
         android:textAlignment="center"
@@ -140,18 +151,55 @@
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/buttonModificaAllergeni"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutModificaPrezzo" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-    <Button
-        android:id="@+id/buttonModificaAllergeni"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="524dp"
+        android:layout_height="212dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="800dp"
-        android:text="Modifica"
-        app:cornerRadius="@android:dimen/app_icon_size"
+        android:gravity="right"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutModificaPrezzo" />
+        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayoutModificaDescrizione"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaInserimentoNelMenu">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewTraduzione"
+                android:layout_width="254dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/cambia_lingua_new" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputLayoutLinguaCorrenteModificaElemGestioneMenu"
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:background="@color/my_green"
+                android:hint="Lang"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/floatingModificaCategoria"
+        app:srcCompat="@drawable/ic_add_fab"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,8 @@ public interface ElementoMenuContract {
 
      default void mostraTraduzione(ElementoMenu elementoMenu){};
 
+        void traduzioneAssente();
+
     }
 
     interface Presenter{

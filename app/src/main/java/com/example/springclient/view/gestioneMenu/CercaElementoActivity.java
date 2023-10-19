@@ -2,12 +2,14 @@ package com.example.springclient.view.gestioneMenu;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +43,8 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     private AutoCompleteTextView autoTextView;
     private List<ElementoMenu> risultatiCerca;
     private List<ElementoMenu> elementoMenuListApp;
+    private TextInputLayout textInputLayoutDescrizione;
+    private Context dialogDettagliContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,7 +106,14 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
+        if(elementoMenu != null)
+            setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
+    }
+
+    @Override
+    public void traduzioneAssente(){
+        Toast.makeText(dialogDettagliContext, "Non esiste una lingua alternativa per questo elemento", Toast.LENGTH_LONG).show();
     }
 
     public void setElementi(List<ElementoMenu> elementoMenuList){
@@ -131,12 +142,14 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagli);
         TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
         TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
+        Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua) ;
 
         //Setto l'elemento menu di cui voglio vedere i dettagli
         setTextInputLayoutText(textInputLayoutPrezzo,elementoMenu.getPrezzo().toString());
-        //setTextInputLayoutText(textInputLayoutAllergeni, elementoMenu.getElencoAllergeni().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
+        this.dialogDettagliContext = dialogDettagli.getContext();
+        this.textInputLayoutDescrizione = textInputLayoutDescrizione;
         dialogDettagli.show();
 
         fabModifica.setOnClickListener(view -> {
@@ -148,6 +161,11 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         buttonIndietro.setOnClickListener(view -> {
             dialogDettagli.dismiss();
         });
+
+        buttonTraduzione.setOnClickListener(view -> {
+            presenter.restituisciTraduzione(elementoMenu.getId().toString());
+        });
+
 
     }
 

@@ -166,6 +166,8 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             public void onSuccess(Response<ElementoMenu> retData) {
                 if(retData.isSuccessful()) {
                     viewElementoMenu.mostraTraduzione(retData.body());
+                }else {
+                    viewElementoMenu.traduzioneAssente();
                 }
             }
         }, id);

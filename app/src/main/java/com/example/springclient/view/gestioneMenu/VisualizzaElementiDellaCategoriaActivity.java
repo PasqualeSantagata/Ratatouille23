@@ -261,8 +261,24 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu){
-      //  Log.d("Traduzione: ", elementoMenu.getNome() + " " + elementoMenu.getDescrizione());
         setParameters(elementoMenu);
+    }
+
+    @Override
+    public void traduzioneAssente() {
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_error_one_button);
+
+        TextView messaggio = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        messaggio.setText("Traduzione non presente. Modifica elemento per aggiungere una traduzione");
+
+        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        dialogAttenzione.show();
+
+        buttonOk.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+
     }
 
 }
