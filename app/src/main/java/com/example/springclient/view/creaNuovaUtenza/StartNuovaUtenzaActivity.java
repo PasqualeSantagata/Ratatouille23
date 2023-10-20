@@ -1,7 +1,9 @@
 package com.example.springclient.view.creaNuovaUtenza;
 
 import android.os.Bundle;
-import android.widget.BaseAdapter;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -13,22 +15,23 @@ import com.example.springclient.contract.AdminContract;
 import com.example.springclient.entity.Ruolo;
 import com.example.springclient.entity.Utente;
 import com.example.springclient.presenter.AdminPresenter;
-import com.example.springclient.view.adapters.SpinnerAdapterRuoli;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class StartNuovaUtenzaActivity extends AppCompatActivity implements AdminContract.View.CreaUtenza {
+public class StartNuovaUtenzaActivity extends AppCompatActivity implements AdminContract.View.CreaUtenza, AdapterView.OnItemSelectedListener {
     private TextInputLayout textInputNome;
     private TextInputLayout textInputCognome;
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
     private Spinner spinnerRuoli;
-    private BaseAdapter spinnerRuoliAdapter;
     private AdminContract.Presenter adminPresenter;
     private Button okButton;
     private Button indietroButton;
+    private List<String> ruoli;
+    private String ruolo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,23 +46,28 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         textInputCognome = (TextInputLayout) findViewById(R.id.textInputLayoutCognomeCreaUtenza);
         textInputPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPasswordCreaUtenza);
         spinnerRuoli = findViewById(R.id.spinnerTipoUtenzaCreaUtenza);
-        spinnerRuoliAdapter = new SpinnerAdapterRuoli(this, Arrays.asList(getResources().getStringArray(R.array.array_ruoli)));
+        spinnerRuoli.setOnItemSelectedListener(this);
+        ruoli = Arrays.asList(getResources().getStringArray(R.array.array_ruoli));
+        ArrayAdapter adapterRuoli = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ruoli);
+        adapterRuoli.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRuoli.setAdapter(adapterRuoli);
+
         okButton = findViewById(R.id.buttonOkCreaUtenza);
         indietroButton = findViewById(R.id.buttonIndietroNuovaUtenza);
         okButton.setOnClickListener(view -> {
             disabilitaErrori();
             raccogliDati();
         });
-        spinnerRuoli.setAdapter(spinnerRuoliAdapter);
+
     }
     @Override
     public void raccogliDati(){
-        String nome, cognome, email, password, ruolo;
+        String nome, cognome, email, password;
         nome = textInputNome.getEditText().getText().toString();
         cognome = textInputCognome.getEditText().getText().toString();
         email = textInputEmail.getEditText().getText().toString();
         password = textInputPassword.getEditText().getText().toString();
-        ruolo = spinnerRuoli.getSelectedItem().toString();
+
         if(campiValidi(nome, cognome, email, password, ruolo)) {
             Utente nuovoUtente = new Utente(nome, cognome, email, password);
             switch (ruolo){
@@ -131,5 +139,15 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
                 return false;
         }
         return true;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        ruolo = ruoli.get(i);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
