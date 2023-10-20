@@ -59,6 +59,8 @@
     <string name="categorie">Categorie</string>
     <string name="lingue">Lingue</string>
     <string name="aggiungi_un_altra_lingua">"  Aggiungi un'altra lingua  "</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 
 
     <string-array name="array_ruoli">
