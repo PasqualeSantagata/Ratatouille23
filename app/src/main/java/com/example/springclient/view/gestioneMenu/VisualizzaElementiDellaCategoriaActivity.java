@@ -57,6 +57,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private  RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
     private ItemTouchHelper.SimpleCallback simpleCallback;
     private String nome;
+    private Menu menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,28 +95,57 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = new MenuInflater(this);
+        MenuItem itemLingua = findViewById(R.id.item_lingue);
+        MenuItem itemLinguaBase = findViewById(R.id.item_lingua_base);
+        MenuItem itemRiordina = findViewById(R.id.item_riordinare);
         inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
 
+        itemLinguaBase.setVisible(false);
+
+        this.menu = menu;
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private boolean b;
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(b==true){
+            menu.findItem(R.id.item_lingue).setVisible(false);
+            menu.findItem(R.id.item_lingua_base).setVisible(true);
+        }else{
+            menu.findItem(R.id.item_lingue).setVisible(true);
+            menu.findItem(R.id.item_lingua_base).setVisible(false);
+        }
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.riordinare:
+            case R.id.item_riordinare:
                 Intent intent = new Intent(this, RiordinaElementiActivity.class);
                 intent.putExtra("elementiMenu",(Serializable) elementiMenu);
                 startActivity(intent);
                 break;
-            case R.id.lingue:
+            case R.id.item_lingue:
                     if(elementoSelezionato != -1) {
                         elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
+                        invalidateOptionsMenu();
+                        b = true;
                     }
                     else{
                         Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
                     }
                 break;
+            case R.id.item_lingua_base:
+                if(elementoSelezionato != -1) {
+                    setParameters(getElementoMenu());
+                    invalidateOptionsMenu();
+                    b = false;
+                }
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -84,7 +84,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                                         elementoMenuList.add(e);
                                     }
                                 }
-
                             }
                             else{
                                 for(ElementoMenu e: elementoMenuListApp){
@@ -100,7 +99,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
             Intent intent = new Intent(this, StartGestioneMenuActivity.class);
             startActivity(intent);
         });
-
     }
 
     @Override
