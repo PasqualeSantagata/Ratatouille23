@@ -29,12 +29,9 @@ public class CreaNuovaUtenzaActivity extends AppCompatActivity {
     private TextInputLayout textInputLayoutNome;
     private TextInputLayout textInputLayoutCognome;
     private TextInputLayout textInputLayoutEmail;
-
     private Button buttonOk;
     private Button buttonIndietro;
-
     private Utente utente;
-
     private AdminContract.Presenter presenter;
 
     @Override
@@ -43,6 +40,7 @@ public class CreaNuovaUtenzaActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("NUOVA UTENZA");
         setContentView(R.layout.activity_nuova_utenza);
         initializeComponents();
+
        //presenter = new UtentePresenter(this);
     }
 
@@ -62,7 +60,7 @@ public class CreaNuovaUtenzaActivity extends AppCompatActivity {
 
             }else{
                 utente = new Utente(textInputLayoutNome.getEditText().toString(), textInputLayoutCognome.getEditText().toString(),
-                        textInputLayoutEmail.getEditText().toString(),"pass"); //aggiungere il recupero del ruolo
+                        textInputLayoutEmail.getEditText().toString(),"pass");
 
                 //manca anche il campo password
                 String role = spinnerRuolo.getSelectedItem().toString();

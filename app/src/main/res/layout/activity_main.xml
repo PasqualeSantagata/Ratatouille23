@@ -26,16 +26,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="357dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="450dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="50dp"
         android:hint="@string/email"
         app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/black"
 
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutPassword"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleLogin"
         app:startIconDrawable="@drawable/ic_user">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -50,14 +48,13 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="357dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="450dp"
-        android:layout_marginBottom="500dp"
+        android:layout_marginTop="80dp"
         android:hint="@string/password"
         app:boxStrokeColor="@color/black"
-        app:endIconMode="password_toggle"
 
+        app:endIconMode="password_toggle"
         app:hintTextColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmailLogin"
         app:startIconDrawable="@drawable/ic_lock">
@@ -73,16 +70,12 @@
         android:id="@+id/textViewTitleLogin"
         android:layout_width="220dp"
         android:layout_height="85dp"
-        android:layout_marginStart="510dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="550dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/login"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="64sp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEmailLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -91,36 +84,27 @@
         android:id="@+id/textViewDimenticatoPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="560dp"
-        android:layout_marginEnd="473dp"
 
-        android:layout_marginBottom="369dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:text="@string/ho_dimenticato_la_password"
         android:textColor="#3AAFE4"
         android:textColorHint="#2196F3"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ProgressBar
         android:id="@+id/mainActivityProgressBar"
         android:layout_width="115dp"
         android:layout_height="105dp"
-        android:layout_marginStart="554dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="590dp"
-        android:layout_marginBottom="372dp"
+        android:layout_marginBottom="346dp"
         android:indeterminate="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDimenticatoPassword" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
