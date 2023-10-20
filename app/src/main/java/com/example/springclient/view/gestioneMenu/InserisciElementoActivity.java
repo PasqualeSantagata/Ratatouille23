@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,8 +76,24 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     }
 
     public void elementoSalvatoCorrettamente() {
-        Intent intentElemCaricato = new Intent(this, ElementoInseritoCorrettamenteActivity.class);
-        startActivity(intentElemCaricato);
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_ok_two_button);
+        TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
+        Button indietroButton = dialog.findViewById(R.id.okDialog);
+        Button okButton = dialog.findViewById(R.id.okDialog2);
+        indietroButton.setText("AVANTI");
+        okButton.setText("INDIETRO");
+        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti");
+        okButton.setOnClickListener(view -> {
+            dialog.dismiss();
+            allergeni = new ArrayList<>();
+
+        });
+        indietroButton.setOnClickListener(view -> {
+            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+            startActivity(nuovaLingua);
+        });
+        dialog.show();
     }
 
 
@@ -165,7 +182,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         }
         if(descrizione.isEmpty()){
             descrizioneTextInputLayout.setError("Descrizione non valida");
-            String s = "";
+
             checked = false;
         }
         else{

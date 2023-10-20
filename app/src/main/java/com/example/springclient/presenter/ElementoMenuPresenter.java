@@ -13,6 +13,7 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.gestioneMenu.CercaElementoActivity;
 import com.example.springclient.view.gestioneMenu.ModificaElementoActivity;
+import com.example.springclient.view.gestioneMenu.NuovoElementoNuovaLinguaActivity;
 import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
 import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
 import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
@@ -40,6 +42,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private CercaElementoActivity cercaElementoActivity;
     private ModificaElementoActivity modificaElementoActivity;
     private ElementoMenuContract.View viewElementoMenu;
+    private NuovoElementoNuovaLinguaActivity nuovoElementoNuovaLinguaActivity;
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         this.inserisciElementoActivity = inserisciElementoActivity;
     }
@@ -69,6 +72,11 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     public ElementoMenuPresenter(ModificaElementoActivity modificaElementoActivity){
         this.modificaElementoActivity = modificaElementoActivity;
     }
+    public ElementoMenuPresenter(NuovoElementoNuovaLinguaActivity nuovoElementoNuovaLinguaActivity){
+        this.nuovoElementoNuovaLinguaActivity = nuovoElementoNuovaLinguaActivity;
+    }
+
+
 
     @Override
     public void saveElementoMenu(ElementoMenu elementoMenu, String categoria) {
@@ -88,10 +96,9 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
                 }
                 else{
                     if(response.code() == 412) {
-                        ApiResponse[] apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse[].class);
+                        ApiResponse apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse.class);
                         List<String> listOfError = new ArrayList<>();
-                        for (ApiResponse a : apiResponse)
-                            listOfError.add(a.getMessage());
+                        listOfError.add(apiResponse.getMessage());
                         inserisciElementoActivity.showErrors(listOfError);
                     }
                 }

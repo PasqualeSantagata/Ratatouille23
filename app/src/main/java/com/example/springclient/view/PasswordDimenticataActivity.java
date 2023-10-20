@@ -58,8 +58,8 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
 
     public void emailInviataCorrettamente(){
         Dialog emailInviataCorrettamenteDialog = new Dialog(this);
-        emailInviataCorrettamenteDialog.setContentView(R.layout.dialog_email_inviata);
-        Button okButton = emailInviataCorrettamenteDialog.findViewById(R.id.okButtonEmailInviata);
+        emailInviataCorrettamenteDialog.setContentView(R.layout.dialog_ok_one_button);
+        Button okButton = emailInviataCorrettamenteDialog.findViewById(R.id.okDialog);
         emailInviataCorrettamenteDialog.show();
         okButton.setOnClickListener(view -> {
                 progressBar.setVisibility(View.GONE);
