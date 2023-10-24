@@ -61,6 +61,12 @@
     <string name="aggiungi_un_altra_lingua">"  Aggiungi un'altra lingua  "</string>
     <string name="si">Si</string>
     <string name="no">No</string>
+    <string name="tabella_allergeni">Tabella allergeni</string>
+    <string name="prezzo_up">prezzo⤴️</string>
+    <string name="nome_up">nome⤴️</string>
+    <string name="prezzo_down">prezzo⤵️</string>
+    <string name="nome_down">nome⤵️</string>
+    <string name="annulla">Annulla</string>
 
 
     <string-array name="array_ruoli">

@@ -157,7 +157,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
 
         buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
-        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxArachidi);
+        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
         checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
         checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
         checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);

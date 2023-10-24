@@ -296,7 +296,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     public void dialogAllergeni(){
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
-        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxArachidi);
+        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
         checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
         checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
         checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);

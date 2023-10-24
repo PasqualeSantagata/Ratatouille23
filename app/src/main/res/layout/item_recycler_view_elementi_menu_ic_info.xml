@@ -24,18 +24,6 @@
             tools:layout_editor_absoluteY="71dp">
 
             <ImageView
-                android:id="@+id/ic_tempo_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="9dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView9"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNomeInfo"
-                app:srcCompat="@drawable/ic_tempo" />
-
-            <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="433dp"
                 android:layout_height="64dp"
@@ -43,19 +31,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/image_simple_elem_menu_recycle_view" />
-
-            <ImageView
-                android:id="@+id/ic_quantit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="9dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView9"
-                app:layout_constraintStart_toEndOf="@+id/textViewTempoPreparazioneInfo"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNomeInfo"
-                app:srcCompat="@drawable/ic_quantita" />
 
             <ImageView
                 android:id="@+id/InfoElementoImageView"
@@ -66,25 +41,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/ic_info" />
-
-            <TextView
-                android:id="@+id/textViewQuantitaInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="120dp"
-                android:layout_marginBottom="6dp"
-                android:inputType="numberDecimal"
-                android:text="TextView"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/imageView9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ic_quantit"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNomeInfo"
-                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textViewNomeInfo"
@@ -101,22 +57,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textViewTempoPreparazioneInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="31dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
-                android:inputType="number"
-                android:text="TextView"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/imageView9"
-                app:layout_constraintStart_toEndOf="@+id/ic_tempo_info"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNomeInfo"
-                tools:ignore="TouchTargetSizeCheck"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

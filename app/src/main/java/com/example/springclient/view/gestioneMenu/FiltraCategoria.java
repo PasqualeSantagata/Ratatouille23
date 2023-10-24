@@ -31,6 +31,5 @@ public class FiltraCategoria extends AppCompatActivity {
 
         });
     }
-
-
+    
 }
