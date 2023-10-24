@@ -74,13 +74,13 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
         buttonIndietro.setOnClickListener(view -> {
 
             Dialog dialog = new Dialog(this);
-            TextView errorMessage = findViewById(R.id.textViewDialogeError);
+            TextView errorMessage = findViewById(R.id.textViewDialogeWarnTwoBtn);
             errorMessage.setText(R.string.dialog_sicuro_di_uscire);
             dialog.setContentView(R.layout.dialog_error_two_button);
             dialog.show();
 
-            Button buttonNo = findViewById(R.id.buttonNoDialogeError);
-            Button buttonSi = findViewById(R.id.buttonSiDialogeError);
+            Button buttonNo = findViewById(R.id.buttonNoDialogWarnTwoBtn);
+            Button buttonSi = findViewById(R.id.buttonSiDialogWarnTwoBtn);
 
             buttonNo.setOnClickListener(view1 -> {
                 dialog.dismiss();

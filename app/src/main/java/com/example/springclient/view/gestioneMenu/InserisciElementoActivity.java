@@ -75,28 +75,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         initializeComponents();
     }
 
-    public void elementoSalvatoCorrettamente() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_ok_two_button);
-        TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
-        Button indietroButton = dialog.findViewById(R.id.okDialog);
-        Button okButton = dialog.findViewById(R.id.okDialog2);
-        indietroButton.setText("AVANTI");
-        okButton.setText("INDIETRO");
-        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti");
-        okButton.setOnClickListener(view -> {
-            dialog.dismiss();
-            allergeni = new ArrayList<>();
-
-        });
-        indietroButton.setOnClickListener(view -> {
-            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
-            startActivity(nuovaLingua);
-        });
-        dialog.show();
-    }
-
-
     public void initializeComponents() {
         //Text
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
@@ -132,7 +110,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         });
         indietroButton.setOnClickListener(view -> {
             Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
-            startActivity(intentHome);
+            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? i dati inseriti andranno persi", intentHome);
         });
         inserisciButton.setOnClickListener(view -> {
             dialogAllergeni();
@@ -140,6 +118,64 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         
     }
 
+    public void elementoSalvatoCorrettamenteDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_ok_two_button);
+        TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
+        Button indietroButton = dialog.findViewById(R.id.okDialog);
+        Button okButton = dialog.findViewById(R.id.okDialog2);
+        indietroButton.setText("AVANTI");
+        okButton.setText("INDIETRO");
+        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti");
+        okButton.setOnClickListener(view -> {
+            dialog.dismiss();
+            allergeni = new ArrayList<>();
+        });
+        indietroButton.setOnClickListener(view -> {
+            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+            startActivity(nuovaLingua);
+        });
+        dialog.show();
+    }
+
+
+    private void mostraDialogWarning(String messaggio){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_error_one_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        dialogAttenzione.show();
+
+        buttonOk.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+    }
+
+    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_error_two_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        dialogAttenzione.show();
+
+        buttonSi.setOnClickListener(view -> {
+            if(intentSi != null)
+                startActivity(intentSi);
+
+            dialogAttenzione.dismiss();
+        });
+        buttonNo.setOnClickListener(view -> {
+
+            dialogAttenzione.dismiss();
+        });
+    }
 
     public ElementoMenu getElementoValues() {
         String nomeElemento, prezzoElemento;

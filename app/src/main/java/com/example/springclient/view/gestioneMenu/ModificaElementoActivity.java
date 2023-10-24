@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -106,8 +107,8 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
         });
         buttonIndietro.setOnClickListener(view -> {
-            Intent intent = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
-            startActivity(intent);
+            Intent intentVisualizzaCategorie = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
+            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? perderai tutti i dati inseriti fino ad ora!", intentVisualizzaCategorie);
         });
 
     }
@@ -178,6 +179,27 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         });
     }
 
+    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_error_two_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        dialogAttenzione.show();
+
+        buttonSi.setOnClickListener(view -> {
+            if(intentSi != null)
+                startActivity(intentSi);
+
+            dialogAttenzione.dismiss();
+        });
+        buttonNo.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+    }
     @Override
     public void setNomiCategorie(List<String> nomiCategori) {
         this.nomiCategoria = nomiCategori;

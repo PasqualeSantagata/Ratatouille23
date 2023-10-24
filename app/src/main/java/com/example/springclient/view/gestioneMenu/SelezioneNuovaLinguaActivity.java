@@ -50,35 +50,38 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         spinnerLingua.setAdapter(adapterLingue);
 
         buttonIndietro.setOnClickListener(view -> {
-            dialogAttenzione();
+            Intent intentEsci = new Intent(this, StartGestioneMenuActivity.class);
+            mostraDialogWarningTwoBtn("Sei sicuro di voler uscire? Annullerai l'inserimento dell'elemento in un'altra lingua", intentEsci);
         });
         buttonOk.setOnClickListener(view -> {
             Intent nuovaLinguaElemento = new Intent(this, NuovoElementoNuovaLinguaActivity.class);
             nuovaLinguaElemento.putExtra("elemento", elemento);
             nuovaLinguaElemento.putExtra("lingua", linguaSelezionata);
             startActivity(nuovaLinguaElemento);
-
         });
     }
 
 
-    private void dialogAttenzione (){
-        Dialog dialgAttenzione = new Dialog(this);
-        dialgAttenzione.setContentView(R.layout.dialog_error_two_button);
-        TextView textViewMessage = dialgAttenzione.findViewById(R.id.textViewDialogeError);
-        textViewMessage.setText("Sei sicuro di voler uscire? Annullerai l'inserimento dell'elemento in un'altra lingua");
-        Button buttonSi = dialgAttenzione.findViewById(R.id.buttonSiDialogeError);
-        Button buttonNo = dialgAttenzione.findViewById(R.id.buttonNoDialogeError);
-        dialgAttenzione.show();
+    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_error_two_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        dialogAttenzione.show();
 
         buttonSi.setOnClickListener(view -> {
-            Intent intentEsci = new Intent(this, StartGestioneMenuActivity.class);
-            startActivity(intentEsci);
+            if(intentSi != null)
+                startActivity(intentSi);
+
+            dialogAttenzione.dismiss();
         });
         buttonNo.setOnClickListener(view -> {
-            dialgAttenzione.dismiss();
+            dialogAttenzione.dismiss();
         });
-
     }
 
     @Override

@@ -22,7 +22,7 @@
             android:background="@drawable/bk_dialog_warning">
 
             <Button
-                android:id="@+id/buttonSiDialogeError"
+                android:id="@+id/buttonSiDialogWarnTwoBtn"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:layout_marginEnd="72dp"
@@ -35,7 +35,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
-                android:id="@+id/buttonNoDialogeError"
+                android:id="@+id/buttonNoDialogWarnTwoBtn"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="72dp"
@@ -49,7 +49,7 @@
                 />
 
             <TextView
-                android:id="@+id/textViewDialogeError"
+                android:id="@+id/textViewDialogeWarnTwoBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="232dp"

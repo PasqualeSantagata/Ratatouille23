@@ -297,11 +297,15 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     @Override
     public void traduzioneAssente() {
+        mostraDialogWarningOneBtn("Traduzione non presente. Modifica elemento per aggiungere una traduzione");
+    }
+
+    private void mostraDialogWarningOneBtn(String messaggio){
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_error_one_button);
 
-        TextView messaggio = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        messaggio.setText("Traduzione non presente. Modifica elemento per aggiungere una traduzione");
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        messaggiodialog.setText(messaggio);
 
         Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
         dialogAttenzione.show();
@@ -309,7 +313,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         buttonOk.setOnClickListener(view -> {
             dialogAttenzione.dismiss();
         });
-
     }
 
 }

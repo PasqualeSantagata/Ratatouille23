@@ -25,7 +25,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
@@ -92,7 +91,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
             public void onSuccess(Response<Void> response) {
                 if(response.isSuccessful()){
                     inserisciElementoActivity.cleanFields();
-                    inserisciElementoActivity.elementoSalvatoCorrettamente();
+                    inserisciElementoActivity.elementoSalvatoCorrettamenteDialog();
                 }
                 else{
                     if(response.code() == 412) {

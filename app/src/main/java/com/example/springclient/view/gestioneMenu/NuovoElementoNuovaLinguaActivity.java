@@ -1,10 +1,12 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +36,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
     private List<CheckBox> checkBoxes;
     private Button buttonOkDialog;
     private Button okButton;
+    private Button indietroButton;
     private ElementoMenuPresenter elementoMenuPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,18 +52,20 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
     }
 
     private void initializeComponents() {
+        //Text
         textInputLayoutNome = findViewById(R.id.textInputLayout8);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneNuovaLinguaGestioneMenu);
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoNovaLingua);
         textInputEditTextLingua = findViewById(R.id.textInputEditTextLinguaCorrenteInserisciElemSecondaLingua);
-        inserisciAllergeniButton = findViewById(R.id.iserisciAllergeneNuovaLinguaButton);
-        okButton = findViewById(R.id.buttonOkElemNuovaLingua);
-
         textInputLayoutPrezzo.getEditText().setText(elemento.getPrezzo().toString());
         textInputLayoutPrezzo.setEnabled(false);
         textInputEditTextLingua.setEnabled(false);
         textInputEditTextLingua.setText(lingua);
 
+        //Buttons
+        inserisciAllergeniButton = findViewById(R.id.iserisciAllergeneNuovaLinguaButton);
+        okButton = findViewById(R.id.buttonOkElemNuovaLingua);
+        indietroButton = findViewById(R.id.buttonIndietroElemNuovaLingua);
         inserisciAllergeniButton.setOnClickListener(view -> {
             dialogAllergeni();
         });
@@ -69,6 +74,10 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
             if(elementoMenu != null) {
                 elementoMenuPresenter.aggiungiLingua(elemento.getId().toString(), elementoMenu);
             }
+        });
+        indietroButton.setOnClickListener(view -> {
+            Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
+            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare alla home? perderai tutti i dati inseriti!", intentHome);
 
         });
     }
@@ -178,6 +187,27 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         });
     }
 
+    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_error_two_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        buttonSi.setOnClickListener(view -> {
+            if(intentSi != null)
+                startActivity(intentSi);
+
+            dialogAttenzione.dismiss();
+        });
+        buttonNo.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+
+        dialogAttenzione.show();
+    }
 
 
 
