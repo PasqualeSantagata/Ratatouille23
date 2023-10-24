@@ -95,15 +95,15 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
+
         MenuItem itemLingua = findViewById(R.id.item_lingue);
         MenuItem itemLinguaBase = findViewById(R.id.item_lingua_base);
         MenuItem itemRiordina = findViewById(R.id.item_riordinare);
-        inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
-
-        itemLinguaBase.setEnabled(false);
+        //itemLinguaBase.setEnabled(false);
 
         this.menu = menu;
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     private boolean b;
