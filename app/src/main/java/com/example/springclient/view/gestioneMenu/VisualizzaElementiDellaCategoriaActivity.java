@@ -94,13 +94,13 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = new MenuInflater(this);
+        MenuInflater inflater = getMenuInflater();
         MenuItem itemLingua = findViewById(R.id.item_lingue);
         MenuItem itemLinguaBase = findViewById(R.id.item_lingua_base);
         MenuItem itemRiordina = findViewById(R.id.item_riordinare);
         inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
 
-        itemLinguaBase.setVisible(false);
+        itemLinguaBase.setEnabled(false);
 
         this.menu = menu;
         return super.onCreateOptionsMenu(menu);
@@ -109,11 +109,11 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private boolean b;
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(b==true){
-            menu.findItem(R.id.item_lingue).setVisible(false);
-            menu.findItem(R.id.item_lingua_base).setVisible(true);
+            menu.findItem(R.id.item_lingue).setEnabled(false);
+            menu.findItem(R.id.item_lingua_base).setEnabled(true);
         }else{
-            menu.findItem(R.id.item_lingue).setVisible(true);
-            menu.findItem(R.id.item_lingua_base).setVisible(false);
+            menu.findItem(R.id.item_lingue).setEnabled(true);
+            menu.findItem(R.id.item_lingua_base).setEnabled(false);
         }
 
         return true;
@@ -132,6 +132,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                         elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
                         invalidateOptionsMenu();
                         b = true;
+
                     }
                     else{
                         Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
