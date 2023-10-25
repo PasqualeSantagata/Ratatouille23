@@ -29,7 +29,6 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
     private HomeNuovoElementoActivity homeNuovoElementoActivity;
     private CreaCategoriaActivity creaCategoriaActivity;
     private List<String> nomiCategoria = new ArrayList<>();
-
     private CategoriaContract.View categoriaView;
 
 

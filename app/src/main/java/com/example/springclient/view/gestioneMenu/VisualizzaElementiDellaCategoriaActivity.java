@@ -123,8 +123,9 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.item_riordinare:
-                Intent intent = new Intent(this, RiordinaElementiActivity.class);
+                Intent intent = new Intent(this, FiltraCategoria.class);
                 intent.putExtra("elementiMenu",(Serializable) elementiMenu);
+                intent.putExtra("nomeCategoria", nome);
                 startActivity(intent);
                 break;
             case R.id.item_lingue:

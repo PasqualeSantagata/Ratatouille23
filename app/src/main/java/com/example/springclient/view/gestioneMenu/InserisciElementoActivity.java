@@ -124,8 +124,8 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
         Button indietroButton = dialog.findViewById(R.id.okDialog);
         Button okButton = dialog.findViewById(R.id.okDialog2);
-        indietroButton.setText("AVANTI");
-        okButton.setText("INDIETRO");
+        indietroButton.setText("INDIETRO");
+        okButton.setText("AVANTI");
         dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti");
         okButton.setOnClickListener(view -> {
             dialog.dismiss();

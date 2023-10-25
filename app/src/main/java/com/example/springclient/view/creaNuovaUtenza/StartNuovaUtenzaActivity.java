@@ -41,10 +41,10 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
     }
 
     private void inizializzaComponenti(){
-        textInputNome = (TextInputLayout) findViewById(R.id.textInputLayoutNomeCreaUtenza);
-        textInputEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmailCreaUtenza);
-        textInputCognome = (TextInputLayout) findViewById(R.id.textInputLayoutCognomeCreaUtenza);
-        textInputPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPasswordCreaUtenza);
+        textInputNome = findViewById(R.id.textInputLayoutNomeCreaUtenza);
+        textInputEmail = findViewById(R.id.textInputLayoutEmailCreaUtenza);
+        textInputCognome = findViewById(R.id.textInputLayoutCognomeCreaUtenza);
+        textInputPassword = findViewById(R.id.textInputLayoutPasswordCreaUtenza);
         spinnerRuoli = findViewById(R.id.spinnerTipoUtenzaCreaUtenza);
         spinnerRuoli.setOnItemSelectedListener(this);
         ruoli = Arrays.asList(getResources().getStringArray(R.array.array_ruoli));
@@ -93,16 +93,16 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         cognome = textInputCognome.getEditText().getText().toString();
         email = textInputEmail.getEditText().getText().toString();
         password = textInputPassword.getEditText().getText().toString();
-        if(nome == null || nome.equals("")) {
+        if(nome.equals("")) {
             textInputNome.setError("Inserire nome");
         }
-        if(cognome == null || cognome.equals("")){
+        if(cognome.equals("")){
             textInputCognome.setError("Inserire cognome");
         }
-        if(email == null || email.equals("")) {
+        if(email.equals("")) {
             textInputEmail.setError("Inserire email");
         }
-        if(password == null || password.equals("")) {
+        if(password.equals("")) {
             textInputPassword.setError("Inserire password");
         }
         CharSequence messaggio = "Inserisci tutti i campi";
