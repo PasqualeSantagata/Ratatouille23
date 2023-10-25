@@ -2,7 +2,6 @@ package com.example.springclient.entity;
 
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class ElementoMenu implements Serializable {
     public static final Comparator<ElementoMenu> comparePrezzoCrescente = Comparator.comparing(e -> e.prezzo);
     public static final Comparator<ElementoMenu> compareNomeDecrescente = (e1, e2) -> -e1.nome.compareTo(e2.getNome());
     public static final Comparator<ElementoMenu> comparePrezzoDecrescente = (e1, e2) -> - e1.prezzo.compareTo(e2.prezzo);
+
 
 
     public ElementoMenu(Long id, String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
