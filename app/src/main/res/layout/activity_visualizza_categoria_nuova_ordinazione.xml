@@ -137,7 +137,7 @@
         android:id="@+id/recycleViewElemMenuNuovaOrdinazione"
         android:layout_width="450dp"
         android:layout_height="697dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginBottom="55dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonIndietroVisuaCatNuovaOrdinazione"
         app:layout_constraintStart_toStartOf="parent"
