@@ -94,6 +94,12 @@ public class FiltraCategoria extends AppCompatActivity {
 
             startActivity(intentVisualizzaCategoria);
         });
+        buttonAnnulla.setOnClickListener(view -> {
+            intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
+            intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
+
+            startActivity(intentVisualizzaCategoria);
+        });
 
         //Check box
         checkboxNome = findViewById(R.id.checkBoxFiltroNome);
