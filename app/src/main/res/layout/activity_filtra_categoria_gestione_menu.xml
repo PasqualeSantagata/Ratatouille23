@@ -129,12 +129,13 @@
 
     <TableLayout
         android:id="@+id/tableLayoutFiltraAllergene"
-        android:layout_width="696dp"
+        android:layout_width="542dp"
         android:layout_height="128dp"
 
         android:background="@drawable/design_button_rounded_green"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22">
 
@@ -169,8 +170,6 @@
 
         </TableRow>
     </TableLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
