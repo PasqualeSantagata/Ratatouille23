@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     @Override
     public void dialgPrimoAccesso(){
         dialogPrimoAcesso = new Dialog(this);
-        dialogPrimoAcesso.setContentView(R.layout.dialog_error_one_button);
+        dialogPrimoAcesso.setContentView(R.layout.dialog_warning_one_button);
         TextView errorMessage = dialogPrimoAcesso.findViewById(R.id.textViewMessageDialogueErrorOneBt);
         errorMessage.setText(R.string.dialog_cambia_pass);
         dialogPrimoAcesso.show();

@@ -34,7 +34,7 @@
         android:id="@+id/spinnerLingueHomeInserisciElemento"
         android:layout_width="500dp"
         android:layout_height="60dp"
-        android:background="@color/grey"
+        android:background="@drawable/design_item_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -43,7 +43,7 @@
         android:id="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         android:layout_width="500dp"
         android:layout_height="60dp"
-        android:background="@color/grey"
+        android:background="@drawable/design_item_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />

@@ -303,7 +303,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     private void mostraDialogWarningOneBtn(String messaggio){
         Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_error_one_button);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
 
         TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
         messaggiodialog.setText(messaggio);

@@ -76,7 +76,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
             Dialog dialog = new Dialog(this);
             TextView errorMessage = findViewById(R.id.textViewDialogeWarnTwoBtn);
             errorMessage.setText(R.string.dialog_sicuro_di_uscire);
-            dialog.setContentView(R.layout.dialog_error_two_button);
+            dialog.setContentView(R.layout.dialog_warning_two_button);
             dialog.show();
 
             Button buttonNo = findViewById(R.id.buttonNoDialogWarnTwoBtn);

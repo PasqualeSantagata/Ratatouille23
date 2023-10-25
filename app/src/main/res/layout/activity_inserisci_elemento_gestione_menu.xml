@@ -39,7 +39,7 @@
         android:id="@+id/TextInputLayoutNomeInserisciElementoMenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="430dp"
-        android:layout_height="52dp"
+        android:layout_height="72dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
@@ -55,7 +55,7 @@
         <AutoCompleteTextView
             android:id="@+id/TextInputEditTextNomeInserisciElementoMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="52dp"
             android:background="@drawable/desing_rounded_green_tf"
             android:shadowColor="#4CAF50"
             android:singleLine="true"
@@ -74,17 +74,14 @@
         android:id="@+id/TextInputLayoutPrezzoInserisciElementoMenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="72dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"
         android:hint="@string/prezzo"
         app:boxStrokeColor="@color/my_green"
         app:hintTextColor="@color/my_green"
-
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextInputLayoutNomeInserisciElementoMenu">
 
@@ -118,7 +115,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputTextFieldDescrizioneInserisciElementoMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="230dp"
             android:background="@drawable/desing_rounded_green_tf"
             android:gravity="top|left"
             android:inputType="textMultiLine"

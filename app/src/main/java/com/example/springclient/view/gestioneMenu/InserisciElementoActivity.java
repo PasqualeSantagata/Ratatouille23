@@ -141,7 +141,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
     private void mostraDialogWarning(String messaggio){
         Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_error_one_button);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
 
         TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
         messaggiodialog.setText(messaggio);
@@ -156,7 +156,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
     private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
         Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_error_two_button);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
 
         TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
         messaggiodialog.setText(messaggio);

@@ -181,7 +181,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
     private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
         Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_error_two_button);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
 
         TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
         messaggiodialog.setText(messaggio);

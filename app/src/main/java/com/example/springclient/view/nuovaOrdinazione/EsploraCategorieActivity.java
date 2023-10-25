@@ -84,7 +84,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
        buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
                 Dialog dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_error_one_button);
+                dialog.setContentView(R.layout.dialog_warning_one_button);
                 TextView errorMessage = findViewById(R.id.textViewMessageDialogueErrorOneBt);
                 errorMessage.setText(R.string.dialog_ord_vuota);
                 dialog.show();
