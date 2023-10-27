@@ -21,6 +21,7 @@ import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
 import com.example.springclient.view.gestioneMenu.VisualizzaElementiDellaCategoriaActivity;
 import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
+import com.example.springclient.view.nuovaOrdinazione.VisualizzaCategoriaActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -68,6 +69,9 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         this.nuovoElementoNuovaLinguaActivity = nuovoElementoNuovaLinguaActivity;
     }
 
+    public ElementoMenuPresenter(VisualizzaCategoriaActivity visualizzaCategoriaActivity) {
+        this.viewElementoMenu = visualizzaCategoriaActivity;
+    }
 
 
     @Override

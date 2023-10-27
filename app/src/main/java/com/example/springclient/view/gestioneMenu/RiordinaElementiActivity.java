@@ -98,7 +98,7 @@ public class RiordinaElementiActivity extends AppCompatActivity implements IRecy
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClickRecyclerViewPortata(int position) {
 
     }
 

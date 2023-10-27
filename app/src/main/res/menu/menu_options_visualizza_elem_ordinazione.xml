@@ -2,14 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_lingue"
+        android:id="@+id/item_lingue_ordinazione"
         android:title="@string/visualizza_altre_lingue" />
     <item
-        android:id="@+id/item_lingua_base"
+        android:id="@+id/item_lingua_base_ordinazione"
         android:title="Visualizza lingua base" />
-    <item
-        android:id="@+id/item_riordinare"
-        android:title="@string/riordina_elementi" />
 
 
 </menu>

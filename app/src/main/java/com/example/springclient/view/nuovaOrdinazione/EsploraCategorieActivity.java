@@ -44,7 +44,9 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
 
         categoriaPresenter = new CategoriaMenuPresenter(this);
+        //Dettagli ordinazione dalla activity precedente
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+        //Fetch delle categorie dal server
         categoriaPresenter.getAllCategorie();
     }
 
@@ -56,31 +58,43 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
 
+
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
         buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
-                Dialog dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_warning_one_button);
-                TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-                Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
-                errorMessage.setText(R.string.dialog_ord_vuota);
-                ok.setOnClickListener(view1 -> {
-                    dialog.dismiss();
-                });
-                dialog.show();
+                mostraDialogWarning(getString(R.string.dialog_ord_vuota));
+
             } else {
                 // starta il riepilogo ordinazione non vuota
                 Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
                 intentRiepilogo.putExtra("ordinazione",ordinazione);
                 startActivity(intentRiepilogo);
             }
+
         });
        buttonIndietro.setOnClickListener(view -> {
            onBackPressed();
        });
 
+
+    }
+
+
+    private void mostraDialogWarning(String messaggio){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        dialogAttenzione.show();
+
+        buttonOk.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
 
     }
 

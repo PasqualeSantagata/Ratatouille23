@@ -21,7 +21,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
-
     private TextInputLayout textInputLayoutNumeroPersone;
     private TextInputLayout textInputLayoutSala;
     private TextInputLayout textInputLayoutTavolo;

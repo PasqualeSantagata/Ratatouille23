@@ -55,7 +55,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
-    private Spinner spinnerLingua;
     private String linguaSelezionata;
     private List<String> lingue;
     private String categoriaSelezionata;

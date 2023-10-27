@@ -67,6 +67,8 @@
     <string name="prezzo_down">prezzo⤵️</string>
     <string name="nome_down">nome⤵️</string>
     <string name="annulla">Annulla</string>
+    <string name="invia_ordine">invia ordine</string>
+    <string name="continua_l_ordinazione">continua l\'ordinazione</string>
 
 
     <string-array name="array_ruoli">

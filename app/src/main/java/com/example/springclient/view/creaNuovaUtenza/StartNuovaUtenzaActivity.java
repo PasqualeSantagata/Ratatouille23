@@ -59,6 +59,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
             raccogliDati();
         });
 
+
     }
     @Override
     public void raccogliDati(){
@@ -150,4 +151,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
 }

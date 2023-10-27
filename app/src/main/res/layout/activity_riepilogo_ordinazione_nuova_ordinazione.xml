@@ -23,7 +23,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="50dp"
-        android:text="@string/indietro"
+        android:text="@string/continua_l_ordinazione"
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,7 +34,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
-        android:text="@android:string/ok"
+        android:text="@string/invia_ordine"
         app:cornerRadius="@android:dimen/app_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

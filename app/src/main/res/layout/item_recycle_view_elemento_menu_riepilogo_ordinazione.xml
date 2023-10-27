@@ -25,10 +25,12 @@
                 android:id="@+id/imageViewInfoElemRiepilogoOrdinazione"
                 android:layout_width="433dp"
                 android:layout_height="64dp"
+                android:onClick="showPopupMenu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/im_info_recycle_view" />
+                app:srcCompat="@drawable/im_info_recycle_view"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/textViewNomePiattoRiepilogoOrdinazione"

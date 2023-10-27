@@ -1,7 +1,7 @@
 package com.example.springclient.view.adapters;
 
 public interface IRecycleViewElementoMenu {
-    void onItemClick(int position);
+    void onItemClickRecyclerViewPortata(int position);
     default void onButtonDeleted(int position){
 
     }
