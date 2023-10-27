@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
+import com.example.springclient.view.MainActivity;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
@@ -41,19 +43,10 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
 
-
         categoriaPresenter = new CategoriaMenuPresenter(this);
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         categoriaPresenter.getAllCategorie();
-        //initializeComponents();
     }
-
-    public void startVisualizzaCategoria(){
-        Intent intentVisiualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
-        //intentVisiualizzaCategoria.putExtra("ordinazione",ordinazione);
-        startActivity(intentVisiualizzaCategoria);
-    }
-
 
     public void initializeComponents() {
 
@@ -63,21 +56,19 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
 
-
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
-        //magari si fa l'entity categoria cosi si leggono da db
-        //e si fa un metodo per associarre imageview alla foto e al nome della categoria
-        //cosi da rendere semplice l'aggiunta di categorie da parte dell'admin
-
-
-       buttonRiepilogo.setOnClickListener(view -> {
+        buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_warning_one_button);
                 TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+                Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
                 errorMessage.setText(R.string.dialog_ord_vuota);
+                ok.setOnClickListener(view1 -> {
+                    dialog.dismiss();
+                });
                 dialog.show();
             } else {
                 // starta il riepilogo ordinazione non vuota
@@ -86,6 +77,9 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 startActivity(intentRiepilogo);
             }
         });
+       buttonIndietro.setOnClickListener(view -> {
+           onBackPressed();
+       });
 
 
     }
@@ -99,14 +93,13 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     la foto viene recuperata in due passaggi in caso la connessione fosse lenta
      */
     public void setCategorie(List<Categoria> categorie){
-        //controllare che la lista abbia almeno un elemento
         this.categorie = categorie;
-        if(!categorie.isEmpty()){
+        if(categorie != null && !categorie.isEmpty()){
             for(int i = 0; i<categorie.size(); i++){
                 categoriaPresenter.getFotoCategoriaById(categorie.get(i), i);
             }
         } else{
-            //TODO
+            dialogNessunaCategoria();
         }
         initializeComponents();
     }
@@ -132,4 +125,41 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         startActivity(intentVisualizzaCategoria);
     }
 
+    @Override
+    public void onBackPressed() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_warning_two_button);
+        TextView errorMessage = dialog.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        errorMessage.setText("Tornando indietro perderai la corrente ordinazione");
+        dialog.show();
+
+        Button buttonNo = dialog.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        Button buttonSi = dialog.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+
+        buttonNo.setOnClickListener(view1 -> {
+            dialog.dismiss();
+        });
+
+        buttonSi.setOnClickListener(view1 -> {
+            Intent intentLogOut = new Intent(this, StartNuovaOrdinazioneActivity.class);
+            dialog.dismiss();
+            startActivity(intentLogOut);
+            super.onBackPressed();
+        });
+    }
+
+    private void dialogNessunaCategoria(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_warning_one_button);
+        TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        errorMessage.setText("Nessuna categoria da visualizzare");
+        ok.setOnClickListener(view1 -> {
+            Intent intentLogOut = new Intent(this, StartNuovaOrdinazioneActivity.class);
+            dialog.dismiss();
+            startActivity(intentLogOut);
+            dialog.dismiss();
+        });
+        dialog.show();
+    }
 }

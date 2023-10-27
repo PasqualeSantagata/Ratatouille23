@@ -109,8 +109,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             }
         });
         indietroButton.setOnClickListener(view -> {
-            Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
-            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? i dati inseriti andranno persi", intentHome);
+            onBackPressed();
         });
         inserisciButton.setOnClickListener(view -> {
             dialogAllergeni();
@@ -333,5 +332,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
+        mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? I dati inseriti andranno persi", intentHome);
     }
 }

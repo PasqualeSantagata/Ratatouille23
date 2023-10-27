@@ -70,7 +70,6 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
                     List<Portata> portataOrdinazione = new ArrayList<>();
                     for(Portata p: retData.body()){
                         portataOrdinazione.add(new Portata(p.getId()));
-                        Log.d("PortataSalvata: ", p.getId().toString());
                     }
                     riepilogoOrdinazioneActivity.salvaOrdinazione(portataOrdinazione);
                 }

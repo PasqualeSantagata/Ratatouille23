@@ -72,26 +72,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
         fabMinus = findViewById(R.id.fabMinus);
 
         buttonIndietro.setOnClickListener(view -> {
-
-            Dialog dialog = new Dialog(this);
-            TextView errorMessage = findViewById(R.id.textViewDialogeWarnTwoBtn);
-            errorMessage.setText(R.string.dialog_sicuro_di_uscire);
-            dialog.setContentView(R.layout.dialog_warning_two_button);
-            dialog.show();
-
-            Button buttonNo = findViewById(R.id.buttonNoDialogWarnTwoBtn);
-            Button buttonSi = findViewById(R.id.buttonSiDialogWarnTwoBtn);
-
-            buttonNo.setOnClickListener(view1 -> {
-                dialog.dismiss();
-            });
-
-            buttonSi.setOnClickListener(view1 -> {
-                Intent intentLogOut = new Intent(this, MainActivity.class);
-                dialog.dismiss();
-                startActivity(intentLogOut);
-            });
-
+            onBackPressed();
         });
 
         fab1.setOnClickListener(view -> {
@@ -170,4 +151,26 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_warning_two_button);
+        TextView errorMessage = dialog.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        errorMessage.setText(R.string.dialog_sicuro_di_uscire);
+        dialog.show();
+
+        Button buttonNo = dialog.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        Button buttonSi = dialog.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+
+        buttonNo.setOnClickListener(view1 -> {
+            dialog.dismiss();
+        });
+
+        buttonSi.setOnClickListener(view1 -> {
+            Intent intentLogOut = new Intent(this, MainActivity.class);
+            dialog.dismiss();
+            startActivity(intentLogOut);
+            super.onBackPressed();
+        });
+    }
 }

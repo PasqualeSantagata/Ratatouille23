@@ -164,10 +164,9 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         super.onDestroy();
     }
 
-
-
-
-
-
-
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        finish();
+    }
 }

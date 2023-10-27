@@ -77,8 +77,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         });
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intent = new Intent(this, StartGestioneMenuActivity.class);
-            startActivity(intent);
+            onBackPressed();
         });
 
         fabAggiungiCategoria.setOnClickListener(view -> {
@@ -92,6 +91,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void setNomiCategorie(List<String> nomiCategorie) {
         this.categorie = nomiCategorie;
+
         initializeComponents();
     }
 
@@ -113,5 +113,12 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, StartGestioneMenuActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }
