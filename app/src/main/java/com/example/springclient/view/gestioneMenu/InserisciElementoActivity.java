@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +34,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
@@ -55,7 +53,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
-    private Spinner spinnerLingua;
     private String linguaSelezionata;
     private List<String> lingue;
     private String categoriaSelezionata;
@@ -109,8 +106,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             }
         });
         indietroButton.setOnClickListener(view -> {
-            Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
-            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? i dati inseriti andranno persi", intentHome);
+            onBackPressed();
         });
         inserisciButton.setOnClickListener(view -> {
             dialogAllergeni();
@@ -136,6 +132,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             startActivity(nuovaLingua);
         });
         dialog.show();
+    }
+
+    private void mostraDialogOkTwoBtn(String messaggio, Intent intentAvanti, String tastoAvanti, Intent intentIndietro, String tastoIndietro){
+        if(tastoAvanti == null || tastoAvanti.isEmpty()){
+
+        }
+
     }
 
 
@@ -333,5 +336,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
+        mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? i dati inseriti andranno persi", intentHome);
+        super.onBackPressed();  //?
     }
 }

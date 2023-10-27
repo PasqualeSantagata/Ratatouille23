@@ -167,7 +167,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClickRecyclerViewPortata(int position) {
 
     }
 

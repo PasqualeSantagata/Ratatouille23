@@ -97,11 +97,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_overflow_visualizza_elem_menu_inserimento_nel_menu, menu);
 
-        MenuItem itemLingua = findViewById(R.id.item_lingue);
-        MenuItem itemLinguaBase = findViewById(R.id.item_lingua_base);
-        MenuItem itemRiordina = findViewById(R.id.item_riordinare);
-        //itemLinguaBase.setEnabled(false);
-
         this.menu = menu;
         return true;
     }
@@ -133,7 +128,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                         elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
                         invalidateOptionsMenu();
                         b = true;
-
                     }
                     else{
                         Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
@@ -275,7 +269,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClickRecyclerViewPortata(int position) {
         elementoSelezionato = position;
         setParameters(elementiMenu.get(position));
     }

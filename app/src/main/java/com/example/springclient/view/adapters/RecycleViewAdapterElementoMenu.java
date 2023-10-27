@@ -64,7 +64,7 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
                         int pos = getAdapterPosition();
 
                         if(pos != RecyclerView.NO_POSITION){
-                            recycleViewElementoMenuInterface.onItemClick(pos);
+                            recycleViewElementoMenuInterface.onItemClickRecyclerViewPortata(pos);
                         }
                     }
                 }
