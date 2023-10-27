@@ -166,7 +166,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    //elemento salvato correttamente
+                    //elemento salvato correttament
                 }
             }
         });
