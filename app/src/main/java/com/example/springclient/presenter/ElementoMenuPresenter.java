@@ -30,35 +30,26 @@ import retrofit2.Response;
 public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
-    private RetrofitService retrofitService;
+
     private InserisciElementoActivity inserisciElementoActivity;
     private StartGestioneMenuActivity gestioneMenuActivity;
-    private HomeNuovoElementoActivity homeNuovoElementoActivity;
 
-    private EsploraCategorieActivity esploraCategorieActivity;
-    private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
     private VisualizzaElementiDellaCategoriaActivity visualizzaElementiDellaCategoriaActivity;
-    private CercaElementoActivity cercaElementoActivity;
+
     private ModificaElementoActivity modificaElementoActivity;
     private ElementoMenuContract.View viewElementoMenu;
     private NuovoElementoNuovaLinguaActivity nuovoElementoNuovaLinguaActivity;
+    private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
+
+    public ElementoMenuPresenter(RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity) {
+        this.riepilogoOrdinazioneActivity = riepilogoOrdinazioneActivity;
+    }
+
     public ElementoMenuPresenter(InserisciElementoActivity inserisciElementoActivity){
         this.inserisciElementoActivity = inserisciElementoActivity;
     }
     public ElementoMenuPresenter(StartGestioneMenuActivity gestioneMenuActivity){
         this.gestioneMenuActivity = gestioneMenuActivity;
-    }
-
-    public ElementoMenuPresenter(HomeNuovoElementoActivity homeNuovoElementoActivity){
-        this.homeNuovoElementoActivity = homeNuovoElementoActivity;
-    }
-
-    public ElementoMenuPresenter(EsploraCategorieActivity esploraCategorieActivity){
-        this.esploraCategorieActivity = esploraCategorieActivity;
-    }
-
-    public ElementoMenuPresenter(RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity) {
-        this.riepilogoOrdinazioneActivity = riepilogoOrdinazioneActivity;
     }
 
     public ElementoMenuPresenter(VisualizzaElementiDellaCategoriaActivity visualizzaElementiDellaCategoriaActivity) {
@@ -188,9 +179,16 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
+                if(retData.isSuccessful()){
 
+                }
             }
         }, id);
+    }
+
+    public void traduciOrdinazione(List<ElementoMenu> elementoMenuList){
+
+
     }
 
     public void modificaElementoMenu(ElementoMenu elementoMenu){

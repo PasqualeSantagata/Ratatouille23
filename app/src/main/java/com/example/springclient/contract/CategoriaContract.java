@@ -21,6 +21,7 @@ public interface CategoriaContract {
         void initializeComponents();
         void setNomiCategorie(List<String> nomiCategorie);
         void setCategorie(List<Categoria> categorie);
+        default void notifyAdapter(int posizione){};
 
     }
 

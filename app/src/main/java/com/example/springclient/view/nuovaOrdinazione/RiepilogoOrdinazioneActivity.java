@@ -1,5 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.contract.OrdinazioneContract;
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
@@ -48,7 +50,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     private Ordinazione ordinazione;
     private List<Portata> portate;
     private RecycleViewAdapterRiepilogoOrdinazione adapterElementoMenu;
-
+    private ElementoMenuPresenter elementoMenuPresenter;
     private OrdinazioneContract.Presenter presenterOrdinazione;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,21 +59,25 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_riepilogo_ordinazione_nuova_ordinazione);
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+        elementoMenuPresenter = new ElementoMenuPresenter(this);
         portate = new ArrayList<>();
         for(Portata o : ordinazione.getElementiOrdinati()){
             portate.add(o);
         }
         presenterOrdinazione = new OrdinazionePresenter(this);
-        Log.d("WEWE", ordinazione.getElementiOrdinati().get(0).getElementoMenu().getNome());
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
+        buttonIndietro = findViewById(R.id.buttonIndietroRiepilogo);
         buttonOk.setOnClickListener(view -> {
-            /* tradurre gli elementi delle ordinazioni */
+            //elementoMenuPresenter.traduciOrdinazione();
+
 
             presenterOrdinazione.savePortate(portate);
         });
+        buttonIndietro.setOnClickListener(view -> onBackPressed());
+        initializeComponents();
     }
 
-    private void InitializeComponents() {
+    private void initializeComponents() {
         RecyclerView  recyclerViewRiepilogo = findViewById(R.id.RecyclerViewRiepilogoOrdinazione);
         adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazione(this,this ,portate);
         recyclerViewRiepilogo.setAdapter(adapterElementoMenu);
@@ -79,21 +85,23 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewRiepilogo.setLayoutManager(horizontal);
     }
 
-    private void setHorizontalRecycleView (RecyclerView recyclerView){
-        LinearLayoutManager horizontalLayout = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayout);
-    }
 
     public void salvaOrdinazione(List<Portata> portateOrdinazione){
         ordinazione.setElementiOrdinati(portateOrdinazione);
         presenterOrdinazione.aggiungiOrdinazione(ordinazione);
     }
 
-
     @Override
     public void onItemClick(int position) {
         //Aprire menu di android per far elminiare una certa pietanza dall'ordinaizone
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
+        intentEsploraCategorie.putExtra("ordinazione",ordinazione);
+        startActivity(intentEsploraCategorie);
+        super.onBackPressed();
     }
 }
 

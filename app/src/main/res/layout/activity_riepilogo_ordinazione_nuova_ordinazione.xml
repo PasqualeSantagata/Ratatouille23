@@ -41,8 +41,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerViewRiepilogoOrdinazione"
-        android:layout_width="1279dp"
-        android:layout_height="588dp"
+        android:layout_width="1297dp"
+        android:layout_height="488dp"
         android:layout_marginStart="1dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView21"
         app:layout_constraintEnd_toEndOf="parent"

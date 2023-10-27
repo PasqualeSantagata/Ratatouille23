@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.example.springclient.entity.ElementoMenu;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class FiltraCategoria extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class FiltraCategoria extends AppCompatActivity {
     private List<String> allergeni;
     private List<ElementoMenu> elementiMenu;
     private String nome;
+    private Intent intentVisualizzaCategoria;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +54,6 @@ public class FiltraCategoria extends AppCompatActivity {
         buttonTabellaAllergeni = findViewById(R.id.buttonFiltraTabellaAllergeni);
         buttonOk = findViewById(R.id.buttonOkFiltraCategoria);
         buttonAnnulla = findViewById(R.id.buttonAnnullaFiltraCategoria);
-
 
         buttonNome.setOnClickListener(view -> {
             if(buttonNome.getText().toString().equals(getString(R.string.nome_up))){
@@ -70,19 +73,20 @@ public class FiltraCategoria extends AppCompatActivity {
         buttonTabellaAllergeni.setOnClickListener(view -> {
             dialogAllergeni();
         });
-        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
-        buttonOk.setOnClickListener(view -> {
-            if (checkboxAllergeni.isActivated()){
+        intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
 
+        buttonOk.setOnClickListener(view -> {
+            if(checkboxAllergeni.isChecked()){
+                filtraAllergeni();
             }
-            if(checkboxNome.isActivated()) {
+            if(checkboxNome.isChecked()) {
                 if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeCrescente);
                 } else {
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeDecrescente);
                 }
             }
-            if(checkboxPrezzo.isActivated()){
+            if(checkboxPrezzo.isChecked()){
                 if(buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))){
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoCrescente);
                 }else{
@@ -95,21 +99,38 @@ public class FiltraCategoria extends AppCompatActivity {
             startActivity(intentVisualizzaCategoria);
         });
         buttonAnnulla.setOnClickListener(view -> {
-            intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
-            intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
-
-            startActivity(intentVisualizzaCategoria);
+            onBackPressed();
         });
 
         //Check box
         checkboxNome = findViewById(R.id.checkBoxFiltroNome);
         checkboxPrezzo = findViewById(R.id.checkBoxFiltroPrezzo);
         checkboxAllergeni = findViewById(R.id.checkBoxFiltroTabellaAllergene);
+        checkboxNome.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b){
+                checkboxPrezzo.setChecked(false);
+            }
+        });
+        checkboxPrezzo.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b){
+                checkboxNome.setChecked(false);
+            }
+        });
 
-        if(checkboxNome.isActivated()){
-            checkboxPrezzo.setChecked(false);
-        }else if (checkboxPrezzo.isActivated()){
-            checkboxNome.setChecked(false);
+    }
+
+    private void filtraAllergeni(){
+        List<String> allergeniElemento;
+        Iterator<ElementoMenu> elementoMenuIterator = elementiMenu.iterator();
+        while(elementoMenuIterator.hasNext()){
+            ElementoMenu e = elementoMenuIterator.next();
+            allergeniElemento = e.getElencoAllergeni();
+            for(String s: allergeni){
+                if(allergeniElemento.contains(s)){
+                    elementoMenuIterator.remove();
+                    break;
+                }
+            }
         }
 
     }
@@ -178,4 +199,12 @@ public class FiltraCategoria extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
+        intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
+
+        startActivity(intentVisualizzaCategoria);
+        super.onBackPressed();
+    }
 }

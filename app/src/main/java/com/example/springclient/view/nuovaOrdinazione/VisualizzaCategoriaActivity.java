@@ -47,8 +47,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         getSupportActionBar().setTitle(nome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
-
-
         initializeComponents();
 
     }
@@ -73,10 +71,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         });
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
-            intentEsploraCategorie.putExtra("ordinazione",ordinazione);
-            startActivity(intentEsploraCategorie);
-
+            onBackPressed();
         });
 
         buttonRiepilogo.setOnClickListener(view -> {
@@ -117,5 +112,13 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     public void onItemClick(int position) {
         elementoSelezionato = position;
         setParameters(elementiMenu.get(position).getElementoMenu());
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
+        intentEsploraCategorie.putExtra("ordinazione",ordinazione);
+        startActivity(intentEsploraCategorie);
+        super.onBackPressed();
     }
 }

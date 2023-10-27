@@ -32,5 +32,7 @@ public interface ElementoMenuAPI {
     @POST("api/v1/elementoMenu/modificaElemento")
     Single<Response<Void>> modificaElementoMenu(@Body ElementoMenu elementoMenu);
 
+    @POST("api/v1/elementoMenu/restituisciLinguaBase")
+    Single<Response<ElementoMenu>> restituisciLinguaBase(@Body List<ElementoMenu> elementoMenuList);
 
 }

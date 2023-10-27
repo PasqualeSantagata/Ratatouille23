@@ -135,10 +135,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewElemMenuNuovaOrdinazione"
-        android:layout_width="450dp"
-        android:layout_height="697dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="58dp"
+        android:layout_width="459dp"
+        android:layout_height="631dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonIndietroVisuaCatNuovaOrdinazione"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

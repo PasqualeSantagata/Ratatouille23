@@ -56,16 +56,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
     public void initializeComponents() {
-/*
-        int [] images = {R.drawable.categoria_primi, R.drawable.categoria_secondi, R.drawable.categoria_bevande,
-        R.drawable.categoria_sushi, R.drawable.categoria_pizza, R.drawable.categoria_dessert};
-        categoriaList = new ArrayList<>();
-        List<ElementoMenu> elementoMenuList = new ArrayList<>();
-        List<String> allergeni = new ArrayList<>();
-        allergeni.add("nessuno (forse) ehehe");
-        elementoMenuList.add(new ElementoMenu("carbonata",2.0F, "un buon piatto cos", allergeni));
-       */
-        //setta i models della recycle view
 
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
         adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
@@ -75,6 +65,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
+        buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
         //magari si fa l'entity categoria cosi si leggono da db
         //e si fa un metodo per associarre imageview alla foto e al nome della categoria
@@ -85,7 +76,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             if (ordinazione.ordinazioneVuota()){
                 Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_warning_one_button);
-                TextView errorMessage = findViewById(R.id.textViewMessageDialogueErrorOneBt);
+                TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
                 errorMessage.setText(R.string.dialog_ord_vuota);
                 dialog.show();
             } else {
@@ -94,7 +85,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 intentRiepilogo.putExtra("ordinazione",ordinazione);
                 startActivity(intentRiepilogo);
             }
-
         });
 
 
@@ -120,6 +110,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         }
         initializeComponents();
     }
+    @Override
     public void notifyAdapter(int posizione){
         adapterCategoria.notifyItemChanged(posizione);
     }

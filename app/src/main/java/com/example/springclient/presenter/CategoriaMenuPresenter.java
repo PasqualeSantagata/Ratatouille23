@@ -33,7 +33,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
 
 
     public CategoriaMenuPresenter(EsploraCategorieMenuActivity esploraCategorieMenuActivity) {
-        this.esploraCategorieMenuActivity = esploraCategorieMenuActivity;
+        this.categoriaView = esploraCategorieMenuActivity;
     }
 
     public CategoriaMenuPresenter(HomeNuovoElementoActivity homeNuovoElementoActivity) {
@@ -63,7 +63,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
             @Override
             public void onSuccess(Response<List<Categoria>> retData) {
                 if(retData.isSuccessful()){
-                    esploraCategorieMenuActivity.setCategorie(retData.body());
+                    categoriaView.setCategorie(retData.body());
                 }
             }
         });
@@ -118,7 +118,7 @@ public class CategoriaMenuPresenter implements CategoriaContract.Presenter {
                 if(retData.isSuccessful()){
                     Bitmap bitmap = BitmapFactory.decodeStream(retData.body().byteStream());
                     categoria.setImage(bitmap);
-                    esploraCategorieMenuActivity.notifyAdapter(posizione);
+                    categoriaView.notifyAdapter(posizione);
                 }
             }
         });
