@@ -42,6 +42,8 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private Ordinazione ordinazione;
     private int elementoSelezionato = -1;
 
+    private boolean b;
+
     private ElementoMenuPresenter elementoMenuPresenter;
 
     //boolean categoriaInclusa; serve a sapere quali categorie ci sono per sapere quali mostrare nel riepilogo,
@@ -100,14 +102,14 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         return true;
     }
 
-    private boolean b;
+
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(b==true){
-            menu.findItem(R.id.item_lingue).setEnabled(false);
-            menu.findItem(R.id.item_lingua_base).setEnabled(true);
+        if(b){
+            menu.findItem(R.id.item_lingue_ordinazione).setEnabled(false);
+            menu.findItem(R.id.item_lingua_base_ordinazione).setEnabled(true);
         }else{
-            menu.findItem(R.id.item_lingue).setEnabled(true);
-            menu.findItem(R.id.item_lingua_base).setEnabled(false);
+            menu.findItem(R.id.item_lingue_ordinazione).setEnabled(true);
+            menu.findItem(R.id.item_lingua_base_ordinazione).setEnabled(false);
         }
 
         return true;
@@ -118,13 +120,14 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         switch (item.getItemId()){
             case R.id.item_lingue_ordinazione :
                 if(elementoSelezionato != -1) {
-                    elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
+                    elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getElementoMenu().getId().toString());
                     invalidateOptionsMenu();
                     b = true;
                 }
                 else{
                     Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
                 }
+                break;
 
             case R.id.item_lingua_base_ordinazione:
                 if(elementoSelezionato != -1) {

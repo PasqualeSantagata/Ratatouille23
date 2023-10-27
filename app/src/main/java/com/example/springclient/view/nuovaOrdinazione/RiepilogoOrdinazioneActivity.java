@@ -89,12 +89,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         PopupMenu popupMenu = new PopupMenu(this, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(R.menu.menu_popup_elem_riepilogo, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                return onPopupMenuClick(menuItem);
-            }
-        });
+        popupMenu.setOnMenuItemClickListener(menuItem -> onPopupMenuClick(menuItem));
         popupMenu.show();
     }
 

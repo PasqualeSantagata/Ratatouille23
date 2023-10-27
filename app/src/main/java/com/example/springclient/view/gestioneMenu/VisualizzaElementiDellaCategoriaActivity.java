@@ -206,7 +206,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     }
 
-
     public void dialogAllergeni(){
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);

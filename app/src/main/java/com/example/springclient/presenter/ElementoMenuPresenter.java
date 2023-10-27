@@ -56,7 +56,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     }
 
     public ElementoMenuPresenter(VisualizzaElementiDellaCategoriaActivity visualizzaElementiDellaCategoriaActivity) {
-        this.visualizzaElementiDellaCategoriaActivity = visualizzaElementiDellaCategoriaActivity;
+        this.viewElementoMenu = visualizzaElementiDellaCategoriaActivity;
     }
 
     public ElementoMenuPresenter(CercaElementoActivity cercaElementoActivity) {
