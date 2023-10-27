@@ -106,7 +106,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    /* aggiungi schermata di conferma */
+                    riepilogoOrdinazioneActivity.dialogOrdinazioneAvvvenutaConSuccesso();
 
                 }
             }

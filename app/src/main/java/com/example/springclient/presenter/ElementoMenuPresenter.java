@@ -10,6 +10,7 @@ import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.gestioneMenu.CercaElementoActivity;
 import com.example.springclient.view.gestioneMenu.ModificaElementoActivity;
@@ -40,6 +41,7 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     private ElementoMenuContract.View viewElementoMenu;
     private NuovoElementoNuovaLinguaActivity nuovoElementoNuovaLinguaActivity;
     private RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity;
+
 
     public ElementoMenuPresenter(RiepilogoOrdinazioneActivity riepilogoOrdinazioneActivity) {
         this.riepilogoOrdinazioneActivity = riepilogoOrdinazioneActivity;
@@ -184,11 +186,6 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
                 }
             }
         }, id);
-    }
-
-    public void traduciOrdinazione(List<ElementoMenu> elementoMenuList){
-
-
     }
 
     public void modificaElementoMenu(ElementoMenu elementoMenu){

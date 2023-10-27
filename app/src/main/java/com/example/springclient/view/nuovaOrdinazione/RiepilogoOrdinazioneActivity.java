@@ -1,5 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.OrdinazionePresenter;
+import com.example.springclient.view.MainActivity;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazione;
 
@@ -31,22 +34,9 @@ import java.util.List;
 
 public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable {
 
-    private ImageView imageViewPrimi;
-    private ImageView imageViewSecondi;
-    private ImageView imageViewBevande;
-    private ImageView imageViewSushi;
-    private ImageView imageViewPizze;
-    private ImageView imageViewDessert;
-
     private Button buttonIndietro;
     private Button buttonOk;
 
-    private RecyclerView recyclerViewPrimi;
-    private RecyclerView recyclerViewSecondi;
-    private RecyclerView recyclerViewBevande;
-    private RecyclerView recyclerViewSushi;
-    private RecyclerView recyclerViewPizze;
-    private RecyclerView recyclerViewDessert;
     private Ordinazione ordinazione;
     private List<Portata> portate;
     private RecycleViewAdapterRiepilogoOrdinazione adapterElementoMenu;
@@ -68,9 +58,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
         buttonIndietro = findViewById(R.id.buttonIndietroRiepilogo);
         buttonOk.setOnClickListener(view -> {
-            //elementoMenuPresenter.traduciOrdinazione();
-
-
             presenterOrdinazione.savePortate(portate);
         });
         buttonIndietro.setOnClickListener(view -> onBackPressed());
@@ -89,6 +76,21 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     public void salvaOrdinazione(List<Portata> portateOrdinazione){
         ordinazione.setElementiOrdinati(portateOrdinazione);
         presenterOrdinazione.aggiungiOrdinazione(ordinazione);
+    }
+
+    public void dialogOrdinazioneAvvvenutaConSuccesso(){
+        Dialog ordinazioneAvvenuta = new Dialog(this);
+        ordinazioneAvvenuta.setContentView(R.layout.dialog_ok_one_button);
+        TextView ordinazioneAvvenutaTv = ordinazioneAvvenuta.findViewById(R.id.textViewDialogEmailInviata);
+        ordinazioneAvvenutaTv.setText("Ordinazione inviata con successo");
+        Button okButton = ordinazioneAvvenuta.findViewById(R.id.okDialog);
+        ordinazioneAvvenuta.show();
+        okButton.setOnClickListener(view -> {
+            ordinazioneAvvenuta.dismiss();
+            Intent loginActivity = new Intent(this, StartNuovaOrdinazioneActivity.class);
+            startActivity(loginActivity);
+        });
+
     }
 
     @Override
