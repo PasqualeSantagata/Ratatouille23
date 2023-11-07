@@ -31,7 +31,7 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
     @Override
     public RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_recycle_view_elemento_menu_riepilogo_ordinazione, parent,false);
+        View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu_delete_btn, parent,false);
 
         return new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder(view, recycleViewElementoMenuInterface);
     }
@@ -56,9 +56,9 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
             super(itemView);
-            textViewNome = itemView.findViewById(R.id.textViewNomePiattoRiepilogoOrdinazione);
-            imageViewInfo = itemView.findViewById(R.id.imageViewInfoElemRiepilogoOrdinazione);
-            textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoRiepilogo);
+            textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
+            imageViewInfo = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
+            textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoRecycleViewDeleteBtn);
 
             imageViewInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
