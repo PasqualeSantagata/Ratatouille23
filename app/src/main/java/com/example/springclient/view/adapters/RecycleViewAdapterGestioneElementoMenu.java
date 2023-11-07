@@ -30,13 +30,14 @@ public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter
     @Override
     public RecycleViewAdapterGestioneElementoMenu.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu2, parent,false);
+        View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu_delete_btn, parent,false);
 
         return new RecycleViewAdapterGestioneElementoMenu.MyViewHolder(view, recycleViewElementoMenuInterface);
     }
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterGestioneElementoMenu.MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getNome());
+        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getPrezzo().toString());
     }
 
     @Override
@@ -46,14 +47,16 @@ public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView textViewNome;
+        TextView textViewPrezzo;
         ImageView imageViewInfo;
         ImageView cancellaElementoImageView;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
             super(itemView);
-            textViewNome = itemView.findViewById(R.id.textViewNome);
+            textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
             imageViewInfo = itemView.findViewById(R.id.imageViewInfoRecycleView);
-            cancellaElementoImageView = itemView.findViewById(R.id.cancellaElementoImageView);
+            cancellaElementoImageView = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
+            textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoRecycleViewDeleteBtn);
 
 
             itemView.setOnClickListener(view -> {

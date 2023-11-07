@@ -38,6 +38,7 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
+        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString());
 
     }
 
@@ -48,13 +49,13 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView textViewNome;
-
+        TextView textViewPrezzo;
         ImageView imageViewInfo;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
             super(itemView);
-            textViewNome = itemView.findViewById(R.id.textViewNome);
-
+            textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
+            textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoElemMenu);
             imageViewInfo = itemView.findViewById(R.id.imageViewInfoRecycleView);
 
             itemView.setOnClickListener(new View.OnClickListener() {

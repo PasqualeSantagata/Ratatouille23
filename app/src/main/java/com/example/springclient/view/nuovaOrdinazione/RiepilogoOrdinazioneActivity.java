@@ -4,11 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,7 +19,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
-import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazione;
+import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +32,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     private Ordinazione ordinazione;
     private List<Portata> portate;
-    private RecycleViewAdapterRiepilogoOrdinazione adapterElementoMenu;
+    private RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn adapterElementoMenu;
     private ElementoMenuPresenter elementoMenuPresenter;
     private OrdinazioneContract.Presenter presenterOrdinazione;
     private int indiceElementoSelezionato = -1;
@@ -65,7 +61,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     private void initializeComponents() {
         //Recycler view
         RecyclerView recyclerViewRiepilogo = findViewById(R.id.RecyclerViewRiepilogoOrdinazione);
-        adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazione(this, this, portate);
+        adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(this, this, portate);
         recyclerViewRiepilogo.setAdapter(adapterElementoMenu);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewRiepilogo.setLayoutManager(horizontal);
@@ -85,25 +81,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         presenterOrdinazione.aggiungiOrdinazione(ordinazione);
     }
 
-    public void showPopupMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.menu_popup_elem_riepilogo, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(menuItem -> onPopupMenuClick(menuItem));
-        popupMenu.show();
-    }
-
-    private boolean onPopupMenuClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_elimina_elem_riepilogo:
-                //Deve elminare l'elemento
-                portate.remove(indiceElementoSelezionato);
-                //notifica l'adapter della recycler view
-                adapterElementoMenu.notifyItemChanged(indiceElementoSelezionato);
-                break;
-        }
-        return true;
-    }
 
     public void dialogOrdinazioneAvvvenutaConSuccesso() {
         Dialog ordinazioneAvvenuta = new Dialog(this);
@@ -122,12 +99,30 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     @Override
     public void onItemClickRecyclerViewPortata(int position) {
-        //Aprire menu di android per far elminiare una certa pietanza dall'ordinaizone
         indiceElementoSelezionato = position;
         elementoSelezionato = portate.get(position);
+        //Starta dialog warn per eliminare elem
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
 
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        messaggiodialog.setText("Sei sicuro di voler eliminare questo elemento dall'ordinazione?");
+
+        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        dialogAttenzione.show();
+
+        buttonSi.setOnClickListener(view -> {
+            //elimina elemento
+            portate.remove(position);
+            dialogAttenzione.dismiss();
+        });
+        buttonNo.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -135,6 +130,10 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         intentEsploraCategorie.putExtra("ordinazione", ordinazione);
         startActivity(intentEsploraCategorie);
         super.onBackPressed();
+    }
+
+    public void notifyAdapter(int index){
+        adapterElementoMenu.notifyItemChanged(index);
     }
 
 
