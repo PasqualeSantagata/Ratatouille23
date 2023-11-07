@@ -114,6 +114,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         });
 
     }
+
     public void listenerAllergeni(){
         allergeni = elementoMenu.getElencoAllergeni();
         if(allergeni == null)
@@ -152,7 +153,6 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         }
 
     }
-
 
     public void dialogAllergeni(){
         Dialog dialogAllergeni = new Dialog(this);
