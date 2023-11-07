@@ -87,8 +87,7 @@ public class CreaCategoriaActivity extends AppCompatActivity {
         });
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
-            startActivity(intent);
+            onBackPressed();
         });
 
         imageViewAggiungiImmagine.setOnClickListener(view -> {
@@ -117,6 +116,10 @@ public class CreaCategoriaActivity extends AppCompatActivity {
         return true;
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }

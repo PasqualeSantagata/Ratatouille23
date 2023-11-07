@@ -107,8 +107,10 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
         });
         buttonIndietro.setOnClickListener(view -> {
-            Intent intentVisualizzaCategorie = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
-            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? perderai tutti i dati inseriti fino ad ora!", intentVisualizzaCategorie);
+            /*Intent intentVisualizzaCategorie = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
+            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? perderai tutti i dati inseriti fino ad ora!", intentVisualizzaCategorie);*/
+            //questa schermata è raggiungibile da due diverse quindi indietro dovrebbe corrispondere ad onBackPressed di default
+            onBackPressed();
         });
 
     }
@@ -192,7 +194,8 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
         buttonSi.setOnClickListener(view -> {
             if(intentSi != null)
-                startActivity(intentSi);
+                onBackPressed();
+                //startActivity(intentSi);
 
             dialogAttenzione.dismiss();
         });
@@ -223,4 +226,5 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
 }

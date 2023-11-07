@@ -58,6 +58,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     private String linguaSelezionata;
     private List<String> lingue;
     private String categoriaSelezionata;
+    private ElementoMenu elementoMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
         okButton.setOnClickListener(view -> {
             if(checkFields()) {
-                ElementoMenu elementoMenu = getElementoValues();
+                elementoMenu = getElementoValues();
                 elementoMenuPresenter.saveElementoMenu(elementoMenu, categoriaSelezionata);
             }
         });
@@ -122,15 +123,18 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
         Button indietroButton = dialog.findViewById(R.id.okDialog);
         Button okButton = dialog.findViewById(R.id.okDialog2);
-        indietroButton.setText("INDIETRO");
+        indietroButton.setText("CONTINUA");
         okButton.setText("AVANTI");
-        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti");
-        okButton.setOnClickListener(view -> {
-            dialog.dismiss();
-            allergeni = new ArrayList<>();
-        });
+        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti, altrimenti premi "+
+        "continua per aggiungere un nuovo elemento");
         indietroButton.setOnClickListener(view -> {
+            Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
+            startActivity(intentHome);
+        });
+        okButton.setOnClickListener(view -> {
             Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+            nuovaLingua.putExtra("elemento", elementoMenu);
+            dialog.dismiss();
             startActivity(nuovaLingua);
         });
         dialog.show();
@@ -335,7 +339,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
     @Override
     public void onBackPressed() {
-        Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
+        Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
         mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? I dati inseriti andranno persi", intentHome);
     }
 }

@@ -77,7 +77,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         });
         indietroButton.setOnClickListener(view -> {
             Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
-            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare alla home? perderai tutti i dati inseriti!", intentHome);
+            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? perderai tutti i dati inseriti!", intentHome);
 
         });
     }
@@ -198,7 +198,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
         buttonSi.setOnClickListener(view -> {
             if(intentSi != null)
-                startActivity(intentSi);
+                super.onBackPressed();
 
             dialogAttenzione.dismiss();
         });
@@ -209,6 +209,24 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         dialogAttenzione.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
+        mostraDialogWarningTwoBtn("Sei sicuro di voler annullare l'inserimento? perderai tutti i dati inseriti", intentHome);
 
+    }
 
+    public void linguaAggiunta() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_ok_one_button);
+        TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
+        Button okButton = dialog.findViewById(R.id.okDialog);
+        okButton.setText("OK");
+        dialogTv.setText("Traduzione inserita con successo");
+        okButton.setOnClickListener(view -> {
+            Intent nuovaLingua = new Intent(this, StartGestioneMenuActivity.class);
+            startActivity(nuovaLingua);
+        });
+        dialog.show();
+    }
 }

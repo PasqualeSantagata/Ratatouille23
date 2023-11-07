@@ -169,9 +169,9 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
         errorMessage.setText("Nessuna categoria da visualizzare");
         ok.setOnClickListener(view1 -> {
-            Intent intentLogOut = new Intent(this, StartNuovaOrdinazioneActivity.class);
+            Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
             dialog.dismiss();
-            startActivity(intentLogOut);
+            startActivity(intent);
             dialog.dismiss();
         });
         dialog.show();

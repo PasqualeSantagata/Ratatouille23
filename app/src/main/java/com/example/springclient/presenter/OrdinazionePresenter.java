@@ -38,9 +38,6 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     }
 
 
-    public OrdinazionePresenter() {
-    }
-
     public void getOrdinazioniSospese(){
         ordinazioneModel.getOrdinazioniSospese(new CallbackResponse<List<Ordinazione>>() {
             @Override
@@ -84,7 +81,6 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
             public void onFailure(Throwable t) {
 
             }
-
             @Override
             public void onSuccess(Response<Ordinazione> retData) {
                 if(retData.isSuccessful()){

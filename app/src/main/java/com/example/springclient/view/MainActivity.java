@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         });
     }
 
+    public void disabilitaPorogressBar(){
+        progressBar.setVisibility(View.GONE);
+
+    }
 
     public void cleanFields(){
         editTextPassword.setText("");

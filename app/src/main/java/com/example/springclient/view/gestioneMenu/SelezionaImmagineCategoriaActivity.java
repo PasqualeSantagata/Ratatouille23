@@ -118,4 +118,9 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
         byte[] bytes = convertiImmagine(bitmap);
         caricaImmagine(bytes);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

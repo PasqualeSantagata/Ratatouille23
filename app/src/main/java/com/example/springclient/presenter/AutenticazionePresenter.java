@@ -45,7 +45,7 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
                 Disabilitare progress bar quando non c'è connessione
                 */
                 Toast.makeText(loginActivity, t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e("Failure: ", t.getMessage());
+                loginActivity.disabilitaPorogressBar();
             }
             @Override
             public void onSuccess(Response<ApiToken> retData) {

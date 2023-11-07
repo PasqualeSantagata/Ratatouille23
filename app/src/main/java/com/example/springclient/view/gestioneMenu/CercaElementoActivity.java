@@ -96,8 +96,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                         });
 
         buttonInditero.setOnClickListener(view -> {
-            Intent intent = new Intent(this, StartGestioneMenuActivity.class);
-            startActivity(intent);
+            onBackPressed();
         });
     }
 
@@ -174,5 +173,12 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     @Override
     public void onButtonDeleted(int position){
         startDialogDettagliElemento(elementoMenuList.get(position));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, StartGestioneMenuActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

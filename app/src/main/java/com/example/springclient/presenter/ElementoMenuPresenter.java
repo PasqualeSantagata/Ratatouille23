@@ -153,6 +153,9 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
 
             @Override
             public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    nuovoElementoNuovaLinguaActivity.linguaAggiunta();
+                }
 
             }
         }, id, elementoMenu);

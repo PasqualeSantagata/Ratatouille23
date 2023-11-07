@@ -50,8 +50,7 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         spinnerLingua.setAdapter(adapterLingue);
 
         buttonIndietro.setOnClickListener(view -> {
-            Intent intentEsci = new Intent(this, StartGestioneMenuActivity.class);
-            mostraDialogWarningTwoBtn("Sei sicuro di voler uscire? Annullerai l'inserimento dell'elemento in un'altra lingua", intentEsci);
+            onBackPressed();
         });
         buttonOk.setOnClickListener(view -> {
             Intent nuovaLinguaElemento = new Intent(this, NuovoElementoNuovaLinguaActivity.class);
@@ -75,7 +74,7 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
 
         buttonSi.setOnClickListener(view -> {
             if(intentSi != null)
-                startActivity(intentSi);
+                super.onBackPressed();
 
             dialogAttenzione.dismiss();
         });
@@ -92,5 +91,11 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intentEsci = new Intent(this, StartGestioneMenuActivity.class);
+        mostraDialogWarningTwoBtn("Sei sicuro di voler uscire? Annullerai l'inserimento dell'elemento in un'altra lingua", intentEsci);
     }
 }

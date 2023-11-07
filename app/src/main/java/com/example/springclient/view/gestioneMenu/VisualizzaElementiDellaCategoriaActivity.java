@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -58,6 +59,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private ItemTouchHelper.SimpleCallback simpleCallback;
     private String nome;
     private Menu menu;
+    private Button indietroButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,9 +89,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
             }
         };
-
         initializeComponents();
-
     }
 
     @Override
@@ -151,19 +151,27 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
         allergeniButton = findViewById(R.id.textViewAllergeniElementoGestioneMenu);
         fabModifica = findViewById(R.id.fabModificaInserNelMenu);
+        indietroButton = findViewById(R.id.buttonIndietroElemInserNelMenu);
         setElementiMenuRecycleView();
 
         fabModifica.setOnClickListener(view -> {
-            Intent intentModElemento = new Intent(this, ModificaElementoActivity.class);
-            intentModElemento.putExtra("elementoMenu", elementoSelezionato);
-            startActivity(intentModElemento);
+            if(elementoSelezionato != -1) {
+                Intent intentModElemento = new Intent(this, ModificaElementoActivity.class);
+                intentModElemento.putExtra("elementoMenu", elementiMenu.get(elementoSelezionato));
+                startActivity(intentModElemento);
+            }
+            else{
+                Toast.makeText(this, "Seleziona un elemento", Toast.LENGTH_SHORT).show();
+            }
         });
 
         allergeniButton.setOnClickListener(view -> {
             dialogAllergeni();
         });
 
-
+        indietroButton.setOnClickListener(view -> {
+            onBackPressed();
+        });
     }
 
     public void listenerAllergeni(){
@@ -309,4 +317,10 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent esploraCategorie = new Intent(this, EsploraCategorieMenuActivity.class);
+        startActivity(esploraCategorie);
+        super.onBackPressed();
+    }
 }

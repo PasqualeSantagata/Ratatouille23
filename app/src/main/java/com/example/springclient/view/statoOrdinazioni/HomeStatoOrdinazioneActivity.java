@@ -51,7 +51,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         ordinazionePresenter.getOrdinazioniSospese();
 
         stompConnect();
-
     }
 
     public void setOrdinazioniSospese(List<Ordinazione> ordinazioni){
