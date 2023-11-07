@@ -56,7 +56,7 @@ public class RecycleViewAdapterGestioneElementoMenuInfoBtn extends RecyclerView.
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeInfo);
             imageViewInfo = itemView.findViewById(R.id.InfoElementoImageView);
-            textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoRecycleViewDeleteBtn);
+            textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoGestioneMenu);
 
 
             itemView.setOnClickListener(view -> {

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -24,7 +25,6 @@ import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +33,8 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     private RecyclerView recyclerViewImmagini;
     private RecycleViewAdapterCategoria adapterCategoria;
     private FloatingActionButton aggiungiImmagineFab;
+    private Button buttonIndietro;
+    private Button buttonAggiungiImmagine;
     private List<Categoria> categorieList ;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +60,8 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     private void initializeComponents() {
         recyclerViewImmagini = findViewById(R.id.recyclerViewSelezImgCategoriaGestioneMenu);
         aggiungiImmagineFab = findViewById(R.id.floatingActionButton);
+        buttonAggiungiImmagine = findViewById(R.id.buttonAggingiImmagineSelezImmagine);
+        buttonIndietro = findViewById(R.id.buttonIndietroSelezImmagine);
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
                 registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
@@ -80,13 +84,17 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                     }
                 });
 
-        aggiungiImmagineFab.setOnClickListener(view -> {
+        buttonAggiungiImmagine.setOnClickListener(view -> {
             pickMedia.launch(new PickVisualMediaRequest.Builder()
                     .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                     .build());
 
         });
         setImmaginiRecycleView();
+
+        buttonIndietro.setOnClickListener(view -> {
+            onBackPressed();
+        });
     }
 
     public void setImmaginiRecycleView(){
@@ -95,8 +103,6 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
 
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewImmagini.setLayoutManager(horizontal);
-
-
     }
 
     public byte[] convertiImmagine(Bitmap bitmap){

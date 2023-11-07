@@ -46,6 +46,7 @@
         android:id="@+id/spinnerCategoriaInserimentoNelMenu"
         android:layout_width="510dp"
         android:layout_height="64dp"
+        android:background="@drawable/design_item_spinner"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView8"

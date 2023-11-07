@@ -123,7 +123,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     }
 
-
     @Override
     public void onBackPressed() {
         Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
