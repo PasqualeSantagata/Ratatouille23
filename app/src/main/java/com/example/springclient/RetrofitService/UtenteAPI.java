@@ -2,7 +2,7 @@ package com.example.springclient.RetrofitService;
 
 
 import com.example.springclient.apiUtils.ApiResponse;
-import com.example.springclient.authentication.ApiToken;
+import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.entity.Utente;
 
@@ -16,7 +16,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface UtenteAPI {
 
@@ -27,10 +26,10 @@ public interface UtenteAPI {
     Single<Response<ApiResponse>> registraUtente(@Body Utente utente);
     @POST("api/v1/auth/authenticate")
     @Headers("No-Authentication: true")
-    Single<Response<ApiToken>> logInUtente(@Body AuthRequest authRequest);
+    Single<Response<AuthenticationResponse>> logInUtente(@Body AuthRequest authRequest);
 
     @POST("api/v1/auth/refreshToken")
     @Headers("No-Authentication: true")
-    Call<ApiToken> refreshToken(@Header("Authorization") String token);
+    Call<AuthenticationResponse> refreshToken(@Header("Authorization") String token);
 
 }

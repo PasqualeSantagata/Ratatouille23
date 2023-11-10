@@ -1,16 +1,14 @@
 package com.example.springclient.contract;
 
 
-import com.example.springclient.apiUtils.ApiResponse;
-import com.example.springclient.authentication.ApiToken;
+import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.authentication.AuthRequest;
-import com.example.springclient.entity.Utente;
 
 public interface AutenticazioneContract {
 
     interface Model{
 
-        void logInUtente(AuthRequest authRequest, CallbackResponse<ApiToken> CallbackResponse);
+        void logInUtente(AuthRequest authRequest, CallbackResponse<AuthenticationResponse> CallbackResponse);
 
     }
 
@@ -24,7 +22,7 @@ public interface AutenticazioneContract {
         void avviaDashboardAdmin();
         void avviaDashboardSupervisore();
         void avviaDashboardAddettoSala();
-        void avviaDashboardAddettoCucina();
+        void avviaDashboardAddettoCucina(String email);
 
         void avviaRecuperoPassword();
     }

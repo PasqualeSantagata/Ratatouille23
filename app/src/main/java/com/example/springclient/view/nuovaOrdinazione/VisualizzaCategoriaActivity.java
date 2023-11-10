@@ -29,6 +29,7 @@ import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private Button buttonOkDialog;
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
-
     private ElementoMenuPresenter elementoMenuPresenter;
 
     @Override
@@ -67,7 +67,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
 
         elementoMenuPresenter = new ElementoMenuPresenter(this);
-
         initializeComponents();
 
     }
@@ -129,6 +128,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         checkBoxes.add(checkBoxUova);
         for(CheckBox c: checkBoxes){
             String valore = (String)c.getTag();
+            c.setClickable(false);
             if(allergeni.contains(valore)){
                 c.setChecked(true);
             }

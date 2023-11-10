@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CategoriaContract;
+import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
@@ -25,10 +26,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModificaElementoActivity extends AppCompatActivity implements CategoriaContract.View, AdapterView.OnItemSelectedListener {
+public class ModificaElementoActivity extends AppCompatActivity implements CategoriaContract.View, AdapterView.OnItemSelectedListener, ElementoMenuContract.View {
     private TextInputLayout textInputLayoutNome;
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutPrezzo;
@@ -50,6 +53,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
     private ElementoMenuPresenter elementoMenuPresenter;
+    private boolean traduzioneAssente;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,10 +90,13 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         textInputEditTextLingua.setText(elementoMenu.getLingua());
 
         fabAggiungiLingua.setOnClickListener(view -> {
-            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
-            nuovaLingua.putExtra("elemento", elementoMenu);
-            startActivity(nuovaLingua);
+                Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+                nuovaLingua.putExtra("elemento", elementoMenu);
+                startActivity(nuovaLingua);
         });
+        if(!traduzioneAssente){
+            fabAggiungiLingua.setVisibility(View.INVISIBLE);
+        }
 
 
         fabAggiungiCategoria.setOnClickListener(view -> {
@@ -204,9 +211,21 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         });
     }
     @Override
+    public void traduzioneAssente(){
+        traduzioneAssente = true;
+        initializeComponents();
+    }
+    @Override
+    public void mostraTraduzione(ElementoMenu elementoMenu){
+        initializeComponents();
+    }
+
+
+
+    @Override
     public void setNomiCategorie(List<String> nomiCategori) {
         this.nomiCategoria = nomiCategori;
-        initializeComponents();
+        elementoMenuPresenter.restituisciTraduzione(elementoMenu.getId().toString());
     }
 
     @Override

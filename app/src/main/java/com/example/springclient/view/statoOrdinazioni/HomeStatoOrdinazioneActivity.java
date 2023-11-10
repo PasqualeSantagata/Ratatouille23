@@ -20,6 +20,7 @@ import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,9 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     private List<Ordinazione> ordinazioni;
     private List<StatoOrdinazione> ordinazioniSospese;
     private int posizione;
-    RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
+    private RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
+    private FirebaseAnalytics firebaseAnalytics;
+    private String email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +52,8 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         getSupportActionBar().setTitle("STATO DELLE ORDINAZIONI");
         ordinazionePresenter = new OrdinazionePresenter(this);
         ordinazionePresenter.getOrdinazioniSospese();
-
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        email = getIntent().getStringExtra("email");
         stompConnect();
     }
 
@@ -138,10 +142,15 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
     @Override
     public void onGreenButtonClickOrdinazioniCorrenti(int position) {
-        Long id = ordinazioniSospese.get(position).getPortata().getId();
+        Portata p = ordinazioniSospese.get(position).getPortata();
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, email);
+        Long id = p.getId();
         ordinazioniSospese.get(position).getPortata().setPrenotato(true);
         posizione = position;
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, bundle);
+
     }
 
     @Override

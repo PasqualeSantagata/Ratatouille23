@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ratatouille23-9ebe6",
+  "private_key_id": "127af2d09761356645a40a37af4cb31a1e004490",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDGXskvmDEF4kGC\ngp73Td2m1jR1lLnVP2v2Ta3OId4HKmRpOrMn8u/TiSdkUgjkxGYQm1/Marq2EmqR\n/XW26qMMHgwKUjA06qzFsz/RT9XE2r1Qs/flrdek8lH1VoC2ygkHCX1FQu7OHNXW\nlc/qAFK2wGW7Y4aS5hGbLoYSWmmps16jcgMoA0FQ75j+PfZBdsyYvc3VEz7tzLwe\nN/CeLs6kMKxlKWjDsNWLGh4Jiq1Cmlqo6gl344eKRSx9/Yajux9N8GPNVv3SN3eZ\nFBoVV7y+6RZSporrB3ftXzzrwHmVoMHE2g0NFqbLyO49lmDRjYdvkqh8tBjxzPAv\n2PQs4NfvAgMBAAECggEAKLeT/Bz1EwwZ/jvpfUGSWYhmRCw+6LKX6nqPTlxNQpNF\nAQR3eZ+38meYmlLsWGinuojp5P+TS4QEM+semmkXBom0Vvn/wxzYUcw1MTV932Y2\nrbYDEDXaqZTDleQnj11w9OzRtcHDWrM4gU9G2fUvBSwAtbH8EXL/8iZehq3gOmCm\nYFNDa1GIAHAh+puwqtI5ElVA61BvAB/O2dQ8fPPXnFomuI66DLO2ZkBIbOPn+I8a\nFhneI8TeIRGarYKTRIGMraNXscXLYbwwTFsSsVc3xlk7QIY0dZBZMCJ5g7RTxVk/\nVJdWagmS5IPJU2CCZCcT7Re6o7yjRU4HoTxLJGBrQQKBgQDo9g6bQMkHVf5O1JUy\nJSRTYv0otrKFsHTpz8Jlo8w5tg5k8mISLcre5/TghlOf4/XVO9ObipOrgPOnkMif\n+MhUtBSaey8ScAi/xWHK+y/7COMNJ9SCRK/RZBfZ1UfqGPQaI78wnBkmbM1n9Plc\nc8mjErol7s9OorVTiEtnp4hvaQKBgQDZ/Psy8u6mV1pK8qrCT+DTGZ5675zkd3J7\n4FPGyakPe9cp7/j/IbOp3lFXJL2e1Lnv+YjWQoMNyJ6PX0paULpJNUzhDMetu7Xy\n9rmPCYY0F+Xhs9AwKWj0P4XGsM/1iRAiTcawQ58XgrWIblXPEWLpFDs+97e+oA/U\nY+GoN3r5lwKBgHQNX+lntL260R1kOY7pgdcokQUfPn/rD9MKdMU9fBej4jfXp5N2\nzIGO/CZ9xFr6rRS04Q2zUy006Cypq8hFn0bTDxCGHUUKGtGt+rGrwJNGMhXzqaHb\npdqiCl+yKEkudSwwcqY8nSrPOOR43WB5LhHW2nTbKtr5o2shkq7ofsdBAoGBALf8\n6by4BKwLYJ+PsIbvSrCCmBvlMEQ5eTyLO8q2HOZ/vTydWkllFbKTfY4S6aUsoX+l\n21QUsW6p3QLgB+6w4nq17RyqX8MIg2r9yeKrxEUlwpa84UQ1P2ugTfZE+FGijSaX\nBNNzT81VOolbrztlzlkyBUuBY+oWSSYX47fKlBYjAoGAZTQ3TUdmIOVRiyDB+TXY\nArFI765ChxoHhHx4PQRuT12oIxiB3PknbMpLs7FWaGl+wRd1Wb8C7ycwQyF4VTnK\nwMb1Z2DcCCf5DKjIZ8ZJV1NLUV7ptSjDGqjbYN4BuxlsfCMN7fMVjRc8bw378zbL\n2omBRRXTHsjWI6Ku7jSh4C8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ratatouilleanalytics@ratatouille23-9ebe6.iam.gserviceaccount.com",
+  "client_id": "111089645942661329190",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ratatouilleanalytics%40ratatouille23-9ebe6.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

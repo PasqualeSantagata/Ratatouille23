@@ -2,13 +2,12 @@ package com.example.springclient.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.AutenticazioneContract;
-import com.example.springclient.authentication.ApiToken;
+import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.entity.Ruolo;
 import com.example.springclient.model.AutenticazioneModel;
 import com.example.springclient.RetrofitService.RetrofitService;
@@ -38,7 +37,7 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
 
     @Override
     public void logInUtente(AuthRequest authRequest){
-        autenticazioneModel.logInUtente(authRequest, new CallbackResponse<ApiToken>() {
+        autenticazioneModel.logInUtente(authRequest, new CallbackResponse<AuthenticationResponse>() {
             @Override
             public void onFailure(Throwable t) {
                 /*TODO*
@@ -48,20 +47,20 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
                 loginActivity.disabilitaPorogressBar();
             }
             @Override
-            public void onSuccess(Response<ApiToken> retData) {
+            public void onSuccess(Response<AuthenticationResponse> retData) {
                 if(retData.isSuccessful()){
-                    ApiToken apiToken = retData.body();
+                    AuthenticationResponse authenticationResponse = retData.body();
                     sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-                    sharedPreferences.edit().putString("accessToken", apiToken.getAccessToken()).apply();
-                    sharedPreferences.edit().putString("refreshToken", apiToken.getRefreshToken()).apply();
-                    if(apiToken.getRuolo().equals(Ruolo.ADMIN.name())) {
+                    sharedPreferences.edit().putString("accessToken", authenticationResponse.getAccessToken()).apply();
+                    sharedPreferences.edit().putString("refreshToken", authenticationResponse.getRefreshToken()).apply();
+                    if(authenticationResponse.getRuolo().equals(Ruolo.ADMIN.name())) {
                         loginActivity.avviaDashboardAdmin();
                     }
-                    else if(apiToken.getRuolo().equals(Ruolo.ADDETTO_SALA.name())){
+                    else if(authenticationResponse.getRuolo().equals(Ruolo.ADDETTO_SALA.name())){
                         loginActivity.avviaDashboardAddettoSala();
                     }
-                    else if(apiToken.getRuolo().equals(Ruolo.ADDETTO_CUCINA.name())){
-                        loginActivity.avviaDashboardAddettoCucina();
+                    else if(authenticationResponse.getRuolo().equals(Ruolo.ADDETTO_CUCINA.name())){
+                        loginActivity.avviaDashboardAddettoCucina(authenticationResponse.getEmail());
 
                     }
                 }

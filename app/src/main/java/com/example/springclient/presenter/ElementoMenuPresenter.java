@@ -62,15 +62,18 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
     public ElementoMenuPresenter(CercaElementoActivity cercaElementoActivity) {
         this.viewElementoMenu = cercaElementoActivity;
     }
-    public ElementoMenuPresenter(ModificaElementoActivity modificaElementoActivity){
+    /*public ElementoMenuPresenter(ModificaElementoActivity modificaElementoActivity){
         this.modificaElementoActivity = modificaElementoActivity;
-    }
+    }*/
     public ElementoMenuPresenter(NuovoElementoNuovaLinguaActivity nuovoElementoNuovaLinguaActivity){
         this.nuovoElementoNuovaLinguaActivity = nuovoElementoNuovaLinguaActivity;
     }
 
     public ElementoMenuPresenter(VisualizzaCategoriaActivity visualizzaCategoriaActivity) {
         this.viewElementoMenu = visualizzaCategoriaActivity;
+    }
+    public ElementoMenuPresenter(ElementoMenuContract.View viewElementoMenu) {
+        this.viewElementoMenu = viewElementoMenu;
     }
 
 

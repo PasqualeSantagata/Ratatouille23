@@ -65,6 +65,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewRiepilogo.setAdapter(adapterElementoMenu);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewRiepilogo.setLayoutManager(horizontal);
+        recyclerViewRiepilogo.setItemAnimator(null);
 
         //Buttons
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
@@ -114,8 +115,13 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
         buttonSi.setOnClickListener(view -> {
             //elimina elemento
-            portate.remove(position);
             dialogAttenzione.dismiss();
+            portate.remove(position);
+            ordinazione.getElementiOrdinati().remove(position);
+            notifyAdapter();
+            if(portate.size() == 0){
+                onBackPressed();
+            }
         });
         buttonNo.setOnClickListener(view -> {
             dialogAttenzione.dismiss();
@@ -131,8 +137,8 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         super.onBackPressed();
     }
 
-    public void notifyAdapter(int index){
-        adapterElementoMenu.notifyItemChanged(index);
+    public void notifyAdapter(){
+        adapterElementoMenu.notifyDataSetChanged();
     }
 
 

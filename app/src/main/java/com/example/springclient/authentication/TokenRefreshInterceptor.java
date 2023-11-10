@@ -69,7 +69,7 @@ public class TokenRefreshInterceptor implements Interceptor {
                 .client(okHttpClient)
                 .build();
         UtenteAPI service = retrofit.create(UtenteAPI.class);
-        retrofit2.Response<ApiToken> response= service.refreshToken(refreshToken).execute();
+        retrofit2.Response<AuthenticationResponse> response= service.refreshToken(refreshToken).execute();
         if(response.code() == 401){
             /**
              * mostrare di nuovo schermata login
@@ -77,10 +77,10 @@ public class TokenRefreshInterceptor implements Interceptor {
             Log.d("Token: ", "Sessone scaduta");
             //throw new RuntimeException("Sessione scaduta");
         }
-        ApiToken apiToken = response.body();
-        if(apiToken != null) {
-            sharedPreferences.edit().putString("accessToken", apiToken.getAccessToken()).commit();
-            sharedPreferences.edit().putString("refreshToken", apiToken.getRefreshToken()).commit();
+        AuthenticationResponse authenticationResponse = response.body();
+        if(authenticationResponse != null) {
+            sharedPreferences.edit().putString("accessToken", authenticationResponse.getAccessToken()).commit();
+            sharedPreferences.edit().putString("refreshToken", authenticationResponse.getRefreshToken()).commit();
         }
         String token = sharedPreferences.getString("accessToken", "");
         return token;

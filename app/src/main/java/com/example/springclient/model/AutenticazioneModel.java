@@ -3,7 +3,7 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.RetrofitService.UtenteAPI;
 import com.example.springclient.apiUtils.ApiResponse;
-import com.example.springclient.authentication.ApiToken;
+import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.AdminContract;
 import com.example.springclient.contract.CallbackResponse;
@@ -55,18 +55,18 @@ public class AutenticazioneModel implements AutenticazioneContract.Model, AdminC
 
     }
     @Override
-    public void logInUtente(AuthRequest authRequest, CallbackResponse<ApiToken> callbackResponse) {
+    public void logInUtente(AuthRequest authRequest, CallbackResponse<AuthenticationResponse> callbackResponse) {
         utenteAPI.logInUtente(authRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ApiToken>>() {
+                .subscribe(new SingleObserver<Response<AuthenticationResponse>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
 
                     }
                     @Override
-                    public void onSuccess(@NonNull Response<ApiToken> apiTokenResponse) {
+                    public void onSuccess(@NonNull Response<AuthenticationResponse> apiTokenResponse) {
                         callbackResponse.onSuccess(apiTokenResponse);
 
                     }

@@ -151,8 +151,9 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
 
     @Override
-    public void avviaDashboardAddettoCucina() {
+    public void avviaDashboardAddettoCucina(String email) {
         Intent avviaCuoco = new Intent(this, HomeStatoOrdinazioneActivity.class);
+        avviaCuoco.putExtra("email", email);
         startActivity(avviaCuoco);
     }
 
