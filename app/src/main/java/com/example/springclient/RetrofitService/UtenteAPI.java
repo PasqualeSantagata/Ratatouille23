@@ -31,5 +31,7 @@ public interface UtenteAPI {
     @POST("api/v1/auth/refreshToken")
     @Headers("No-Authentication: true")
     Call<AuthenticationResponse> refreshToken(@Header("Authorization") String token);
+    @GET("api/v1/utente/getCuochi")
+    Single<Response<List<String>>> getAllCuochi();
 
 }

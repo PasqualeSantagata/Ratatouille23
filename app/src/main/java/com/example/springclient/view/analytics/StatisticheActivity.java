@@ -16,35 +16,53 @@ import com.anychart.enums.HoverMode;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 import com.example.springclient.R;
+import com.example.springclient.analytics.AnalyticsData;
+import com.example.springclient.presenter.AnalyticsPresenter;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StatisticheActivity extends AppCompatActivity {
+    private AnalyticsPresenter analyticsPresenter;
+    private List<AnalyticsData> analyticsDataList;
+    private List<String> cuochi;
+    private AnyChartView anyChartView;
+    private List<DataEntry> datiGrafo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_statistiche);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+
+        anyChartView = findViewById(R.id.any_chart_view);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
+        analyticsPresenter = new AnalyticsPresenter(this);
+        analyticsPresenter.getAnalytics();
 
+    }
+
+    public void preparaDati(){
+        datiGrafo = new ArrayList<>();
+        List<String> cuochiAnalitics = new ArrayList<>();
+        for(AnalyticsData analyticsData: analyticsDataList){
+            cuochiAnalitics.add(analyticsData.getCuoco());
+        }
+        for(String cuoco: cuochi){
+            if(!cuochiAnalitics.contains(cuoco)){
+                analyticsDataList.add(new AnalyticsData(cuoco, 0));
+            }
+        }
+        for(AnalyticsData a: analyticsDataList){
+            datiGrafo.add(new ValueDataEntry(a.getCuoco(), a.getOrdiniEvasi()));
+        }
+        costruisciGrafo();
+    }
+    public void costruisciGrafo(){
         Cartesian cartesian = AnyChart.column();
-
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("Rouge", 80540));
-        data.add(new ValueDataEntry("Foundation", 94190));
-        data.add(new ValueDataEntry("Mascara", 102610));
-        data.add(new ValueDataEntry("Lip gloss", 110430));
-        data.add(new ValueDataEntry("Lipstick", 128000));
-        data.add(new ValueDataEntry("Nail polish", 143760));
-        data.add(new ValueDataEntry("Eyebrow pencil", 170670));
-        data.add(new ValueDataEntry("Eyeliner", 213210));
-        data.add(new ValueDataEntry("Eyeshadows", 249980));
-
-        Column column = cartesian.column(data);
+        Column column = cartesian.column(datiGrafo);
 
         column.tooltip()
                 .titleFormat("{%X}")
@@ -52,29 +70,31 @@ public class StatisticheActivity extends AppCompatActivity {
                 .anchor(Anchor.CENTER_BOTTOM)
                 .offsetX(0d)
                 .offsetY(5d)
-                .format("${%Value}{groupsSeparator: }");
+                .format("{%Value}{groupsSeparator: }");
 
         cartesian.animation(true);
-        cartesian.title("Top 10 Cosmetic Products by Revenue");
+        cartesian.title("Portate preparate");
 
         cartesian.yScale().minimum(0d);
 
-        cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+        cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
         cartesian.interactivity().hoverMode(HoverMode.BY_X);
 
-        cartesian.xAxis(0).title("Product");
-        cartesian.yAxis(0).title("Revenue");
+        cartesian.xAxis(0).title("Email cuochi");
+        cartesian.yAxis(0).title("Portate preparate");
 
         anyChartView.setChart(cartesian);
 
-
-
-
     }
 
+    public void setAnalyticsDataList(List<AnalyticsData> analyticsDataList){
+        this.analyticsDataList = analyticsDataList;
+    }
 
-
+    public void setCuochi(List<String> cuochi){
+        this.cuochi = cuochi;
+    }
 
 }

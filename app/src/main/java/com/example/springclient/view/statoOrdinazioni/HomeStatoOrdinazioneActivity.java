@@ -149,7 +149,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         ordinazioniSospese.get(position).getPortata().setPrenotato(true);
         posizione = position;
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.PURCHASE, bundle);
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
     }
 

@@ -23,6 +23,7 @@ public class RetrofitService {
     private CategoriaAPI categoriaAPI;
     private OrdinazioneAPI ordinazioneAPI;
     private RecuperoCredenzialiAPI recuperoCredenzialiAPI;
+    private AnalyticsAPI analyticsAPI;
     private OkHttpClient.Builder okHttp;
     private AggiungiTokenInterceptor aggiungiTokenInterceptor;
     private TokenRefreshInterceptor tokenRefreshInterceptor;
@@ -62,7 +63,7 @@ public class RetrofitService {
         categoriaAPI = retrofitClient.create(CategoriaAPI.class);
         recuperoCredenzialiAPI = retrofitClient.create(RecuperoCredenzialiAPI.class);
         ordinazioneAPI = retrofitClient.create(OrdinazioneAPI.class);
-
+        analyticsAPI = retrofitClient.create(AnalyticsAPI.class);
     }
 
     public UtenteAPI getUtenteAPI(){
@@ -82,6 +83,9 @@ public class RetrofitService {
     public RecuperoCredenzialiAPI getRecuperoCredenzialiAPI(){return recuperoCredenzialiAPI;}
 
     public AggiungiTokenInterceptor getMyInterceptor(){return aggiungiTokenInterceptor;}
+    public AnalyticsAPI getAnalyticsAPI(){
+        return analyticsAPI;
+    }
 
     public void setUtentePresenter(AutenticazionePresenter autenticazionePresenter) {
         this.autenticazionePresenter = autenticazionePresenter;
