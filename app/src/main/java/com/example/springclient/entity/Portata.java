@@ -1,6 +1,7 @@
 package com.example.springclient.entity;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Portata implements Serializable {
     private Long id;
@@ -8,6 +9,10 @@ public class Portata implements Serializable {
     private boolean prenotato;
     private String breveNota;
 
+    public static final Comparator<Portata> compareNomeCrescente = Comparator.comparing(p -> p.elementoMenu.getNome());
+    public static final Comparator<Portata> comparePrezzoCrescente = Comparator.comparing(p -> p.elementoMenu.getPrezzo());
+    public static final Comparator<Portata> compareNomeDecrescente = (p1, p2) -> - compareNomeCrescente.compare(p1,p2);
+    public static final Comparator<Portata> comparePrezzoDecrescente = (p1, p2) -> - comparePrezzoCrescente.compare(p1,p2);
 
     public Portata(Long id, ElementoMenu elementoMenu, boolean prenotato, String breveNota) {
         this.id = id;

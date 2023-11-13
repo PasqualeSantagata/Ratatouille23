@@ -26,7 +26,6 @@ public class AnalyticsPresenter {
             public void onFailure(Throwable t) {
 
             }
-
             @Override
             public void onSuccess(Response<List<AnalyticsData>> retData) {
                 if(retData.isSuccessful()){
