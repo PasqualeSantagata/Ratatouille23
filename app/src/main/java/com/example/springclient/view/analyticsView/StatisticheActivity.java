@@ -1,9 +1,12 @@
-package com.example.springclient.view.analytics;
+package com.example.springclient.view.analyticsView;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -18,7 +21,7 @@ import com.anychart.enums.TooltipPositionMode;
 import com.example.springclient.R;
 import com.example.springclient.analytics.AnalyticsData;
 import com.example.springclient.presenter.AnalyticsPresenter;
-
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,8 @@ public class StatisticheActivity extends AppCompatActivity {
     private List<String> cuochi;
     private AnyChartView anyChartView;
     private List<DataEntry> datiGrafo;
+    private EditText editTextData;
+    private Button buttonSelezionaDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,26 @@ public class StatisticheActivity extends AppCompatActivity {
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
         analyticsPresenter = new AnalyticsPresenter(this);
         analyticsPresenter.getAnalytics();
+
+    }
+
+    public void initializeComponents() {
+        buttonSelezionaDate = findViewById(R.id.buttonSelezionaDateStatistiche);
+        editTextData = findViewById(R.id.editTextDate);
+        mostraPicker();
+    }
+
+
+    private void mostraPicker(){
+        MaterialDatePicker materialDatePicker=MaterialDatePicker.Builder.dateRangePicker().
+                setSelection(Pair.create(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds())).build();
+
+        buttonSelezionaDate.setOnClickListener(view -> {
+            materialDatePicker.show(getSupportFragmentManager(), "picker_date_analytics");
+            materialDatePicker.addOnPositiveButtonClickListener(view2 -> {
+                editTextData.setText(materialDatePicker.getHeaderText());
+            });
+        });
 
     }
 

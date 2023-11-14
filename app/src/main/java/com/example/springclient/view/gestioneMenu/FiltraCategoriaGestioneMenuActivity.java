@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FiltraCategoria extends AppCompatActivity {
+public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
     private Button buttonNome;
     private Button buttonPrezzo;
     private Button buttonOk;

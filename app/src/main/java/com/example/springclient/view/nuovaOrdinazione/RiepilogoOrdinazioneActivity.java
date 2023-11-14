@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -14,12 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.OrdinazioneContract;
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -102,6 +107,42 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     public void onItemClickRecyclerViewPortata(int position) {
         indiceElementoSelezionato = position;
         elementoSelezionato = portate.get(position);
+        //Dialog mostra info
+        startDialogDettagliElemento(elementoSelezionato.getElementoMenu());
+    }
+
+    private void startDialogDettagliElemento(ElementoMenu elementoMenu){
+        Dialog dialogDettagli = new Dialog(this);
+        dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);
+
+        //setto le text view e i buttons
+        FloatingActionButton fabModifica = dialogDettagli.findViewById(R.id.fabDialogDettagli);
+        fabModifica.setVisibility(View.GONE);
+        Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagli);
+        TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
+        TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
+        Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua) ;
+        buttonTraduzione.setVisibility(View.GONE);
+
+        //Setto l'elemento menu di cui voglio vedere i dettagli
+        setTextInputLayoutText(textInputLayoutPrezzo,elementoMenu.getPrezzo().toString());
+        setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
+
+        buttonIndietro.setOnClickListener(view -> {
+            dialogDettagli.dismiss();
+        });
+
+        dialogDettagli.show();
+    }
+    private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
+        EditText editText = textInputLayout.getEditText();
+        editText.setText(text);
+    }
+
+    @Override
+    public void onButtonDeleted(int position){
+        indiceElementoSelezionato = position;
+        elementoSelezionato = portate.get(position);
         //Starta dialog warn per eliminare elem
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
@@ -128,6 +169,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         });
 
     }
+
 
     @Override
     public void onBackPressed() {

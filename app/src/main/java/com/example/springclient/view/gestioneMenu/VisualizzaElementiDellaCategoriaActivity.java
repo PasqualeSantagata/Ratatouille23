@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -118,7 +117,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.item_riordinare:
-                Intent intent = new Intent(this, FiltraCategoria.class);
+                Intent intent = new Intent(this, FiltraCategoriaGestioneMenuActivity.class);
                 intent.putExtra("elementiMenu",(Serializable) elementiMenu);
                 intent.putExtra("nomeCategoria", nome);
                 startActivity(intent);

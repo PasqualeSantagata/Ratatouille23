@@ -5,7 +5,7 @@ import com.example.springclient.analytics.AnalyticsData;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.model.AnalyticsModel;
 import com.example.springclient.model.UtenteModel;
-import com.example.springclient.view.analytics.StatisticheActivity;
+import com.example.springclient.view.analyticsView.StatisticheActivity;
 
 import java.util.List;
 

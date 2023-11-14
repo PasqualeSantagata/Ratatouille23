@@ -17,7 +17,7 @@ import java.util.List;
 
 public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerView.Adapter<RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder>{
 
-    IRecycleViewElementoMenu recycleViewElementoMenuInterface;
+    private final IRecycleViewElementoMenu recycleViewElementoMenuInterface;
     Context context;
     List<Portata> listaElementiMenu;
 
@@ -41,6 +41,12 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
         //TODO input type dell'xml è number ma qua è passata la string, dovrebbe workare
         holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString());
+
+        //Controllo su nota
+        String nota = listaElementiMenu.get(position).getBreveNota();
+        if(nota != null && !nota.equals(""))
+            holder.textViewBreveNota.setText(listaElementiMenu.get(position).getBreveNota());
+
     }
 
     @Override
@@ -53,22 +59,31 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
         TextView textViewNome;
         ImageView imageViewInfo;
         TextView textViewPrezzo;
+        TextView textViewBreveNota;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
             imageViewInfo = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
             textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoRecycleViewDeleteBtn);
+            textViewBreveNota = itemView.findViewById(R.id.textViewRecycleViewBreveNotaRiepilogo);
 
-            imageViewInfo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(recycleViewElementoMenuInterface != null){
-                        int pos = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if(recycleViewElementoMenuInterface != null){
+                    int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION){
-                            recycleViewElementoMenuInterface.onItemClickRecyclerViewPortata(pos);
-                        }
+                    if(pos != RecyclerView.NO_POSITION){
+                        recycleViewElementoMenuInterface.onItemClickRecyclerViewPortata(pos);
+                    }
+                }
+            });
+            imageViewInfo.setOnClickListener(view -> {
+                if(recycleViewElementoMenuInterface != null){
+                    int pos = getAdapterPosition();
+
+                    if(pos != RecyclerView.NO_POSITION){
+                        recycleViewElementoMenuInterface.onButtonDeleted(pos);
+
                     }
                 }
             });

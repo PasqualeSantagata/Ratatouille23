@@ -50,6 +50,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_stato_ordinazioni);
         getSupportActionBar().setTitle("STATO DELLE ORDINAZIONI");
+
         ordinazionePresenter = new OrdinazionePresenter(this);
         ordinazionePresenter.getOrdinazioniSospese();
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -57,12 +58,12 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         stompConnect();
     }
 
-    public void setOrdinazioniSospese(List<Ordinazione> ordinazioni){
+    public void setOrdinazioniSospese(List<Ordinazione> ordinazioni) {
         this.ordinazioni = ordinazioni;
         ordinazioniSospese = new ArrayList<>();
-        for(Ordinazione o: ordinazioni){
-            for(Portata p: o.getElementiOrdinati()){
-                if(!p.isPrenotato()) {
+        for (Ordinazione o : ordinazioni) {
+            for (Portata p : o.getElementiOrdinati()) {
+                if (!p.isPrenotato()) {
                     ordinazioniSospese.add(new StatoOrdinazione(o, p));
                 }
             }
@@ -70,7 +71,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         initializeComponents();
     }
 
-    public void aggiornaPrenotazioni(){
+    public void aggiornaPrenotazioni() {
         ordinazioniSospese.remove(posizione);
         adapterCorrenti.notifyItemRemoved(posizione);
     }
@@ -79,12 +80,12 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         boolean completo = true;
         long idOrdinazione = -1;
         List<Portata> portataList = new ArrayList<>();
-        for(Ordinazione o: ordinazioni){
-            for(Portata p: o.getElementiOrdinati()){
-               if(p.getId().equals(id)){
-                   portataList = o.getElementiOrdinati();
-                   idOrdinazione = o.getId();
-               }
+        for (Ordinazione o : ordinazioni) {
+            for (Portata p : o.getElementiOrdinati()) {
+                if (p.getId().equals(id)) {
+                    portataList = o.getElementiOrdinati();
+                    idOrdinazione = o.getId();
+                }
             }
         }
         for (Portata p : portataList) {
@@ -93,7 +94,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
                 break;
             }
         }
-        if(completo && idOrdinazione > 0){
+        if (completo && idOrdinazione > 0) {
             ordinazionePresenter.concludiOrdinazione(idOrdinazione);
         }
     }
@@ -106,29 +107,28 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
         setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, ordinazioniSospese);
 
+
+
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
     }
 
 
-
-
-    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione) {
         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
         recyclerView.setAdapter(adapterCorrenti);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
     }
 
-    public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione) {
         RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione){
+    public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione) {
         RecycleViewAdapterOrdinazioniEvase adapter = new RecycleViewAdapterOrdinazioniEvase(this, this, ordinazione);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -151,6 +151,11 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
+
+      /*  //Passa elem. alla reccyle view ordinazioni prenotate
+        List<StatoOrdinazione> statoOrdinazione = new ArrayList<>();
+        statoOrdinazione.add(new StatoOrdinazione(ordinazioniSospese.get(position).getOrdinazione(), ordinazioniSospese.get(position).getPortata()));
+        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, statoOrdinazione); */
     }
 
     @Override
@@ -169,8 +174,8 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
-    private void stompConnect(){
-        if(stompClient == null) {
+    private void stompConnect() {
+        if (stompClient == null) {
             stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
             stompClient.connect();
 
@@ -192,7 +197,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
-
     @Override
     protected void onDestroy() {
         stompClient.disconnect();
@@ -201,29 +205,28 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         stompClient.disconnect();
         super.onPause();
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         stompConnect();
         super.onStart();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         stompConnect();
         super.onResume();
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         stompClient.disconnect();
         super.onStop();
     }
-
 
 
 }

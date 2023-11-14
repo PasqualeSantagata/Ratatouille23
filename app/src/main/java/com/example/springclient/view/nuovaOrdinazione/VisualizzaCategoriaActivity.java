@@ -29,8 +29,8 @@ import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,20 +55,20 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private List<String> allergeni;
     private List<CheckBox> checkBoxes;
     private ElementoMenuPresenter elementoMenuPresenter;
+    private String nome;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementi");
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
-        String nome = getIntent().getStringExtra("nomeCategoria");
+        nome = getIntent().getStringExtra("nomeCategoria");
         getSupportActionBar().setTitle(nome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
 
         elementoMenuPresenter = new ElementoMenuPresenter(this);
         initializeComponents();
-
     }
 
     public void initializeComponents() {
@@ -89,6 +89,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         fabAggiungiAdOrdinazione.setOnClickListener(view -> {
             if(elementoSelezionato > -1) {
                 ordinazione.aggiungiPiatto(new Portata(getElementoMenu(),false));
+                Toast.makeText(this,"Aggiunto ad ordinazione",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -214,6 +215,14 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
                     invalidateOptionsMenu();
                     b = false;
                 }
+                break;
+
+            case R.id.item_riordina_elem:
+                Intent intent = new Intent(this, FiltraCategoriaNuovaOrdinazioneActivity.class);
+                intent.putExtra("elementiMenu", (Serializable) elementiMenu);
+                intent.putExtra("nomeCategoria", nome);
+                startActivity(intent);
+
                 break;
         }
         return super.onOptionsItemSelected(item);

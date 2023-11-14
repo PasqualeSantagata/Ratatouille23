@@ -7,6 +7,10 @@
     <item
         android:id="@+id/item_lingua_base_ordinazione"
         android:title="Visualizza lingua base" />
+    <item
+        android:id="@+id/item_riordina_elem"
+        android:title="Riordina elementi" />
+
 
 
 </menu>
