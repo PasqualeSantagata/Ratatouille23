@@ -142,12 +142,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutNumPersoneStartNuovaOrdinazione"
         android:layout_width="430dp"
-        android:layout_height="52dp"
+        android:layout_height="82dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
+        android:hint="@string/numero_di_persone_al_tavolo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:hint="@string/numero_di_persone_al_tavolo"
 
         >
 
@@ -155,38 +155,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/desing_rounded_green_tf"
-            android:inputType="number"
-             />
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutTavoloStartNuovaOrdinazione"
         android:layout_width="430dp"
-        android:layout_height="52dp"
+        android:layout_height="82dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
         android:hint="@string/tavolo"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/desing_rounded_green_tf"
-            android:inputType="number"
-            />
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutSalaStartNuovaOrdinazione"
         android:layout_width="430dp"
-        android:layout_height="52dp"
+        android:layout_height="82dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
+        android:hint="@string/sala"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTavoloStartNuovaOrdinazione"
-        android:hint="@string/sala"
 
         >
 

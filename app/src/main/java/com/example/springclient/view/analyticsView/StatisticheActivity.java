@@ -23,6 +23,9 @@ import com.example.springclient.analytics.AnalyticsData;
 import com.example.springclient.presenter.AnalyticsPresenter;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class StatisticheActivity extends AppCompatActivity {
     private List<DataEntry> datiGrafo;
     private EditText editTextData;
     private Button buttonSelezionaDate;
+    private Column column;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +50,34 @@ public class StatisticheActivity extends AppCompatActivity {
         anyChartView = findViewById(R.id.any_chart_view);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
         analyticsPresenter = new AnalyticsPresenter(this);
-        analyticsPresenter.getAnalytics();
+        String dataFine = LocalDate.now().toString();
+        String dataInizio = LocalDate.now().minusMonths(1).toString();
+        analyticsPresenter.getAnalytics(dataInizio, dataFine);
+
+        initializeComponents();
 
     }
 
     public void initializeComponents() {
         buttonSelezionaDate = findViewById(R.id.buttonSelezionaDateStatistiche);
         editTextData = findViewById(R.id.editTextDate);
+        editTextData.setClickable(false);
         mostraPicker();
     }
 
 
     private void mostraPicker(){
-        MaterialDatePicker materialDatePicker=MaterialDatePicker.Builder.dateRangePicker().
+        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().
                 setSelection(Pair.create(MaterialDatePicker.thisMonthInUtcMilliseconds(), MaterialDatePicker.todayInUtcMilliseconds())).build();
 
         buttonSelezionaDate.setOnClickListener(view -> {
             materialDatePicker.show(getSupportFragmentManager(), "picker_date_analytics");
             materialDatePicker.addOnPositiveButtonClickListener(view2 -> {
                 editTextData.setText(materialDatePicker.getHeaderText());
-                materialDatePicker.getSelection();
+                String dataInizio = Instant.ofEpochMilli(view2.first).atZone(ZoneId.systemDefault()).toLocalDate().toString();
+                String dataFine = Instant.ofEpochMilli(view2.second).atZone(ZoneId.systemDefault()).toLocalDate().toString();
+                analyticsPresenter.getAnalytics(dataInizio, dataFine);
+
             });
         });
 
@@ -84,11 +97,11 @@ public class StatisticheActivity extends AppCompatActivity {
         for(AnalyticsData a: analyticsDataList){
             datiGrafo.add(new ValueDataEntry(a.getCuoco(), a.getOrdiniEvasi()));
         }
-        costruisciGrafo();
     }
     public void costruisciGrafo(){
-        Cartesian cartesian = AnyChart.column();
-        Column column = cartesian.column(datiGrafo);
+        if(column == null) {
+            Cartesian cartesian = AnyChart.column();
+            column = cartesian.column(datiGrafo);
 
         column.tooltip()
                 .titleFormat("{%X}")
@@ -112,6 +125,11 @@ public class StatisticheActivity extends AppCompatActivity {
         cartesian.yAxis(0).title("Portate preparate");
 
         anyChartView.setChart(cartesian);
+
+        }
+        else{
+            column.data(datiGrafo);
+        }
 
     }
 

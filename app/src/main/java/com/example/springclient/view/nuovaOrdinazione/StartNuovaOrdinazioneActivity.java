@@ -125,29 +125,59 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
         });
 
         buttonOk.setOnClickListener(view -> {
-            //TODO Aggiungere controllo sul numero dei tavoli e sale complessivi
             Editable numPersone = etNumPersone.getText();
             String persone = numPersone.toString();
-            Integer n = Integer.valueOf(persone);
+
 
             Editable numTavolo = etTavolo.getText();
             String tavolo = numTavolo.toString();
-            Integer n2 = Integer.valueOf(tavolo);
 
             Editable numSala = etSala.getText();
             String sala = numSala.toString();
-            Integer n3 = Integer.valueOf(sala);
 
-            Integer nPersone = n;
-            Integer ntavolo = n2;
-            Integer nsala = n3;
+            if(checkFields(persone, tavolo, sala)) {
+                Integer n = Integer.valueOf(persone);
+                Integer n2 = Integer.valueOf(tavolo);
+                Integer n3 = Integer.valueOf(sala);
 
-            ordinazione = new Ordinazione(nPersone,ntavolo,nsala);
+                Integer nPersone = n;
+                Integer ntavolo = n2;
+                Integer nsala = n3;
+                ordinazione = new Ordinazione(nPersone, ntavolo, nsala);
 
-            Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
-            intentCategorie.putExtra("ordinazione",ordinazione);
-            startActivity(intentCategorie);
+                Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
+                intentCategorie.putExtra("ordinazione", ordinazione);
+                startActivity(intentCategorie);
+            }
         });
+    }
+
+    private boolean checkFields(String persone, String tavolo, String sala){
+        boolean checked = true;
+
+        if(persone.equals("")){
+            textInputLayoutNumeroPersone.setError("Inserisci il numero di persone");
+            checked = false;
+        }
+        else{
+            textInputLayoutNumeroPersone.setErrorEnabled(false);
+        }
+        if(tavolo.equals("")){
+            textInputLayoutTavolo.setError("Inserisci il numero di tavolo");
+            checked = false;
+        }
+        else{
+            textInputLayoutTavolo.setErrorEnabled(false);
+        }
+        if(sala.equals("")){
+            textInputLayoutSala.setError("Inserisci la sala");
+            checked = false;
+        }
+        else{
+            textInputLayoutSala.setErrorEnabled(false);
+        }
+
+        return checked;
     }
 
     @Override

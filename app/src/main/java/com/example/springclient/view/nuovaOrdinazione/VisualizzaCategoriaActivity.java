@@ -78,7 +78,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoVisuaCatNuovaOrdinazione);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneVisuaCatNuovaOrdinazione);
         textInputLayoutNota= findViewById(R.id.textInputLayoutBreveNota);
-
         textViewAllergeni= findViewById(R.id.textViewAllergeniVisualCatNuovaOrd);
 
         fabAggiungiAdOrdinazione = findViewById(R.id.fabAggiungiAdOrdinazione);
@@ -88,7 +87,9 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
         fabAggiungiAdOrdinazione.setOnClickListener(view -> {
             if(elementoSelezionato > -1) {
-                ordinazione.aggiungiPiatto(new Portata(getElementoMenu(),false));
+                Portata portata = new Portata(getElementoMenu(),false);
+                portata.setBreveNota(textInputLayoutNota.getEditText().getText().toString());
+                ordinazione.aggiungiPiatto(portata);
                 Toast.makeText(this,"Aggiunto ad ordinazione",Toast.LENGTH_SHORT).show();
             }
         });
@@ -98,9 +99,14 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         });
 
         buttonRiepilogo.setOnClickListener(view -> {
-            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
-            intentRiepilogo.putExtra("ordinazione",ordinazione);
-            startActivity(intentRiepilogo);
+            if(ordinazione != null && ordinazione.getElementiOrdinati().size() != 0) {
+                Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
+                intentRiepilogo.putExtra("ordinazione", ordinazione);
+                startActivity(intentRiepilogo);
+            }
+            else{
+                mostraDialogWarningOneBtn("Attenzione l'ordinazione non ha elementi");
+            }
         });
 
         textViewAllergeni.setOnClickListener(view -> {
@@ -146,6 +152,21 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
         }
 
+    }
+
+    private void mostraDialogWarningOneBtn(String messaggio){
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        dialogAttenzione.show();
+
+        buttonOk.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
     }
 
     public void dialogAllergeni(){
@@ -252,6 +273,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     }
 
     private ElementoMenu getElementoMenu(){
+        String nota = textInputLayoutNota.getEditText().getText().toString();
         return elementiMenu.get(elementoSelezionato).getElementoMenu();
     }
 

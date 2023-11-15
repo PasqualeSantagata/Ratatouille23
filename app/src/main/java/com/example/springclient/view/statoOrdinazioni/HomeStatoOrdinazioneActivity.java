@@ -49,6 +49,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     private RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
     private FirebaseAnalytics firebaseAnalytics;
     private String email;
+    private RecycleViewAdapterOrdinazioniPrenotate adapterPrenotate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         ordinazionePresenter.getOrdinazioniSospese();
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         email = getIntent().getStringExtra("email");
+        ordinazioniPrenotate = new ArrayList<>();
         stompConnect();
     }
 
@@ -137,6 +139,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
         setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, ordinazioniSospese);
+        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, ordinazioniPrenotate);
 
 
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
@@ -152,8 +155,8 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
     public void setDatiRecycleViewOrdinazioniPrenotate(RecyclerView recyclerView, List<StatoOrdinazione> ordinazione) {
-        RecycleViewAdapterOrdinazioniPrenotate adapter = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
-        recyclerView.setAdapter(adapter);
+        adapterPrenotate = new RecycleViewAdapterOrdinazioniPrenotate(this, this, ordinazione);
+        recyclerView.setAdapter(adapterPrenotate);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
@@ -183,9 +186,10 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
 
         //Passa elem. alla reccyle view ordinazioni prenotate
-        ordinazioniPrenotate = new ArrayList<>();
         ordinazioniPrenotate.add(new StatoOrdinazione(ordinazioniSospese.get(position).getOrdinazione(), ordinazioniSospese.get(position).getPortata()));
-        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, ordinazioniPrenotate);
+        adapterPrenotate.notifyItemInserted(ordinazioniPrenotate.size()-1);
+
+
     }
 
     @Override

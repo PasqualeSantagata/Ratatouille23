@@ -23,8 +23,8 @@ public class AnalyticsModel {
         this.anlayticsAPI = retrofitService.getAnalyticsAPI();
     }
 
-    public void getAnalytics(CallbackResponse<List<AnalyticsData>> callbackResponse){
-        anlayticsAPI.getAnalytics().
+    public void getAnalytics(CallbackResponse<List<AnalyticsData>> callbackResponse, String dataInizio, String dataFine){
+        anlayticsAPI.getAnalytics(dataInizio, dataFine).
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<List<AnalyticsData>>>() {

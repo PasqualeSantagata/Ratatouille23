@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final String base_URL ="http://192.168.1.9:8080/";
+    private static final String base_URL ="http://192.168.1.2:8080/";
     private static RetrofitService INSTANCE;
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;

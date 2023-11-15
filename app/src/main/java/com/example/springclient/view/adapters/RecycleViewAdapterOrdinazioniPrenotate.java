@@ -40,8 +40,8 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniPrenotate.MyViewHolder holder, int position) {
         //info ordinazione
-        holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala());
-        holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo());
+        holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala().toString());
+        holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo().toString());
         //info singoli piatti della stessa ordinazione
         holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getTempoPreparazione());
         holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getNome());

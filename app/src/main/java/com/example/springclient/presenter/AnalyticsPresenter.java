@@ -20,7 +20,7 @@ public class AnalyticsPresenter {
         this.statisticheActivity = statisticheActivity;
     }
 
-    public void getAnalytics(){
+    public void getAnalytics(String dataInizio, String dataFine){
         analyticsModel.getAnalytics(new CallbackResponse<List<AnalyticsData>>() {
             @Override
             public void onFailure(Throwable t) {
@@ -33,7 +33,7 @@ public class AnalyticsPresenter {
                     getCuochi();
                 }
             }
-        });
+        }, dataInizio, dataFine);
     }
 
     public void getCuochi(){
@@ -48,10 +48,15 @@ public class AnalyticsPresenter {
                 if(retData.isSuccessful()){
                     statisticheActivity.setCuochi(retData.body());
                     statisticheActivity.preparaDati();
+                    statisticheActivity.costruisciGrafo();
+
                 }
             }
         });
     }
+
+
+
 
 
 }

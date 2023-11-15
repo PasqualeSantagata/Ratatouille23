@@ -64,7 +64,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
                 mostraDialogWarning(getString(R.string.dialog_ord_vuota));
-
             } else {
                 // starta il riepilogo ordinazione non vuota
                 Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
