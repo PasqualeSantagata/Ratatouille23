@@ -60,7 +60,7 @@
                 app:srcCompat="@drawable/line_1" />
 
             <TextView
-                android:id="@+id/textViewTempoRecycleViewStatoOrdinazioni"
+                android:id="@+id/textViewOrarioRecycleViewStatoOrdinazioni"
                 android:layout_width="98dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="107dp"

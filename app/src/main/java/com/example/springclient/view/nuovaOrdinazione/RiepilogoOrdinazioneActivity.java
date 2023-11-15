@@ -111,7 +111,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         startDialogDettagliElemento(elementoSelezionato.getElementoMenu());
     }
 
-    private void startDialogDettagliElemento(ElementoMenu elementoMenu){
+    private void startDialogDettagliElemento(ElementoMenu elementoMenu) {
         Dialog dialogDettagli = new Dialog(this);
         dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);
 
@@ -121,11 +121,11 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagli);
         TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
         TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
-        Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua) ;
+        Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua);
         buttonTraduzione.setVisibility(View.GONE);
 
         //Setto l'elemento menu di cui voglio vedere i dettagli
-        setTextInputLayoutText(textInputLayoutPrezzo,elementoMenu.getPrezzo().toString());
+        setTextInputLayoutText(textInputLayoutPrezzo, elementoMenu.getPrezzo().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
         buttonIndietro.setOnClickListener(view -> {
@@ -134,13 +134,14 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
         dialogDettagli.show();
     }
+
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
     }
 
     @Override
-    public void onButtonDeleted(int position){
+    public void onButtonDeleted(int position) {
         indiceElementoSelezionato = position;
         elementoSelezionato = portate.get(position);
         //Starta dialog warn per eliminare elem
@@ -160,7 +161,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
             portate.remove(position);
             ordinazione.getElementiOrdinati().remove(position);
             notifyAdapter();
-            if(portate.size() == 0){
+            if (portate.size() == 0) {
                 onBackPressed();
             }
         });
@@ -179,7 +180,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         super.onBackPressed();
     }
 
-    public void notifyAdapter(){
+    public void notifyAdapter() {
         adapterElementoMenu.notifyDataSetChanged();
     }
 

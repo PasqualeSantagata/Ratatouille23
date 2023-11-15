@@ -65,7 +65,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
             super(itemView);
             buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewStatoOrdinazioni);
             textViewNomePiatto = itemView.findViewById(R.id.textViewNomePiattoRecycleViewStatoOrdinazioni);
-            textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewStatoOrdinazioni);
+            textViewTempo = itemView.findViewById(R.id.textViewOrarioRecycleViewStatoOrdinazioni);
             textViewNota = itemView.findViewById(R.id.textViewNotaRecycleViewStatoOrdinazioni);
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewStatoOrdinazioni);
             textViewSala = itemView.findViewById(R.id.textViewSalaRecycleViewStatoOrdinazioni);

@@ -1,8 +1,11 @@
 package com.example.springclient.view.statoOrdinazioni;
 
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +23,7 @@ import com.example.springclient.view.adapters.IRecycleViewOrdinazioniPrenotate;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniEvase;
 import com.example.springclient.view.adapters.RecycleViewAdapterOrdinazioniPrenotate;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -39,6 +43,8 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     private OrdinazionePresenter ordinazionePresenter;
     private List<Ordinazione> ordinazioni;
     private List<StatoOrdinazione> ordinazioniSospese;
+    private List<StatoOrdinazione> ordinazioniPrenotate;
+    private List<StatoOrdinazione> ordinazioniEvase;
     private int posizione;
     private RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
     private FirebaseAnalytics firebaseAnalytics;
@@ -99,6 +105,31 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         }
     }
 
+    private void mostraDialogDettagli(StatoOrdinazione ordinazione){
+        Dialog dialogDettagli = new Dialog(this);
+        dialogDettagli.setContentView(R.layout.dialog_dettagli_stato_ordinazione);
+
+        TextInputLayout textInputLayoutBreveNota = dialogDettagli.findViewById(R.id.textInputLayoutNotaDialogDettagliStatoOrd);
+        TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagliStatoOrd);
+        Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagliStatoOrd);
+
+        String descrizione = ordinazione.getPortata().getElementoMenu().getDescrizione();
+        String breveNota = ordinazione.getPortata().getBreveNota();
+        setTextInputLayoutText(textInputLayoutDescrizione, descrizione);
+        setTextInputLayoutText(textInputLayoutBreveNota, breveNota);
+
+        buttonIndietro.setOnClickListener(view -> {
+            dialogDettagli.dismiss();
+        });
+
+        dialogDettagli.show();
+    }
+
+    private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
+        EditText editText = textInputLayout.getEditText();
+        editText.setText(text);
+    }
+
 
 
     public void initializeComponents() {
@@ -106,7 +137,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
         setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, ordinazioniSospese);
-
 
 
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
@@ -137,7 +167,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
     @Override
     public void onItemClickOrdinazioniCorrenti(int position) {
-
+        mostraDialogDettagli(ordinazioniSospese.get(position));
     }
 
     @Override
@@ -152,10 +182,10 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
 
-      /*  //Passa elem. alla reccyle view ordinazioni prenotate
-        List<StatoOrdinazione> statoOrdinazione = new ArrayList<>();
-        statoOrdinazione.add(new StatoOrdinazione(ordinazioniSospese.get(position).getOrdinazione(), ordinazioniSospese.get(position).getPortata()));
-        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, statoOrdinazione); */
+        //Passa elem. alla reccyle view ordinazioni prenotate
+        ordinazioniPrenotate = new ArrayList<>();
+        ordinazioniPrenotate.add(new StatoOrdinazione(ordinazioniSospese.get(position).getOrdinazione(), ordinazioniSospese.get(position).getPortata()));
+        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, ordinazioniPrenotate);
     }
 
     @Override
