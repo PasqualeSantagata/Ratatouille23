@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,6 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
-import com.example.springclient.view.MainActivity;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
@@ -72,7 +71,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 intentRiepilogo.putExtra("ordinazione",ordinazione);
                 startActivity(intentRiepilogo);
             }
-
         });
        buttonIndietro.setOnClickListener(view -> {
            onBackPressed();
@@ -131,12 +129,17 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         for(ElementoMenu e: elementi){
             portata.add(new Portata(e,false));
         }
+
         intentVisualizzaCategoria.putExtra("elementi", (Serializable) portata);
         intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
-
         //Ordinazione con le info collezionate in precedenza
         intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
-        startActivity(intentVisualizzaCategoria);
+
+        if(!elementi.isEmpty()){
+            startActivity(intentVisualizzaCategoria);
+        }else{
+            Toast.makeText(this,"Categoria attualmente vuota",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

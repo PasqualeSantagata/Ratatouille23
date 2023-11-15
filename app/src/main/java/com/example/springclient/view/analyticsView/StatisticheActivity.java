@@ -64,6 +64,7 @@ public class StatisticheActivity extends AppCompatActivity {
             materialDatePicker.show(getSupportFragmentManager(), "picker_date_analytics");
             materialDatePicker.addOnPositiveButtonClickListener(view2 -> {
                 editTextData.setText(materialDatePicker.getHeaderText());
+                materialDatePicker.getSelection();
             });
         });
 
