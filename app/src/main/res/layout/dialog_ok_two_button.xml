@@ -19,7 +19,7 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDialogEmailInviata" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDialogOkTwoBtn" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -36,7 +36,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
-        android:id="@+id/textViewDialogEmailInviata"
+        android:id="@+id/textViewDialogOkTwoBtn"
         android:layout_width="800dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -61,7 +61,7 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDialogEmailInviata"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDialogOkTwoBtn"
         app:layout_constraintVertical_bias="0.502" />
 
     <ImageView

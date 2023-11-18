@@ -20,7 +20,6 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -89,7 +88,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements C
 
     @Override
     public void setNomiCategorie(List<String> nomiCategori) {
-
+        //TODO serve?
     }
 
     public void notifyAdapter(int posizione){

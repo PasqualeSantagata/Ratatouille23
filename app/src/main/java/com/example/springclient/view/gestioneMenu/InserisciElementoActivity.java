@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
     private TextInputLayout nomeElementoTextInputLayout;
@@ -87,46 +86,46 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
 
         autocompDisposable =
-            RxTextView.textChangeEvents(autoTextView)
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                    charSequence -> {
-                        Editable editable = autoTextView.getText();
-                        if (editable != null && !editable.toString().isEmpty()) {
-                            foodFactsPresenter.getElementoMenuDetails(editable.toString());
-                        }
-                    });
+                RxTextView.textChangeEvents(autoTextView)
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                charSequence -> {
+                                    Editable editable = autoTextView.getText();
+                                    if (editable != null && !editable.toString().isEmpty()) {
+                                        foodFactsPresenter.getElementoMenuDetails(editable.toString());
+                                    }
+                                });
 
         //Buttons
         okButton = findViewById(R.id.buttonInserElemOk);
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
         inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
         okButton.setOnClickListener(view -> {
-            if(checkFields()) {
+            if (checkFields()) {
                 elementoMenu = getElementoValues();
                 elementoMenuPresenter.saveElementoMenu(elementoMenu, categoriaSelezionata);
             }
         });
         indietroButton.setOnClickListener(view -> {
-            onBackPressed();
+            mostraDialogWarningTwoBtn("Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?");
         });
         inserisciButton.setOnClickListener(view -> {
             dialogAllergeni();
         });
-        
+
     }
 
     public void elementoSalvatoCorrettamenteDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_two_button);
-        TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
+        TextView dialogTv = dialog.findViewById(R.id.textViewDialogOkTwoBtn);
         Button indietroButton = dialog.findViewById(R.id.okDialog);
         Button okButton = dialog.findViewById(R.id.okDialog2);
         indietroButton.setText("CONTINUA");
         okButton.setText("AVANTI");
-        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti, altrimenti premi "+
-        "continua per aggiungere un nuovo elemento");
+        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti, altrimenti premi " +
+                "continua per aggiungere un nuovo elemento");
         indietroButton.setOnClickListener(view -> {
             Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
             startActivity(intentHome);
@@ -140,8 +139,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         dialog.show();
     }
 
-
-    private void mostraDialogWarning(String messaggio){
+    private void mostraDialogWarning(String messaggio) {
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
 
@@ -156,7 +154,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         });
     }
 
-    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
+    private void mostraDialogWarningTwoBtn(String messaggio) {
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
 
@@ -168,16 +166,14 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         dialogAttenzione.show();
 
         buttonSi.setOnClickListener(view -> {
-            if(intentSi != null)
-                startActivity(intentSi);
-
+            onBackPressed();
             dialogAttenzione.dismiss();
         });
         buttonNo.setOnClickListener(view -> {
-
             dialogAttenzione.dismiss();
         });
     }
+
 
     public ElementoMenu getElementoValues() {
         String nomeElemento, prezzoElemento;
@@ -190,10 +186,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
         elementoMenu = new ElementoMenu(nomeElemento, Float.parseFloat(prezzoElemento), descrizione, allergeni, linguaSelezionata);
-        return  elementoMenu;
+        return elementoMenu;
     }
 
-    private boolean checkFields(){
+    private boolean checkFields() {
         boolean checked = true;
         String nomeElemento, prezzoElemento;
         String[] elencoAllergeni;
@@ -201,35 +197,31 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-       // elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
+        // elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
 
-        if(nomeElemento.equals("")){
+        if (nomeElemento.equals("")) {
             nomeElementoTextInputLayout.setError("Nome non valido");
             checked = false;
-        }
-        else{
+        } else {
             nomeElementoTextInputLayout.setErrorEnabled(false);
         }
-        if(prezzoElemento.isEmpty() || !prezzoElemento.matches("[+-]?([0-9]*[.])?[0-9]+")){
+        if (prezzoElemento.isEmpty() || !prezzoElemento.matches("[+-]?([0-9]*[.])?[0-9]+")) {
             prezzoElementoTextInputLayout.setError("Prezzo non valido");
             checked = false;
-        }
-        else{
+        } else {
             prezzoElementoTextInputLayout.setErrorEnabled(false);
         }
-        if(descrizione.isEmpty()){
+        if (descrizione.isEmpty()) {
             descrizioneTextInputLayout.setError("Descrizione non valida");
 
             checked = false;
-        }
-        else{
+        } else {
             prezzoElementoTextInputLayout.setErrorEnabled(false);
         }
 
         return checked;
     }
-
 
     public void cleanFields() {
         nomeElementoTextInputLayout.getEditText().setText("");
@@ -237,26 +229,26 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         descrizioneTextInputLayout.getEditText().setText("");
     }
 
-    public void showErrors(List<String> listOfErrors){
-        for(String s: listOfErrors) {
-          if(s.toLowerCase().contains("nome")) {
-              nomeElementoTextInputLayout.setError(s);
-          }
+    public void showErrors(List<String> listOfErrors) {
+        for (String s : listOfErrors) {
+            if (s.toLowerCase().contains("nome")) {
+                nomeElementoTextInputLayout.setError(s);
+            }
         }
     }
 
-    public void generateNames(List<String> names, List<ProdottoResponse> prodotti){
-       // suggeriti.clear();
+    public void generateNames(List<String> names, List<ProdottoResponse> prodotti) {
+        // suggeriti.clear();
         suggeriti = names;
         this.prodotti = prodotti;
         Log.d("suggeriti: ", suggeriti.toString());
-        adapter = new ArrayAdapter<>(InserisciElementoActivity.this,android.R.layout.simple_dropdown_item_1line, suggeriti);
+        adapter = new ArrayAdapter<>(InserisciElementoActivity.this, android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
-    public void listenerAllergeni(){
-        if(allergeni == null) {
+    public void listenerAllergeni() {
+        if (allergeni == null) {
             allergeni = new ArrayList<>();
         }
         checkBoxes = new ArrayList<>();
@@ -274,18 +266,17 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         checkBoxes.add(checkBoxSesamo);
         checkBoxes.add(checkBoxSoia);
         checkBoxes.add(checkBoxUova);
-        for(CheckBox c: checkBoxes){
-            String valore = (String)c.getTag();
-            if(allergeni.contains(valore)){
+        for (CheckBox c : checkBoxes) {
+            String valore = (String) c.getTag();
+            if (allergeni.contains(valore)) {
                 c.setChecked(true);
             }
             c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if(b){
-                    if(!allergeni.contains(valore)){
+                if (b) {
+                    if (!allergeni.contains(valore)) {
                         allergeni.add(valore);
                     }
-                }
-                else{
+                } else {
                     allergeni.remove(valore);
                 }
             });
@@ -295,7 +286,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     }
 
 
-    public void dialogAllergeni(){
+    public void dialogAllergeni() {
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
         checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
@@ -340,6 +331,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void onBackPressed() {
         Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
-        mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? I dati inseriti andranno persi", intentHome);
+        startActivity(intentHome);
     }
 }

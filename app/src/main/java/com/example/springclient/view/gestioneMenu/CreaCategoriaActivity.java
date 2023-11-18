@@ -1,11 +1,10 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,15 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.CategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.CategoriaMenuPresenter;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 
@@ -59,17 +54,17 @@ public class CreaCategoriaActivity extends AppCompatActivity {
         immagineCategoria = (byte[]) getIntent().getSerializableExtra("immagine");
 
 
-        if (immagineCategoria != null){
+        if (immagineCategoria != null) {
             immagine = BitmapFactory.decodeByteArray(immagineCategoria, 0, immagineCategoria.length);
             imageViewAggiungiImmagine.setImageBitmap(immagine);
         }
 
         buttonOk.setOnClickListener(view -> {
 
-            if(controllaCampi()){
+            if (controllaCampi()) {
                 String nomeCategoria = textInputLayoutNomeCategoria.getEditText().getText().toString();
                 Categoria categoria = new Categoria(nomeCategoria);
-                if(immagineCategoria != null){
+                if (immagineCategoria != null) {
                     immagineFile = new File(getApplicationContext().getFilesDir(), nomeCategoria + ".jpeg");
                     OutputStream os;
                     try {
@@ -77,7 +72,7 @@ public class CreaCategoriaActivity extends AppCompatActivity {
                         immagine.compress(Bitmap.CompressFormat.JPEG, 100, os);
                         os.flush();
                         os.close();
-                    } catch (Exception ignored){
+                    } catch (Exception ignored) {
 
                     }
                 }
@@ -87,7 +82,7 @@ public class CreaCategoriaActivity extends AppCompatActivity {
         });
 
         buttonIndietro.setOnClickListener(view -> {
-            onBackPressed();
+            mostraDialogWarningTwoBtn("Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?");
         });
 
         imageViewAggiungiImmagine.setOnClickListener(view -> {
@@ -95,21 +90,41 @@ public class CreaCategoriaActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    public void salvaImmagine(Long id){
+
+    private void mostraDialogWarningTwoBtn(String messaggio) {
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
+        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
+        dialogAttenzione.show();
+
+        buttonSi.setOnClickListener(view -> {
+            onBackPressed();
+            dialogAttenzione.dismiss();
+        });
+        buttonNo.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+    }
+
+    public void salvaImmagine(Long id) {
         categoriaPresenter.addFotoCategoria(id.toString(), immagineFile);
 
     }
 
-    public void continuaInserimento(){
+    public void continuaInserimento() {
         Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
         startActivity(intent);
     }
 
 
-
-    public boolean controllaCampi(){
+    public boolean controllaCampi() {
         String nomeCategoria = textInputLayoutNomeCategoria.getEditText().getText().toString();
-        if(nomeCategoria.equals("")){
+        if (nomeCategoria.equals("")) {
             textInputLayoutNomeCategoria.setError("Inserisci un nome");
             return false;
         }

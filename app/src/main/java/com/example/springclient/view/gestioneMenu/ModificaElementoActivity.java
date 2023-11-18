@@ -26,8 +26,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.jetbrains.annotations.Contract;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +52,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     private List<CheckBox> checkBoxes;
     private ElementoMenuPresenter elementoMenuPresenter;
     private boolean traduzioneAssente;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
     public void initializeComponents() {
         textInputLayoutNome = findViewById(R.id.textInputLayoutModificaNome);
-        textInputLayoutPrezzo= findViewById(R.id.textInputLayoutModificaPrezzo);
+        textInputLayoutPrezzo = findViewById(R.id.textInputLayoutModificaPrezzo);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutModificaDescrizione);
         textInputLayoutNome.getEditText().setText((elementoMenu.getNome()));
         textInputLayoutDescrizione.getEditText().setText((elementoMenu.getDescrizione()));
@@ -90,19 +89,20 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         textInputEditTextLingua.setText(elementoMenu.getLingua());
 
         fabAggiungiLingua.setOnClickListener(view -> {
-                Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
-                nuovaLingua.putExtra("elemento", elementoMenu);
-                startActivity(nuovaLingua);
+            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+            nuovaLingua.putExtra("elemento", elementoMenu);
+            startActivity(nuovaLingua);
         });
-        if(!traduzioneAssente){
+        if (!traduzioneAssente) {
             fabAggiungiLingua.setVisibility(View.INVISIBLE);
         }
 
 
         fabAggiungiCategoria.setOnClickListener(view -> {
-            if(categoriaSelezionata != null){
+            if (categoriaSelezionata != null) {
                 categoriaMenuPresenter.aggiungiElemento(categoriaSelezionata, elementoMenu);
                 //se non aggiunge è perchè è già presente
+                //TODO si può mettere tipo un toast che dice se è gia presente?
             }
         });
 
@@ -114,17 +114,15 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
         });
         buttonIndietro.setOnClickListener(view -> {
-            /*Intent intentVisualizzaCategorie = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
-            mostraDialogWarningTwoBtn("Sei sicuro di voler tornare indietro? perderai tutti i dati inseriti fino ad ora!", intentVisualizzaCategorie);*/
             //questa schermata è raggiungibile da due diverse quindi indietro dovrebbe corrispondere ad onBackPressed di default
-            onBackPressed();
+            mostraDialogWarningTwoBtn("Attenzione se torni indietro tutte le modifiche effettuate fino ad ora andranno perse! Continuare? ");
         });
 
     }
 
-    public void listenerAllergeni(){
+    public void listenerAllergeni() {
         allergeni = elementoMenu.getElencoAllergeni();
-        if(allergeni == null)
+        if (allergeni == null)
             allergeni = new ArrayList<>();
         checkBoxes = new ArrayList<>();
         checkBoxes.add(checkBoxArachidi);
@@ -141,18 +139,17 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         checkBoxes.add(checkBoxSesamo);
         checkBoxes.add(checkBoxSoia);
         checkBoxes.add(checkBoxUova);
-        for(CheckBox c: checkBoxes){
-            String valore = (String)c.getTag();
-            if(allergeni.contains(valore)){
+        for (CheckBox c : checkBoxes) {
+            String valore = (String) c.getTag();
+            if (allergeni.contains(valore)) {
                 c.setChecked(true);
             }
             c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if(b){
-                    if(!allergeni.contains(valore)){
+                if (b) {
+                    if (!allergeni.contains(valore)) {
                         allergeni.add(valore);
                     }
-                }
-                else{
+                } else {
                     allergeni.remove(valore);
                 }
             });
@@ -161,7 +158,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
 
     }
 
-    public void dialogAllergeni(){
+    public void dialogAllergeni() {
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
 
@@ -188,7 +185,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         });
     }
 
-    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
+    private void mostraDialogWarningTwoBtn(String messaggio) {
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
 
@@ -200,26 +197,24 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
         dialogAttenzione.show();
 
         buttonSi.setOnClickListener(view -> {
-            if(intentSi != null)
-                onBackPressed();
-                //startActivity(intentSi);
-
+            onBackPressed();
             dialogAttenzione.dismiss();
         });
         buttonNo.setOnClickListener(view -> {
             dialogAttenzione.dismiss();
         });
     }
+
     @Override
-    public void traduzioneAssente(){
+    public void traduzioneAssente() {
         traduzioneAssente = true;
         initializeComponents();
     }
+
     @Override
-    public void mostraTraduzione(ElementoMenu elementoMenu){
+    public void mostraTraduzione(ElementoMenu elementoMenu) {
         initializeComponents();
     }
-
 
 
     @Override
@@ -244,6 +239,45 @@ public class ModificaElementoActivity extends AppCompatActivity implements Categ
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    public void elementoModificatoConSuccesso() {
+        mostraDialogOkOneBtn("Elemento modificato correttamente!!!");
+    }
+
+    private void mostraDialogOkOneBtn(String messaggio) {
+        Dialog dialogOk = new Dialog(this);
+        dialogOk.setContentView(R.layout.dialog_ok_one_button);
+
+        TextView textViewMess = dialogOk.findViewById(R.id.textViewDialogOkTwoBtn);
+        textViewMess.setText(messaggio);
+        Button buttonOk = dialogOk.findViewById(R.id.okDialog);
+        buttonOk.setOnClickListener(view -> {
+            onBackPressed();
+            dialogOk.dismiss();
+        });
+
+        dialogOk.show();
+    }
+
+    public void elementoNonModificato() {
+        mostraDialogErrorOneBtn("Errore, modifica non effettuata, si prega di riprovare successivamente");
+    }
+
+
+    private void mostraDialogErrorOneBtn(String messaggio) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_err_one_btn);
+
+        TextView textViewmess = dialog.findViewById(R.id.textViewErrorMessageDialogErrorOneBtn);
+        textViewmess.setText(messaggio);
+
+        Button buttonOk = dialog.findViewById(R.id.buttonOkDialogErrorOneBtn);
+        buttonOk.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 
 }

@@ -14,7 +14,7 @@ import com.example.springclient.view.analyticsView.StatisticheActivity;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
 import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
 
-public class DashboardAdminActivity extends AppCompatActivity {
+public class  DashboardAdminActivity extends AppCompatActivity {
     private ImageView imageViewMenu;
     private ImageView imageViewAnalytics;
     private ImageView imageViewNuovaUtenza;

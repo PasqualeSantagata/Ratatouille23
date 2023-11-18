@@ -121,7 +121,9 @@
                 android:layout_marginBottom="43dp"
                 android:text="10"
                 android:textAlignment="viewEnd"
+                android:textColor="@color/my_green"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/imageView18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView6" />
@@ -135,7 +137,9 @@
                 android:layout_marginBottom="17dp"
                 android:text="3"
                 android:textAlignment="viewEnd"
+                android:textColor="@color/my_green"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textViewSalaRecycleViewStatoOrdinazioni"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView7" />

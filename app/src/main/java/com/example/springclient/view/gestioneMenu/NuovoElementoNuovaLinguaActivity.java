@@ -219,7 +219,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
     public void linguaAggiunta() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_one_button);
-        TextView dialogTv = dialog.findViewById(R.id.textViewDialogEmailInviata);
+        TextView dialogTv = dialog.findViewById(R.id.textViewDialogOkTwoBtn);
         Button okButton = dialog.findViewById(R.id.okDialog);
         okButton.setText("OK");
         dialogTv.setText("Traduzione inserita con successo");

@@ -104,7 +104,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if (adapterView.getId() == R.id.spinnerCategoriaHomeInserimentoNelMenu) {
             categoriaSelezionata = categorie.get(i);
-        } else if (adapterView.getId()  == R.id.spinnerLingueHomeInserisciElemento) {
+        } else if (adapterView.getId() == R.id.spinnerLingueHomeInserisciElemento) {
             linguaSelezionata = lingue.get(i);
         }
 

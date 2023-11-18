@@ -3,23 +3,18 @@ package com.example.springclient.presenter;
 import android.util.Log;
 import android.widget.Toast;
 
-
-
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.view.gestioneMenu.CercaElementoActivity;
+import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
 import com.example.springclient.view.gestioneMenu.ModificaElementoActivity;
 import com.example.springclient.view.gestioneMenu.NuovoElementoNuovaLinguaActivity;
 import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
-import com.example.springclient.view.gestioneMenu.HomeNuovoElementoActivity;
-import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
 import com.example.springclient.view.gestioneMenu.VisualizzaElementiDellaCategoriaActivity;
-import com.example.springclient.view.nuovaOrdinazione.EsploraCategorieActivity;
 import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
 import com.example.springclient.view.nuovaOrdinazione.VisualizzaCategoriaActivity;
 import com.google.gson.Gson;
@@ -202,13 +197,14 @@ public class ElementoMenuPresenter implements ElementoMenuContract.Presenter {
         elementoMenuModel.modificaElementoMenu(elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-
+                //TODO dovremmo fare i controlli sui campi come nel caso dell' inserimento ?
+                modificaElementoActivity.elementoNonModificato();
             }
 
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    /* schermata modifica confermata sulla modificaElementoActivity*/
+                    modificaElementoActivity.elementoModificatoConSuccesso();
                 }
             }
         });

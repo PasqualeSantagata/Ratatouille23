@@ -41,7 +41,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     private List<ElementoMenu> elementoMenuList;
     private ElementoMenuPresenter presenter;
     private AutoCompleteTextView autoTextView;
-    private List<ElementoMenu> risultatiCerca;
     private List<ElementoMenu> elementoMenuListApp;
     private TextInputLayout textInputLayoutDescrizione;
     private Context dialogDettagliContext;
@@ -77,17 +76,16 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                 .subscribe(
                         charSequence -> {
                             if (charSequence != null && !charSequence.toString().isEmpty()) {
-                                for(ElementoMenu e: elementoMenuListApp){
-                                    if(!e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && elementoMenuList.contains(e)){
+                                for (ElementoMenu e : elementoMenuListApp) {
+                                    if (!e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && elementoMenuList.contains(e)) {
                                         elementoMenuList.remove(e);
                                     } else if (e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && !elementoMenuList.contains(e)) {
                                         elementoMenuList.add(e);
                                     }
                                 }
-                            }
-                            else{
-                                for(ElementoMenu e: elementoMenuListApp){
-                                    if(!elementoMenuList.contains(e)){
+                            } else {
+                                for (ElementoMenu e : elementoMenuListApp) {
+                                    if (!elementoMenuList.contains(e)) {
                                         elementoMenuList.add(e);
                                     }
                                 }
@@ -102,17 +100,17 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
-        if(elementoMenu != null)
+        if (elementoMenu != null)
             setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
     }
 
     @Override
-    public void traduzioneAssente(){
+    public void traduzioneAssente() {
         Toast.makeText(dialogDettagliContext, "Non esiste una lingua alternativa per questo elemento", Toast.LENGTH_LONG).show();
     }
 
-    public void setElementi(List<ElementoMenu> elementoMenuList){
+    public void setElementi(List<ElementoMenu> elementoMenuList) {
         this.elementoMenuList = elementoMenuList;
         this.elementoMenuListApp = new ArrayList<>();
         elementoMenuListApp.addAll(elementoMenuList);
@@ -124,12 +122,12 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         editText.setText(text);
     }
 
-    private String getTextInputLayoutText (TextInputLayout textInputLayout){
+    private String getTextInputLayoutText(TextInputLayout textInputLayout) {
         EditText editText = textInputLayout.getEditText();
         return editText.getText().toString();
     }
 
-    private void startDialogDettagliElemento(ElementoMenu elementoMenu){
+    private void startDialogDettagliElemento(ElementoMenu elementoMenu) {
         Dialog dialogDettagli = new Dialog(this);
         dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);
 
@@ -138,10 +136,10 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagli);
         TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
         TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
-        Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua) ;
+        Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua);
 
         //Setto l'elemento menu di cui voglio vedere i dettagli
-        setTextInputLayoutText(textInputLayoutPrezzo,elementoMenu.getPrezzo().toString());
+        setTextInputLayoutText(textInputLayoutPrezzo, elementoMenu.getPrezzo().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
         this.dialogDettagliContext = dialogDettagli.getContext();
@@ -171,7 +169,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     }
 
     @Override
-    public void onButtonDeleted(int position){
+    public void onButtonDeleted(int position) {
         startDialogDettagliElemento(elementoMenuList.get(position));
     }
 

@@ -33,6 +33,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/desing_rounded_green_tf"
                     android:editable="false"
                     tools:ignore="Deprecated"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -50,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:editable="false"
+                    android:background="@drawable/desing_rounded_green_tf"
                     android:gravity="top|left"
                     android:hint="@string/descrizione"
                     tools:ignore="Deprecated" />

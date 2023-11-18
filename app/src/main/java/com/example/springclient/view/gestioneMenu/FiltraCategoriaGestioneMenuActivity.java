@@ -55,17 +55,17 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
         buttonAnnulla = findViewById(R.id.buttonAnnullaFiltraCategoria);
 
         buttonNome.setOnClickListener(view -> {
-            if(buttonNome.getText().toString().equals(getString(R.string.nome_up))){
+            if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
                 buttonNome.setText(R.string.nome_down);
-            }else{
+            } else {
                 buttonNome.setText(R.string.nome_up);
             }
 
         });
         buttonPrezzo.setOnClickListener(view -> {
-            if(buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))){
+            if (buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))) {
                 buttonPrezzo.setText(R.string.prezzo_down);
-            }else{
+            } else {
                 buttonPrezzo.setText(R.string.prezzo_up);
             }
         });
@@ -75,24 +75,24 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
         intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
 
         buttonOk.setOnClickListener(view -> {
-            if(checkboxAllergeni.isChecked()){
+            if (checkboxAllergeni.isChecked()) {
                 filtraAllergeni();
             }
-            if(checkboxNome.isChecked()) {
+            if (checkboxNome.isChecked()) {
                 if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeCrescente);
                 } else {
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeDecrescente);
                 }
             }
-            if(checkboxPrezzo.isChecked()){
-                if(buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))){
+            if (checkboxPrezzo.isChecked()) {
+                if (buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))) {
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoCrescente);
-                }else{
+                } else {
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoDecrescente);
                 }
             }
-            intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
+            intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementiMenu);
             intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
 
             startActivity(intentVisualizzaCategoria);
@@ -106,26 +106,26 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
         checkboxPrezzo = findViewById(R.id.checkBoxFiltroPrezzo);
         checkboxAllergeni = findViewById(R.id.checkBoxFiltroTabellaAllergene);
         checkboxNome.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b){
+            if (b) {
                 checkboxPrezzo.setChecked(false);
             }
         });
         checkboxPrezzo.setOnCheckedChangeListener((compoundButton, b) -> {
-            if(b){
+            if (b) {
                 checkboxNome.setChecked(false);
             }
         });
 
     }
 
-    private void filtraAllergeni(){
+    private void filtraAllergeni() {
         List<String> allergeniElemento;
         Iterator<ElementoMenu> elementoMenuIterator = elementiMenu.iterator();
-        while(elementoMenuIterator.hasNext()){
+        while (elementoMenuIterator.hasNext()) {
             ElementoMenu e = elementoMenuIterator.next();
             allergeniElemento = e.getElencoAllergeni();
-            for(String s: allergeni){
-                if(allergeniElemento.contains(s)){
+            for (String s : allergeni) {
+                if (allergeniElemento.contains(s)) {
                     elementoMenuIterator.remove();
                     break;
                 }
@@ -134,7 +134,7 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
 
     }
 
-    public void dialogAllergeni(){
+    public void dialogAllergeni() {
         Dialog dialogAllergeni = new Dialog(this);
         dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
         checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
@@ -160,8 +160,8 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
         dialogAllergeni.show();
     }
 
-    public void listenerAllergeni(){
-        if(allergeni == null) {
+    public void listenerAllergeni() {
+        if (allergeni == null) {
             allergeni = new ArrayList<>();
         }
         checkBoxes = new ArrayList<>();
@@ -179,18 +179,17 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
         checkBoxes.add(checkBoxSesamo);
         checkBoxes.add(checkBoxSoia);
         checkBoxes.add(checkBoxUova);
-        for(CheckBox c: checkBoxes){
-            String valore = (String)c.getTag();
-            if(allergeni.contains(valore)){
+        for (CheckBox c : checkBoxes) {
+            String valore = (String) c.getTag();
+            if (allergeni.contains(valore)) {
                 c.setChecked(true);
             }
             c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if(b){
-                    if(!allergeni.contains(valore)){
+                if (b) {
+                    if (!allergeni.contains(valore)) {
                         allergeni.add(valore);
                     }
-                }
-                else{
+                } else {
                     allergeni.remove(valore);
                 }
             });
@@ -200,7 +199,7 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
+        intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementiMenu);
         intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
 
         startActivity(intentVisualizzaCategoria);

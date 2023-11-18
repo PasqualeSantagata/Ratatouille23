@@ -71,27 +71,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.creaNuovaUtenza.RegistrazioneCompletaNuovaUtenzaActivity"
-            android:exported="false"
-            android:configChanges="orientation"
-            android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity">
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.gestioneMenu.ElementoInseritoCorrettamenteActivity"
-            android:exported="false"
-            android:configChanges="orientation"
-            android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".view.PasswordDimenticataActivity"
             android:exported="false"
             android:configChanges="orientation"

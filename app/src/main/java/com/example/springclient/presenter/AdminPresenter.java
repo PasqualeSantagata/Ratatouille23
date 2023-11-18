@@ -28,13 +28,13 @@ public class AdminPresenter implements AdminContract.Presenter {
         autenticazioneModel.registraUtente(utente,new CallbackResponse<ApiResponse>() {
             @Override
             public void onFailure(Throwable t) {
-
+                startNuovaUtenzaActivity.registrazioneFallita();
             }
 
             @Override
             public void onSuccess(Response<ApiResponse> retData) {
                 if(retData.isSuccessful()){
-
+                    startNuovaUtenzaActivity.registrazioneAvvenutaConSuccesso();
 
                 }
                 else if(retData.code() == 412){

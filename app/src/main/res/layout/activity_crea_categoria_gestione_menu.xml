@@ -54,7 +54,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nome" />
+            android:hint="@string/nome"
+            android:background="@drawable/desing_rounded_green_tf"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

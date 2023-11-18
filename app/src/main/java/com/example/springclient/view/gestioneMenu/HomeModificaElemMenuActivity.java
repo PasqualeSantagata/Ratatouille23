@@ -26,6 +26,7 @@ public class HomeModificaElemMenuActivity extends AppCompatActivity {
 
         initializeComponents();
     }
+
     private void initializeComponents() {
         buttonCategorie = findViewById(R.id.espoloraCategoriaHomeModificaButton);
         buttonCerca = findViewById(R.id.cercaHomeModificaButton);
@@ -43,6 +44,7 @@ public class HomeModificaElemMenuActivity extends AppCompatActivity {
             onBackPressed();
         });
     }
+
     @Override
     public void onBackPressed() {
         Intent indietro = new Intent(this, StartGestioneMenuActivity.class);

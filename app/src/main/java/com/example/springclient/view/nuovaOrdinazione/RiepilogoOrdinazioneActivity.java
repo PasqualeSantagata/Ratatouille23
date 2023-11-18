@@ -91,7 +91,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     public void dialogOrdinazioneAvvvenutaConSuccesso() {
         Dialog ordinazioneAvvenuta = new Dialog(this);
         ordinazioneAvvenuta.setContentView(R.layout.dialog_ok_one_button);
-        TextView ordinazioneAvvenutaTv = ordinazioneAvvenuta.findViewById(R.id.textViewDialogEmailInviata);
+        TextView ordinazioneAvvenutaTv = ordinazioneAvvenuta.findViewById(R.id.textViewDialogOkTwoBtn);
         ordinazioneAvvenutaTv.setText("Ordinazione inviata con successo");
         Button okButton = ordinazioneAvvenuta.findViewById(R.id.okDialog);
         ordinazioneAvvenuta.show();
