@@ -1,7 +1,7 @@
 package com.example.springclient.contract;
 
 public interface RecuperoCredenzialiContract {
-    interface Presenter{
+    interface Presenter {
         void avviaRecuperoPassword(String email);
 
     }
@@ -11,7 +11,7 @@ public interface RecuperoCredenzialiContract {
 
     }
 
-    interface View {
+    interface View extends BaseView{
         void verificaEmail(String email);
         void emailErrata();
 

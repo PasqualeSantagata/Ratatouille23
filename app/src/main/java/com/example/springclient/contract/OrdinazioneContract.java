@@ -5,8 +5,6 @@ import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
-
 public interface OrdinazioneContract {
     interface Model{
         void getOrdinazioniSospese(CallbackResponse<List<Ordinazione>> ordinazioneCallback);
@@ -14,16 +12,19 @@ public interface OrdinazioneContract {
         void concludiOrdinazione(CallbackResponse<Ordinazione> ordinazioneCallback, Long id);
     }
 
-    interface View{
-
-
-
+    interface ViewOrdinazione extends BaseView{
+            void salvaOrdinazione(List<Portata> portateOrdinazione);
+            void dialogOrdinazioneAvvvenutaConSuccesso();
     }
+    interface ViewPrenotazionePortate{
+        void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese);
+    }
+
 
     interface Presenter{
         void getOrdinazioniSospese();
-        void savePortate(List<Portata> portataList);
+        void salvaPortate(List<Portata> portataList);
         void concludiOrdinazione(long idOrdinazione);
-        void aggiungiOrdinazione(Ordinazione ordinazione);
+        void salvaOrdinazione(Ordinazione ordinazione);
     }
 }

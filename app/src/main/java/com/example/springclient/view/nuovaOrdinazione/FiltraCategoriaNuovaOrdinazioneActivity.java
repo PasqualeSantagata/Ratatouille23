@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Portata;
 
@@ -19,7 +20,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity {
+public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity implements BaseAllergeniDialog {
     private Button buttonNome;
     private Button buttonPrezzo;
     private Button buttonOk;
@@ -28,10 +29,6 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity {
     private CheckBox checkboxPrezzo;
     private CheckBox checkboxAllergeni;
     private Button buttonTabellaAllergeni;
-    private List<CheckBox> checkBoxes;
-    private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
-            checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
-            checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
     private List<Portata> elementiMenu;
     private String nome;
@@ -43,7 +40,7 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_filtra_categoria_gestione_menu);
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementiMenu");
         nome = getIntent().getStringExtra("nomeCategoria");
-
+        allergeni = new ArrayList<>();
         initializeComponents();
 
     }
@@ -72,7 +69,7 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity {
             }
         });
         buttonTabellaAllergeni.setOnClickListener(view -> {
-            dialogAllergeni();
+            dialogAllergeni(this, allergeni, false);
         });
         intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
 
@@ -136,71 +133,6 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity {
         }
 
     }
-
-    public void dialogAllergeni(){
-        Dialog dialogAllergeni = new Dialog(this);
-        dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
-        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
-        checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
-        checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
-        checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);
-        checkBoxGlutine = dialogAllergeni.findViewById(R.id.checkBoxGlutine);
-        checkBoxLatte = dialogAllergeni.findViewById(R.id.checkBoxLatte);
-        checkBoxLupini = dialogAllergeni.findViewById(R.id.checkBoxLupini);
-        checkBoxMolluschi = dialogAllergeni.findViewById(R.id.checkBoxMolluschi);
-        checkBoxPesce = dialogAllergeni.findViewById(R.id.checkBoxPesce);
-        checkBoxSedano = dialogAllergeni.findViewById(R.id.checkBoxSedano);
-        checkBoxSenape = dialogAllergeni.findViewById(R.id.checkBoxSenape);
-        checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
-        checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
-        checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
-        Button buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
-        buttonOkDialog.setOnClickListener(view -> {
-            dialogAllergeni.dismiss();
-        });
-
-        listenerAllergeni();
-        dialogAllergeni.show();
-    }
-
-    public void listenerAllergeni(){
-        if(allergeni == null) {
-            allergeni = new ArrayList<>();
-        }
-        checkBoxes = new ArrayList<>();
-        checkBoxes.add(checkBoxArachidi);
-        checkBoxes.add(checkBoxAnidrideSolforosa);
-        checkBoxes.add(checkBoxCrostacei);
-        checkBoxes.add(checkBoxFruttaGuscio);
-        checkBoxes.add(checkBoxGlutine);
-        checkBoxes.add(checkBoxLatte);
-        checkBoxes.add(checkBoxLupini);
-        checkBoxes.add(checkBoxMolluschi);
-        checkBoxes.add(checkBoxPesce);
-        checkBoxes.add(checkBoxSedano);
-        checkBoxes.add(checkBoxSenape);
-        checkBoxes.add(checkBoxSesamo);
-        checkBoxes.add(checkBoxSoia);
-        checkBoxes.add(checkBoxUova);
-        for(CheckBox c: checkBoxes){
-            String valore = (String)c.getTag();
-            if(allergeni.contains(valore)){
-                c.setChecked(true);
-            }
-            c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if(b){
-                    if(!allergeni.contains(valore)){
-                        allergeni.add(valore);
-                    }
-                }
-                else{
-                    allergeni.remove(valore);
-                }
-            });
-
-        }
-    }
-
     @Override
     public void onBackPressed() {
         intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);

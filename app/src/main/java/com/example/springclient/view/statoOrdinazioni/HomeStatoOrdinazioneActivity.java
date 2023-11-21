@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.entity.StatoOrdinazione;
@@ -34,7 +35,8 @@ import io.reactivex.schedulers.Schedulers;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
-public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate, IRecycleViewOrdinazioniEvase {
+public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate
+        , IRecycleViewOrdinazioniEvase, OrdinazioneContract.ViewPrenotazionePortate {
 
     private RecyclerView recyclerViewOrdinazioniCorrenti;
     private RecyclerView recyclerViewOrdinazioniPrenotate;

@@ -83,6 +83,8 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         });
     }
 
+
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         linguaSelezionata = lingue.get(i);

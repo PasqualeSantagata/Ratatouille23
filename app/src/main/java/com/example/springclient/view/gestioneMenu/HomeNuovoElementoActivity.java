@@ -1,5 +1,6 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -13,22 +14,21 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.CategoriaContract;
-import com.example.springclient.entity.Categoria;
-import com.example.springclient.presenter.CategoriaMenuPresenter;
+import com.example.springclient.contract.HomeNuovoElementoContract;
+import com.example.springclient.presenter.HomeNuovoElementoPresenter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, CategoriaContract.View {
+public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, HomeNuovoElementoContract.View {
 
     private Spinner spinnerLingua;
     private Spinner spinnerCategoria;
     private Button buttonIndietro;
     private Button buttonOk;
     private FloatingActionButton fabAggiungiCategoria;
-    private CategoriaContract.Presenter categoriaPresenter;
+    private HomeNuovoElementoContract.Presenter homeNuovoElementoPresenter;
     private List<String> categorie;
     private List<String> lingue;
     private String categoriaSelezionata;
@@ -40,9 +40,8 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         getSupportActionBar().setTitle("NUOVO ELEMENTO DEL MENÚ");
         setContentView(R.layout.activity_home_nuovo_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        categoriaPresenter = new CategoriaMenuPresenter(this);
-        categoriaPresenter.getNomiCategorie();
-
+        homeNuovoElementoPresenter = new HomeNuovoElementoPresenter(this);
+        homeNuovoElementoPresenter.getNomiCategorie();
     }
 
     public void initializeComponents() {
@@ -60,10 +59,6 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         ArrayAdapter adapterCategorie = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorie);
         adapterCategorie.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapterCategorie);
-
-        //List<Categoria> categoriaList = elementoMenuPresenter.;
-        //SpinnerAdapterCategorie spinnerAdapterCategorie = new SpinnerAdapterCategorie(this,categorie);
-        //spinnerCategoria.setAdapter(spinnerAdapterCategorie);
 
         //Buttons
         buttonIndietro = findViewById(R.id.buttonIndietroNuovoElemento);
@@ -91,13 +86,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void setNomiCategorie(List<String> nomiCategorie) {
         this.categorie = nomiCategorie;
-
         initializeComponents();
-    }
-
-    @Override
-    public void setCategorie(List<Categoria> categorie) {
-
     }
 
     @Override
@@ -113,6 +102,10 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+    @Override
+    public Context getContext(){
+        return getContext();
     }
 
     @Override

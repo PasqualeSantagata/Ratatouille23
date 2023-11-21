@@ -1,14 +1,9 @@
 package com.example.springclient.model;
 
-import android.util.Log;
-
 import com.example.springclient.RetrofitService.FoodFactsAPI;
 import com.example.springclient.RetrofitService.FoodFactsRetrofit;
 import com.example.springclient.apiUtils.FoodFactsResponse;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.contract.ElementoMenuContract;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

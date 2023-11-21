@@ -5,11 +5,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
-import lombok.Data;
-import lombok.ToString;
 
-@Data
-@ToString
 public class ElementoMenu implements Serializable {
     private Long id;
     private String nome;
@@ -19,14 +15,14 @@ public class ElementoMenu implements Serializable {
     private String lingua;
     private String tempoPreparazione;//Magari va cambiato in float o int se li interpretiamo sempre come minuti
     private Float quantita;
-    public static final Comparator<ElementoMenu> compareNomeCrescente = (e1, e2) -> e1.nome.compareTo(e2.getNome());
+    public static final Comparator<ElementoMenu> compareNomeCrescente = (e1, e2) -> e1.nome.compareTo(e2.nome);
     public static final Comparator<ElementoMenu> comparePrezzoCrescente = Comparator.comparing(e -> e.prezzo);
     public static final Comparator<ElementoMenu> compareNomeDecrescente = (e1, e2) -> -e1.nome.compareTo(e2.getNome());
     public static final Comparator<ElementoMenu> comparePrezzoDecrescente = (e1, e2) -> - e1.prezzo.compareTo(e2.prezzo);
 
 
 
-    public ElementoMenu(Long id, String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
+   public ElementoMenu(Long id, String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
         this.id = id;
         this.nome = nome;
         this.prezzo = prezzo;

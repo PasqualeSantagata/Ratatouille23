@@ -1,6 +1,7 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,21 +22,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.ElementoMenuContract;
-import com.example.springclient.entity.Categoria;
+import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, ElementoMenuContract.View {
+public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View, BaseAllergeniDialog {
 
     private TextInputLayout textInputLayouNome;
     private TextInputLayout textInputLayoutDescrizione;
@@ -44,16 +43,10 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private FloatingActionButton fabModifica;
     private TextView allergeniButton;
     private List<String> allergeni;
-    private List<CheckBox> checkBoxes;
-
-    private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
-            checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
-            checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<ElementoMenu> elementiMenu;
-    private Categoria categoria;
-    private RecyclerView recyclerView;
+
     private int elementoSelezionato = -1;
-    private ElementoMenuPresenter elementoMenuPresenter;
+    private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
     private  RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
     private ItemTouchHelper.SimpleCallback simpleCallback;
     private String nome;
@@ -69,7 +62,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         nome = getIntent().getStringExtra("nomeCategoria");
         getSupportActionBar().setTitle(nome);
         setContentView(R.layout.activity_visualizza_cagtegoria_gestione_menu);
-        elementoMenuPresenter = new ElementoMenuPresenter(this);
+        visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
 
         simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN
                 | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
@@ -124,7 +117,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                 break;
             case R.id.item_lingue:
                     if(elementoSelezionato != -1) {
-                        elementoMenuPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
+                        visualizzaElementiPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
                         invalidateOptionsMenu();
                         b = true;
                     }
@@ -144,6 +137,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     public void initializeComponents(){
         textInputLayouNome = findViewById(R.id.textInputLayoutNomeInserimNelMenu);
         textInputLayoutDescrizione  = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
@@ -165,80 +159,16 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         });
 
         allergeniButton.setOnClickListener(view -> {
-            dialogAllergeni();
+            //questo può essere chiamato solo dopo set parameters??
+            if(allergeni != null) {
+                dialogAllergeni(this, allergeni, true);
+            }
         });
 
         indietroButton.setOnClickListener(view -> {
             onBackPressed();
         });
     }
-
-    public void listenerAllergeni(){
-        if(allergeni == null) {
-            allergeni = new ArrayList<>();
-        }
-        checkBoxes = new ArrayList<>();
-        checkBoxes.add(checkBoxArachidi);
-        checkBoxes.add(checkBoxAnidrideSolforosa);
-        checkBoxes.add(checkBoxCrostacei);
-        checkBoxes.add(checkBoxFruttaGuscio);
-        checkBoxes.add(checkBoxGlutine);
-        checkBoxes.add(checkBoxLatte);
-        checkBoxes.add(checkBoxLupini);
-        checkBoxes.add(checkBoxMolluschi);
-        checkBoxes.add(checkBoxPesce);
-        checkBoxes.add(checkBoxSedano);
-        checkBoxes.add(checkBoxSenape);
-        checkBoxes.add(checkBoxSesamo);
-        checkBoxes.add(checkBoxSoia);
-        checkBoxes.add(checkBoxUova);
-        for(CheckBox c: checkBoxes){
-            String valore = (String)c.getTag();
-            c.setClickable(false);
-            if(allergeni.contains(valore)){
-                c.setChecked(true);
-            }
-            c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if(b){
-                    if(!allergeni.contains(valore)){
-                        allergeni.add(valore);
-                    }
-                }
-                else{
-                    allergeni.remove(valore);
-                }
-            });
-
-        }
-
-    }
-
-    public void dialogAllergeni(){
-        Dialog dialogAllergeni = new Dialog(this);
-        dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
-        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
-        checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
-        checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
-        checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);
-        checkBoxGlutine = dialogAllergeni.findViewById(R.id.checkBoxGlutine);
-        checkBoxLatte = dialogAllergeni.findViewById(R.id.checkBoxLatte);
-        checkBoxLupini = dialogAllergeni.findViewById(R.id.checkBoxLupini);
-        checkBoxMolluschi = dialogAllergeni.findViewById(R.id.checkBoxMolluschi);
-        checkBoxPesce = dialogAllergeni.findViewById(R.id.checkBoxPesce);
-        checkBoxSedano = dialogAllergeni.findViewById(R.id.checkBoxSedano);
-        checkBoxSenape = dialogAllergeni.findViewById(R.id.checkBoxSenape);
-        checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
-        checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
-        checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
-        Button buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
-        buttonOkDialog.setOnClickListener(view -> {
-            dialogAllergeni.dismiss();
-        });
-
-        listenerAllergeni();
-        dialogAllergeni.show();
-    }
-
 
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
@@ -283,22 +213,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public void onButtonDeleted(int position) {
         elementoSelezionato = position;
-        elementoMenuPresenter.rimuoviElemento(elementiMenu.get(position).getId().toString());
-    }
-
-    public void cancellaElemento(){
-        elementiMenu.remove(elementoSelezionato);
-        adapterElementoMenu.notifyItemChanged(elementoSelezionato);
-    }
-
-    @Override
-    public void mostraTraduzione(ElementoMenu elementoMenu){
-        setParameters(elementoMenu);
-    }
-
-    @Override
-    public void traduzioneAssente() {
-        mostraDialogWarningOneBtn("Traduzione non presente. Modifica elemento per aggiungere una traduzione");
+        visualizzaElementiPresenter.rimuoviElementoMenu(elementiMenu.get(position).getId().toString());
     }
 
     private void mostraDialogWarningOneBtn(String messaggio){
@@ -317,9 +232,36 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
+    public void rimuoviElemento(){
+        elementiMenu.remove(elementoSelezionato);
+        adapterElementoMenu.notifyItemChanged(elementoSelezionato);
+    }
+
+    @Override
+    public void mostraTraduzione(ElementoMenu elementoMenu){
+        setParameters(elementoMenu);
+    }
+
+    @Override
+    public void traduzioneAssente() {
+        mostraDialogWarningOneBtn("Traduzione non presente. Modifica elemento per aggiungere una traduzione");
+    }
+
+    @Override
+    public void setElementi(List<ElementoMenu> elementoMenuList) {
+
+    }
+
+    @Override
     public void onBackPressed() {
         Intent esploraCategorie = new Intent(this, EsploraCategorieMenuActivity.class);
         startActivity(esploraCategorie);
         super.onBackPressed();
     }
+
+    @Override
+    public Context getContext() {
+        return getContext();
+    }
+
 }

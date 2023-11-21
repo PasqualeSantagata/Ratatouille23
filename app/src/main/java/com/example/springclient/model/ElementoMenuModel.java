@@ -3,12 +3,8 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.ElementoMenuAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.contract.ElementoMenuContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.apiUtils.ApiResponse;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -21,12 +17,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ElementoMenuModel implements ElementoMenuContract.Model {
+public class ElementoMenuModel {
     private ElementoMenuAPI elementoMenuAPI;
     public ElementoMenuModel(RetrofitService retrofitService) {
         this.elementoMenuAPI = retrofitService.getElementoMenuAPI();
     }
-    @Override
+
     public void salvaElementoMenu(ElementoMenu elementoMenu, String categoria, CallbackResponse<Void> elementoMenuCallback) {
         elementoMenuAPI.salvaElementoMenu(elementoMenu, categoria).enqueue(new Callback<Void>() {
             @Override
@@ -41,7 +37,7 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
     }
 
 
-    @Override
+
     public void getAllElementiMenu(CallbackResponse<List<ElementoMenu>> elementoMenuCallback) {
         elementoMenuAPI.getAllElementoMenu()
                 .subscribeOn(Schedulers.io())
@@ -87,8 +83,8 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
                 });
     }
 
-    public void aggiungiLingua(CallbackResponse<Void> callback, String id, ElementoMenu elementoMenu){
-        elementoMenuAPI.aggiungiLingua(id, elementoMenu)
+    public void aggiungiLingua(CallbackResponse<Void> callback, String nome, ElementoMenu elementoMenu){
+        elementoMenuAPI.aggiungiLingua(nome, elementoMenu)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<Void>>() {
@@ -171,6 +167,7 @@ public class ElementoMenuModel implements ElementoMenuContract.Model {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        callbackResponse.onFailure(e);
 
                     }
                 });

@@ -2,6 +2,7 @@ package com.example.springclient.view.gestioneMenu;
 
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -14,15 +15,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.apiUtils.ProdottoResponse;
-import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.FoodFactsPresenter;
+import com.example.springclient.presenter.InserisciElementoPresenter;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
@@ -33,31 +36,25 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    private ElementoMenuContract.Presenter presenter = new ElementoMenuPresenter(this);
+public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.View, BaseAllergeniDialog {
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
     private TextInputLayout descrizioneTextInputLayout;
     private Button okButton;
     private Button indietroButton;
     private Button inserisciButton;
-    private ElementoMenuPresenter elementoMenuPresenter;
     private FoodFactsPresenter foodFactsPresenter;
     private AutoCompleteTextView autoTextView;
     private List<String> suggeriti;
     private ArrayAdapter<String> adapter;
     private List<ProdottoResponse> prodotti;
     private Disposable autocompDisposable;
-    private CheckBox checkBoxArachidi, checkBoxAnidrideSolforosa, checkBoxCrostacei, checkBoxFruttaGuscio,
-            checkBoxGlutine, checkBoxLatte, checkBoxLupini, checkBoxMolluschi, checkBoxPesce,
-            checkBoxSedano, checkBoxSenape, checkBoxSesamo, checkBoxSoia, checkBoxUova;
     private List<String> allergeni;
-    private List<CheckBox> checkBoxes;
     private String linguaSelezionata;
     private List<String> lingue;
     private String categoriaSelezionata;
     private ElementoMenu elementoMenu;
+    private InserisciElementoContract.Presenter inserisciElementoPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +63,18 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         setContentView(R.layout.activity_inserisci_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        elementoMenuPresenter = new ElementoMenuPresenter(this);
+        inserisciElementoPresenter = new InserisciElementoPresenter(this);
         foodFactsPresenter = new FoodFactsPresenter(this);
+
+        allergeni = new ArrayList<>();
+
         linguaSelezionata = getIntent().getStringExtra("lingua");
         categoriaSelezionata = getIntent().getStringExtra("categoria");
 
         initializeComponents();
     }
 
+    @Override
     public void initializeComponents() {
         //Text
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
@@ -83,7 +84,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
         //adapter suggeritore nome elementi
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, suggeriti);
-
 
         autocompDisposable =
                 RxTextView.textChangeEvents(autoTextView)
@@ -104,28 +104,29 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         okButton.setOnClickListener(view -> {
             if (checkFields()) {
                 elementoMenu = getElementoValues();
-                elementoMenuPresenter.saveElementoMenu(elementoMenu, categoriaSelezionata);
+                inserisciElementoPresenter.inserisciElementoMenu(elementoMenu, categoriaSelezionata);
             }
         });
         indietroButton.setOnClickListener(view -> {
-            mostraDialogWarningTwoBtn("Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?");
+            onBackPressed();
+
         });
         inserisciButton.setOnClickListener(view -> {
-            dialogAllergeni();
+            dialogAllergeni(this, allergeni, false);
         });
 
     }
 
-    public void elementoSalvatoCorrettamenteDialog() {
+    private void elementoSalvatoCorrettamenteDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_two_button);
         TextView dialogTv = dialog.findViewById(R.id.textViewDialogOkTwoBtn);
         Button indietroButton = dialog.findViewById(R.id.okDialog);
         Button okButton = dialog.findViewById(R.id.okDialog2);
-        indietroButton.setText("CONTINUA");
-        okButton.setText("AVANTI");
-        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi avanti, altrimenti premi " +
-                "continua per aggiungere un nuovo elemento");
+        indietroButton.setText("INDIETRO");
+        okButton.setText("AGGIUNGI");
+        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi aggiungi, altrimenti premi " +
+                "indietro per aggiungere un nuovo elemento");
         indietroButton.setOnClickListener(view -> {
             Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
             startActivity(intentHome);
@@ -139,48 +140,28 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         dialog.show();
     }
 
-    private void mostraDialogWarning(String messaggio) {
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
 
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        dialogAttenzione.show();
-
-        buttonOk.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+    @Override
+    public void elementoInseritoCorrettamente() {
+        cleanFields();
+        elementoSalvatoCorrettamenteDialog();
     }
 
-    private void mostraDialogWarningTwoBtn(String messaggio) {
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
+    @Override
+    public void mostraErroreInserimentoElemento(String errore) {
+        if (errore.toLowerCase().contains("nome")) {
+            nomeElementoTextInputLayout.setError(errore);
+        }else{
+            Toast.makeText(this, errore, Toast.LENGTH_LONG).show();
+        }
 
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        dialogAttenzione.show();
-
-        buttonSi.setOnClickListener(view -> {
-            onBackPressed();
-            dialogAttenzione.dismiss();
-        });
-        buttonNo.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
     }
 
 
-    public ElementoMenu getElementoValues() {
+    private ElementoMenu getElementoValues() {
         String nomeElemento, prezzoElemento;
         String descrizione;
-
         ElementoMenu elementoMenu;
-
 
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
@@ -192,12 +173,10 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     private boolean checkFields() {
         boolean checked = true;
         String nomeElemento, prezzoElemento;
-        String[] elencoAllergeni;
         String descrizione;
 
         nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
         prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-        // elencoAllergeni = elencoAllergeniTextInputLayout.getEditText().getText().toString().split(",");
         descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
 
         if (nomeElemento.equals("")) {
@@ -229,87 +208,14 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         descrizioneTextInputLayout.getEditText().setText("");
     }
 
-    public void showErrors(List<String> listOfErrors) {
-        for (String s : listOfErrors) {
-            if (s.toLowerCase().contains("nome")) {
-                nomeElementoTextInputLayout.setError(s);
-            }
-        }
-    }
 
     public void generateNames(List<String> names, List<ProdottoResponse> prodotti) {
-        // suggeriti.clear();
         suggeriti = names;
         this.prodotti = prodotti;
         Log.d("suggeriti: ", suggeriti.toString());
         adapter = new ArrayAdapter<>(InserisciElementoActivity.this, android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-    }
-
-    public void listenerAllergeni() {
-        if (allergeni == null) {
-            allergeni = new ArrayList<>();
-        }
-        checkBoxes = new ArrayList<>();
-        checkBoxes.add(checkBoxArachidi);
-        checkBoxes.add(checkBoxAnidrideSolforosa);
-        checkBoxes.add(checkBoxCrostacei);
-        checkBoxes.add(checkBoxFruttaGuscio);
-        checkBoxes.add(checkBoxGlutine);
-        checkBoxes.add(checkBoxLatte);
-        checkBoxes.add(checkBoxLupini);
-        checkBoxes.add(checkBoxMolluschi);
-        checkBoxes.add(checkBoxPesce);
-        checkBoxes.add(checkBoxSedano);
-        checkBoxes.add(checkBoxSenape);
-        checkBoxes.add(checkBoxSesamo);
-        checkBoxes.add(checkBoxSoia);
-        checkBoxes.add(checkBoxUova);
-        for (CheckBox c : checkBoxes) {
-            String valore = (String) c.getTag();
-            if (allergeni.contains(valore)) {
-                c.setChecked(true);
-            }
-            c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if (b) {
-                    if (!allergeni.contains(valore)) {
-                        allergeni.add(valore);
-                    }
-                } else {
-                    allergeni.remove(valore);
-                }
-            });
-
-        }
-
-    }
-
-
-    public void dialogAllergeni() {
-        Dialog dialogAllergeni = new Dialog(this);
-        dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
-        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
-        checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
-        checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
-        checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);
-        checkBoxGlutine = dialogAllergeni.findViewById(R.id.checkBoxGlutine);
-        checkBoxLatte = dialogAllergeni.findViewById(R.id.checkBoxLatte);
-        checkBoxLupini = dialogAllergeni.findViewById(R.id.checkBoxLupini);
-        checkBoxMolluschi = dialogAllergeni.findViewById(R.id.checkBoxMolluschi);
-        checkBoxPesce = dialogAllergeni.findViewById(R.id.checkBoxPesce);
-        checkBoxSedano = dialogAllergeni.findViewById(R.id.checkBoxSedano);
-        checkBoxSenape = dialogAllergeni.findViewById(R.id.checkBoxSenape);
-        checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
-        checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
-        checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
-        Button buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
-        buttonOkDialog.setOnClickListener(view -> {
-            dialogAllergeni.dismiss();
-        });
-
-        listenerAllergeni();
-        dialogAllergeni.show();
     }
 
     @Override
@@ -330,7 +236,17 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
     @Override
     public void onBackPressed() {
-        Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
-        startActivity(intentHome);
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningTwoBtn(dialog,
+                "Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?",
+                view -> {
+                    Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
+                    startActivity(intentHome);
+                }, view -> dialog.dismiss());
+    }
+
+    @Override
+    public Context getContext(){
+        return getContext();
     }
 }

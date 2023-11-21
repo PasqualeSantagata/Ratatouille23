@@ -23,8 +23,8 @@ public interface ElementoMenuAPI {
     @GET("api/v1/elementoMenu/rimuoviElemento/{id}")
     Single<Response<Void>> rimuoviElemento(@Path(value = "id", encoded = true)String id);
 
-    @POST("api/v1/elementoMenu/aggiungiLingua/{id}")
-    Single<Response<Void>> aggiungiLingua(@Path(value = "id", encoded = true)String id, @Body ElementoMenu elementoMenu);
+    @POST("api/v1/elementoMenu/aggiungiLingua/{nome}")
+    Single<Response<Void>> aggiungiLingua(@Path(value = "nome", encoded = true)String nome, @Body ElementoMenu elementoMenu);
     @GET("api/v1/elementoMenu/restituisciTraduzione/{id}")
     Single<Response<ElementoMenu>> restituisciTraduzione(@Path(value = "id", encoded = true)String id);
     @POST("api/v1/elementoMenu/restituisciLinguaBase/{id}")

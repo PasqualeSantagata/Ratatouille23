@@ -1,6 +1,7 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -12,15 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.contract.ModificaElementoContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.presenter.ModificaElementoPresenter;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
+public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implements ModificaElementoContract.ViewAggiungiLingua, BaseAllergeniDialog {
 
     private TextInputLayout textInputLayoutNome;
     private TextInputLayout textInputLayoutDescrizione;
@@ -37,7 +40,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
     private Button buttonOkDialog;
     private Button okButton;
     private Button indietroButton;
-    private ElementoMenuPresenter elementoMenuPresenter;
+    private ModificaElementoContract.Presenter modificaElementoPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +49,13 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aggiungi_elem_in_nuova_lingua_gestione_menu);
         elemento = (ElementoMenu) getIntent().getSerializableExtra("elemento");
         lingua = getIntent().getStringExtra("lingua");
-        elementoMenuPresenter = new ElementoMenuPresenter(this);
-
+        modificaElementoPresenter = new ModificaElementoPresenter(this);
         initializeComponents();
     }
 
-    private void initializeComponents() {
+
+    @Override
+    public void initializeComponents() {
         //Text
         textInputLayoutNome = findViewById(R.id.textInputLayout8);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneNuovaLinguaGestioneMenu);
@@ -67,12 +71,13 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         okButton = findViewById(R.id.buttonOkElemNuovaLingua);
         indietroButton = findViewById(R.id.buttonIndietroElemNuovaLingua);
         inserisciAllergeniButton.setOnClickListener(view -> {
-            dialogAllergeni();
+            allergeni = elemento.getElencoAllergeni();
+            dialogAllergeni(this, allergeni, false);
         });
         okButton.setOnClickListener(view -> {
             ElementoMenu elementoMenu = getElemento();
             if(elementoMenu != null) {
-                elementoMenuPresenter.aggiungiLingua(elemento.getId().toString(), elementoMenu);
+                modificaElementoPresenter.aggiungiLingua(elemento.getNome(), elementoMenu);
             }
         });
         indietroButton.setOnClickListener(view -> {
@@ -119,74 +124,6 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         return checked;
     }
 
-    public void listenerAllergeni(){
-        allergeni = elemento.getElencoAllergeni();
-        if(allergeni == null)
-            allergeni = new ArrayList<>();
-        checkBoxes = new ArrayList<>();
-        checkBoxes.add(checkBoxArachidi);
-        checkBoxes.add(checkBoxAnidrideSolforosa);
-        checkBoxes.add(checkBoxCrostacei);
-        checkBoxes.add(checkBoxFruttaGuscio);
-        checkBoxes.add(checkBoxGlutine);
-        checkBoxes.add(checkBoxLatte);
-        checkBoxes.add(checkBoxLupini);
-        checkBoxes.add(checkBoxMolluschi);
-        checkBoxes.add(checkBoxPesce);
-        checkBoxes.add(checkBoxSedano);
-        checkBoxes.add(checkBoxSenape);
-        checkBoxes.add(checkBoxSesamo);
-        checkBoxes.add(checkBoxSoia);
-        checkBoxes.add(checkBoxUova);
-        for(CheckBox c: checkBoxes){
-            String valore = (String)c.getTag();
-            c.setClickable(false);
-            if(allergeni.contains(valore)){
-                c.setChecked(true);
-            }
-            c.setOnCheckedChangeListener((compoundButton, b) -> {
-                if(b){
-                    if(!allergeni.contains(valore)){
-                        allergeni.add(valore);
-                    }
-                }
-                else{
-                    allergeni.remove(valore);
-                }
-            });
-
-        }
-
-    }
-
-
-    public void dialogAllergeni(){
-        Dialog dialogAllergeni = new Dialog(this);
-        dialogAllergeni.setContentView(R.layout.dialog_tabella_allergeni);
-
-        buttonOkDialog = dialogAllergeni.findViewById(R.id.buttonOkTabellaAllergeniDialog);
-        checkBoxArachidi = dialogAllergeni.findViewById(R.id.checkBoxFiltroTabellaAllergene);
-        checkBoxAnidrideSolforosa = dialogAllergeni.findViewById(R.id.checkBoxAnidrideSolforosa);
-        checkBoxCrostacei = dialogAllergeni.findViewById(R.id.checkBoxCrostacei);
-        checkBoxFruttaGuscio = dialogAllergeni.findViewById(R.id.checkBoxFruttaGuscio);
-        checkBoxGlutine = dialogAllergeni.findViewById(R.id.checkBoxGlutine);
-        checkBoxLatte = dialogAllergeni.findViewById(R.id.checkBoxLatte);
-        checkBoxLupini = dialogAllergeni.findViewById(R.id.checkBoxLupini);
-        checkBoxMolluschi = dialogAllergeni.findViewById(R.id.checkBoxMolluschi);
-        checkBoxPesce = dialogAllergeni.findViewById(R.id.checkBoxPesce);
-        checkBoxSedano = dialogAllergeni.findViewById(R.id.checkBoxSedano);
-        checkBoxSenape = dialogAllergeni.findViewById(R.id.checkBoxSenape);
-        checkBoxSesamo = dialogAllergeni.findViewById(R.id.checkBoxSesamo);
-        checkBoxSoia = dialogAllergeni.findViewById(R.id.checkBoxSoia);
-        checkBoxUova = dialogAllergeni.findViewById(R.id.checkBoxUova);
-        listenerAllergeni();
-        dialogAllergeni.show();
-
-        buttonOkDialog.setOnClickListener(view -> {
-            dialogAllergeni.dismiss();
-        });
-    }
-
     private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
@@ -209,6 +146,21 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         dialogAttenzione.show();
     }
 
+    public void mostraDialogWarning(String messaggio) {
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        dialogAttenzione.show();
+
+        buttonOk.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+    }
+
     @Override
     public void onBackPressed() {
         Intent intentHome = new Intent(this, StartGestioneMenuActivity.class);
@@ -216,6 +168,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
 
     }
 
+    @Override
     public void linguaAggiunta() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_one_button);
@@ -229,4 +182,12 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
+    @Override
+    public Context getContext() {
+        return getContext();
+    }
+
+
+
 }

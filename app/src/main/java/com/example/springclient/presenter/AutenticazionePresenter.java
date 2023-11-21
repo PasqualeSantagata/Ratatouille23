@@ -2,7 +2,6 @@ package com.example.springclient.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.CallbackResponse;
@@ -16,8 +15,8 @@ import com.example.springclient.view.MainActivity;
 import retrofit2.Response;
 
 public class AutenticazionePresenter implements AutenticazioneContract.Presenter {
-    private AutenticazioneModel autenticazioneModel;
-    private RetrofitService retrofitService;
+    private final AutenticazioneModel autenticazioneModel;
+    private final RetrofitService retrofitService;
     private MainActivity loginActivity;
     private SharedPreferences sharedPreferences;
 
@@ -40,11 +39,8 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
         autenticazioneModel.logInUtente(authRequest, new CallbackResponse<AuthenticationResponse>() {
             @Override
             public void onFailure(Throwable t) {
-                /*TODO*
-                Disabilitare progress bar quando non c'è connessione
-                */
-                Toast.makeText(loginActivity, t.getMessage(), Toast.LENGTH_LONG).show();
                 loginActivity.disabilitaPorogressBar();
+                loginActivity.mostraDialogErrore("Errore nella connsessione con il server");
             }
             @Override
             public void onSuccess(Response<AuthenticationResponse> retData) {
@@ -74,7 +70,6 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
             }
         });
     }
-
 
     public void avviaAggiornaPassword(){
         loginActivity.dialgPrimoAccesso();

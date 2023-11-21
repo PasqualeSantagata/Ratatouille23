@@ -22,8 +22,9 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
+
+/** ?? **/
 public class RiordinaElementiActivity extends AppCompatActivity implements IRecycleViewElementoMenu {
-    private RecyclerView recyclerViewElementi;
     private RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
     private Button buttonOk;
     private Button buttonIndietro;

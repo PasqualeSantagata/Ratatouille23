@@ -64,7 +64,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         okButton.setOnClickListener(view -> {
             disabilitaErrori();
             raccogliDati();
-            progressBar.setVisibility(View.VISIBLE);
+
         });
         indietroButton.setOnClickListener(view -> {
             mostraDialogWarningTwoBtn("Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?");
@@ -113,6 +113,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
                     nuovoUtente.setRuolo(Ruolo.SUPERVISORE);
             }
             adminPresenter.registraUtente(nuovoUtente);
+            progressBar.setVisibility(View.VISIBLE);
         } else {
             mostraErroreCampiVuoti();
         }
@@ -120,7 +121,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
 
     @Override
     public void mostraErroreCampiVuoti() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         String nome, cognome, email, password;
         nome = textInputNome.getEditText().getText().toString();
@@ -146,7 +147,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
 
     @Override
     public void mostraErrore(String messaggio) {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         String lowMessaggio = messaggio.toLowerCase();
         if (lowMessaggio.contains("nome") && !lowMessaggio.contains("cog")) {
@@ -195,13 +196,13 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         TextView textViewMessaggio = dialogRegistrazioneAvvenutaConSuccesso.findViewById(R.id.textViewDialogOkTwoBtn);
         Button okButton = dialogRegistrazioneAvvenutaConSuccesso.findViewById(R.id.okDialog);
 
-        textViewMessaggio.setText("Utente registrato correttamente!!");
+        textViewMessaggio.setText("Utente registrato correttamente");
         okButton.setOnClickListener(view -> {
             dialogRegistrazioneAvvenutaConSuccesso.dismiss();
         });
 
         dialogRegistrazioneAvvenutaConSuccesso.show();
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void registrazioneFallita() {
@@ -218,8 +219,19 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         Button buttonOk = dialog.findViewById(R.id.buttonOkDialogErrorOneBtn);
         buttonOk.setOnClickListener(view -> {
             dialog.dismiss();
+            cancellaCampi();
         });
 
         dialog.show();
+
     }
+
+    public void cancellaCampi(){
+        textInputNome.getEditText().setText("");
+        textInputCognome.getEditText().setText("");
+        textInputEmail.getEditText().setText("");
+        textInputPassword.getEditText().setText("");
+    }
+
+
 }

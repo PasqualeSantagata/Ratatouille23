@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.ElementoMenuContract;
+import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.presenter.ElementoMenuPresenter;
+import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenuInfoBtn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,14 +32,14 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
-public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu, ElementoMenuContract.View {
+public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View {
 
     private Button buttonInditero;
     private RecyclerView recyclerViewElementi;
     private RecycleViewAdapterGestioneElementoMenuInfoBtn adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
-    private ElementoMenuPresenter presenter;
+    private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
     private AutoCompleteTextView autoTextView;
     private List<ElementoMenu> elementoMenuListApp;
     private TextInputLayout textInputLayoutDescrizione;
@@ -51,10 +51,8 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         setContentView(R.layout.activity_cerca_elemento_gestione_menu);
         getSupportActionBar().setTitle("CERCA ELEMENTO MENU");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        presenter = new ElementoMenuPresenter(this);
-        presenter.getAllElementiMenu();
-
-
+        visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
+        visualizzaElementiPresenter.getElementiMenu();
     }
 
     @SuppressLint("CheckResult")
@@ -98,25 +96,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         });
     }
 
-    @Override
-    public void mostraTraduzione(ElementoMenu elementoMenu) {
-        if (elementoMenu != null)
-            setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
-
-    }
-
-    @Override
-    public void traduzioneAssente() {
-        Toast.makeText(dialogDettagliContext, "Non esiste una lingua alternativa per questo elemento", Toast.LENGTH_LONG).show();
-    }
-
-    public void setElementi(List<ElementoMenu> elementoMenuList) {
-        this.elementoMenuList = elementoMenuList;
-        this.elementoMenuListApp = new ArrayList<>();
-        elementoMenuListApp.addAll(elementoMenuList);
-        initializeComponents();
-    }
-
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
@@ -157,9 +136,32 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         });
 
         buttonTraduzione.setOnClickListener(view -> {
-            presenter.restituisciTraduzione(elementoMenu.getId().toString());
+            visualizzaElementiPresenter.restituisciTraduzione(elementoMenu.getId().toString());
         });
 
+
+    }
+
+    @Override
+    public void mostraTraduzione(ElementoMenu elementoMenu) {
+        if (elementoMenu != null)
+            setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
+
+    }
+    @Override
+    public void setElementi(List<ElementoMenu> elementoMenuList) {
+        this.elementoMenuList = elementoMenuList;
+        this.elementoMenuListApp = new ArrayList<>();
+        elementoMenuListApp.addAll(elementoMenuList);
+        initializeComponents();
+    }
+
+    @Override
+    public void traduzioneAssente() {
+        Toast.makeText(dialogDettagliContext, "Non esiste una lingua alternativa per questo elemento", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void rimuoviElemento() {
 
     }
 
@@ -178,5 +180,10 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         Intent intent = new Intent(this, StartGestioneMenuActivity.class);
         startActivity(intent);
         super.onBackPressed();
+    }
+
+    @Override
+    public Context getContext(){
+        return getContext();
     }
 }

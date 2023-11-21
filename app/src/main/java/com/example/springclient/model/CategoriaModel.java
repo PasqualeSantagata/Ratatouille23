@@ -1,17 +1,15 @@
 package com.example.springclient.model;
 
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.springclient.RetrofitService.CategoriaAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.contract.CategoriaContract;
+import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -19,14 +17,13 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class CategoriaModel implements CategoriaContract.Model {
+public class CategoriaModel implements MostraCategoriaContract.Model {
     private CategoriaAPI categoriaAPI;
     public CategoriaModel(RetrofitService retrofitService) {
         this.categoriaAPI = retrofitService.getCategoriaAPI();

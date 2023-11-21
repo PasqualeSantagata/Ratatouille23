@@ -1,0 +1,59 @@
+package com.example.springclient.presenter;
+
+import android.util.Log;
+import android.widget.Toast;
+
+import com.example.springclient.RetrofitService.RetrofitService;
+import com.example.springclient.apiUtils.ApiResponse;
+import com.example.springclient.contract.CallbackResponse;
+import com.example.springclient.contract.InserisciElementoContract;
+import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.ElementoMenuModel;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Response;
+
+public class InserisciElementoPresenter implements InserisciElementoContract.Presenter{
+    private ElementoMenuModel elementoMenuModel= new ElementoMenuModel(RetrofitService.getIstance());
+    private InserisciElementoContract.View inserisciElementoView;
+
+    public InserisciElementoPresenter(InserisciElementoContract.View inserisciElementoView){
+        this.inserisciElementoView = inserisciElementoView;
+    }
+
+    @Override
+    public void inserisciElementoMenu(ElementoMenu elementoMenu, String categoria) {
+        elementoMenuModel.salvaElementoMenu(elementoMenu, categoria, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("onFailure", t.getMessage());
+                inserisciElementoView.mostraDialogErrore(inserisciElementoView.getContext(),"Errore nella connsessione con il server");
+            }
+
+            @Override
+            public void onSuccess(Response<Void> response) {
+                if(response.isSuccessful()){
+                    inserisciElementoView.elementoInseritoCorrettamente();
+                }
+                else{
+                    if(response.code() == 412) {
+                        ApiResponse apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse.class);
+                        String errore = apiResponse.getMessage();
+                        inserisciElementoView.mostraErroreInserimentoElemento(errore);
+                    }
+                }
+            }
+        });
+
+
+
+
+    }
+
+
+
+
+}

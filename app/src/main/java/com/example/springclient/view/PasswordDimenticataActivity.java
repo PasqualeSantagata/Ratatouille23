@@ -1,6 +1,7 @@
 package com.example.springclient.view;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -33,7 +34,14 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         initializeComponents();
 
     }
-    private void initializeComponents(){
+
+    @Override
+    public Context getContext() {
+        return getContext();
+    }
+
+    @Override
+    public void initializeComponents(){
         emailTextInputLayout = findViewById(R.id.textInputLayoutEmailPassDimenticata);
         buttonOk = findViewById(R.id.buttonOkPassDimenticata);
         buttonIndietro = findViewById(R.id.buttonIndietroPassDimenticata);

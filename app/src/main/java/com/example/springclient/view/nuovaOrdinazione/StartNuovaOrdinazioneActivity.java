@@ -36,17 +36,14 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
     private FloatingActionButton fab50;
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabMinus;
-    private ImageView imageViewRectangleNumbers;
     private int n = 0;
     private Ordinazione ordinazione;
-    private OrdinazionePresenter ordinazionePresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("NUOVA ORDINAZIONE");
         setContentView(R.layout.activity_start_nuova_ordinazione);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        ordinazionePresenter = new OrdinazionePresenter(this);
         initializeComponents();
     }
 

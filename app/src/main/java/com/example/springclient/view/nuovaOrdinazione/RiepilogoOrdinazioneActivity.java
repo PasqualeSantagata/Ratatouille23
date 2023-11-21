@@ -1,6 +1,7 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
-import com.example.springclient.presenter.ElementoMenuPresenter;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable {
+public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable, OrdinazioneContract.ViewOrdinazione {
 
     private Button buttonIndietro;
     private Button buttonOk;
@@ -38,7 +38,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     private Ordinazione ordinazione;
     private List<Portata> portate;
     private RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn adapterElementoMenu;
-    private ElementoMenuPresenter elementoMenuPresenter;
     private OrdinazioneContract.Presenter presenterOrdinazione;
     private int indiceElementoSelezionato = -1;
     private Portata elementoSelezionato;
@@ -51,19 +50,19 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         setContentView(R.layout.activity_riepilogo_ordinazione_nuova_ordinazione);
         //Dettagli ordinazione dalla activity precedente
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
-        elementoMenuPresenter = new ElementoMenuPresenter(this);
+        presenterOrdinazione = new OrdinazionePresenter(this);
 
         portate = new ArrayList<>();
         for (Portata o : ordinazione.getElementiOrdinati()) {
             portate.add(o);
         }
-        presenterOrdinazione = new OrdinazionePresenter(this);
+
 
         initializeComponents();
     }
 
-
-    private void initializeComponents() {
+    @Override
+    public void initializeComponents() {
         //Recycler view
         RecyclerView recyclerViewRiepilogo = findViewById(R.id.RecyclerViewRiepilogoOrdinazione);
         adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(this, this, portate);
@@ -76,7 +75,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
         buttonIndietro = findViewById(R.id.buttonIndietroRiepilogo);
         buttonOk.setOnClickListener(view -> {
-            presenterOrdinazione.savePortate(portate);
+            presenterOrdinazione.salvaPortate(portate);
         });
         buttonIndietro.setOnClickListener(view -> onBackPressed());
 
@@ -84,7 +83,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     public void salvaOrdinazione(List<Portata> portateOrdinazione) {
         ordinazione.setElementiOrdinati(portateOrdinazione);
-        presenterOrdinazione.aggiungiOrdinazione(ordinazione);
+        presenterOrdinazione.salvaOrdinazione(ordinazione);
     }
 
 
@@ -122,7 +121,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         TextInputLayout textInputLayoutPrezzo = dialogDettagli.findViewById(R.id.textInputLayoutPrezzoDialogDettagli);
         TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagli);
         Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua);
-        buttonTraduzione.setVisibility(View.GONE);
+        buttonTraduzione.setVisibility(View.INVISIBLE);
 
         //Setto l'elemento menu di cui voglio vedere i dettagli
         setTextInputLayoutText(textInputLayoutPrezzo, elementoMenu.getPrezzo().toString());
@@ -182,6 +181,10 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     public void notifyAdapter() {
         adapterElementoMenu.notifyDataSetChanged();
+    }
+    @Override
+    public Context getContext(){
+        return getContext();
     }
 
 

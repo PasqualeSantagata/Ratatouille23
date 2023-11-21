@@ -6,7 +6,7 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 
-public interface CategoriaContract {
+public interface MostraCategoriaContract {
     interface Model{
         void saveCategoria(Categoria categoria, CallbackResponse<Categoria> callbackResponse);
 
@@ -17,19 +17,15 @@ public interface CategoriaContract {
 
     }
 
-    interface View{
-        void initializeComponents();
-        void setNomiCategorie(List<String> nomiCategorie);
-        void setCategorie(List<Categoria> categorie);
-        default void notifyAdapter(int posizione){};
+    interface View extends BaseView{
+        void setCategorie(List<Categoria> categoriaList);
+        void mostraImmagineCategoria(int posizione);
 
     }
 
     interface Presenter{
         void getAllCategorie();
-        void saveCategoria(Categoria categoria);
+        //comune a tutte le schermate che debbano mostrare l'elenco delle categorie
         void getFotoCategoriaById(Categoria categoria, int posizione);
-        void getNomiCategorie();
-
     }
 }

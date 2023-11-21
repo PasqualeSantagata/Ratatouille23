@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     private RecuperoCredenzialiContract.Presenter recuperoCredenzialiPresenter;
     private View progressBar;
     private String email;
-    private StompClient stompClient;
     private Dialog dialogPrimoAcesso;
 
 
@@ -53,7 +52,9 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
         initializeComponents();
     }
-    private void initializeComponents() {
+
+    @Override
+    public void initializeComponents() {
        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmailLogin);
        textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
        textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
     @Override
     public void loginErrore(){
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
         textInputLayoutEmail.setError(" ");
         textInputLayoutPassword.setError(" ");
         //Da proivare poichè a me non và ma penso sia un problema del mio emulatore android studio
@@ -139,6 +140,21 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
     }
 
+    public void mostraDialogErrore(String messaggio) {
+        Dialog dialogAttenzione = new Dialog(this);
+        dialogAttenzione.setContentView(R.layout.dialog_err_one_btn);
+
+        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewErrorMessageDialogErrorOneBtn);
+        messaggiodialog.setText(messaggio);
+
+        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogErrorOneBtn);
+        dialogAttenzione.show();
+
+        buttonOk.setOnClickListener(view -> {
+            dialogAttenzione.dismiss();
+        });
+    }
+
     @Override
     public void avviaDashboardSupervisore() {
 
@@ -164,14 +180,13 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
 
     @Override
-    protected void onDestroy() {
-        stompClient.disconnect();
-        super.onDestroy();
-    }
-
-    @Override
     public void onBackPressed() {
         finishAffinity();
         finish();
+    }
+
+    @Override
+    public Context getContext() {
+        return getContext();
     }
 }

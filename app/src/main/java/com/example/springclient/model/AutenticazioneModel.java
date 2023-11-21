@@ -15,6 +15,8 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AutenticazioneModel implements AutenticazioneContract.Model, AdminContract.Model {
@@ -33,26 +35,17 @@ public class AutenticazioneModel implements AutenticazioneContract.Model, AdminC
 
     @Override
     public void registraUtente(Utente utente, CallbackResponse<ApiResponse> callbackResponse) {
-        utenteAPI.registraUtente(utente)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<ApiResponse>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+        utenteAPI.registraUtente(utente).enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                callbackResponse.onSuccess(response);
+            }
 
-                    }
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
 
-                    @Override
-                    public void onSuccess(@NonNull Response<ApiResponse> apiResponse) {
-                        callbackResponse.onSuccess(apiResponse);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
-
+            }
+        });
     }
     @Override
     public void logInUtente(AuthRequest authRequest, CallbackResponse<AuthenticationResponse> callbackResponse) {

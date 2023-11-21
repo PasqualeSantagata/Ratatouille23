@@ -1,6 +1,7 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -14,12 +15,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.CategoriaContract;
+import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
-import com.example.springclient.presenter.CategoriaMenuPresenter;
+import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
@@ -27,14 +28,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria, CategoriaContract.View {
+public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria, MostraCategoriaContract.View {
     private Ordinazione ordinazione;
     private Button buttonIndietro;
     private Button buttonRiepilogo;
-    private CategoriaMenuPresenter categoriaPresenter;
+    private MostraCategoriaMenuPresenter categoriaPresenter;
 
     private List<Categoria> categorie;
     private RecycleViewAdapterCategoria adapterCategoria;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
 
-        categoriaPresenter = new CategoriaMenuPresenter(this);
+        categoriaPresenter = new MostraCategoriaMenuPresenter(this);
         //Dettagli ordinazione dalla activity precedente
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         //Fetch delle categorie dal server
@@ -77,6 +79,20 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
     }
+    private void dialogNessunaCategoria(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_warning_one_button);
+        TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        errorMessage.setText("Nessuna categoria da visualizzare");
+        ok.setOnClickListener(view1 -> {
+            Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
+            dialog.dismiss();
+            startActivity(intent);
+            dialog.dismiss();
+        });
+        dialog.show();
+    }
 
 
     private void mostraDialogWarning(String messaggio){
@@ -95,14 +111,10 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
     }
 
-    @Override
-    public void setNomiCategorie(List<String> nomiCategorie) {
-
-    }
-
     /*
-    la foto viene recuperata in due passaggi in caso la connessione fosse lenta
-     */
+        la foto viene recuperata in due passaggi in caso la connessione fosse lenta
+    */
+    @Override
     public void setCategorie(List<Categoria> categorie){
         this.categorie = categorie;
         if(categorie != null && !categorie.isEmpty()){
@@ -115,7 +127,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         initializeComponents();
     }
     @Override
-    public void notifyAdapter(int posizione){
+    public void mostraImmagineCategoria(int posizione){
         adapterCategoria.notifyItemChanged(posizione);
     }
 
@@ -164,18 +176,10 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         });
     }
 
-    private void dialogNessunaCategoria(){
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_warning_one_button);
-        TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        errorMessage.setText("Nessuna categoria da visualizzare");
-        ok.setOnClickListener(view1 -> {
-            Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
-            dialog.dismiss();
-            startActivity(intent);
-            dialog.dismiss();
-        });
-        dialog.show();
+    @Override
+    public Context getContext() {
+        return getContext();
     }
+
+
 }

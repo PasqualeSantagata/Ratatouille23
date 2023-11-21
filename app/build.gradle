@@ -68,9 +68,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava3
     implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava3', version: '2.9.0'
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    compileOnly 'org.projectlombok:lombok:1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
 
     // https://mvnrepository.com/artifact/javax.inject/javax.inject
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
@@ -92,6 +90,8 @@ dependencies {
 
     //anycharts
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.5'
+
+    
 
 
 
