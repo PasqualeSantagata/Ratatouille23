@@ -20,7 +20,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutDescrizioneNuovaLinguaGestioneMenu"
         android:layout_width="430dp"
-        android:layout_height="190dp"
+        android:layout_height="220dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:hint="@string/descrizione"
@@ -29,15 +29,15 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="190dp"
             android:background="@drawable/desing_rounded_green_tf"
-            android:gravity="top|left"/>
+            android:gravity="top|left" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout8"
         android:layout_width="430dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:hint="@string/nome"
@@ -53,7 +53,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPrezzoNovaLingua"
         android:layout_width="430dp"
-        android:layout_height="52dp"
+        android:layout_height="80dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:hint="@string/prezzo"

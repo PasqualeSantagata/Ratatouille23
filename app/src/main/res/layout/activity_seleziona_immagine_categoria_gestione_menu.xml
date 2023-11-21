@@ -17,21 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
-        android:clickable="true"
-        app:backgroundTint="@color/my_green"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewSelezImgCategoriaGestioneMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_add_fab"
-        app:tint="@color/white"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Button
         android:id="@+id/buttonIndietroSelezImmagine"
         android:layout_width="180dp"

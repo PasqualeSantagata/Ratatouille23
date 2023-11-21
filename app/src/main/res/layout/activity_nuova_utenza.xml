@@ -10,7 +10,7 @@
         android:id="@+id/textView20"
         android:layout_width="600dp"
         android:layout_height="49dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/design_button_rounded_green"
         android:text="Inserisci i dati"
         android:textAlignment="center"
@@ -36,13 +36,13 @@
         android:id="@+id/textInputLayoutNomeCreaUtenza"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="600dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
 
         android:layout_marginTop="50dp"
         android:hint="@string/nome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTipoUtenzaCreaUtenza">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -56,8 +56,8 @@
         android:id="@+id/textInputLayoutCognomeCreaUtenza"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
         android:hint="@string/cognome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +73,8 @@
         android:id="@+id/textInputLayoutEmailCreaUtenza"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
         android:hint="@string/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,18 +102,18 @@
         android:id="@+id/spinnerTipoUtenzaCreaUtenza"
         android:layout_width="600dp"
         android:layout_height="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/design_item_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPasswordCreaUtenza" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPasswordCreaUtenza"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="30dp"
         android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,8 +136,9 @@
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826" />
+        app:layout_constraintVertical_bias="0.821" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

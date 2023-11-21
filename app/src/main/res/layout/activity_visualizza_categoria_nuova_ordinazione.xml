@@ -105,7 +105,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutBreveNota"
             android:layout_width="610dp"
-            android:layout_height="58dp"
+            android:layout_height="80dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="40dp"
             android:hint="@string/breve_nota"
@@ -116,8 +116,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/desing_rounded_green_tf"
-                />
+                android:background="@drawable/desing_rounded_green_tf" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

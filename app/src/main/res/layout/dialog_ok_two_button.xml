@@ -16,7 +16,7 @@
         android:layout_marginEnd="150dp"
         android:layout_marginBottom="50dp"
         android:text="@string/si"
-        android:textSize="34sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDialogOkTwoBtn" />
@@ -58,7 +58,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:text="@string/no"
-        android:textSize="34sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDialogOkTwoBtn"
