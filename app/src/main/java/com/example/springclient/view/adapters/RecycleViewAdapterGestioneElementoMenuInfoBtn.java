@@ -39,7 +39,7 @@ public class RecycleViewAdapterGestioneElementoMenuInfoBtn extends RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getNome());
-        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getPrezzo().toString());
+        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getPrezzo().toString() + "€");
     }
 
     @Override

@@ -40,7 +40,7 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
     public void onBindViewHolder(@NonNull RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
         //TODO input type dell'xml è number ma qua è passata la string, dovrebbe workare
-        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString());
+        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString() + "€");
 
         //Controllo su nota
         String nota = listaElementiMenu.get(position).getBreveNota();

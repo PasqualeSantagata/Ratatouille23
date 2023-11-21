@@ -38,7 +38,7 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
-        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString());
+        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString() + "€");
 
     }
 

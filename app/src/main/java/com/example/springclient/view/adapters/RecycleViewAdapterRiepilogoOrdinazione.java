@@ -39,7 +39,7 @@ public class RecycleViewAdapterRiepilogoOrdinazione extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull RecycleViewAdapterRiepilogoOrdinazione.MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
         //TODO input type dell'xml è number ma qua è passata la string, dovrebbe workare
-        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString());
+        holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString() + "€");
     }
 
     @Override
