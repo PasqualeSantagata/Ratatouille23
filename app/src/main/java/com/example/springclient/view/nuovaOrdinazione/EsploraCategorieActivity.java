@@ -23,6 +23,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
+import com.example.springclient.view.gestioneMenu.HomeModificaElemMenuActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -65,7 +66,8 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
         buttonRiepilogo.setOnClickListener(view -> {
             if (ordinazione.ordinazioneVuota()){
-                mostraDialogWarning(getString(R.string.dialog_ord_vuota));
+                Dialog dialog = new Dialog(this);
+                mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
             } else {
                 // starta il riepilogo ordinazione non vuota
                 Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
@@ -77,37 +79,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
            onBackPressed();
        });
 
-
-    }
-    private void dialogNessunaCategoria(){
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_warning_one_button);
-        TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        errorMessage.setText("Nessuna categoria da visualizzare");
-        ok.setOnClickListener(view1 -> {
-            Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
-            dialog.dismiss();
-            startActivity(intent);
-            dialog.dismiss();
-        });
-        dialog.show();
-    }
-
-
-    private void mostraDialogWarning(String messaggio){
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        dialogAttenzione.show();
-
-        buttonOk.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
 
     }
 
@@ -122,7 +93,12 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 categoriaPresenter.getFotoCategoriaById(categorie.get(i), i);
             }
         } else{
-            dialogNessunaCategoria();
+            Dialog dialog = new Dialog(this);
+            mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
+                Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
+                dialog.dismiss();
+                startActivity(intent);
+            });
         }
         initializeComponents();
     }

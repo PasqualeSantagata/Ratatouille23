@@ -3,7 +3,9 @@ package com.example.springclient.presenter;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.VisualizzElementiContract;
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.model.ElementoMenuModel;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import retrofit2.Response;
 public class VisualizzElementiPresenter implements VisualizzElementiContract.Presenter {
 
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
+    private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     private VisualizzElementiContract.View visualizzaElementiView;
     public VisualizzElementiPresenter(VisualizzElementiContract.View visualizzaElementiView){
         this.visualizzaElementiView = visualizzaElementiView;
@@ -87,4 +90,27 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
             }
         }, idElemento);
     }
+
+    @Override
+    public void aggiornaElementiCategoria(String nomeCategoria){
+        categoriaModel.getCategoriaByNome(nomeCategoria, new CallbackResponse<Categoria>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<Categoria> retData) {
+                if(retData.isSuccessful()){
+                    visualizzaElementiView.setElementi(retData.body().getElementi());
+                }
+                else{
+
+                }
+            }
+        });
+
+    }
+
+
 }

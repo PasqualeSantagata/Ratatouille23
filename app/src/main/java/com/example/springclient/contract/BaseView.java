@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.springclient.R;
+import com.example.springclient.view.gestioneMenu.HomeModificaElemMenuActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,8 +17,7 @@ public interface BaseView {
     Context getContext();
     void initializeComponents();
 
-    default void mostraDialogErrore(Context context, String messaggio){
-        Dialog dialogAttenzione = new Dialog(context);
+    default void mostraDialogErroreOneBtn(Dialog dialogAttenzione, String messaggio, View.OnClickListener eventoOk){
         dialogAttenzione.setContentView(R.layout.dialog_err_one_btn);
 
         TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewErrorMessageDialogErrorOneBtn);
@@ -26,9 +26,7 @@ public interface BaseView {
         Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogErrorOneBtn);
         dialogAttenzione.show();
 
-        buttonOk.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+        buttonOk.setOnClickListener(eventoOk);
     }
     default void mostraDialogWarningTwoBtn(Dialog dialogWarning, String messaggio, View.OnClickListener eventoSi, View.OnClickListener eventoNo) {
         dialogWarning.setContentView(R.layout.dialog_warning_two_button);
@@ -46,6 +44,24 @@ public interface BaseView {
         }else{
             dialogWarning.dismiss();
         }
+    }
+    default void mostraDialogOkOneBtn(Dialog dialogOk, String messaggio, View.OnClickListener eventoOk) {
+        dialogOk.setContentView(R.layout.dialog_ok_one_button);
+        TextView textViewMess = dialogOk.findViewById(R.id.textViewDialogOkTwoBtn);
+        textViewMess.setText(messaggio);
+        Button buttonOk = dialogOk.findViewById(R.id.okDialog);
+        buttonOk.setOnClickListener(eventoOk);
+
+        dialogOk.show();
+    }
+
+    default void mostraDialogWarningOneBtn(Dialog dialogWarning, String messaggio, View.OnClickListener eventoOk){
+        dialogWarning.setContentView(R.layout.dialog_warning_one_button);
+        TextView errorMessage = dialogWarning.findViewById(R.id.textViewMessageDialogueErrorOneBt);
+        Button ok = dialogWarning.findViewById(R.id.buttonOkDialogueErrorOneBt);
+        errorMessage.setText(messaggio);
+        ok.setOnClickListener(eventoOk);
+        dialogWarning.show();
     }
 
 

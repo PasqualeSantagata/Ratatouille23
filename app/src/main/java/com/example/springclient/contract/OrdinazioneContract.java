@@ -13,8 +13,8 @@ public interface OrdinazioneContract {
     }
 
     interface ViewOrdinazione extends BaseView{
-            void salvaOrdinazione(List<Portata> portateOrdinazione);
-            void dialogOrdinazioneAvvvenutaConSuccesso();
+        void salvaOrdinazione(List<Portata> portateOrdinazione);
+        void ordinazioneAvvvenutaConSuccesso();
     }
     interface ViewPrenotazionePortate{
         void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese);

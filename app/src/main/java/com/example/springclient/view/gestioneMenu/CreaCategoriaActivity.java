@@ -36,7 +36,6 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
     private Bitmap immagine;
     private File immagineFile;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,26 +90,6 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
         imageViewAggiungiImmagine.setOnClickListener(view -> {
             Intent intent = new Intent(this, SelezionaImmagineCategoriaActivity.class);
             startActivity(intent);
-        });
-    }
-
-    private void mostraDialogWarningTwoBtn(String messaggio) {
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        dialogAttenzione.show();
-
-        buttonSi.setOnClickListener(view -> {
-            onBackPressed();
-            dialogAttenzione.dismiss();
-        });
-        buttonNo.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
         });
     }
 

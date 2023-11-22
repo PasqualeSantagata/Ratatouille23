@@ -74,7 +74,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    viewOrdinazione.dialogOrdinazioneAvvvenutaConSuccesso();
+                    viewOrdinazione.ordinazioneAvvvenutaConSuccesso();
                 }
             }
         }, ordinazione);

@@ -87,20 +87,15 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
-    public void dialogOrdinazioneAvvvenutaConSuccesso() {
+    @Override
+    public void ordinazioneAvvvenutaConSuccesso() {
         Dialog ordinazioneAvvenuta = new Dialog(this);
-        ordinazioneAvvenuta.setContentView(R.layout.dialog_ok_one_button);
-        TextView ordinazioneAvvenutaTv = ordinazioneAvvenuta.findViewById(R.id.textViewDialogOkTwoBtn);
-        ordinazioneAvvenutaTv.setText("Ordinazione inviata con successo");
-        Button okButton = ordinazioneAvvenuta.findViewById(R.id.okDialog);
-        ordinazioneAvvenuta.show();
-        okButton.setOnClickListener(view -> {
+        mostraDialogOkOneBtn(ordinazioneAvvenuta, "Ordinazione inviata con successo", view -> {
             ordinazioneAvvenuta.dismiss();
             Intent loginActivity = new Intent(this, StartNuovaOrdinazioneActivity.class);
             startActivity(loginActivity);
         });
     }
-
 
     @Override
     public void onItemClickRecyclerViewPortata(int position) {

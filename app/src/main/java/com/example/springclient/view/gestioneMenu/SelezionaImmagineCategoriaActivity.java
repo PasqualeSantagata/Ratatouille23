@@ -32,7 +32,6 @@ import java.util.List;
 public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewCategoria {
     private RecyclerView recyclerViewImmagini;
     private RecycleViewAdapterCategoria adapterCategoria;
-    private FloatingActionButton aggiungiImmagineFab;
     private Button buttonIndietro;
     private Button buttonAggiungiImmagine;
     private List<Categoria> categorieList ;
@@ -59,7 +58,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
 
     private void initializeComponents() {
         recyclerViewImmagini = findViewById(R.id.recyclerViewSelezImgCategoriaGestioneMenu);
-        aggiungiImmagineFab = findViewById(R.id.floatingActionButton);
+        //aggiungiImmagineFab = findViewById(R.id.floatingActionButton);
         buttonAggiungiImmagine = findViewById(R.id.buttonAggingiImmagineSelezImmagine);
         buttonIndietro = findViewById(R.id.buttonIndietroSelezImmagine);
 

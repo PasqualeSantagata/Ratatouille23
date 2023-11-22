@@ -44,6 +44,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         homeNuovoElementoPresenter.getNomiCategorie();
     }
 
+    @Override
     public void initializeComponents() {
         //Spinner lingua
         spinnerLingua = findViewById(R.id.spinnerLingueHomeInserisciElemento);

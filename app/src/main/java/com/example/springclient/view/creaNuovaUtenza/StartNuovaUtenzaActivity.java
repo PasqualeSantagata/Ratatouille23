@@ -1,6 +1,7 @@
 package com.example.springclient.view.creaNuovaUtenza;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,7 +25,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Arrays;
 import java.util.List;
 
-public class StartNuovaUtenzaActivity extends AppCompatActivity implements AdminContract.View.CreaUtenza, AdapterView.OnItemSelectedListener {
+public class StartNuovaUtenzaActivity extends AppCompatActivity implements AdminContract.View, AdapterView.OnItemSelectedListener {
     private TextInputLayout textInputNome;
     private TextInputLayout textInputCognome;
     private TextInputLayout textInputEmail;
@@ -42,10 +43,16 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuova_utenza);
         adminPresenter = new AdminPresenter(this);
-        inizializzaComponenti();
+        initializeComponents();
     }
 
-    private void inizializzaComponenti() {
+    @Override
+    public Context getContext() {
+        return getContext();
+    }
+
+    @Override
+    public void initializeComponents() {
         textInputNome = findViewById(R.id.textInputLayoutNomeCreaUtenza);
         textInputEmail = findViewById(R.id.textInputLayoutEmailCreaUtenza);
         textInputCognome = findViewById(R.id.textInputLayoutCognomeCreaUtenza);
@@ -67,29 +74,21 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
 
         });
         indietroButton.setOnClickListener(view -> {
-            mostraDialogWarningTwoBtn("Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?");
+            onBackPressed();
         });
 
     }
 
-    private void mostraDialogWarningTwoBtn(String messaggio) {
+    @Override
+    public void onBackPressed() {
         Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        dialogAttenzione.show();
-
-        buttonSi.setOnClickListener(view -> {
-            onBackPressed();
-            dialogAttenzione.dismiss();
-        });
-        buttonNo.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+        mostraDialogWarningTwoBtn(dialogAttenzione,
+                "Attenzione, tutti i dati inseriti verranno cancellati se torni indietro, continuare?",
+                view -> {
+                    dialogAttenzione.dismiss();
+                    super.onBackPressed();
+                },
+                view -> dialogAttenzione.dismiss());
     }
 
     @Override
@@ -188,42 +187,18 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
 
     }
 
-
+    @Override
     public void registrazioneAvvenutaConSuccesso() {
-        //TODO da provare
-        Dialog dialogRegistrazioneAvvenutaConSuccesso = new Dialog(this);
-        dialogRegistrazioneAvvenutaConSuccesso.setContentView(R.layout.dialog_ok_one_button);
-        TextView textViewMessaggio = dialogRegistrazioneAvvenutaConSuccesso.findViewById(R.id.textViewDialogOkTwoBtn);
-        Button okButton = dialogRegistrazioneAvvenutaConSuccesso.findViewById(R.id.okDialog);
-
-        textViewMessaggio.setText("Utente registrato correttamente");
-        okButton.setOnClickListener(view -> {
-            dialogRegistrazioneAvvenutaConSuccesso.dismiss();
-        });
-
-        dialogRegistrazioneAvvenutaConSuccesso.show();
+        Dialog dialog = new Dialog(this);
+        mostraDialogOkOneBtn(dialog,"Utente registrato correttamente", view -> dialog.dismiss());
+        cancellaCampi();
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    @Override
     public void registrazioneFallita() {
-        mostraDialogErrorOneBtn("Errore imprevisto, utente non registrato, ritenta tra poco");
-    }
-
-    private void mostraDialogErrorOneBtn(String messaggio) {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_err_one_btn);
-
-        TextView textViewmess = dialog.findViewById(R.id.textViewErrorMessageDialogErrorOneBtn);
-        textViewmess.setText(messaggio);
-
-        Button buttonOk = dialog.findViewById(R.id.buttonOkDialogErrorOneBtn);
-        buttonOk.setOnClickListener(view -> {
-            dialog.dismiss();
-            cancellaCampi();
-        });
-
-        dialog.show();
-
+        mostraDialogErroreOneBtn(dialog, "Errore imprevisto, utente non registrato, ritenta tra poco", view -> dialog.dismiss());
     }
 
     public void cancellaCampi(){

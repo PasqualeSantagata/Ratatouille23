@@ -39,7 +39,6 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
-
                     @Override
                     public void onSuccess(@NonNull Response<Categoria> categoriaResponse) {
                         categoriaCallback.onSuccess(categoriaResponse);
@@ -194,6 +193,29 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
 
     }
 
+    public void getCategoriaByNome(String nomeCategoria, CallbackResponse<Categoria> callbackResponse){
+        categoriaAPI.getCategoriaByNome(nomeCategoria)
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Categoria>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Categoria> categoriaResponse) {
+                        callbackResponse.onSuccess(categoriaResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callbackResponse.onFailure(e);
+
+                    }
+                });
+
+    }
 
 
 }

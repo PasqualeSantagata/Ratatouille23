@@ -1,5 +1,6 @@
 package com.example.springclient.presenter;
 
+import android.app.Dialog;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -30,7 +31,8 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
             @Override
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
-                inserisciElementoView.mostraDialogErrore(inserisciElementoView.getContext(),"Errore nella connsessione con il server");
+                Dialog dialog = new Dialog(inserisciElementoView.getContext());
+                inserisciElementoView.mostraDialogErroreOneBtn(dialog, "Impossibile comunicare con il server", view -> dialog.dismiss());
             }
 
             @Override

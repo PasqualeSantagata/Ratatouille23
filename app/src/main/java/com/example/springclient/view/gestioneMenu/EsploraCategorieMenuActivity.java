@@ -42,22 +42,6 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         mostracategoriaMenuPresenter.getAllCategorie();
         Button riepilogoButton = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
         riepilogoButton.setVisibility(View.INVISIBLE);
-
-    }
-
-    private void dialogNessunaCategoria(){
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_warning_one_button);
-        TextView errorMessage = dialog.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        Button ok = dialog.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        errorMessage.setText("Nessuna categoria da visualizzare");
-        ok.setOnClickListener(view1 -> {
-            Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
-            dialog.dismiss();
-            startActivity(intent);
-            dialog.dismiss();
-        });
-        dialog.show();
     }
 
     public void initializeComponents() {
@@ -80,6 +64,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
         List<ElementoMenu> elementi = categorie.get(position).getElementi();
         intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementi);
+        intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
         startActivity(intentVisualizzaCategoria);
 
     }
@@ -92,7 +77,12 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
                 mostracategoriaMenuPresenter.getFotoCategoriaById(categorie.get(i), i);
             }
         } else{
-            dialogNessunaCategoria();
+            Dialog dialog = new Dialog(this);
+            mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
+                Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
+                dialog.dismiss();
+                startActivity(intent);
+            });
         }
         initializeComponents();
     }

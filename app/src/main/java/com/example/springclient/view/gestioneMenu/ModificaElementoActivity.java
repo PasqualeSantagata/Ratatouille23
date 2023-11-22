@@ -98,14 +98,18 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
         });
         buttonOk.setOnClickListener(view -> {
             if(controllaCampi()) {
-                disabilitaErrori();
-                modificaElementoMenuPresenter.modificaElementoMenu(elementoMenu);
+                String nome, descrizione, prezzo;
+                nome = textInputLayoutNome.getEditText().getText().toString();
+                descrizione = textInputLayoutDescrizione.getEditText().getText().toString();
+                prezzo = textInputLayoutPrezzo.getEditText().getText().toString();
+                ElementoMenu elementoAggiornato = new ElementoMenu(elementoMenu.getId(),nome, Float.valueOf(prezzo), descrizione, allergeni, elementoMenu.getLingua());
+                modificaElementoMenuPresenter.modificaElementoMenu(elementoAggiornato);
             }
 
         });
         buttonIndietro.setOnClickListener(view -> {
-            //questa schermata è raggiungibile da due diverse quindi indietro dovrebbe corrispondere ad onBackPressed di default
-            mostraDialogWarningTwoBtn("Attenzione se torni indietro tutte le modifiche effettuate fino ad ora andranno perse! Continuare? ");
+            onBackPressed();
+
         });
 
     }
@@ -139,40 +143,6 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
         return corretto;
     }
 
-    private void mostraDialogWarningTwoBtn(String messaggio) {
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        dialogAttenzione.show();
-
-        buttonSi.setOnClickListener(view -> {
-            onBackPressed();
-            dialogAttenzione.dismiss();
-        });
-        buttonNo.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
-    }
-
-    private void mostraDialogOkOneBtn(String messaggio) {
-        Dialog dialogOk = new Dialog(this);
-        dialogOk.setContentView(R.layout.dialog_ok_one_button);
-
-        TextView textViewMess = dialogOk.findViewById(R.id.textViewDialogOkTwoBtn);
-        textViewMess.setText(messaggio);
-        Button buttonOk = dialogOk.findViewById(R.id.okDialog);
-        buttonOk.setOnClickListener(view -> {
-            onBackPressed();
-            dialogOk.dismiss();
-        });
-
-        dialogOk.show();
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -185,21 +155,15 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
 
     }
 
-
-
-    private void mostraDialogErrorOneBtn(String messaggio) {
+    @Override
+    public void onBackPressed() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_err_one_btn);
-
-        TextView textViewmess = dialog.findViewById(R.id.textViewErrorMessageDialogErrorOneBtn);
-        textViewmess.setText(messaggio);
-
-        Button buttonOk = dialog.findViewById(R.id.buttonOkDialogErrorOneBtn);
-        buttonOk.setOnClickListener(view -> {
-            dialog.dismiss();
-        });
-
-        dialog.show();
+        mostraDialogWarningTwoBtn(dialog, "Attenzione se torni indietro tutte le modifiche effettuate fino ad ora andranno perse! Continuare? ",
+                view1 -> {
+                    super.onBackPressed();
+                    dialog.dismiss();
+                },
+                view12 -> dialog.dismiss());
     }
 
     @Override
@@ -212,8 +176,6 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
         fabAggiungiLingua.setVisibility(View.INVISIBLE);
         TextView textViewLingua = findViewById(R.id.textViewLingua);
         textViewLingua.setText("  Lingua corrente  ");
-
-
     }
     @Override
     public void elementoGiaPresenteNellaCategoria(){
@@ -227,12 +189,14 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
 
     @Override
     public void elementoModificatoCorrettamente(){
-        mostraDialogOkOneBtn("Elemento modificato correttamente");
+        Dialog dialogOk = new Dialog(this);
+        mostraDialogOkOneBtn(dialogOk, "Elemento modificato correttamente", view -> super.onBackPressed());
     }
 
     @Override
     public void erroreModifica(){
-        mostraDialogErrorOneBtn("Errore nella connessione con il server");
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, "Errore nella connessione con il server", view -> dialog.dismiss());
     }
 
     @Override

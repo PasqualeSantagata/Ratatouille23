@@ -18,8 +18,6 @@ public class  DashboardAdminActivity extends AppCompatActivity {
     private ImageView imageViewMenu;
     private ImageView imageViewAnalytics;
     private ImageView imageViewNuovaUtenza;
-    private AdminPresenter adminPresenter;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,10 +26,7 @@ public class  DashboardAdminActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_dashboard_admin);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        adminPresenter = new AdminPresenter(this);
         initializeComponents();
-
-
     }
 
 

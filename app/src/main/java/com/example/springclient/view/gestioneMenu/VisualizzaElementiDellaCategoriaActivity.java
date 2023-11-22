@@ -249,13 +249,21 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     @Override
     public void setElementi(List<ElementoMenu> elementoMenuList) {
+        this.elementiMenu = elementoMenuList;
+        initializeComponents();
+    }
 
+    @Override
+    protected void onResume() {
+        visualizzaElementiPresenter.aggiornaElementiCategoria(nome);
+        super.onResume();
     }
 
     @Override
     public void onBackPressed() {
         Intent esploraCategorie = new Intent(this, EsploraCategorieMenuActivity.class);
         startActivity(esploraCategorie);
+
         super.onBackPressed();
     }
 

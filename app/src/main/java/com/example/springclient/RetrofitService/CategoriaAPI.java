@@ -46,4 +46,7 @@ public interface CategoriaAPI {
     @POST("api/v1/categoria/aggiungiElementoAllaCategoria/{categoria}")
     Single<Response<Void>> aggiungiElemento(@Path(value = "categoria", encoded = true)String nome, @Body ElementoMenu elementoMenu);
 
+    @GET("/api/v1/categoria/getCategoriaByNome/{nomeCategoria}")
+    Single<Response<Categoria>> getCategoriaByNome(@Path(value = "nomeCategoria", encoded = true)String nomeCategoria);
+
 }

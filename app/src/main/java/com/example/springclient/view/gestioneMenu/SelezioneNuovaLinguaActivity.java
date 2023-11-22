@@ -1,6 +1,7 @@
 package com.example.springclient.view.gestioneMenu;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -15,12 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.BaseView;
 import com.example.springclient.entity.ElementoMenu;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, BaseView {
 
     private Spinner spinnerLingua;
     private Button buttonIndietro;
@@ -38,7 +40,9 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         initializeComponents();
     }
 
-    private void initializeComponents(){
+
+    @Override
+    public void initializeComponents(){
         spinnerLingua = findViewById(R.id.spinnerSelezionaLinguaGestioneMenu);
         buttonIndietro = findViewById(R.id.buttonIndietroSelezionaLinguaGestioneMenu);
         buttonOk = findViewById(R.id.buttonOkSelezionaLinguaGestioneMenu);
@@ -60,31 +64,6 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         });
     }
 
-
-    private void mostraDialogWarningTwoBtn(String messaggio, Intent intentSi){
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_two_button);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonSi = dialogAttenzione.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-        Button buttonNo = dialogAttenzione.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        dialogAttenzione.show();
-
-        buttonSi.setOnClickListener(view -> {
-            if(intentSi != null)
-                super.onBackPressed();
-
-            dialogAttenzione.dismiss();
-        });
-        buttonNo.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
-    }
-
-
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         linguaSelezionata = lingue.get(i);
@@ -97,7 +76,14 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
 
     @Override
     public void onBackPressed() {
-        Intent intentEsci = new Intent(this, StartGestioneMenuActivity.class);
-        mostraDialogWarningTwoBtn("Sei sicuro di voler uscire? Annullerai l'inserimento dell'elemento in un'altra lingua", intentEsci);
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler uscire? Annullerai l'inserimento dell'elemento in un'altra lingua",
+                view -> super.onBackPressed(),
+                view -> dialog.dismiss());
+    }
+
+    @Override
+    public Context getContext() {
+        return getContext();
     }
 }

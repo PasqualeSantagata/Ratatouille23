@@ -105,6 +105,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             if (checkFields()) {
                 elementoMenu = getElementoValues();
                 inserisciElementoPresenter.inserisciElementoMenu(elementoMenu, categoriaSelezionata);
+
             }
         });
         indietroButton.setOnClickListener(view -> {
@@ -135,6 +136,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
             Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
             nuovaLingua.putExtra("elemento", elementoMenu);
             dialog.dismiss();
+            cleanFields();
             startActivity(nuovaLingua);
         });
         dialog.show();

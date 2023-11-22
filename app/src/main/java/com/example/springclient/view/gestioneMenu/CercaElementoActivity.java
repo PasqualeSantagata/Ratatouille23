@@ -129,6 +129,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
             Intent intent = new Intent(this, ModificaElementoActivity.class);
             intent.putExtra("elementoMenu", elementoMenu);
             startActivity(intent);
+            dialogDettagli.dismiss();
         });
 
         buttonIndietro.setOnClickListener(view -> {
@@ -180,6 +181,12 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         Intent intent = new Intent(this, StartGestioneMenuActivity.class);
         startActivity(intent);
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        visualizzaElementiPresenter.getElementiMenu();
+        super.onResume();
     }
 
     @Override

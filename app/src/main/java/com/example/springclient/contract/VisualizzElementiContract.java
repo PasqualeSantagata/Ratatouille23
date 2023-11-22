@@ -12,6 +12,7 @@ public interface VisualizzElementiContract {
         void setElementi(List<ElementoMenu> elementoMenuList);
         void rimuoviElemento();
 
+
     }
 
     interface Presenter{
@@ -20,6 +21,7 @@ public interface VisualizzElementiContract {
         void rimuoviElementoMenu(String idElemento);
         void restituisciTraduzione(String idElemento);
         void restituisciLinguaBase(String idElemento);
+        void aggiornaElementiCategoria(String nomeCategoria);
 
 
     }

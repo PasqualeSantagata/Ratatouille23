@@ -9,27 +9,20 @@ public interface AdminContract {
 
     }
 
-    interface View{
-        interface Dashboard{
+    interface View extends BaseView{
 
-        }
-        interface CreaUtenza{
+        void registrazioneFallita();
+        void registrazioneAvvenutaConSuccesso();
+        void raccogliDati();
 
+        void mostraErroreCampiVuoti();
 
-            void raccogliDati();
+        void mostraErrore(String messaggio);
 
-            void mostraErroreCampiVuoti();
+        void disabilitaErrori();
 
-            void mostraErrore(String messaggio);
+        boolean campiValidi(String... valori);
 
-            void disabilitaErrori();
-
-            boolean campiValidi(String... valori);
-        }
-        interface InserisciElemento{
-
-
-        }
     }
     interface Model{
         void registraUtente(Utente utente, CallbackResponse<ApiResponse> callbackResponse);

@@ -1,5 +1,6 @@
 package com.example.springclient.presenter;
 
+import android.app.Dialog;
 import android.util.Log;
 
 import com.example.springclient.RetrofitService.RetrofitService;
@@ -26,7 +27,8 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
         categoriaModel.saveCategoria(categoria, new CallbackResponse<Categoria>() {
             @Override
             public void onFailure(Throwable t) {
-                creaCategoriaView.mostraDialogErrore(creaCategoriaView.getContext(), "Impossibile comunicare con il server");
+                Dialog dialog = new Dialog(creaCategoriaView.getContext());
+                creaCategoriaView.mostraDialogErroreOneBtn(dialog, "Impossibile comunicare con il server", view -> dialog.dismiss());
             }
             @Override
             public void onSuccess(Response<Categoria> retData) {
