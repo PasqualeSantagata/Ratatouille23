@@ -38,7 +38,13 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterCategoria.MyViewHolder holder, int position) {
-        holder.textViewNomeCategoria.setText(categoriaList.get(position).getNome());
+
+        if(categoriaList.get(position).getNome() == null || categoriaList.get(position).getNome().isEmpty()){
+            holder.textViewNomeCategoria.setVisibility(View.INVISIBLE);
+        }else{
+            holder.textViewNomeCategoria.setText(categoriaList.get(position).getNome());
+        }
+
         holder.imageViewCategoria.setImageBitmap(categoriaList.get(position).getImage());
     }
 
