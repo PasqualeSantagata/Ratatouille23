@@ -22,7 +22,6 @@ import com.example.springclient.R;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,6 +46,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     }
 
     private void setImmaginiCategoriaDefault() {
+        //TODO aggiungere nuove imagini
         int[] immagini = {R.drawable.categoria_dessert, R.drawable.categoria_bevande, R.drawable.categoria_primi,
                 R.drawable.categoria_pizza, R.drawable.categoria_secondi, R.drawable.categoria_sushi};
 
