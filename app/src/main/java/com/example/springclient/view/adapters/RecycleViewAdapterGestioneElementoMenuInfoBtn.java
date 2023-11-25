@@ -31,7 +31,7 @@ public class RecycleViewAdapterGestioneElementoMenuInfoBtn extends RecyclerView.
     @Override
     public RecycleViewAdapterGestioneElementoMenuInfoBtn.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_recycler_view_elementi_menu_ic_info, parent,false);
+        View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu_delete_btn, parent,false);
 
         return new RecycleViewAdapterGestioneElementoMenuInfoBtn.MyViewHolder(view, recycleViewElementoMenuInterface);
     }
@@ -55,7 +55,7 @@ public class RecycleViewAdapterGestioneElementoMenuInfoBtn extends RecyclerView.
         public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeInfo);
-            imageViewInfo = itemView.findViewById(R.id.InfoElementoImageView);
+            imageViewInfo = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
             textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoGestioneMenu);
 
 

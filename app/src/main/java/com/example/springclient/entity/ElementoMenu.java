@@ -13,16 +13,13 @@ public class ElementoMenu implements Serializable {
     private String descrizione;
     private List<String> elencoAllergeni;
     private String lingua;
-    private String tempoPreparazione;//Magari va cambiato in float o int se li interpretiamo sempre come minuti
-    private Float quantita;
     public static final Comparator<ElementoMenu> compareNomeCrescente = (e1, e2) -> e1.nome.compareTo(e2.nome);
     public static final Comparator<ElementoMenu> comparePrezzoCrescente = Comparator.comparing(e -> e.prezzo);
     public static final Comparator<ElementoMenu> compareNomeDecrescente = (e1, e2) -> -e1.nome.compareTo(e2.getNome());
-    public static final Comparator<ElementoMenu> comparePrezzoDecrescente = (e1, e2) -> - e1.prezzo.compareTo(e2.prezzo);
+    public static final Comparator<ElementoMenu> comparePrezzoDecrescente = (e1, e2) -> -e1.prezzo.compareTo(e2.prezzo);
 
 
-
-   public ElementoMenu(Long id, String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
+    public ElementoMenu(Long id, String nome, Float prezzo, String descrizione, List<String> elencoAllergeni, String lingua) {
         this.id = id;
         this.nome = nome;
         this.prezzo = prezzo;
@@ -94,26 +91,11 @@ public class ElementoMenu implements Serializable {
         return lingua;
     }
 
-    public String getTempoPreparazione() {
-        return tempoPreparazione;
-    }
-
-    public void setTempoPreparazione(String tempoPreparazione) {
-        this.tempoPreparazione = tempoPreparazione;
-    }
-
-    public Float getQuantita() {
-        return quantita;
-    }
-
-    public void setQuantita(Float quantita) {
-        this.quantita = quantita;
-    }
-
-    public Long getId(){
+    public Long getId() {
         return id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 

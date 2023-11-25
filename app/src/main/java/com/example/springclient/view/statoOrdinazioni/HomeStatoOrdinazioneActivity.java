@@ -113,14 +113,19 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         Dialog dialogDettagli = new Dialog(this);
         dialogDettagli.setContentView(R.layout.dialog_dettagli_stato_ordinazione);
 
+        TextInputLayout textInputLayoutTavolo = dialogDettagli.findViewById(R.id.textInputLayoutTavoloDialogStatoOrdinazione);
+        TextInputLayout textInputLayoutSala = dialogDettagli.findViewById(R.id.textInputLayoutSalaDialogStatoOrdinazione);
         TextInputLayout textInputLayoutBreveNota = dialogDettagli.findViewById(R.id.textInputLayoutNotaDialogDettagliStatoOrd);
         TextInputLayout textInputLayoutDescrizione = dialogDettagli.findViewById(R.id.textInputLayoutDescrizioneDialogDettagliStatoOrd);
         Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagliStatoOrd);
+
 
         String descrizione = ordinazione.getPortata().getElementoMenu().getDescrizione();
         String breveNota = ordinazione.getPortata().getBreveNota();
         setTextInputLayoutText(textInputLayoutDescrizione, descrizione);
         setTextInputLayoutText(textInputLayoutBreveNota, breveNota);
+        setTextInputLayoutText(textInputLayoutTavolo, ordinazione.getOrdinazione().getTavolo().toString());
+        setTextInputLayoutText(textInputLayoutSala, ordinazione.getOrdinazione().getSala().toString());
 
         buttonIndietro.setOnClickListener(view -> {
             dialogDettagli.dismiss();

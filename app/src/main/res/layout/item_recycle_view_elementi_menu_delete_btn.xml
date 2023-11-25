@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="450dp"
-    android:layout_height="210dp">
+    android:layout_height="250dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="390dp"
-        android:layout_height="195dp"
+        android:layout_height="230dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         app:cardBackgroundColor="@color/my_green"
@@ -26,8 +26,8 @@
 
             <TextView
                 android:id="@+id/textViewNomeRecycleViewDeleteBtn"
-                android:layout_width="349dp"
-                android:layout_height="49dp"
+                android:layout_width="355dp"
+                android:layout_height="82dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="21dp"
@@ -41,10 +41,11 @@
 
             <ImageView
                 android:id="@+id/imageViewInfoRecycleView"
-                android:layout_width="433dp"
-                android:layout_height="64dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="431dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="7dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.487"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewRecycleViewBreveNotaRiepilogo"
                 app:srcCompat="@drawable/image_simple_elem_menu_recycle_view" />
@@ -66,9 +67,9 @@
                 android:id="@+id/imageView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="7dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="2dp"
                 app:layout_constraintEnd_toStartOf="@+id/textViewPrezzoRecycleViewDeleteBtn"
                 app:layout_constraintHorizontal_bias="0.739"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,30 +80,26 @@
                 android:id="@+id/textViewPrezzoRecycleViewDeleteBtn"
                 android:layout_width="80dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="31dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="2dp"
                 android:inputType="numberDecimal"
                 android:text="10"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
                 app:layout_constraintEnd_toStartOf="@+id/textViewRecycleViewBreveNotaRiepilogo"
+                app:layout_constraintStart_toEndOf="@+id/imageView13"
                 app:layout_constraintTop_toBottomOf="@+id/textViewNomeRecycleViewDeleteBtn"
-                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textViewRecycleViewBreveNotaRiepilogo"
-                android:layout_width="224dp"
-                android:layout_height="59dp"
+                android:layout_width="230dp"
+                android:layout_height="57dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="16dp"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/imageViewInfoRecycleView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewNomeRecycleViewDeleteBtn" />
 

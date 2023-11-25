@@ -168,12 +168,17 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     public void onItemClickRecyclerViewPortata(int position) {
-
+        startDialogDettagliElemento(elementoMenuList.get(position));
     }
 
     @Override
     public void onButtonDeleted(int position) {
-        startDialogDettagliElemento(elementoMenuList.get(position));
+        //TODO serve mantenre l'ele selezionato ?      elementoSelezionato = position;
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
+                view -> visualizzaElementiPresenter.rimuoviElementoMenu(elementoMenuList.get(position).getId().toString()),  //TODO è la lista giusta?
+                view -> dialog.dismiss()
+        );
     }
 
     @Override

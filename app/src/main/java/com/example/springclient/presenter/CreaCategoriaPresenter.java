@@ -1,7 +1,6 @@
 package com.example.springclient.presenter;
 
 import android.app.Dialog;
-import android.util.Log;
 
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
@@ -34,7 +33,6 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
             public void onSuccess(Response<Categoria> retData) {
                 if(retData.isSuccessful()){
                     creaCategoriaView.salvaImmagine(retData.body().getId());
-                    Log.d("retData: ", retData.body().toString());
                 }
             }
         });

@@ -2,7 +2,6 @@ package com.example.springclient.presenter;
 
 import android.app.Dialog;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
@@ -11,9 +10,6 @@ import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Response;
 
@@ -54,8 +50,5 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
 
 
     }
-
-
-
 
 }

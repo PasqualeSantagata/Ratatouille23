@@ -16,7 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,13 +40,12 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutPrezzo;
     private FloatingActionButton fabModifica;
-    private TextView allergeniButton;
+    private Button modificaAllergeniButton;
     private List<String> allergeni;
     private List<ElementoMenu> elementiMenu;
-
     private int elementoSelezionato = -1;
     private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
-    private  RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
+    private RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
     private ItemTouchHelper.SimpleCallback simpleCallback;
     private String nome;
     private Menu menu;
@@ -94,11 +92,12 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     private boolean b;
+
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(b==true){
+        if (b == true) {
             menu.findItem(R.id.item_lingue).setEnabled(false);
             menu.findItem(R.id.item_lingua_base).setEnabled(true);
-        }else{
+        } else {
             menu.findItem(R.id.item_lingue).setEnabled(true);
             menu.findItem(R.id.item_lingua_base).setEnabled(false);
         }
@@ -108,25 +107,24 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_riordinare:
                 Intent intent = new Intent(this, FiltraCategoriaGestioneMenuActivity.class);
-                intent.putExtra("elementiMenu",(Serializable) elementiMenu);
+                intent.putExtra("elementiMenu", (Serializable) elementiMenu);
                 intent.putExtra("nomeCategoria", nome);
                 startActivity(intent);
                 break;
             case R.id.item_lingue:
-                    if(elementoSelezionato != -1) {
-                        visualizzaElementiPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
-                        invalidateOptionsMenu();
-                        b = true;
-                    }
-                    else{
-                        Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
-                    }
+                if (elementoSelezionato != -1) {
+                    visualizzaElementiPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
+                    invalidateOptionsMenu();
+                    b = true;
+                } else {
+                    Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.item_lingua_base:
-                if(elementoSelezionato != -1) {
+                if (elementoSelezionato != -1) {
                     setParameters(getElementoMenu());
                     invalidateOptionsMenu();
                     b = false;
@@ -138,29 +136,28 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void initializeComponents(){
+    public void initializeComponents() {
         textInputLayouNome = findViewById(R.id.textInputLayoutNomeInserimNelMenu);
-        textInputLayoutDescrizione  = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
+        textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
-        allergeniButton = findViewById(R.id.textViewAllergeniElementoGestioneMenu);
+        modificaAllergeniButton = findViewById(R.id.buttonModificaVisualCatGestioneMenu);
         fabModifica = findViewById(R.id.fabModificaInserNelMenu);
         indietroButton = findViewById(R.id.buttonIndietroElemInserNelMenu);
         setElementiMenuRecycleView();
 
         fabModifica.setOnClickListener(view -> {
-            if(elementoSelezionato != -1) {
+            if (elementoSelezionato != -1) {
                 Intent intentModElemento = new Intent(this, ModificaElementoActivity.class);
                 intentModElemento.putExtra("elementoMenu", elementiMenu.get(elementoSelezionato));
                 startActivity(intentModElemento);
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Seleziona un elemento", Toast.LENGTH_SHORT).show();
             }
         });
 
-        allergeniButton.setOnClickListener(view -> {
+        modificaAllergeniButton.setOnClickListener(view -> {
             //questo può essere chiamato solo dopo set parameters??
-            if(allergeni != null) {
+            if (allergeni != null) {
                 dialogAllergeni(this, allergeni, true);
             }
         });
@@ -176,7 +173,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
 
-    public void setElementiMenuRecycleView(){
+    public void setElementiMenuRecycleView() {
         RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewPiattiCategoriaInserimentoNelMenu);
         adapterElementoMenu = new RecycleViewAdapterGestioneElementoMenu(this, elementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
@@ -184,23 +181,16 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewPiatti.setLayoutManager(linearLayoutManager);
         recyclerViewPiatti.setItemAnimator(null);
-
-        //Dovrebbe implementare la funzione drug and drop
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerViewPiatti.addItemDecoration(dividerItemDecoration);
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerViewPiatti);
-
     }
 
-    public void setParameters(ElementoMenu elementoMenu){
+    public void setParameters(ElementoMenu elementoMenu) {
         allergeni = elementoMenu.getElencoAllergeni();
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
         setTextInputLayoutText(textInputLayouNome, elementoMenu.getNome());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
     }
 
-    private ElementoMenu getElementoMenu(){
+    private ElementoMenu getElementoMenu() {
         return elementiMenu.get(elementoSelezionato);
     }
 
@@ -213,10 +203,14 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public void onButtonDeleted(int position) {
         elementoSelezionato = position;
-        visualizzaElementiPresenter.rimuoviElementoMenu(elementiMenu.get(position).getId().toString());
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
+                view -> visualizzaElementiPresenter.rimuoviElementoMenu(elementiMenu.get(position).getId().toString()),
+                view -> dialog.dismiss()
+        );
     }
 
-    private void mostraDialogWarningOneBtn(String messaggio){
+    private void mostraDialogWarningOneBtn(String messaggio) {
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
 
@@ -232,13 +226,13 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void rimuoviElemento(){
+    public void rimuoviElemento() {
         elementiMenu.remove(elementoSelezionato);
         adapterElementoMenu.notifyItemChanged(elementoSelezionato);
     }
 
     @Override
-    public void mostraTraduzione(ElementoMenu elementoMenu){
+    public void mostraTraduzione(ElementoMenu elementoMenu) {
         setParameters(elementoMenu);
     }
 

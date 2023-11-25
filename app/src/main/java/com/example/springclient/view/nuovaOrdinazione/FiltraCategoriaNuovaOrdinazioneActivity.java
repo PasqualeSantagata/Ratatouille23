@@ -1,6 +1,5 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -46,6 +45,7 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
     }
 
     private void initializeComponents() {
+        //TODO provare set visibility filitri su prezzo e nome
         //buttons
         buttonNome = findViewById(R.id.buttonNomeFiltraCategoria);
         buttonPrezzo = findViewById(R.id.buttonPrezzoFiltraCategoria);
