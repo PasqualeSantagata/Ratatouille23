@@ -117,8 +117,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
             case R.id.item_lingue:
                 if (elementoSelezionato != -1) {
                     visualizzaElementiPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getId().toString());
-                    invalidateOptionsMenu();
-                    b = true;
+
                 } else {
                     Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
                 }
@@ -233,6 +232,8 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
+        invalidateOptionsMenu();
+        b = true;
         setParameters(elementoMenu);
     }
 
