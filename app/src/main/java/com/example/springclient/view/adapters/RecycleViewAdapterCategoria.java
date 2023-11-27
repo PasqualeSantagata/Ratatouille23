@@ -62,17 +62,14 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
             textViewNomeCategoria = itemView.findViewById(R.id.textViewRecycleViewNomeCategoria);
             imageViewCategoria = itemView.findViewById(R.id.imageViewRecycleViewCategoria);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (recycleViewCategoriaInterface != null){
-                        int pos = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if (recycleViewCategoriaInterface != null){
+                    int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION){
-                            recycleViewCategoriaInterface.onItemClick(pos);
-                        }
-
+                    if(pos != RecyclerView.NO_POSITION){
+                        recycleViewCategoriaInterface.onItemClick(pos);
                     }
+
                 }
             });
         }

@@ -1,5 +1,6 @@
 package com.example.springclient.view.gestioneMenu;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,7 +69,7 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
                 String nomeCategoria = textInputLayoutNomeCategoria.getEditText().getText().toString();
                 Categoria categoria = new Categoria(nomeCategoria);
                 if (immagineCategoria != null) {
-                    immagineFile = new File(getApplicationContext().getFilesDir(), nomeCategoria + ".jpeg");
+                    immagineFile = new File(getApplicationContext().getFilesDir(), nomeCategoria + ".PNG");
                     OutputStream os;
                     try {
                         os = Files.newOutputStream(immagineFile.toPath());
@@ -75,10 +77,15 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
                         os.flush();
                         os.close();
                     } catch (Exception ignored) {
-
+                        Toast.makeText(this, "Errore nel caricamento della foto: "+ignored.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
-                creaCategoriaPresenter.salavaCategoria(categoria);
+                if(immagineCategoria == null){
+                    Dialog dialog = new Dialog(this);
+                    mostraDialogWarningOneBtn(dialog, "Inserisci una foto per la categoria", view1 -> dialog.dismiss());
+                }else {
+                    creaCategoriaPresenter.salavaCategoria(categoria);
+                }
             }
 
         });

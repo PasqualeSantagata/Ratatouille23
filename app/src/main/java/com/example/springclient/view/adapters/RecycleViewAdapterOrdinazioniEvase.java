@@ -42,7 +42,7 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
         holder.textViewSala.setText(ordinazioniEvase.get(position).getOrdinazione().getSala());
         //info portate
         holder.textViewNomePiatto.setText(ordinazioniEvase.get(position).getPortata().getElementoMenu().getNome());
-        holder.textViewTempo.setText(ordinazioniEvase.get(position).getPortata().getElementoMenu().getTempoPreparazione());
+       // holder.textViewTempo.setText(ordinazioniEvase.get(position).getPortata().getElementoMenu().getTempoPreparazione());
         holder.textViewNota.setText(ordinazioniEvase.get(position).getPortata().getBreveNota());
     }
 

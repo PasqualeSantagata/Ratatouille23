@@ -22,6 +22,7 @@ public interface VisualizzElementiContract {
         void restituisciTraduzione(String idElemento);
         void restituisciLinguaBase(String idElemento);
         void aggiornaElementiCategoria(String nomeCategoria);
+        void eliminaElementoDallaCategoria(Long idCategoria, ElementoMenu elementoMenu);
 
 
     }

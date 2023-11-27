@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
@@ -34,7 +35,8 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View, BaseAllergeniDialog {
+public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu,
+        VisualizzElementiContract.View, BaseAllergeniDialog {
 
     private TextInputLayout textInputLayouNome;
     private TextInputLayout textInputLayoutDescrizione;
@@ -50,14 +52,16 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private String nome;
     private Menu menu;
     private Button indietroButton;
+    private Long idCategoria;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //verifica l'acrtivity prececente
-        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementi");
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementiCategoria");
+        idCategoria = (Long) getIntent().getSerializableExtra("idCategoria");
         nome = getIntent().getStringExtra("nomeCategoria");
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getSupportActionBar().setTitle(nome);
         setContentView(R.layout.activity_visualizza_cagtegoria_gestione_menu);
         visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
@@ -203,7 +207,10 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         elementoSelezionato = position;
         Dialog dialog = new Dialog(this);
         mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
-                view -> visualizzaElementiPresenter.rimuoviElementoMenu(elementiMenu.get(position).getId().toString()),
+                view -> {
+                    visualizzaElementiPresenter.eliminaElementoDallaCategoria(idCategoria, elementiMenu.get(position));
+                    dialog.dismiss();
+                },
                 view -> dialog.dismiss()
         );
     }
@@ -227,6 +234,10 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     public void rimuoviElemento() {
         elementiMenu.remove(elementoSelezionato);
         adapterElementoMenu.notifyItemChanged(elementoSelezionato);
+        if(elementiMenu.isEmpty()){
+            Intent intent = new Intent(this, EsploraCategorieMenuActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

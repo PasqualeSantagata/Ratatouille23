@@ -27,7 +27,7 @@ public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Pre
         categoriaModel.getAllCategorie(new CallbackResponse<List<Categoria>>() {
             @Override
             public void onFailure(Throwable t) {
-
+                categoriaView.caricamentoCategorieFallito();
             }
 
             @Override

@@ -21,6 +21,7 @@ public interface MostraCategoriaContract {
         void setCategorie(List<Categoria> categoriaList);
         void mostraImmagineCategoria(int posizione);
 
+        void caricamentoCategorieFallito();
     }
 
     interface Presenter{

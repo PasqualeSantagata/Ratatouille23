@@ -1,6 +1,6 @@
 package com.example.springclient.view.gestioneMenu;
 
-import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.contract.ModificaElementoContract;
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.presenter.ModificaElementoPresenter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity implements BaseAllergeniDialog {
+public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity implements BaseAllergeniDialog, ModificaElementoContract.ViewDefinisciOrdine {
     private Button buttonNome;
     private Button buttonPrezzo;
     private Button buttonOk;
@@ -31,20 +34,28 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
     private List<String> allergeni;
     private List<ElementoMenu> elementiMenu;
     private String nome;
+    private Categoria categoria;
     private Intent intentVisualizzaCategoria;
+    private ModificaElementoContract.Presenter modificaElementoPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtra_categoria_gestione_menu);
-        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementiMenu");
+        categoria = (Categoria) getIntent().getSerializableExtra("categoria");
+        elementiMenu = categoria.getElementi();
         nome = getIntent().getStringExtra("nomeCategoria");
         allergeni = new ArrayList<>();
-
+        modificaElementoPresenter = new ModificaElementoPresenter(this);
         initializeComponents();
     }
 
-    private void initializeComponents() {
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
+    }
+
+    public void initializeComponents() {
         //buttons
         buttonNome = findViewById(R.id.buttonNomeFiltraCategoria);
         buttonPrezzo = findViewById(R.id.buttonPrezzoFiltraCategoria);
@@ -55,16 +66,20 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
         buttonNome.setOnClickListener(view -> {
             if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
                 buttonNome.setText(R.string.nome_down);
+
             } else {
                 buttonNome.setText(R.string.nome_up);
+
             }
 
         });
         buttonPrezzo.setOnClickListener(view -> {
             if (buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))) {
                 buttonPrezzo.setText(R.string.prezzo_down);
+
             } else {
                 buttonPrezzo.setText(R.string.prezzo_up);
+
             }
         });
         buttonTabellaAllergeni.setOnClickListener(view -> {
@@ -78,20 +93,24 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
             }
             if (checkboxNome.isChecked()) {
                 if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
+                    categoria.setFlagOrdinamento(1);
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeCrescente);
                 } else {
+                    categoria.setFlagOrdinamento(2);
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeDecrescente);
                 }
             }
             if (checkboxPrezzo.isChecked()) {
                 if (buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))) {
+                    categoria.setFlagOrdinamento(3);
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoCrescente);
                 } else {
+                    categoria.setFlagOrdinamento(4);
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoDecrescente);
                 }
             }
-            intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementiMenu);
-            intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
+            intentVisualizzaCategoria.putExtra("categoria", (Serializable) categoria);
+            modificaElementoPresenter.modificaOrdineCategoria(categoria);
 
             startActivity(intentVisualizzaCategoria);
         });
@@ -134,8 +153,7 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
 
     @Override
     public void onBackPressed() {
-        intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementiMenu);
-        intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
+        intentVisualizzaCategoria.putExtra("categoria", (Serializable)categoria);
         startActivity(intentVisualizzaCategoria);
         super.onBackPressed();
     }

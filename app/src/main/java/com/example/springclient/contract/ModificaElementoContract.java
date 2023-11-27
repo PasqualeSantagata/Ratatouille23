@@ -1,5 +1,6 @@
 package com.example.springclient.contract;
 
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 
 import java.util.List;
@@ -20,13 +21,16 @@ public interface ModificaElementoContract {
         void linguaAggiunta();
 
     }
+    interface ViewDefinisciOrdine extends BaseView{
+
+    }
     interface Presenter{
         void getNomiCategoriaDisponibili(String id);
         void restituisciTraduzioneElemento(String id);
         void aggiungiElementoAllaCategoria(String nomeCategoria, ElementoMenu elementoMenu);
         void modificaElementoMenu(ElementoMenu elementoMenu);
         void aggiungiLingua(String nomeElemento, ElementoMenu elementoTradotto);
-
+        void modificaOrdineCategoria(Categoria categoria);
 
     }
 

@@ -58,6 +58,25 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
     }
 
     @Override
+    public void eliminaElementoDallaCategoria(Long idCategoria, ElementoMenu elementoMenu){
+        categoriaModel.eliminaElementoDallaCategoria(idCategoria.toString(), elementoMenu, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    visualizzaElementiView.rimuoviElemento();
+                }
+
+            }
+        });
+
+    }
+
+    @Override
     public void restituisciTraduzione(String idElemento) {
         elementoMenuModel.restituisciTraduzione(new CallbackResponse<ElementoMenu>() {
             @Override
@@ -102,7 +121,9 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
             @Override
             public void onSuccess(Response<Categoria> retData) {
                 if(retData.isSuccessful()){
-                    visualizzaElementiView.setElementi(retData.body().getElementi());
+                    Categoria categoria = retData.body();
+                    categoria.ordinaCategoria();
+                    visualizzaElementiView.setElementi(categoria.getElementi());
                 }
                 else{
 

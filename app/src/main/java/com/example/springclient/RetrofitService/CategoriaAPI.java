@@ -49,4 +49,9 @@ public interface CategoriaAPI {
     @GET("/api/v1/categoria/getCategoriaByNome/{nomeCategoria}")
     Single<Response<Categoria>> getCategoriaByNome(@Path(value = "nomeCategoria", encoded = true)String nomeCategoria);
 
+    @POST("/api/v1/categoria/modificaOrdine")
+    Single<Response<Void>> modificaOrdineCategoria( @Body Categoria categoria);
+    @POST("/api/v1/categoria/eliminaElemento/{idCategoria}")
+    Single<Response<Void>> eliminaElementoDallaCategoira( @Path(value = "idCategoria", encoded = true)String idCategoria, @Body ElementoMenu elementoMenu);
+
 }

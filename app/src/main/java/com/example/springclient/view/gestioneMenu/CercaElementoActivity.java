@@ -175,7 +175,11 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     public void onButtonDeleted(int position) {
         Dialog dialog = new Dialog(this);
         mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
-                view -> visualizzaElementiPresenter.rimuoviElementoMenu(elementoMenuList.get(position).getId().toString()),  //TODO è la lista giusta?
+                view -> {
+                        visualizzaElementiPresenter.rimuoviElementoMenu(elementoMenuList.get(position).getId().toString());
+                        adapter.notifyItemChanged(position);
+                        dialog.dismiss();
+                },
                 view -> dialog.dismiss()
         );
     }

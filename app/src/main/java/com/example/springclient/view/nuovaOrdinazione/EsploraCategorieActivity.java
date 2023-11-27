@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,17 +51,19 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         //Fetch delle categorie dal server
         categoriaPresenter.getAllCategorie();
+        initializeComponents();
     }
 
-    public void initializeComponents() {
-
+    private void creaRecyclerView(){
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
         adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewCategorie.setLayoutManager(horizontal);
+    }
 
-
+    @Override
+    public void initializeComponents() {
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
@@ -99,8 +102,9 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 dialog.dismiss();
                 startActivity(intent);
             });
+
         }
-        initializeComponents();
+        creaRecyclerView();
     }
     @Override
     public void mostraImmagineCategoria(int posizione){
@@ -108,15 +112,30 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     }
 
     @Override
+    public void caricamentoCategorieFallito() {
+        //non viene mostrata la dialog se l'utente è uscito dall'activity mentre le categorie stavano ancora caricando
+        //nel caso in cui la connessione al server fallisca
+        if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            Dialog dialog = new Dialog(this);
+            mostraDialogErroreOneBtn(dialog, "Impossibile caricare le categorie", view -> {
+                Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
+                dialog.dismiss();
+                startActivity(intent);
+            });
+        }
+    }
+
+    @Override
     public void onItemClick(int position) {
         Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
         //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
-        List<ElementoMenu> elementi = categorie.get(position).getElementi();
+        Categoria categoria = categorie.get(position);
+        categoria.ordinaCategoria();
+        List<ElementoMenu> elementi = categoria.getElementi();
         List<Portata> portata = new ArrayList<>();
         for(ElementoMenu e: elementi){
             portata.add(new Portata(e,false));
         }
-
         intentVisualizzaCategoria.putExtra("elementi", (Serializable) portata);
         intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
         //Ordinazione con le info collezionate in precedenza
@@ -132,24 +151,14 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     @Override
     public void onBackPressed() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_warning_two_button);
-        TextView errorMessage = dialog.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        errorMessage.setText("Tornando indietro perderai la corrente ordinazione");
-        dialog.show();
-
-        Button buttonNo = dialog.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        Button buttonSi = dialog.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-
-        buttonNo.setOnClickListener(view1 -> {
-            dialog.dismiss();
-        });
-
-        buttonSi.setOnClickListener(view1 -> {
-            Intent intentLogOut = new Intent(this, StartNuovaOrdinazioneActivity.class);
-            dialog.dismiss();
-            startActivity(intentLogOut);
-            super.onBackPressed();
-        });
+        mostraDialogWarningTwoBtn(dialog, "Tornando indietro perderai la corrente ordinazione",
+                view -> {
+                    Intent intentLogOut = new Intent(this, StartNuovaOrdinazioneActivity.class);
+                    dialog.dismiss();
+                    startActivity(intentLogOut);
+                    super.onBackPressed();
+                },
+                view -> dialog.dismiss());
     }
 
     @Override

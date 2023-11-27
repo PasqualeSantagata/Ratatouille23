@@ -43,7 +43,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala().toString());
         holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo().toString());
         //info singoli piatti della stessa ordinazione
-        holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getTempoPreparazione());
+       // holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getTempoPreparazione());
         holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getNome());
         holder.textViewNota.setText(ordinazioniPrenotate.get(position).getPortata().getBreveNota());
     }

@@ -98,6 +98,12 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
     @Override
+    public void ordinazioneFallita() {
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog,"Errore di connessione con il server", view -> dialog.dismiss());
+    }
+
+    @Override
     public void onItemClickRecyclerViewPortata(int position) {
         indiceElementoSelezionato = position;
         elementoSelezionato = portate.get(position);

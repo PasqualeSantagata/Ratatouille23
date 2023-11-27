@@ -6,6 +6,7 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ModificaElementoContract;
+import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.model.ElementoMenuModel;
@@ -20,11 +21,16 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
     private ModificaElementoContract.ViewAggiungiLingua aggiungiLinguaView;
+    private ModificaElementoContract.ViewDefinisciOrdine definisciOrdineView;
     public ModificaElementoPresenter(ModificaElementoContract.View modificaElementoMenuView) {
         this.modificaElementoMenuView = modificaElementoMenuView;
     }
     public ModificaElementoPresenter(ModificaElementoContract.ViewAggiungiLingua aggiungiLinguaView) {
         this.aggiungiLinguaView = aggiungiLinguaView;
+    }
+
+    public ModificaElementoPresenter(ModificaElementoContract.ViewDefinisciOrdine definisciOrdineView) {
+        this.definisciOrdineView = definisciOrdineView;
     }
 
     @Override
@@ -124,7 +130,23 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
                 }
             }
         }, elementoMenu,elmentoTradotto);
+    }
 
+    @Override
+    public void modificaOrdineCategoria(Categoria categoria){
+        categoriaModel.modificaOrdineCategoria(categoria, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+
+                }
+            }
+        });
 
 
     }

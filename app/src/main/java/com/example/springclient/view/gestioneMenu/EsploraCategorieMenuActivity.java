@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
+import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -62,9 +64,11 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     public void onItemClick(int position) {
         Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
         //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
-        List<ElementoMenu> elementi = categorie.get(position).getElementi();
-        intentVisualizzaCategoria.putExtra("elementi", (Serializable) elementi);
-        intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
+        Categoria categoria = categorie.get(position);
+        categoria.ordinaCategoria();
+        intentVisualizzaCategoria.putExtra("elementiCategoria", (Serializable) categorie.get(position).getElementi());
+        intentVisualizzaCategoria.putExtra("idCategoria", categoria.getId());
+        intentVisualizzaCategoria.putExtra("nomeCategoria", categoria.getNome());
         startActivity(intentVisualizzaCategoria);
 
     }
@@ -90,6 +94,18 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     @Override
     public void mostraImmagineCategoria(int posizione){
         adapterCategoria.notifyItemChanged(posizione);
+    }
+
+    @Override
+    public void caricamentoCategorieFallito() {
+        if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            Dialog dialog = new Dialog(this);
+            mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
+                Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
+                dialog.dismiss();
+                startActivity(intent);
+            });
+        }
     }
 
     @Override

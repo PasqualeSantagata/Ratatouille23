@@ -106,8 +106,12 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         });
 
         textViewAllergeni.setOnClickListener(view -> {
-            allergeni = elementiMenu.get(elementoSelezionato).getElementoMenu().getElencoAllergeni();
-            dialogAllergeni(this, allergeni, true);
+            if(elementoSelezionato != -1) {
+                allergeni = elementiMenu.get(elementoSelezionato).getElementoMenu().getElencoAllergeni();
+                dialogAllergeni(this, allergeni, true);
+            }else{
+                Toast.makeText(this,"Seleziona un elemento",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -187,7 +191,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
     @Override
     public void traduzioneAssente() {
-
+        Toast.makeText(this, "Traduzione non disponibile", Toast.LENGTH_LONG).show();
     }
 
     @Override

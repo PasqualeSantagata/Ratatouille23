@@ -112,7 +112,7 @@ public class OrdinazioneModel implements OrdinazioneContract.Model {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callbackResponse.onFailure(e);
                     }
                 });
 

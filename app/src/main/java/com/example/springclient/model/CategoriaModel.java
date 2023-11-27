@@ -95,7 +95,7 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        categoriaCallback.onFailure(e);
 
                     }
                 });
@@ -172,7 +172,7 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
     }
     public void aggiungiElemento(String nome, ElementoMenu elementoMenu, CallbackResponse<Void> callbackResponse){
         categoriaAPI.aggiungiElemento(nome, elementoMenu)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<Void>>() {
                     @Override
@@ -195,7 +195,7 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
 
     public void getCategoriaByNome(String nomeCategoria, CallbackResponse<Categoria> callbackResponse){
         categoriaAPI.getCategoriaByNome(nomeCategoria)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<Categoria>>() {
                     @Override
@@ -212,6 +212,53 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
                     public void onError(@NonNull Throwable e) {
                         callbackResponse.onFailure(e);
 
+                    }
+                });
+
+    }
+
+    public void modificaOrdineCategoria(Categoria categoria, CallbackResponse<Void> callbackResponse){
+        categoriaAPI.modificaOrdineCategoria(categoria)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+                        callbackResponse.onSuccess(voidResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                            callbackResponse.onFailure(e);
+                    }
+                });
+
+
+    }
+
+    public void eliminaElementoDallaCategoria(String idCategoira, ElementoMenu elementoMenu, CallbackResponse<Void> callbackResponse){
+        categoriaAPI.eliminaElementoDallaCategoira(idCategoira, elementoMenu)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+                        callbackResponse.onSuccess(voidResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callbackResponse.onFailure(e);
                     }
                 });
 

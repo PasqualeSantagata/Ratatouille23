@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -72,14 +73,14 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                             if (h >= 200 && h <= 500 && w >= 200 && w <= 500) {
                                 byte[] bytes = convertiImmagine(bitmap);
                                 caricaImmagine(bytes);
+                            }else{
+                                Toast.makeText(this, "Immagine con risoluzione errata", Toast.LENGTH_LONG).show();
                             }
                         } catch(IOException e){
-                                throw new RuntimeException(e);
-                            }
-
-                        Log.d("PhotoPicker", "Selected URI: " + uri);
+                                Toast.makeText(this, "Errore ne caricamento della foto", Toast.LENGTH_LONG).show();
+                        }
                     } else {
-                        Log.d("PhotoPicker", "No media selected");
+                        Toast.makeText(this, "Nessuna foto selezionata", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -106,7 +107,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
 
     public byte[] convertiImmagine(Bitmap bitmap){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
 
@@ -114,7 +115,6 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
         Intent intent = new Intent(this, CreaCategoriaActivity.class);
         intent.putExtra("immagine", immagine);
         startActivity(intent);
-
     }
 
     @Override

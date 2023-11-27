@@ -1,5 +1,7 @@
 package com.example.springclient.presenter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.springclient.RetrofitService.RetrofitService;
@@ -27,6 +29,62 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     }
 
 
+    @Override
+    public void salvaPortate(List<Portata> portataList){
+        ordinazioneModel.savePortate(new CallbackResponse<List<Portata>>() {
+            @Override
+            public void onFailure(Throwable t) {
+                viewOrdinazione.ordinazioneFallita();
+            }
+
+            @Override
+            public void onSuccess(Response<List<Portata>> retData) {
+                if(retData.isSuccessful()){
+                    List<Portata> portataOrdinazione = new ArrayList<>();
+                    for(Portata p: retData.body()){
+                        portataOrdinazione.add(new Portata(p.getId()));
+                    }
+                    viewOrdinazione.salvaOrdinazione(portataOrdinazione);
+                }
+            }
+        }, portataList);
+
+    }
+    @Override
+    public void salvaOrdinazione(Ordinazione ordinazione){
+        ordinazioneModel.aggiungiOrdinazione(new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+                viewOrdinazione.ordinazioneFallita();
+            }
+
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    viewOrdinazione.ordinazioneAvvvenutaConSuccesso();
+                }
+            }
+        }, ordinazione);
+
+    }
+    @Override
+    public void concludiOrdinazione(long idOrdinazione) {
+        ordinazioneModel.concludiOrdinazione(new CallbackResponse<Ordinazione>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+            @Override
+            public void onSuccess(Response<Ordinazione> retData) {
+                if(retData.isSuccessful()){
+
+
+                }
+            }
+        },idOrdinazione);
+    }
+
+    @Override
     public void getOrdinazioniSospese(){
         ordinazioneModel.getOrdinazioniSospese(new CallbackResponse<List<Ordinazione>>() {
             @Override
@@ -43,58 +101,5 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
         });
     }
 
-
-    public void salvaPortate(List<Portata> portataList){
-        ordinazioneModel.savePortate(new CallbackResponse<List<Portata>>() {
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-
-            @Override
-            public void onSuccess(Response<List<Portata>> retData) {
-                if(retData.isSuccessful()){
-                    List<Portata> portataOrdinazione = new ArrayList<>();
-                    for(Portata p: retData.body()){
-                        portataOrdinazione.add(new Portata(p.getId()));
-                    }
-                    viewOrdinazione.salvaOrdinazione(portataOrdinazione);
-                }
-            }
-        }, portataList);
-
-    }
-    public void salvaOrdinazione(Ordinazione ordinazione){
-        ordinazioneModel.aggiungiOrdinazione(new CallbackResponse<Void>() {
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-
-            @Override
-            public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
-                    viewOrdinazione.ordinazioneAvvvenutaConSuccesso();
-                }
-            }
-        }, ordinazione);
-
-    }
-
-    public void concludiOrdinazione(long idOrdinazione) {
-        ordinazioneModel.concludiOrdinazione(new CallbackResponse<Ordinazione>() {
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-            @Override
-            public void onSuccess(Response<Ordinazione> retData) {
-                if(retData.isSuccessful()){
-
-
-                }
-            }
-        },idOrdinazione);
-    }
 
 }

@@ -33,6 +33,8 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
             public void onSuccess(Response<Categoria> retData) {
                 if(retData.isSuccessful()){
                     creaCategoriaView.salvaImmagine(retData.body().getId());
+                }else{
+
                 }
             }
         });

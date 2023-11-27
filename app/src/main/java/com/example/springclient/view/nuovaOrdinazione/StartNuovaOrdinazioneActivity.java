@@ -1,6 +1,7 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -14,13 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.BaseView;
+import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
+public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements BaseView {
     private TextInputLayout textInputLayoutNumeroPersone;
     private TextInputLayout textInputLayoutSala;
     private TextInputLayout textInputLayoutTavolo;
@@ -38,6 +41,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
     private FloatingActionButton fabMinus;
     private int n = 0;
     private Ordinazione ordinazione;
+    private OrdinazioneContract.Presenter ordinazionePresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +51,13 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
         initializeComponents();
     }
 
-    private void initializeComponents(){
+    @Override
+    public Context getContext() {
+        return getContext();
+
+    }
+
+    public void initializeComponents(){
         textInputLayoutNumeroPersone = findViewById(R.id.textInputLayoutNumPersoneStartNuovaOrdinazione);
         EditText etNumPersone = textInputLayoutNumeroPersone.getEditText();
         textInputLayoutSala = findViewById(R.id.textInputLayoutSalaStartNuovaOrdinazione);
@@ -140,8 +150,8 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
                 Integer nPersone = n;
                 Integer ntavolo = n2;
                 Integer nsala = n3;
-                ordinazione = new Ordinazione(nPersone, ntavolo, nsala);
 
+                ordinazione = new Ordinazione(nPersone, ntavolo, nsala);
                 Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
                 intentCategorie.putExtra("ordinazione", ordinazione);
                 startActivity(intentCategorie);
@@ -180,23 +190,13 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_warning_two_button);
-        TextView errorMessage = dialog.findViewById(R.id.textViewDialogeWarnTwoBtn);
-        errorMessage.setText(R.string.dialog_sicuro_di_uscire);
-        dialog.show();
-
-        Button buttonNo = dialog.findViewById(R.id.buttonNoDialogWarnTwoBtn);
-        Button buttonSi = dialog.findViewById(R.id.buttonSiDialogWarnTwoBtn);
-
-        buttonNo.setOnClickListener(view1 -> {
-            dialog.dismiss();
-        });
-
-        buttonSi.setOnClickListener(view1 -> {
-            Intent intentLogOut = new Intent(this, MainActivity.class);
-            dialog.dismiss();
-            startActivity(intentLogOut);
-            super.onBackPressed();
-        });
+        mostraDialogWarningTwoBtn(dialog,"Sicuro di voler uscire?",
+                view -> {
+                    Intent intentLogOut = new Intent(this, MainActivity.class);
+                    dialog.dismiss();
+                    startActivity(intentLogOut);
+                    super.onBackPressed();
+                },
+                view -> dialog.dismiss());
     }
 }

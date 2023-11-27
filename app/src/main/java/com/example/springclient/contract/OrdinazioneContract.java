@@ -1,5 +1,8 @@
 package com.example.springclient.contract;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 
@@ -15,6 +18,7 @@ public interface OrdinazioneContract {
     interface ViewOrdinazione extends BaseView{
         void salvaOrdinazione(List<Portata> portateOrdinazione);
         void ordinazioneAvvvenutaConSuccesso();
+        void ordinazioneFallita();
     }
     interface ViewPrenotazionePortate{
         void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese);
@@ -26,5 +30,6 @@ public interface OrdinazioneContract {
         void salvaPortate(List<Portata> portataList);
         void concludiOrdinazione(long idOrdinazione);
         void salvaOrdinazione(Ordinazione ordinazione);
+
     }
 }
