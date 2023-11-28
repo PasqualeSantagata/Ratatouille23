@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AutenticazioneModel implements AutenticazioneContract.Model, AdminContract.Model {
+public class AutenticazioneModel {
 
     private final UtenteAPI utenteAPI;
     private static AutenticazioneModel ISTANCE;
@@ -33,7 +33,7 @@ public class AutenticazioneModel implements AutenticazioneContract.Model, AdminC
         return ISTANCE;
     }
 
-    @Override
+
     public void registraUtente(Utente utente, CallbackResponse<ApiResponse> callbackResponse) {
         utenteAPI.registraUtente(utente).enqueue(new Callback<ApiResponse>() {
             @Override
@@ -47,7 +47,7 @@ public class AutenticazioneModel implements AutenticazioneContract.Model, AdminC
             }
         });
     }
-    @Override
+
     public void logInUtente(AuthRequest authRequest, CallbackResponse<AuthenticationResponse> callbackResponse) {
         utenteAPI.logInUtente(authRequest)
                 .subscribeOn(Schedulers.io())

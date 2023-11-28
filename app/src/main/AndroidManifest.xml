@@ -38,7 +38,7 @@
 
 
         <activity
-            android:name=".view.gestioneMenu.InserisciElementoActivity"
+            android:name=".view.inserisciElemento.InserisciElementoActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -91,7 +91,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.nuovaOrdinazione.EsploraCategorieActivity"
+            android:name=".view.gestioneCategorie.EsploraCategorieActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -102,7 +102,7 @@
         </activity>
 
         <activity
-            android:name=".view.nuovaOrdinazione.VisualizzaCategoriaActivity"
+            android:name=".view.nuovaOrdinazione.VisualizzaMenuCategoriaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -114,7 +114,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.nuovaOrdinazione.RiepilogoOrdinazioneActivity"
+            android:name=".view.nuovaOrdinazione.RiepilogoRiepilogoOrdinazioneActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -138,7 +138,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.StartGestioneMenuActivity"
+            android:name=".view.StartGestioneMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -150,7 +150,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.HomeModificaElemMenuActivity"
+            android:name=".view.gestioneElementiMenu.HomeModificaElemMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -162,7 +162,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.EsploraCategorieMenuActivity"
+            android:name=".view.gestioneCategorie.EsploraCategorieMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -175,7 +175,7 @@
         </activity>
 
         <activity
-            android:name=".view.gestioneMenu.VisualizzaElementiDellaCategoriaActivity"
+            android:name=".view.gestioneCategorie.VisualizzaElementiDellaCategoriaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -187,7 +187,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.HomeNuovoElementoActivity"
+            android:name=".view.inserisciElemento.HomeNuovoElementoActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -198,25 +198,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-        <activity
-            android:name=".view.gestioneMenu.RiordinaElementiActivity"
-            android:exported="false"
-            android:configChanges="orientation"
-            android:screenOrientation= "landscape"
-            tools:ignore="LockedOrientationActivity"
-            android:windowSoftInputMode="adjustPan"
-            >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <activity
-            android:name=".view.gestioneMenu.CreaCategoriaActivity"
+            android:name=".view.gestioneCategorie.CreaCategoriaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -228,7 +214,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.SelezionaImmagineCategoriaActivity"
+            android:name=".view.gestioneCategorie.SelezionaImmagineCategoriaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -240,7 +226,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.CercaElementoActivity"
+            android:name=".view.gestioneElementiMenu.CercaElementoActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -252,7 +238,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.ModificaElementoActivity"
+            android:name=".view.gestioneElementiMenu.ModificaElementoActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -264,7 +250,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.SelezioneNuovaLinguaActivity"
+            android:name=".view.inserisciNuovaLingua.SelezioneNuovaLinguaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -276,7 +262,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.NuovoElementoNuovaLinguaActivity"
+            android:name=".view.inserisciNuovaLingua.NuovoElementoNuovaLinguaActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"
@@ -288,7 +274,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.gestioneMenu.FiltraCategoriaGestioneMenuActivity"
+            android:name=".view.gestioneCategorie.FiltraCategoriaGestioneMenuActivity"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"

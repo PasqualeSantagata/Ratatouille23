@@ -6,11 +6,6 @@ public interface RecuperoCredenzialiContract {
 
     }
 
-    interface Model{
-        void recuperaPassword(String email, CallbackResponse<Void> callbackResponse);
-
-    }
-
     interface View extends BaseView{
         void verificaEmail(String email);
         void emailErrata();

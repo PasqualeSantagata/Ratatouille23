@@ -7,26 +7,24 @@ import java.util.List;
 import okhttp3.ResponseBody;
 
 public interface MostraCategoriaContract {
-    interface Model{
-        void saveCategoria(Categoria categoria, CallbackResponse<Categoria> callbackResponse);
-
-        void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback);
-
-        void getFotoCategoriaById(String id, CallbackResponse<ResponseBody> categoriaCallback);
-
-
-    }
 
     interface View extends BaseView{
+        void mostraVisualizzaElementiDellaCategoria();
         void setCategorie(List<Categoria> categoriaList);
         void mostraImmagineCategoria(int posizione);
-
         void caricamentoCategorieFallito();
+        void apriRiepilogo();
     }
 
-    interface Presenter{
+    interface Presenter {
+
+        void tronaHomeModificaElementiMenu();
+        void mostraElementiDellaCategoria();
         void getAllCategorie();
         //comune a tutte le schermate che debbano mostrare l'elenco delle categorie
         void getFotoCategoriaById(Categoria categoria, int posizione);
+        void apriRiepilogo();
+
+        void mostraStartNuovaOrdinazione();
     }
 }

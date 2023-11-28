@@ -9,10 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.presenter.AdminPresenter;
 import com.example.springclient.view.analyticsView.StatisticheActivity;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
-import com.example.springclient.view.gestioneMenu.StartGestioneMenuActivity;
 
 public class  DashboardAdminActivity extends AppCompatActivity {
     private ImageView imageViewMenu;

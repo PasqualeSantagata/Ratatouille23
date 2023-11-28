@@ -15,22 +15,24 @@ public interface ModificaElementoContract {
         void elementoModificatoCorrettamente();
         void erroreModifica();
         void mostraErrori(String errore);
+        void mostraSelezionaNuovaLingua();
 
     }
-    interface ViewAggiungiLingua extends BaseView{
-        void linguaAggiunta();
 
-    }
     interface ViewDefinisciOrdine extends BaseView{
 
     }
-    interface Presenter{
+    interface Presenter {
         void getNomiCategoriaDisponibili(String id);
         void restituisciTraduzioneElemento(String id);
         void aggiungiElementoAllaCategoria(String nomeCategoria, ElementoMenu elementoMenu);
         void modificaElementoMenu(ElementoMenu elementoMenu);
-        void aggiungiLingua(String nomeElemento, ElementoMenu elementoTradotto);
         void modificaOrdineCategoria(Categoria categoria);
+        void tornaIndietro();
+
+        void mostraSelezionaNuovaLingua();
+        void mostraVisualizzaElementiDellaCategoria();
+
 
     }
 

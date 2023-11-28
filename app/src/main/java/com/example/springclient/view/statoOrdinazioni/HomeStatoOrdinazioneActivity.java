@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.GestisciComandeContract;
 import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.entity.StatoOrdinazione;
+import com.example.springclient.presenter.GestisciComandePresenter;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniCorrenti;
 import com.example.springclient.view.adapters.IRecycleViewOrdinazioniEvase;
@@ -36,13 +38,13 @@ import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
 public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewOrdinazioniCorrenti, IRecycleViewOrdinazioniPrenotate
-        , IRecycleViewOrdinazioniEvase, OrdinazioneContract.ViewPrenotazionePortate {
+        ,IRecycleViewOrdinazioniEvase, GestisciComandeContract.HomeGestioneComande {
 
     private RecyclerView recyclerViewOrdinazioniCorrenti;
     private RecyclerView recyclerViewOrdinazioniPrenotate;
     private RecyclerView recyclerViewOrdinazioniEvase;
     private StompClient stompClient;
-    private OrdinazionePresenter ordinazionePresenter;
+    private GestisciComandeContract.Presenter comandePresenter;
     private List<Ordinazione> ordinazioni;
     private List<StatoOrdinazione> ordinazioniSospese;
     private List<StatoOrdinazione> ordinazioniPrenotate;
@@ -60,14 +62,15 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         setContentView(R.layout.activity_stato_ordinazioni);
         getSupportActionBar().setTitle("STATO DELLE ORDINAZIONI");
 
-        ordinazionePresenter = new OrdinazionePresenter(this);
-        ordinazionePresenter.getOrdinazioniSospese();
+        comandePresenter = new GestisciComandePresenter(this);
+        comandePresenter.getOrdinazioniSospese();
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         email = getIntent().getStringExtra("email");
         ordinazioniPrenotate = new ArrayList<>();
         stompConnect();
     }
 
+    @Override
     public void setOrdinazioniSospese(List<Ordinazione> ordinazioni) {
         this.ordinazioni = ordinazioni;
         ordinazioniSospese = new ArrayList<>();
@@ -105,7 +108,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
             }
         }
         if (completo && idOrdinazione > 0) {
-            ordinazionePresenter.concludiOrdinazione(idOrdinazione);
+            comandePresenter.evadiOrdinazione(idOrdinazione);
         }
     }
 
@@ -147,9 +150,12 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
         setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, ordinazioniSospese);
         setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, ordinazioniPrenotate);
-
-
         //Reecuperare i dati e usare setDatiRecycleView per impostarle
+    }
+
+    @Override
+    public void tornaIndietro() {
+
     }
 
 

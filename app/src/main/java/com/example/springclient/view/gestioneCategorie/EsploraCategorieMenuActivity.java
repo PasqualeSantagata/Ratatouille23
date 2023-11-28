@@ -1,13 +1,11 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneCategorie;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,11 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
-import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
+import com.example.springclient.view.gestioneElementiMenu.HomeModificaElemMenuActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,6 +29,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     private MostraCategoriaContract.Presenter mostracategoriaMenuPresenter;
     private RecycleViewAdapterCategoria adapterCategoria;
     private Button indietroButton;
+    private Categoria categoria;
 
 
     @Override
@@ -45,13 +43,11 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         Button riepilogoButton = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
         riepilogoButton.setVisibility(View.INVISIBLE);
     }
-
+    @Override
     public void initializeComponents() {
         indietroButton = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
 
-        indietroButton.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        indietroButton.setOnClickListener(view -> mostracategoriaMenuPresenter.tronaHomeModificaElementiMenu());
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
         adapterCategoria = new RecycleViewAdapterCategoria(this, categorie, this);
         recyclerViewCategorie.setAdapter(adapterCategoria);
@@ -59,19 +55,28 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         recyclerViewCategorie.setLayoutManager(horizontal);
     }
 
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
+    }
 
     @Override
-    public void onItemClick(int position) {
+    public void mostraVisualizzaElementiDellaCategoria(){
         Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
-        //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
-        Categoria categoria = categorie.get(position);
-        categoria.ordinaCategoria();
-        intentVisualizzaCategoria.putExtra("elementiCategoria", (Serializable) categorie.get(position).getElementi());
+        intentVisualizzaCategoria.putExtra("elementiCategoria", (Serializable) categoria.getElementi());
         intentVisualizzaCategoria.putExtra("idCategoria", categoria.getId());
         intentVisualizzaCategoria.putExtra("nomeCategoria", categoria.getNome());
         startActivity(intentVisualizzaCategoria);
-
     }
+
+
+    @Override
+    public void onItemClick(int position) {
+        categoria = categorie.get(position);
+        categoria.ordinaCategoria();
+        mostracategoriaMenuPresenter.mostraElementiDellaCategoria();
+    }
+
 
     @Override
     public void setCategorie(List<Categoria> categorie){
@@ -109,8 +114,8 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     }
 
     @Override
-    public Context getContext(){
-        return getContext();
+    public void apriRiepilogo() {
+
     }
 
     @Override

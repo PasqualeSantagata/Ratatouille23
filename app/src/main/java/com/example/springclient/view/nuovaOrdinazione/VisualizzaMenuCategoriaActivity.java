@@ -1,7 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,20 +20,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
+import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
+import com.example.springclient.view.gestioneCategorie.EsploraCategorieActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class VisualizzaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View, BaseAllergeniDialog {
+public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View, BaseAllergeniDialog,
+        OrdinazioneContract.ViewElementiOrdinazione {
     //impostare categoria dall'intent
     private Button buttonIndietro;
     private Button buttonRiepilogo;
@@ -50,6 +52,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
     private boolean b;
     private List<String> allergeni;
     private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
+    private OrdinazioneContract.Presenter viewElementiOrdinazionePresenter;
     private String nome;
 
     @Override
@@ -61,7 +64,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         getSupportActionBar().setTitle(nome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
-
+        viewElementiOrdinazionePresenter = new OrdinazionePresenter(this);
         visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
         initializeComponents();
     }
@@ -91,14 +94,12 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
 
         buttonIndietro.setOnClickListener(view -> {
             allergeni = elementiMenu.get(elementoSelezionato).getElementoMenu().getElencoAllergeni();
-            onBackPressed();
+            viewElementiOrdinazionePresenter.tornaEsploraCategorie();
         });
 
         buttonRiepilogo.setOnClickListener(view -> {
             if(ordinazione != null && ordinazione.getElementiOrdinati().size() != 0) {
-                Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
-                intentRiepilogo.putExtra("ordinazione", ordinazione);
-                startActivity(intentRiepilogo);
+                visualizzaElementiPresenter.mostraRiepilogo();
             }
             else{
                 mostraDialogWarningOneBtn("Attenzione l'ordinazione non ha elementi");
@@ -115,6 +116,11 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         });
     }
 
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
+    }
+
 
     private void mostraDialogWarningOneBtn(String messaggio){
         Dialog dialogAttenzione = new Dialog(this);
@@ -126,9 +132,7 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
         dialogAttenzione.show();
 
-        buttonOk.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+        buttonOk.setOnClickListener(view -> dialogAttenzione.dismiss());
     }
 
     @Override
@@ -194,15 +198,6 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         Toast.makeText(this, "Traduzione non disponibile", Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void setElementi(List<ElementoMenu> elementoMenuList) {
-
-    }
-
-    @Override
-    public void rimuoviElemento() {
-
-    }
 
 
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
@@ -241,8 +236,29 @@ public class VisualizzaCategoriaActivity extends AppCompatActivity implements IR
         startActivity(intentEsploraCategorie);
         super.onBackPressed();
     }
+
+
+
     @Override
-    public Context getContext(){
-        return getContext();
+    public void mostraRiepilogo() {
+        Intent intentRiepilogo = new Intent(this, RiepilogoRiepilogoOrdinazioneActivity.class);
+        intentRiepilogo.putExtra("ordinazione", ordinazione);
+        startActivity(intentRiepilogo);
     }
+
+    @Override
+    public void mostraModifica(ElementoMenu elementoMenu) {
+
+    }
+
+    @Override
+    public void setElementi(List<ElementoMenu> elementoMenuList) {
+
+    }
+
+    @Override
+    public void rimuoviElemento() {
+
+    }
+
 }

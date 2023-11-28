@@ -8,8 +8,6 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.model.ElementoMenuModel;
 
-import java.util.List;
-
 import retrofit2.Response;
 
 public class VisualizzElementiPresenter implements VisualizzElementiContract.Presenter {
@@ -19,42 +17,6 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
     private VisualizzElementiContract.View visualizzaElementiView;
     public VisualizzElementiPresenter(VisualizzElementiContract.View visualizzaElementiView){
         this.visualizzaElementiView = visualizzaElementiView;
-    }
-
-
-    @Override
-    public void getElementiMenu() {
-        elementoMenuModel.getAllElementiMenu(new CallbackResponse<List<ElementoMenu>>() {
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-
-            @Override
-            public void onSuccess(Response<List<ElementoMenu>> retData) {
-                if(retData.isSuccessful()){
-                    visualizzaElementiView.setElementi(retData.body());
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void rimuoviElementoMenu(String idElemento) {
-        elementoMenuModel.rimuoviElemento(new CallbackResponse<Void>() {
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-
-            @Override
-            public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
-                    visualizzaElementiView.rimuoviElemento();
-                }
-            }
-        }, idElemento);
     }
 
     @Override
@@ -77,22 +39,14 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
     }
 
     @Override
+    public void mostraModifica(ElementoMenu elementoMenu) {
+        visualizzaElementiView.mostraModifica(elementoMenu);
+    }
+
+
+    @Override
     public void restituisciTraduzione(String idElemento) {
-        elementoMenuModel.restituisciTraduzione(new CallbackResponse<ElementoMenu>() {
-            @Override
-            public void onFailure(Throwable t) {
 
-            }
-
-            @Override
-            public void onSuccess(Response<ElementoMenu> retData) {
-                if(retData.isSuccessful()) {
-                    visualizzaElementiView.mostraTraduzione(retData.body());
-                }else {
-                    visualizzaElementiView.traduzioneAssente();
-                }
-            }
-        }, idElemento);
     }
 
     @Override
@@ -112,6 +66,7 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
     @Override
     public void aggiornaElementiCategoria(String nomeCategoria){
+
         categoriaModel.getCategoriaByNome(nomeCategoria, new CallbackResponse<Categoria>() {
             @Override
             public void onFailure(Throwable t) {
@@ -131,6 +86,11 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
             }
         });
 
+    }
+
+    @Override
+    public void mostraRiepilogo() {
+        visualizzaElementiView.mostraRiepilogo();
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
+import com.example.springclient.view.gestioneCategorie.EsploraCategorieActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -30,7 +30,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable, OrdinazioneContract.ViewOrdinazione {
+public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable, OrdinazioneContract.ViewRiepilogoOrdinazione {
 
     private Button buttonIndietro;
     private Button buttonOk;
@@ -74,11 +74,14 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         //Buttons
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
         buttonIndietro = findViewById(R.id.buttonIndietroRiepilogo);
-        buttonOk.setOnClickListener(view -> {
-            presenterOrdinazione.salvaPortate(portate);
-        });
-        buttonIndietro.setOnClickListener(view -> onBackPressed());
+        buttonOk.setOnClickListener(view -> presenterOrdinazione.salvaPortate(portate));
+        buttonIndietro.setOnClickListener(view -> presenterOrdinazione.tornaEsploraCategorie());
 
+    }
+
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
     }
 
     public void salvaOrdinazione(List<Portata> portateOrdinazione) {
@@ -182,10 +185,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     public void notifyAdapter() {
         adapterElementoMenu.notifyDataSetChanged();
-    }
-    @Override
-    public Context getContext(){
-        return getContext();
     }
 
 

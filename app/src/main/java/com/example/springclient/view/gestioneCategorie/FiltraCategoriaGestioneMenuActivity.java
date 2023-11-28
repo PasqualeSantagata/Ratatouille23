@@ -1,6 +1,5 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneCategorie;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -51,10 +50,6 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
     }
 
     @Override
-    public Context getContext() {
-        return getApplicationContext();
-    }
-
     public void initializeComponents() {
         //buttons
         buttonNome = findViewById(R.id.buttonNomeFiltraCategoria);
@@ -82,9 +77,7 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
 
             }
         });
-        buttonTabellaAllergeni.setOnClickListener(view -> {
-            dialogAllergeni(this, allergeni, false);
-        });
+        buttonTabellaAllergeni.setOnClickListener(view -> dialogAllergeni(this, allergeni, false));
         intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
 
         buttonOk.setOnClickListener(view -> {
@@ -109,14 +102,11 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoDecrescente);
                 }
             }
-            intentVisualizzaCategoria.putExtra("categoria", (Serializable) categoria);
-            modificaElementoPresenter.modificaOrdineCategoria(categoria);
 
-            startActivity(intentVisualizzaCategoria);
+            modificaElementoPresenter.modificaOrdineCategoria(categoria);
+            modificaElementoPresenter.mostraVisualizzaElementiDellaCategoria();
         });
-        buttonAnnulla.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        buttonAnnulla.setOnClickListener(view -> modificaElementoPresenter.mostraVisualizzaElementiDellaCategoria());
 
         //Check box
         checkboxNome = findViewById(R.id.checkBoxFiltroNome);
@@ -133,6 +123,11 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
             }
         });
 
+    }
+
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
     }
 
     private void filtraAllergeni() {

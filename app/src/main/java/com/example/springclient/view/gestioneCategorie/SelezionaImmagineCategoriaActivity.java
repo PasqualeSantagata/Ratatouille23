@@ -1,4 +1,4 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneCategorie;
 
 import static android.graphics.BitmapFactory.decodeResource;
 
@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,7 +19,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
+import com.example.springclient.contract.CreaCategoriaContract;
 import com.example.springclient.entity.Categoria;
+import com.example.springclient.presenter.CreaCategoriaPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
@@ -29,12 +30,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewCategoria {
+public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewCategoria, CreaCategoriaContract.ScegliFotoView {
     private RecyclerView recyclerViewImmagini;
     private RecycleViewAdapterCategoria adapterCategoria;
     private Button buttonIndietro;
     private Button buttonAggiungiImmagine;
     private List<Categoria> categorieList ;
+    private CreaCategoriaContract.Presenter creaCategoriaPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
         getSupportActionBar().setTitle("SELEZIONA IMMAGINE CATEGORIA");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         categorieList = new ArrayList<>();
+        creaCategoriaPresenter = new CreaCategoriaPresenter(this);
         setImmaginiCategoriaDefault();
         initializeComponents();
     }
@@ -56,8 +59,22 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
         }
 
     }
+    private void setImmaginiRecycleView(){
+        adapterCategoria = new RecycleViewAdapterCategoria(this, categorieList, this);
+        recyclerViewImmagini.setAdapter(adapterCategoria);
 
-    private void initializeComponents() {
+        GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
+        recyclerViewImmagini.setLayoutManager(horizontal);
+    }
+
+    private byte[] convertiImmagine(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    @Override
+    public void initializeComponents() {
         recyclerViewImmagini = findViewById(R.id.recyclerViewSelezImgCategoriaGestioneMenu);
         //aggiungiImmagineFab = findViewById(R.id.floatingActionButton);
         buttonAggiungiImmagine = findViewById(R.id.buttonAggingiImmagineSelezImmagine);
@@ -72,7 +89,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                             int h = bitmap.getHeight();
                             if (h >= 200 && h <= 500 && w >= 200 && w <= 500) {
                                 byte[] bytes = convertiImmagine(bitmap);
-                                caricaImmagine(bytes);
+                                creaCategoriaPresenter.caricaImmagine(bytes);
                             }else{
                                 Toast.makeText(this, "Immagine con risoluzione errata", Toast.LENGTH_LONG).show();
                             }
@@ -84,33 +101,20 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                     }
                 });
 
-        buttonAggiungiImmagine.setOnClickListener(view -> {
-            pickMedia.launch(new PickVisualMediaRequest.Builder()
-                    .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                    .build());
-
-        });
+        buttonAggiungiImmagine.setOnClickListener(view -> pickMedia.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                .build()));
         setImmaginiRecycleView();
 
-        buttonIndietro.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        buttonIndietro.setOnClickListener(view -> creaCategoriaPresenter.annullaInserisciImmagine());
     }
 
-    public void setImmaginiRecycleView(){
-        adapterCategoria = new RecycleViewAdapterCategoria(this, categorieList, this);
-        recyclerViewImmagini.setAdapter(adapterCategoria);
-
-        GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
-        recyclerViewImmagini.setLayoutManager(horizontal);
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
     }
 
-    public byte[] convertiImmagine(Bitmap bitmap){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
-
+    @Override
     public void caricaImmagine(byte[] immagine){
         Intent intent = new Intent(this, CreaCategoriaActivity.class);
         intent.putExtra("immagine", immagine);

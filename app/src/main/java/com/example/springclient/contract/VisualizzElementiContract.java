@@ -11,19 +11,18 @@ public interface VisualizzElementiContract {
         void traduzioneAssente();
         void setElementi(List<ElementoMenu> elementoMenuList);
         void rimuoviElemento();
-
+        void mostraRiepilogo();
+        void mostraModifica(ElementoMenu elementoMenu);
 
     }
 
-    interface Presenter{
+    interface Presenter {
 
-        void getElementiMenu();
-        void rimuoviElementoMenu(String idElemento);
+        void mostraModifica(ElementoMenu elementoMenu);
         void restituisciTraduzione(String idElemento);
         void restituisciLinguaBase(String idElemento);
         void aggiornaElementiCategoria(String nomeCategoria);
         void eliminaElementoDallaCategoria(Long idCategoria, ElementoMenu elementoMenu);
-
-
+        void mostraRiepilogo();
     }
 }

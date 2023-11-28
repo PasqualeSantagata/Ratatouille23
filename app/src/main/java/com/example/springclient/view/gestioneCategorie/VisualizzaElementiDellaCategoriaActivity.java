@@ -1,7 +1,6 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneCategorie;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -23,11 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
-import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
+import com.example.springclient.view.gestioneCategorie.EsploraCategorieMenuActivity;
+import com.example.springclient.view.gestioneCategorie.FiltraCategoriaGestioneMenuActivity;
+import com.example.springclient.view.gestioneElementiMenu.ModificaElementoActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -169,6 +170,11 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         });
     }
 
+    @Override
+    public void tornaIndietro() {
+
+    }
+
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
@@ -241,6 +247,16 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
+    public void mostraRiepilogo() {
+
+    }
+
+    @Override
+    public void mostraModifica(ElementoMenu elementoMenu) {
+
+    }
+
+    @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
         invalidateOptionsMenu();
         b = true;
@@ -268,13 +284,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     public void onBackPressed() {
         Intent esploraCategorie = new Intent(this, EsploraCategorieMenuActivity.class);
         startActivity(esploraCategorie);
-
         super.onBackPressed();
-    }
-
-    @Override
-    public Context getContext() {
-        return getContext();
     }
 
 }

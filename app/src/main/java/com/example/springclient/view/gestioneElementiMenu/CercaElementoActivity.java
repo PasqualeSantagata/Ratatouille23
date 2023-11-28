@@ -1,4 +1,4 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneElementiMenu;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -17,9 +17,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.VisualizzElementiContract;
+import com.example.springclient.contract.GestioneElementiContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.presenter.VisualizzElementiPresenter;
+import com.example.springclient.presenter.GestioneElementiPresenter;
+import com.example.springclient.view.StartGestioneMenuActivity;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenuInfoBtn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,18 +33,20 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
-public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View {
+public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu, GestioneElementiContract.CercaElementoView {
 
     private Button buttonInditero;
     private RecyclerView recyclerViewElementi;
     private RecycleViewAdapterGestioneElementoMenuInfoBtn adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
-    private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
+    private GestioneElementiContract.Presenter gestioneElementiPresenter;
     private AutoCompleteTextView autoTextView;
     private List<ElementoMenu> elementoMenuListApp;
     private TextInputLayout textInputLayoutDescrizione;
     private Context dialogDettagliContext;
+    private ElementoMenu elementoDaEliminare;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,10 +54,10 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         setContentView(R.layout.activity_cerca_elemento_gestione_menu);
         getSupportActionBar().setTitle("CERCA ELEMENTO MENU");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
-        visualizzaElementiPresenter.getElementiMenu();
+        gestioneElementiPresenter = new GestioneElementiPresenter(this);
+        gestioneElementiPresenter.getElementiMenu();
     }
-
+    @Override
     @SuppressLint("CheckResult")
     public void initializeComponents() {
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
@@ -91,19 +94,18 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                             adapter.notifyDataSetChanged();
                         });
 
-        buttonInditero.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        buttonInditero.setOnClickListener(view -> gestioneElementiPresenter.tornaStartGestioneMenu());
     }
+
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
+    }
+
 
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
-    }
-
-    private String getTextInputLayoutText(TextInputLayout textInputLayout) {
-        EditText editText = textInputLayout.getEditText();
-        return editText.getText().toString();
     }
 
     private void startDialogDettagliElemento(ElementoMenu elementoMenu) {
@@ -126,20 +128,13 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         dialogDettagli.show();
 
         fabModifica.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ModificaElementoActivity.class);
-            intent.putExtra("elementoMenu", elementoMenu);
-            startActivity(intent);
+            gestioneElementiPresenter.mostraModificaElemento(elementoMenu);
             dialogDettagli.dismiss();
         });
 
-        buttonIndietro.setOnClickListener(view -> {
-            dialogDettagli.dismiss();
-        });
+        buttonIndietro.setOnClickListener(view -> dialogDettagli.dismiss());
 
-        buttonTraduzione.setOnClickListener(view -> {
-            visualizzaElementiPresenter.restituisciTraduzione(elementoMenu.getId().toString());
-        });
-
+        buttonTraduzione.setOnClickListener(view -> gestioneElementiPresenter.restituisciTraduzione(elementoMenu));
 
     }
 
@@ -149,22 +144,12 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
             setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
     }
-    @Override
-    public void setElementi(List<ElementoMenu> elementoMenuList) {
-        this.elementoMenuList = elementoMenuList;
-        this.elementoMenuListApp = new ArrayList<>();
-        elementoMenuListApp.addAll(elementoMenuList);
-        initializeComponents();
-    }
 
     @Override
     public void traduzioneAssente() {
         Toast.makeText(dialogDettagliContext, "Non esiste una lingua alternativa per questo elemento", Toast.LENGTH_LONG).show();
     }
-    @Override
-    public void rimuoviElemento() {
 
-    }
 
     @Override
     public void onItemClickRecyclerViewPortata(int position) {
@@ -173,15 +158,8 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     public void onButtonDeleted(int position) {
-        Dialog dialog = new Dialog(this);
-        mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
-                view -> {
-                        visualizzaElementiPresenter.rimuoviElementoMenu(elementoMenuList.get(position).getId().toString());
-                        adapter.notifyItemChanged(position);
-                        dialog.dismiss();
-                },
-                view -> dialog.dismiss()
-        );
+        elementoDaEliminare = elementoMenuList.get(position);
+        gestioneElementiPresenter.avviaRimuoviElemento();
     }
 
     @Override
@@ -193,12 +171,45 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     @Override
     protected void onResume() {
-        visualizzaElementiPresenter.getElementiMenu();
+        gestioneElementiPresenter.getElementiMenu();
         super.onResume();
     }
 
     @Override
-    public Context getContext(){
-        return getContext();
+    public void mostraModificaElemento(ElementoMenu elementoMenu) {
+        Intent intent = new Intent(this, ModificaElementoActivity.class);
+        intent.putExtra("elementoMenu", elementoMenu);
+        startActivity(intent);
+    }
+
+    @Override
+    public void elementoEliminato() {
+        int pos = elementoMenuList.indexOf(elementoDaEliminare);
+        adapter.notifyItemChanged(pos);
+    }
+
+    @Override
+    public void impossibileContattareIlServer(String messaggio){
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog,  messaggio, view -> dialog.dismiss());
+    }
+
+    @Override
+    public void rimuoviElementoDalMenu() {
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningTwoBtn(dialog, "Vuoi eliminare " + elementoDaEliminare.getNome() +" dal menù?",
+              view -> {
+                    gestioneElementiPresenter.rimuoviElementoMenu(elementoDaEliminare);
+                    dialog.dismiss();
+              },
+                view -> dialog.dismiss());
+    }
+
+    @Override
+    public void caricaElementi(List<ElementoMenu> elementoMenuList) {
+        this.elementoMenuList = elementoMenuList;
+        this.elementoMenuListApp = new ArrayList<>();
+        elementoMenuListApp.addAll(elementoMenuList);
+        initializeComponents();
     }
 }

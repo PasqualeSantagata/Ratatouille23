@@ -46,10 +46,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         initializeComponents();
     }
 
-    @Override
-    public Context getContext() {
-        return getContext();
-    }
 
     @Override
     public void initializeComponents() {
@@ -76,6 +72,11 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         indietroButton.setOnClickListener(view -> {
             onBackPressed();
         });
+
+    }
+
+    @Override
+    public void tornaIndietro() {
 
     }
 

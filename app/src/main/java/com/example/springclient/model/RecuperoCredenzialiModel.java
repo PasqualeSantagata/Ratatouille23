@@ -9,10 +9,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecuperoCredenzialiModel implements RecuperoCredenzialiContract.Model {
+public class RecuperoCredenzialiModel {
     private final RecuperoCredenzialiAPI recuperoCredenzialiAPI = RetrofitService.getIstance().getRecuperoCredenzialiAPI();
 
-    @Override
     public void recuperaPassword(String email, CallbackResponse<Void> callbackResponse) {
         recuperoCredenzialiAPI.passwordDimenticata(email)
                 .enqueue(new Callback<Void>() {

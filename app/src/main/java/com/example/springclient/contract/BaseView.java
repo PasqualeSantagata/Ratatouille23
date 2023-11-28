@@ -1,21 +1,16 @@
 package com.example.springclient.contract;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.springclient.R;
-import com.example.springclient.view.gestioneMenu.HomeModificaElemMenuActivity;
-
-import java.util.Collections;
-import java.util.List;
 
 public interface BaseView {
-    Context getContext();
     void initializeComponents();
+    void tornaIndietro();
+
 
     default void mostraDialogErroreOneBtn(Dialog dialogAttenzione, String messaggio, View.OnClickListener eventoOk){
         dialogAttenzione.setContentView(R.layout.dialog_err_one_btn);

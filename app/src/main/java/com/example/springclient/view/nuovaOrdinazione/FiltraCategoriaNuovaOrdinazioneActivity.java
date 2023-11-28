@@ -71,7 +71,7 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
         buttonTabellaAllergeni.setOnClickListener(view -> {
             dialogAllergeni(this, allergeni, false);
         });
-        intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
+        intentVisualizzaCategoria = new Intent(this, VisualizzaMenuCategoriaActivity.class);
 
         buttonOk.setOnClickListener(view -> {
             if(checkboxAllergeni.isChecked()){

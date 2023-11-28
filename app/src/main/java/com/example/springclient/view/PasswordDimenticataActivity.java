@@ -36,11 +36,6 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
     }
 
     @Override
-    public Context getContext() {
-        return getContext();
-    }
-
-    @Override
     public void initializeComponents(){
         emailTextInputLayout = findViewById(R.id.textInputLayoutEmailPassDimenticata);
         buttonOk = findViewById(R.id.buttonOkPassDimenticata);
@@ -52,6 +47,11 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
             String email = String.valueOf(emailTextInputLayout.getEditText().getText());
             verificaEmail(email);
         });
+    }
+
+    @Override
+    public void tornaIndietro() {
+
     }
 
     @Override

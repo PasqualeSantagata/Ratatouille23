@@ -1,13 +1,11 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.inserisciElemento;
 
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,12 +17,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.FoodFactsPresenter;
 import com.example.springclient.presenter.InserisciElementoPresenter;
+import com.example.springclient.view.inserisciNuovaLingua.SelezioneNuovaLinguaActivity;
+import com.example.springclient.view.StartGestioneMenuActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
 
@@ -35,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.View, BaseAllergeniDialog {
+public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.InserisciElementoView, BaseAllergeniDialog {
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
     private TextInputLayout descrizioneTextInputLayout;
@@ -46,7 +45,6 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     private AutoCompleteTextView autoTextView;
     private List<String> suggeriti;
     private ArrayAdapter<String> adapter;
-    private List<ProdottoResponse> prodotti;
     private Disposable autocompDisposable;
     private List<String> allergeni;
     private String linguaSelezionata;
@@ -107,17 +105,28 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
 
             }
         });
-        indietroButton.setOnClickListener(view -> {
-            onBackPressed();
-
-        });
-        inserisciButton.setOnClickListener(view -> {
-            dialogAllergeni(this, allergeni, false);
-        });
+        indietroButton.setOnClickListener(view -> inserisciElementoPresenter.tornaStartGestioneMenu());
+        inserisciButton.setOnClickListener(view -> dialogAllergeni(this, allergeni, false));
 
     }
 
-    private void elementoSalvatoCorrettamenteDialog() {
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
+    }
+
+    @Override
+    public void mostraSelezioneNuovaLingua(){
+        Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+        nuovaLingua.putExtra("elemento", elementoMenu);
+
+        cleanFields();
+        startActivity(nuovaLingua);
+    }
+
+    @Override
+    public void elementoInseritoCorrettamente() {
+        cleanFields();
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_two_button);
         TextView dialogTv = dialog.findViewById(R.id.textViewDialogOkTwoBtn);
@@ -127,25 +136,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         okButton.setText("AGGIUNGI");
         dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi aggiungi, altrimenti premi " +
                 "indietro per aggiungere un nuovo elemento");
-        indietroButton.setOnClickListener(view -> {
-            Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
-            startActivity(intentHome);
-        });
-        okButton.setOnClickListener(view -> {
-            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
-            nuovaLingua.putExtra("elemento", elementoMenu);
-            dialog.dismiss();
-            cleanFields();
-            startActivity(nuovaLingua);
-        });
+        indietroButton.setOnClickListener(view -> inserisciElementoPresenter.mostraHomeNuovoElemento());
+        okButton.setOnClickListener(view -> inserisciElementoPresenter.mostraSelezioneNuovaLingua());
+        dialog.dismiss();
         dialog.show();
-    }
 
-
-    @Override
-    public void elementoInseritoCorrettamente() {
-        cleanFields();
-        elementoSalvatoCorrettamenteDialog();
     }
 
     @Override
@@ -203,20 +198,24 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         return checked;
     }
 
-    public void cleanFields() {
+    private void cleanFields() {
         nomeElementoTextInputLayout.getEditText().setText("");
         prezzoElementoTextInputLayout.getEditText().setText("");
         descrizioneTextInputLayout.getEditText().setText("");
     }
 
-
-    public void generateNames(List<String> names, List<ProdottoResponse> prodotti) {
+    @Override
+    public void generaNomi(List<String> names) {
         suggeriti = names;
-        this.prodotti = prodotti;
-        Log.d("suggeriti: ", suggeriti.toString());
         adapter = new ArrayAdapter<>(InserisciElementoActivity.this, android.R.layout.simple_dropdown_item_1line, suggeriti);
         autoTextView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void mostraHomeNuovoElemento() {
+        Intent intentHome = new Intent(this, HomeNuovoElementoActivity.class);
+        startActivity(intentHome);
     }
 
     @Override
@@ -236,6 +235,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     }
 
     @Override
+    public void erroreInserimentoElemento(){
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, "Impossibile comunicare con il server", view -> dialog.dismiss());
+    }
+
+    @Override
     public void onBackPressed() {
         Dialog dialog = new Dialog(this);
         mostraDialogWarningTwoBtn(dialog,
@@ -246,8 +251,4 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
                 }, view -> dialog.dismiss());
     }
 
-    @Override
-    public Context getContext(){
-        return getContext();
-    }
 }

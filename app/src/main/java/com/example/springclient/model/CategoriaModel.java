@@ -23,13 +23,13 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class CategoriaModel implements MostraCategoriaContract.Model {
+public class CategoriaModel{
     private CategoriaAPI categoriaAPI;
     public CategoriaModel(RetrofitService retrofitService) {
         this.categoriaAPI = retrofitService.getCategoriaAPI();
     }
 
-    @Override
+
     public void saveCategoria(Categoria categoria, CallbackResponse<Categoria> categoriaCallback) {
         categoriaAPI.saveCategoria(categoria)
                 .subscribeOn(Schedulers.io())
@@ -77,7 +77,6 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
     }
 
 
-    @Override
     public void getAllCategorie(CallbackResponse<List<Categoria>> categoriaCallback) {
         categoriaAPI.getAllCategorie()
                 .subscribeOn(Schedulers.io())
@@ -102,7 +101,6 @@ public class CategoriaModel implements MostraCategoriaContract.Model {
 
     }
 
-    @Override
     public void getFotoCategoriaById( String id, CallbackResponse<ResponseBody> categoriaCallback) {
         categoriaAPI.getFotoCategoriaById(id)
                 .subscribeOn(Schedulers.io())

@@ -1,6 +1,5 @@
 package com.example.springclient.presenter;
 
-import android.app.Dialog;
 import android.util.Log;
 
 import com.example.springclient.RetrofitService.RetrofitService;
@@ -8,17 +7,26 @@ import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.model.ElementoMenuModel;
 import com.google.gson.Gson;
+
+import java.util.List;
 
 import retrofit2.Response;
 
 public class InserisciElementoPresenter implements InserisciElementoContract.Presenter{
     private ElementoMenuModel elementoMenuModel= new ElementoMenuModel(RetrofitService.getIstance());
-    private InserisciElementoContract.View inserisciElementoView;
+    private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
+    private InserisciElementoContract.InserisciElementoView inserisciElementoView;
+    private InserisciElementoContract.HomeNuovoElmentoView homeNuovoElementoView;
 
-    public InserisciElementoPresenter(InserisciElementoContract.View inserisciElementoView){
+    public InserisciElementoPresenter(InserisciElementoContract.InserisciElementoView inserisciElementoView){
         this.inserisciElementoView = inserisciElementoView;
+    }
+
+    public InserisciElementoPresenter(InserisciElementoContract.HomeNuovoElmentoView homeNuovoElementoView) {
+        this.homeNuovoElementoView = homeNuovoElementoView;
     }
 
     @Override
@@ -27,8 +35,7 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
             @Override
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
-                Dialog dialog = new Dialog(inserisciElementoView.getContext());
-                inserisciElementoView.mostraDialogErroreOneBtn(dialog, "Impossibile comunicare con il server", view -> dialog.dismiss());
+                inserisciElementoView.elementoInseritoCorrettamente();
             }
 
             @Override
@@ -45,10 +52,48 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
                 }
             }
         });
-
-
-
-
     }
 
+    @Override
+    public void getNomiCategorie() {
+        categoriaModel.getNomiCategorie(new CallbackResponse<List<String>>() {
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+            @Override
+            public void onSuccess(Response<List<String>> retData) {
+                if(retData.isSuccessful()){
+                    homeNuovoElementoView.setNomiCategorie(retData.body());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void mostraCreaCategoria() {
+        homeNuovoElementoView.mostraCreaCategoria();
+    }
+    @Override
+    public void mostraInserisciElemento() {
+        homeNuovoElementoView.mostraInserisciElemento();
+    }
+    @Override
+    public void mostraStartGestioneMenu() {
+        homeNuovoElementoView.tornaIndietro();
+    }
+    @Override
+    public void tornaStartGestioneMenu(){
+        inserisciElementoView.tornaIndietro();
+    }
+
+    @Override
+    public void mostraHomeNuovoElemento() {
+        inserisciElementoView.mostraHomeNuovoElemento();
+    }
+
+    @Override
+    public void mostraSelezioneNuovaLingua() {
+        inserisciElementoView.mostraSelezioneNuovaLingua();
+    }
 }

@@ -1,12 +1,10 @@
-package com.example.springclient.view.nuovaOrdinazione;
+package com.example.springclient.view.gestioneCategorie;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,7 +22,9 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.gestioneMenu.HomeModificaElemMenuActivity;
+import com.example.springclient.view.nuovaOrdinazione.RiepilogoRiepilogoOrdinazioneActivity;
+import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
+import com.example.springclient.view.nuovaOrdinazione.VisualizzaMenuCategoriaActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,6 +38,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
     private List<Categoria> categorie;
     private RecycleViewAdapterCategoria adapterCategoria;
+    private Categoria categoria;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,27 +68,53 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
-        buttonRiepilogo.setOnClickListener(view -> {
-            if (ordinazione.ordinazioneVuota()){
-                Dialog dialog = new Dialog(this);
-                mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
-            } else {
-                // starta il riepilogo ordinazione non vuota
-                Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
-                intentRiepilogo.putExtra("ordinazione",ordinazione);
-                startActivity(intentRiepilogo);
-            }
-        });
-       buttonIndietro.setOnClickListener(view -> {
-           onBackPressed();
-       });
-
+        buttonRiepilogo.setOnClickListener(view -> categoriaPresenter.apriRiepilogo());
+       buttonIndietro.setOnClickListener(view -> categoriaPresenter.mostraStartNuovaOrdinazione());
 
     }
+    @Override
+    public void apriRiepilogo(){
+        if (ordinazione.ordinazioneVuota()){
+            Dialog dialog = new Dialog(this);
+            mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
+        } else {
+            // starta il riepilogo ordinazione non vuota
+            Intent intentRiepilogo = new Intent(this, RiepilogoRiepilogoOrdinazioneActivity.class);
+            intentRiepilogo.putExtra("ordinazione",ordinazione);
+            startActivity(intentRiepilogo);
+        }
+    }
+
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
+    }
+
+    @Override
+    public void mostraVisualizzaElementiDellaCategoria() {
+        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaMenuCategoriaActivity.class);
+        //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
+        List<ElementoMenu> elementi = categoria.getElementi();
+        List<Portata> portata = new ArrayList<>();
+        for(ElementoMenu e: elementi){
+            portata.add(new Portata(e,false));
+        }
+        intentVisualizzaCategoria.putExtra("elementi", (Serializable) portata);
+        intentVisualizzaCategoria.putExtra("nomeCategoria", categoria.getNome());
+        intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
+
+        if(!elementi.isEmpty()){
+            startActivity(intentVisualizzaCategoria);
+        }else{
+            Toast.makeText(this,"Categoria attualmente vuota",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     /*
-        la foto viene recuperata in due passaggi in caso la connessione fosse lenta
-    */
+            la foto viene recuperata in due passaggi in caso la connessione fosse lenta
+        */
     @Override
     public void setCategorie(List<Categoria> categorie){
         this.categorie = categorie;
@@ -125,28 +152,14 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         }
     }
 
+
     @Override
     public void onItemClick(int position) {
-        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaCategoriaActivity.class);
-        //Setta la lista degli elementi menu in base alla categoria selezionata, caricandola da db
-        Categoria categoria = categorie.get(position);
+        categoria = categorie.get(position);
         categoria.ordinaCategoria();
-        List<ElementoMenu> elementi = categoria.getElementi();
-        List<Portata> portata = new ArrayList<>();
-        for(ElementoMenu e: elementi){
-            portata.add(new Portata(e,false));
-        }
-        intentVisualizzaCategoria.putExtra("elementi", (Serializable) portata);
-        intentVisualizzaCategoria.putExtra("nomeCategoria", categorie.get(position).getNome());
-        //Ordinazione con le info collezionate in precedenza
-        intentVisualizzaCategoria.putExtra("ordinazione", ordinazione);
-
-        if(!elementi.isEmpty()){
-            startActivity(intentVisualizzaCategoria);
-        }else{
-            Toast.makeText(this,"Categoria attualmente vuota",Toast.LENGTH_SHORT).show();
-        }
+        categoriaPresenter.mostraElementiDellaCategoria();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -160,11 +173,5 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
                 },
                 view -> dialog.dismiss());
     }
-
-    @Override
-    public Context getContext() {
-        return getContext();
-    }
-
 
 }

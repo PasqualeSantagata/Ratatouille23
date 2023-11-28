@@ -76,6 +76,12 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
            avviaRecuperoPassword();
        });
     }
+
+    @Override
+    public void tornaIndietro() {
+
+    }
+
     @Override
     public void verificaCredenziali(String email, String password){
         if(email.equals("")){
@@ -185,8 +191,4 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         finish();
     }
 
-    @Override
-    public Context getContext() {
-        return getContext();
-    }
 }

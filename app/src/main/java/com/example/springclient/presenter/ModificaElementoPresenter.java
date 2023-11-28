@@ -20,17 +20,27 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
     private ModificaElementoContract.View modificaElementoMenuView;
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
-    private ModificaElementoContract.ViewAggiungiLingua aggiungiLinguaView;
     private ModificaElementoContract.ViewDefinisciOrdine definisciOrdineView;
     public ModificaElementoPresenter(ModificaElementoContract.View modificaElementoMenuView) {
         this.modificaElementoMenuView = modificaElementoMenuView;
     }
-    public ModificaElementoPresenter(ModificaElementoContract.ViewAggiungiLingua aggiungiLinguaView) {
-        this.aggiungiLinguaView = aggiungiLinguaView;
-    }
 
     public ModificaElementoPresenter(ModificaElementoContract.ViewDefinisciOrdine definisciOrdineView) {
         this.definisciOrdineView = definisciOrdineView;
+    }
+
+    @Override
+    public void tornaIndietro(){
+        modificaElementoMenuView.tornaIndietro();
+    }
+    @Override
+    public void mostraSelezionaNuovaLingua() {
+        modificaElementoMenuView.mostraSelezionaNuovaLingua();
+    }
+
+    @Override
+    public void mostraVisualizzaElementiDellaCategoria() {
+        definisciOrdineView.tornaIndietro();
     }
 
     @Override
@@ -110,26 +120,6 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
                 }
             }
         });
-    }
-
-    @Override
-    public void aggiungiLingua(String elementoMenu, ElementoMenu elmentoTradotto){
-        elementoMenuModel.aggiungiLingua(new CallbackResponse<Void>() {
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-
-            @Override
-            public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
-                    aggiungiLinguaView.linguaAggiunta();
-                }
-                else{
-
-                }
-            }
-        }, elementoMenu,elmentoTradotto);
     }
 
     @Override

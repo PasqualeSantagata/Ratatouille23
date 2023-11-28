@@ -6,11 +6,6 @@ import com.example.springclient.authentication.AuthRequest;
 
 public interface AutenticazioneContract {
 
-    interface Model{
-        void logInUtente(AuthRequest authRequest, CallbackResponse<AuthenticationResponse> CallbackResponse);
-
-    }
-
     interface View extends BaseView{
 
         void verificaCredenziali(String email, String password);

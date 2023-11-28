@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class OrdinazioneModel implements OrdinazioneContract.Model {
+public class OrdinazioneModel  {
     private OrdinazioneAPI ordinazioneAPI;
 
     public OrdinazioneModel(RetrofitService retrofitService){

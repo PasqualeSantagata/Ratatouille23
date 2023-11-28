@@ -1,15 +1,12 @@
 package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +17,11 @@ import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.MainActivity;
+import com.example.springclient.view.gestioneCategorie.EsploraCategorieActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements BaseView {
+public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements OrdinazioneContract.StartNuovaOrdinazioneView {
     private TextInputLayout textInputLayoutNumeroPersone;
     private TextInputLayout textInputLayoutSala;
     private TextInputLayout textInputLayoutTavolo;
@@ -48,13 +46,8 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         getSupportActionBar().setTitle("NUOVA ORDINAZIONE");
         setContentView(R.layout.activity_start_nuova_ordinazione);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        ordinazionePresenter = new OrdinazionePresenter(this);
         initializeComponents();
-    }
-
-    @Override
-    public Context getContext() {
-        return getContext();
-
     }
 
     public void initializeComponents(){
@@ -78,7 +71,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         fabMinus = findViewById(R.id.fabMinus);
 
         buttonIndietro.setOnClickListener(view -> {
-            onBackPressed();
+            tornaIndietro();
         });
 
         fab1.setOnClickListener(view -> {
@@ -152,11 +145,14 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
                 Integer nsala = n3;
 
                 ordinazione = new Ordinazione(nPersone, ntavolo, nsala);
-                Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
-                intentCategorie.putExtra("ordinazione", ordinazione);
-                startActivity(intentCategorie);
+                ordinazionePresenter.mostraEsploraCategorie(ordinazione);
             }
         });
+    }
+
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
     }
 
     private boolean checkFields(String persone, String tavolo, String sala){
@@ -198,5 +194,13 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
                     super.onBackPressed();
                 },
                 view -> dialog.dismiss());
+    }
+
+    @Override
+    public void mostraEsploraCategorie(Ordinazione ordinazione) {
+        Intent intentCategorie = new Intent(this, EsploraCategorieActivity.class);
+        intentCategorie.putExtra("ordinazione", ordinazione);
+        startActivity(intentCategorie);
+
     }
 }

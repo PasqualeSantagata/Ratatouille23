@@ -1,7 +1,6 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneElementiMenu;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +20,11 @@ import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.ModificaElementoContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ModificaElementoPresenter;
+import com.example.springclient.view.inserisciNuovaLingua.SelezioneNuovaLinguaActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ModificaElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ModificaElementoContract.View, BaseAllergeniDialog {
@@ -80,11 +78,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
         spinnerCategoria.setAdapter(adapterCategorie);
         textInputEditTextLingua.setText(elementoMenu.getLingua());
 
-        fabAggiungiLingua.setOnClickListener(view -> {
-            Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
-            nuovaLingua.putExtra("elemento", elementoMenu);
-            startActivity(nuovaLingua);
-        });
+        fabAggiungiLingua.setOnClickListener(view -> modificaElementoMenuPresenter.mostraSelezionaNuovaLingua());
 
         fabAggiungiCategoria.setOnClickListener(view -> {
             if (categoriaSelezionata != null) {
@@ -105,21 +99,22 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
                 ElementoMenu elementoAggiornato = new ElementoMenu(elementoMenu.getId(),nome, Float.valueOf(prezzo), descrizione, allergeni, elementoMenu.getLingua());
                 modificaElementoMenuPresenter.modificaElementoMenu(elementoAggiornato);
             }
-
         });
-        buttonIndietro.setOnClickListener(view -> {
-            onBackPressed();
-
-        });
+        buttonIndietro.setOnClickListener(view -> modificaElementoMenuPresenter.tornaIndietro());
 
     }
 
-    public void disabilitaErrori() {
-        textInputLayoutNome.setErrorEnabled(false);
-        textInputLayoutPrezzo.setErrorEnabled(false);
-        textInputLayoutDescrizione.setErrorEnabled(false);
+    @Override
+    public void mostraSelezionaNuovaLingua(){
+        Intent nuovaLingua = new Intent(this, SelezioneNuovaLinguaActivity.class);
+        nuovaLingua.putExtra("elemento", elementoMenu);
+        startActivity(nuovaLingua);
     }
 
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
+    }
 
     private boolean controllaCampi() {
         boolean corretto = true;
@@ -211,11 +206,6 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
             textInputLayoutDescrizione.setError("Desrizione non valida");
         }
 
-    }
-
-    @Override
-    public Context getContext() {
-        return getContext();
     }
 
 }

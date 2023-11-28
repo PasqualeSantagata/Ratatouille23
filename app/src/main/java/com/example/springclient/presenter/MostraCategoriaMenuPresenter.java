@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.example.springclient.RetrofitService.RetrofitService;
+import com.example.springclient.contract.BaseView;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
@@ -17,9 +18,18 @@ import retrofit2.Response;
 public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Presenter {
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     private MostraCategoriaContract.View categoriaView;
-
     public MostraCategoriaMenuPresenter(MostraCategoriaContract.View categoriaView) {
         this.categoriaView = categoriaView;
+    }
+
+    @Override
+    public void tronaHomeModificaElementiMenu() {
+        categoriaView.tornaIndietro();
+    }
+
+    @Override
+    public void mostraElementiDellaCategoria() {
+        categoriaView.mostraVisualizzaElementiDellaCategoria();
     }
 
     @Override
@@ -59,10 +69,15 @@ public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Pre
         });
     }
 
+    @Override
+    public void apriRiepilogo() {
+        categoriaView.apriRiepilogo();
+    }
 
-
-
-
+    @Override
+    public void mostraStartNuovaOrdinazione() {
+        categoriaView.tornaIndietro();
+    }
 
 
 }

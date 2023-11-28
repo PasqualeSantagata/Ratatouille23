@@ -1,7 +1,6 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.inserisciNuovaLingua;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -10,26 +9,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseView;
+import com.example.springclient.contract.InserisciNuovaLinguaContract;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.presenter.InserisciNuovaLinguaPresenter;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, BaseView {
-
+public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciNuovaLinguaContract.SelezionaNuovaLinguaView {
     private Spinner spinnerLingua;
     private Button buttonIndietro;
     private Button buttonOk;
     private List<String> lingue;
     private String linguaSelezionata;
     private ElementoMenu elemento;
+    private InserisciNuovaLinguaContract.Presenter inserisciNuovaLinguaPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +36,7 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_nuova_lingua_gestione_menu);
         elemento = (ElementoMenu) getIntent().getSerializableExtra("elemento");
+        inserisciNuovaLinguaPresenter = new InserisciNuovaLinguaPresenter(this);
         initializeComponents();
     }
 
@@ -53,15 +53,21 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         adapterLingue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLingua.setAdapter(adapterLingue);
 
-        buttonIndietro.setOnClickListener(view -> {
-            onBackPressed();
-        });
-        buttonOk.setOnClickListener(view -> {
-            Intent nuovaLinguaElemento = new Intent(this, NuovoElementoNuovaLinguaActivity.class);
-            nuovaLinguaElemento.putExtra("elemento", elemento);
-            nuovaLinguaElemento.putExtra("lingua", linguaSelezionata);
-            startActivity(nuovaLinguaElemento);
-        });
+        buttonIndietro.setOnClickListener(view -> inserisciNuovaLinguaPresenter.annullaInserimentoNuovaLingua());
+        buttonOk.setOnClickListener(view -> inserisciNuovaLinguaPresenter.avviaNuovoElementoNuovaLingua());
+    }
+
+    @Override
+    public void avviaNuovoElementoNuovaLingua(){
+        Intent nuovaLinguaElemento = new Intent(this, NuovoElementoNuovaLinguaActivity.class);
+        nuovaLinguaElemento.putExtra("elemento", elemento);
+        nuovaLinguaElemento.putExtra("lingua", linguaSelezionata);
+        startActivity(nuovaLinguaElemento);
+    }
+
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
     }
 
     @Override
@@ -82,8 +88,5 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
                 view -> dialog.dismiss());
     }
 
-    @Override
-    public Context getContext() {
-        return getContext();
-    }
+
 }

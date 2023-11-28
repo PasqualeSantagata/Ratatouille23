@@ -6,8 +6,9 @@ import com.example.springclient.RetrofitService.FoodFactsRetrofit;
 import com.example.springclient.apiUtils.FoodFactsResponse;
 import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.CallbackResponse;
+import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.model.FoodFactsModel;
-import com.example.springclient.view.gestioneMenu.InserisciElementoActivity;
+import com.example.springclient.view.inserisciElemento.InserisciElementoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +16,12 @@ import java.util.List;
 import retrofit2.Response;
 
 public class FoodFactsPresenter {
-    private InserisciElementoActivity inserisciElementoView;
-    private FoodFactsRetrofit foodFactsRetrofit;
+    private InserisciElementoContract.InserisciElementoView inserisciElementoView;
     private FoodFactsModel foodFactsModel;
 
 
-    public FoodFactsPresenter(InserisciElementoActivity inserisciElementoView){
-        foodFactsRetrofit = new FoodFactsRetrofit();
-        foodFactsModel = new FoodFactsModel(foodFactsRetrofit);
+    public FoodFactsPresenter(InserisciElementoContract.InserisciElementoView inserisciElementoView){
+        foodFactsModel = new FoodFactsModel(new FoodFactsRetrofit());
         this.inserisciElementoView = inserisciElementoView;
     }
 
@@ -37,16 +36,15 @@ public class FoodFactsPresenter {
                 if(response.isSuccessful()) {
 
                     List<ProdottoResponse> listOfProdotto = response.body().getProducts();
-                    List<String> names = new ArrayList<>();
+                    List<String> nomi = new ArrayList<>();
                     if (listOfProdotto != null) {
-                        Log.d("size: ", String.valueOf(listOfProdotto.size()));
-                        if (listOfProdotto != null && listOfProdotto.size() > 0) {
+                        if (listOfProdotto.size() > 0) {
                             for (ProdottoResponse p : listOfProdotto) {
                                 if (p != null && p.getProduct_name() != null) {
-                                    names.add(p.getProduct_name());
+                                    nomi.add(p.getProduct_name());
                                 }
                             }
-                            inserisciElementoView.generateNames(names, listOfProdotto);
+                            inserisciElementoView.generaNomi(nomi);
                         }
                     }
                 }

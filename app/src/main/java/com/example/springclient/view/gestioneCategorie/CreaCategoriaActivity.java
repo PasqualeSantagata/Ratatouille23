@@ -1,14 +1,11 @@
-package com.example.springclient.view.gestioneMenu;
+package com.example.springclient.view.gestioneCategorie;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,13 +18,14 @@ import com.example.springclient.R;
 import com.example.springclient.contract.CreaCategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.CreaCategoriaPresenter;
+import com.example.springclient.view.inserisciElemento.HomeNuovoElementoActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.OutputStream;
 import java.nio.file.Files;
 
-public class CreaCategoriaActivity extends AppCompatActivity implements CreaCategoriaContract.View {
+public class CreaCategoriaActivity extends AppCompatActivity implements CreaCategoriaContract.CreaCategoriaView {
     private ImageView imageViewAggiungiImmagine;
     private TextView textViewAggiungiImmagine;
     private TextInputLayout textInputLayoutNomeCategoria;
@@ -90,14 +88,13 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
 
         });
 
-        buttonIndietro.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        buttonIndietro.setOnClickListener(view -> creaCategoriaPresenter.tornaHomeNuovoElemento());
+        imageViewAggiungiImmagine.setOnClickListener(view -> creaCategoriaPresenter.mostraScegliFoto());
+    }
 
-        imageViewAggiungiImmagine.setOnClickListener(view -> {
-            Intent intent = new Intent(this, SelezionaImmagineCategoriaActivity.class);
-            startActivity(intent);
-        });
+    @Override
+    public void tornaIndietro() {
+        onBackPressed();
     }
 
     public boolean controllaCampi() {
@@ -119,10 +116,25 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
         Intent intent = new Intent(this, HomeNuovoElementoActivity.class);
         startActivity(intent);
     }
+
     @Override
-    public Context getContext(){
-        return getContext();
+    public void erroreSalvataggioCategoria() {
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, "Impossibile comunicare con il server", view -> dialog.dismiss());
     }
+
+    @Override
+    public void mostraScegliFoto() {
+        Intent intent = new Intent(this, SelezionaImmagineCategoriaActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void impossibileContattareIlServer(String messaggio) {
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
+    }
+
     @Override
     public void onBackPressed() {
         Dialog dialog = new Dialog(this);

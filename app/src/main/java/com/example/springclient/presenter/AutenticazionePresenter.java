@@ -79,6 +79,4 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
         return loginActivity;
     }
 
-
-
 }

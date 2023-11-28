@@ -67,15 +67,12 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewOrdinazioniEvase);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewOrdinazioniEvase);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (iRecycleViewOrdinazioniEvase != null){
-                        int pos = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if (iRecycleViewOrdinazioniEvase != null){
+                    int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION){
-                            iRecycleViewOrdinazioniEvase.onItemClickOrdinazioniEvase(pos);
-                        }
+                    if(pos != RecyclerView.NO_POSITION){
+                        iRecycleViewOrdinazioniEvase.onItemClickOrdinazioniEvase(pos);
                     }
                 }
             });
