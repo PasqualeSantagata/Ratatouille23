@@ -15,6 +15,7 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -112,6 +113,21 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override

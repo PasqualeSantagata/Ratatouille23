@@ -23,14 +23,19 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
     @Override
     public void eliminaElementoDallaCategoria(Long idCategoria, ElementoMenu elementoMenu){
+        visualizzaElementiView.mostraPorgressBar();
         categoriaModel.eliminaElementoDallaCategoria(idCategoria.toString(), elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-                visualizzaElementiView.impossibileRimuovereElemento("Errore di connessione: impossibile rimuovere l'elemento");
+                visualizzaElementiView.nascondiProgressBar();
+                if(visualizzaElementiView.isVisibile()) {
+                    visualizzaElementiView.impossibileRimuovereElemento("Errore di connessione: impossibile rimuovere l'elemento");
+                }
             }
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+                visualizzaElementiView.nascondiProgressBar();
+                if(retData.isSuccessful() && visualizzaElementiView.isVisibile()){
                     visualizzaElementiView.rimuoviElemento();
                 }
 
@@ -47,17 +52,24 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
     @Override
     public void restituisciTraduzione(String idElemento) {
+        visualizzaElementiView.mostraPorgressBar();
         elementoMenuModel.restituisciTraduzione(new CallbackResponse<ElementoMenu>() {
             @Override
             public void onFailure(Throwable t) {
-                visualizzaElementiView.impossibileComunicareConServer("Errore di rete con il server, impossibile recuperare la traduzione");
+                visualizzaElementiView.nascondiProgressBar();
+                if(visualizzaElementiView.isVisibile()) {
+                    visualizzaElementiView.impossibileComunicareConServer("Errore di rete con il server, impossibile recuperare la traduzione");
+                }
             }
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
-                if(retData.isSuccessful()){
-                    visualizzaElementiView.mostraTraduzione(retData.body());
-                }else{
-                    visualizzaElementiView.traduzioneAssente();
+                visualizzaElementiView.nascondiProgressBar();
+                if(visualizzaElementiView.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        visualizzaElementiView.mostraTraduzione(retData.body());
+                    } else {
+                        visualizzaElementiView.traduzioneAssente();
+                    }
                 }
             }
         }, idElemento);
@@ -87,17 +99,14 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
             public void onFailure(Throwable t) {
 
             }
-
             @Override
             public void onSuccess(Response<Categoria> retData) {
-                if(retData.isSuccessful()){
+                if(retData.isSuccessful() && visualizzaElementiView.isVisibile()){
                     Categoria categoria = retData.body();
                     categoria.ordinaCategoria();
                     visualizzaElementiView.setElementi(categoria.getElementi());
                 }
-                else{
 
-                }
             }
         });
 
@@ -115,15 +124,20 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
     @Override
     public void mostrFiltraCategorie(String nomeCategoria) {
+        visualizzaElementiView.mostraPorgressBar();
         elementoMenuModel.trovaElementiPerNomeCategoria(nomeCategoria, new CallbackResponse<List<ElementoMenu>>() {
             @Override
             public void onFailure(Throwable t) {
-                visualizzaElementiView.impossibileComunicareConServer("Impossibile comunicare con il server");
+                visualizzaElementiView.nascondiProgressBar();
+                if(visualizzaElementiView.isVisibile()) {
+                    visualizzaElementiView.impossibileComunicareConServer("Impossibile comunicare con il server");
+                }
             }
 
             @Override
             public void onSuccess(Response<List<ElementoMenu>> retData) {
-                if(retData.isSuccessful()){
+                visualizzaElementiView.nascondiProgressBar();
+                if(retData.isSuccessful() && visualizzaElementiView.isVisibile()){
                     visualizzaElementiView.mostraFiltraCategoria(retData.body());
                 }
             }

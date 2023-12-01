@@ -17,7 +17,6 @@ public interface CreaUtenzaContract {
         void mostraErrore(String messaggio);
 
         void disabilitaErrori();
-
         boolean campiValidi(String... valori);
 
     }

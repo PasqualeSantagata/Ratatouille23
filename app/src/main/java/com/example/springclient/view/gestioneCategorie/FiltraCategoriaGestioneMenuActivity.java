@@ -2,12 +2,15 @@ package com.example.springclient.view.gestioneCategorie;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
@@ -37,6 +40,7 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
     private Intent intentVisualizzaCategoria;
     private int flagOrdinamento;
     private ModificaElementoContract.Presenter modificaElementoPresenter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
         buttonTabellaAllergeni = findViewById(R.id.buttonFiltraTabellaAllergeni);
         buttonOk = findViewById(R.id.buttonOkFiltraCategoria);
         buttonAnnulla = findViewById(R.id.buttonAnnullaFiltraCategoria);
+        progressBar = findViewById(R.id.progressBarFiltraCategoriaGestioneMenu);
+        progressBar.setVisibility(View.INVISIBLE);
 
         buttonNome.setOnClickListener(view -> {
             if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
@@ -129,6 +135,21 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     private void filtraAllergeni() {

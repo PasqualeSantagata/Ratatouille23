@@ -45,31 +45,38 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
 
     @Override
     public void getNomiCategoriaDisponibili(String id) {
+        modificaElementoMenuView.mostraPorgressBar();
         categoriaModel.getNomiCategoriaDisponibili(id, new CallbackResponse<List<String>>() {
             @Override
             public void onFailure(Throwable t) {
-                modificaElementoMenuView.erroreModifica("Errore di connessione: impossibile caricare le categorie disponibili");
+                modificaElementoMenuView.nascondiProgressBar();
+                if(modificaElementoMenuView.isVisibile()) {
+                    modificaElementoMenuView.erroreModifica("Errore di connessione: impossibile caricare le categorie disponibili");
+                }
             }
             @Override
             public void onSuccess(Response<List<String>> retData) {
-                if (retData.isSuccessful()) {
+                modificaElementoMenuView.nascondiProgressBar();
+                if (retData.isSuccessful() && modificaElementoMenuView.isVisibile()) {
                     modificaElementoMenuView.setNomiCategoria(retData.body());
                     restituisciTraduzioneElemento(id);
                 }
             }
         });
     }
-
+    @Override
     public void restituisciTraduzioneElemento(String id){
+        modificaElementoMenuView.mostraPorgressBar();
         elementoMenuModel.restituisciTraduzione(new CallbackResponse<ElementoMenu>() {
             @Override
             public void onFailure(Throwable t) {
-
+                modificaElementoMenuView.nascondiProgressBar();
             }
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
+                modificaElementoMenuView.nascondiProgressBar();
                 modificaElementoMenuView.initializeComponents();
-                if(retData.isSuccessful()) {
+                if(retData.isSuccessful() && modificaElementoMenuView.isVisibile()) {
                     modificaElementoMenuView.disabilitaFabInserisciTraduzione();
                 }
 
@@ -78,18 +85,24 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
     }
     @Override
     public void aggiungiElementoAllaCategoria(String nome, ElementoMenu elementoMenu){
+        modificaElementoMenuView.mostraPorgressBar();
         categoriaModel.aggiungiElemento(nome, elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-                modificaElementoMenuView.erroreModifica("Errore di connessione: impossibile aggiungere l'elemento alla categorai");
+                modificaElementoMenuView.nascondiProgressBar();
+                if(modificaElementoMenuView.isVisibile()) {
+                    modificaElementoMenuView.erroreModifica("Errore di connessione: impossibile aggiungere l'elemento alla categorai");
+                }
             }
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
-                    modificaElementoMenuView.elementoAggiuntoAdUnaCategoria(nome);
-                }
-                else{
-                    modificaElementoMenuView.elementoGiaPresenteNellaCategoria();
+                modificaElementoMenuView.nascondiProgressBar();
+                if(modificaElementoMenuView.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        modificaElementoMenuView.elementoAggiuntoAdUnaCategoria(nome);
+                    } else {
+                        modificaElementoMenuView.elementoGiaPresenteNellaCategoria();
+                    }
                 }
             }
         });
@@ -97,20 +110,25 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
 
     @Override
     public void modificaElementoMenu(ElementoMenu elementoMenu) {
+        modificaElementoMenuView.mostraPorgressBar();
         elementoMenuModel.modificaElementoMenu(elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
+                modificaElementoMenuView.nascondiProgressBar();
                 Log.d("Error: ", t.toString());
-                modificaElementoMenuView.erroreModifica("Errore di connessione con il server");
+                if(modificaElementoMenuView.isVisibile()) {
+                    modificaElementoMenuView.erroreModifica("Errore di connessione con il server");
+                }
             }
 
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+                modificaElementoMenuView.nascondiProgressBar();
+                if(retData.isSuccessful() && modificaElementoMenuView.isVisibile()){
                     modificaElementoMenuView.elementoModificatoCorrettamente();
                 }
                 else{
-                    if(retData.code() == 412){
+                    if(retData.code() == 412 && modificaElementoMenuView.isVisibile()){
                         ApiResponse apiResponse = new Gson().fromJson(retData.errorBody().charStream(), ApiResponse.class);
                         String errore = apiResponse.getMessage();
                         modificaElementoMenuView.mostraErrori(errore);
@@ -123,15 +141,20 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
 
     @Override
     public void modificaOrdineCategoria(String nomeCategoria, int flagOrdinamento){
+        definisciOrdineView.mostraPorgressBar();
         categoriaModel.modificaOrdineCategoria(nomeCategoria, flagOrdinamento, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-                definisciOrdineView.impossibileModificareOrdine("Errore di connessione, impossibile modificare l'ordine degli elementi");
+                definisciOrdineView.nascondiProgressBar();
+                if(definisciOrdineView.isVisibile()) {
+                    definisciOrdineView.impossibileModificareOrdine("Errore di connessione, impossibile modificare l'ordine degli elementi");
+                }
             }
 
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+                definisciOrdineView.nascondiProgressBar();
+                if(retData.isSuccessful() && definisciOrdineView.isVisibile()){
                     mostraVisualizzaElementiDellaCategoria();
                 }
             }

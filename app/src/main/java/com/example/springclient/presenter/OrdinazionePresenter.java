@@ -40,14 +40,17 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
 
     @Override
     public void salvaPortate(List<Portata> portataList){
+        viewRiepilogoOrdinazione.mostraPorgressBar();
         ordinazioneModel.savePortate(new CallbackResponse<List<Portata>>() {
             @Override
             public void onFailure(Throwable t) {
+                viewRiepilogoOrdinazione.nascondiProgressBar();
                 viewRiepilogoOrdinazione.ordinazioneFallita();
             }
 
             @Override
             public void onSuccess(Response<List<Portata>> retData) {
+                viewRiepilogoOrdinazione.nascondiProgressBar();
                 if(retData.isSuccessful()){
                    viewRiepilogoOrdinazione.ordinazioneAvvenutaConSuccesso();
                 }
@@ -58,15 +61,20 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     @Override
     public void salvaOrdinazione(Ordinazione ordinazione){
         ordinazione.setElementiOrdinati(null);
+        viewElementiOrdinazione.mostraPorgressBar();
         ordinazioneModel.aggiungiOrdinazione(new CallbackResponse<Ordinazione>() {
             @Override
             public void onFailure(Throwable t) {
-                viewRiepilogoOrdinazione.ordinazioneFallita();
+                viewRiepilogoOrdinazione.nascondiProgressBar();
+                if(viewRiepilogoOrdinazione.isVisibile()) {
+                    viewRiepilogoOrdinazione.ordinazioneFallita();
+                }
             }
 
             @Override
             public void onSuccess(Response<Ordinazione> retData) {
-                if(retData.isSuccessful()){
+                viewRiepilogoOrdinazione.nascondiProgressBar();
+                if(retData.isSuccessful() && viewRiepilogoOrdinazione.isVisibile()){
                     viewRiepilogoOrdinazione.salvaPortate(retData.body());
                 }
             }
@@ -84,14 +92,19 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     }
     @Override
     public void mostraFiltraCategoria(String nomeCategoria){
+        viewElementiOrdinazione.mostraPorgressBar();
         elementoMenuModel.trovaElementiPerNomeCategoria(nomeCategoria, new CallbackResponse<List<ElementoMenu>>() {
             @Override
             public void onFailure(Throwable t) {
-                viewElementiOrdinazione.impossibileFiltrareElementi("Errore di connessione, impossibile caricare gli elementi da filtrare");
+                viewElementiOrdinazione.nascondiProgressBar();
+                if(viewElementiOrdinazione.isVisibile()) {
+                    viewElementiOrdinazione.impossibileFiltrareElementi("Errore di connessione, impossibile caricare gli elementi da filtrare");
+                }
             }
             @Override
             public void onSuccess(Response<List<ElementoMenu>> retData) {
-                if(retData.isSuccessful()) {
+                viewElementiOrdinazione.nascondiProgressBar();
+                if(retData.isSuccessful() && viewRiepilogoOrdinazione.isVisibile()) {
                     List<Portata> portataList = new ArrayList<>();
                     for(ElementoMenu e: retData.body()){
                         portataList.add(new Portata(e, false));

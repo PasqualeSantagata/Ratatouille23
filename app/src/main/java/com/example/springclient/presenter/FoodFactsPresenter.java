@@ -29,11 +29,13 @@ public class FoodFactsPresenter {
         foodFactsModel.getElementoMenuDetails(nome, new CallbackResponse<FoodFactsResponse>() {
             @Override
             public void onFailure(Throwable t) {
-                inserisciElementoView.autocompletamentoIrrangiungibile();
+                if(inserisciElementoView.isVisibile()) {
+                    inserisciElementoView.autocompletamentoIrrangiungibile();
+                }
             }
             @Override
             public void onSuccess(Response<FoodFactsResponse> response) {
-                if(response.isSuccessful()) {
+                if(response.isSuccessful() && inserisciElementoView.isVisibile()) {
 
                     List<ProdottoResponse> listOfProdotto = response.body().getProducts();
                     List<String> nomi = new ArrayList<>();

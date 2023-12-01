@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -137,6 +138,21 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     @Override
     public void tornaIndietro() {
 
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
 

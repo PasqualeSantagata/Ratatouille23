@@ -31,23 +31,29 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
 
     @Override
     public void inserisciElementoMenu(ElementoMenu elementoMenu, String categoria) {
+        inserisciElementoView.mostraPorgressBar();
         elementoMenuModel.salvaElementoMenu(elementoMenu, categoria, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
-                inserisciElementoView.erroreInserimentoElemento();
+                inserisciElementoView.nascondiProgressBar();
+                if(inserisciElementoView.isVisibile()) {
+                    inserisciElementoView.erroreInserimentoElemento();
+                }
             }
 
             @Override
             public void onSuccess(Response<Void> response) {
-                if(response.isSuccessful()){
-                    inserisciElementoView.elementoInseritoCorrettamente();
-                }
-                else{
-                    if(response.code() == 412) {
-                        ApiResponse apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse.class);
-                        String errore = apiResponse.getMessage();
-                        inserisciElementoView.mostraErroreInserimentoElemento(errore);
+                inserisciElementoView.nascondiProgressBar();
+                if(inserisciElementoView.isVisibile()) {
+                    if (response.isSuccessful()) {
+                        inserisciElementoView.elementoInseritoCorrettamente();
+                    } else {
+                        if (response.code() == 412) {
+                            ApiResponse apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse.class);
+                            String errore = apiResponse.getMessage();
+                            inserisciElementoView.mostraErroreInserimentoElemento(errore);
+                        }
                     }
                 }
             }
@@ -56,14 +62,19 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
 
     @Override
     public void getNomiCategorie() {
+        homeNuovoElementoView.mostraPorgressBar();
         categoriaModel.getNomiCategorie(new CallbackResponse<List<String>>() {
             @Override
             public void onFailure(Throwable t) {
-                homeNuovoElementoView.erroreComunicazioneServer("Errore di connessione con il server riporvare succesivamente");
+                homeNuovoElementoView.nascondiProgressBar();
+                if(homeNuovoElementoView.isVisibile()) {
+                    homeNuovoElementoView.erroreComunicazioneServer("Errore di connessione con il server riporvare succesivamente");
+                }
             }
             @Override
             public void onSuccess(Response<List<String>> retData) {
-                if(retData.isSuccessful()){
+                homeNuovoElementoView.nascondiProgressBar();
+                if(retData.isSuccessful() && homeNuovoElementoView.isVisibile()){
                     homeNuovoElementoView.setNomiCategorie(retData.body());
                 }
             }

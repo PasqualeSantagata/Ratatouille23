@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +41,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     private RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn adapterElementoMenu;
     private OrdinazioneContract.Presenter presenterOrdinazione;
     private Portata elementoSelezionato;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +51,8 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         setContentView(R.layout.activity_riepilogo_ordinazione_nuova_ordinazione);
         //Dettagli ordinazione dalla activity precedente
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
+        progressBar = findViewById(R.id.progressBarRiepilogo);
+        progressBar.setVisibility(View.INVISIBLE);
         presenterOrdinazione = new OrdinazionePresenter(this);
 
         portate = new ArrayList<>();
@@ -80,6 +85,23 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override

@@ -26,11 +26,13 @@ public class GestisciComandePresenter implements GestisciComandeContract.Present
         ordinazioneModel.getOrdinazioniSospese(new CallbackResponse<List<Ordinazione>>() {
             @Override
             public void onFailure(Throwable t) {
-                homeGestioneComande.impossibileComunicareConServer("Errore di comunicazione con il server, impossibile caricare le comande");
+                if(homeGestioneComande.isVisibile()) {
+                    homeGestioneComande.impossibileComunicareConServer("Errore di comunicazione con il server, impossibile caricare le comande");
+                }
             }
             @Override
             public void onSuccess(Response<List<Ordinazione>> retData) {
-                if ((retData.isSuccessful())){
+                if ((retData.isSuccessful()) && homeGestioneComande.isVisibile()){
                     ordinazioni = retData.body();
                     List<Portata> portateSospeseList = new ArrayList<>();
                     for(Ordinazione o: retData.body()){
@@ -69,11 +71,13 @@ public class GestisciComandePresenter implements GestisciComandeContract.Present
             ordinazioneModel.concludiOrdinazione(new CallbackResponse<Ordinazione>() {
                 @Override
                 public void onFailure(Throwable t) {
-                    homeGestioneComande.ordinazioneConclusa("Errore di comunicazione con il server durante l'evasione dell'ordinazione");
+                    if(homeGestioneComande.isVisibile()) {
+                        homeGestioneComande.ordinazioneConclusa("Errore di comunicazione con il server durante l'evasione dell'ordinazione");
+                    }
                 }
                 @Override
                 public void onSuccess(Response<Ordinazione> retData) {
-                    if(retData.isSuccessful()){
+                    if(retData.isSuccessful() && homeGestioneComande.isVisibile()){
                         Ordinazione ordinazione = retData.body();
                         homeGestioneComande.ordinazioneConclusa("ordinazione n° "+ ordinazione.getId()+ " conclusa");
 

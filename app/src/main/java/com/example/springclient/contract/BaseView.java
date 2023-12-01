@@ -10,7 +10,9 @@ import com.example.springclient.R;
 public interface BaseView {
     void initializeComponents();
     void tornaIndietro();
-
+    void mostraPorgressBar();
+    void nascondiProgressBar();
+    boolean isVisibile();
 
     default void mostraDialogErroreOneBtn(Dialog dialogAttenzione, String messaggio, View.OnClickListener eventoOk){
         dialogAttenzione.setContentView(R.layout.dialog_err_one_btn);

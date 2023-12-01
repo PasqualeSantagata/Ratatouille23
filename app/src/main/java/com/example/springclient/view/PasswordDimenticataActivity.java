@@ -6,9 +6,11 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.RecuperoCredenzialiContract;
@@ -21,7 +23,7 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
     private Button buttonOk;
     private Button buttonIndietro;
     private RecuperoCredenzialiContract.Presenter credenzialiPresenter;
-    private View progressBar;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         buttonOk = findViewById(R.id.buttonOkPassDimenticata);
         buttonIndietro = findViewById(R.id.buttonIndietroPassDimenticata);
         progressBar = findViewById(R.id.passwordDimenticataProgessBar);
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
         buttonOk.setOnClickListener(view -> {
             emailTextInputLayout.setErrorEnabled(false);
             String email = String.valueOf(emailTextInputLayout.getEditText().getText());
@@ -53,12 +55,27 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
     }
 
     @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
+    }
+
+    @Override
     public void verificaEmail(String email){
         if(email == null || email.equals("")){
             emailTextInputLayout.setError("Inserisci la mail");
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
         credenzialiPresenter.avviaRecuperoPassword(email);
     }
     @Override

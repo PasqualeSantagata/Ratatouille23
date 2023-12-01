@@ -4,11 +4,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
@@ -34,12 +37,15 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
     private Button okButton;
     private Button indietroButton;
     private InserisciNuovaLinguaContract.Presenter inserisciNuovaLinguaPresenter;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("NUOVO ELEMENTO DEL MENU");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_aggiungi_elem_in_nuova_lingua_gestione_menu);
+        progressBar = findViewById(R.id.progressBarNuovoElementoNuovaLingua);
+        progressBar.setVisibility(View.INVISIBLE);
         elemento = (ElementoMenu) getIntent().getSerializableExtra("elemento");
         lingua = getIntent().getStringExtra("lingua");
         inserisciNuovaLinguaPresenter = new InserisciNuovaLinguaPresenter(this);
@@ -81,6 +87,22 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
         onBackPressed();
     }
 
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
+    }
+
     private ElementoMenu getElemento() {
         String nome, descrizione;
         List<String> allergeni = elemento.getElencoAllergeni();
@@ -114,7 +136,6 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
         else{
             textInputLayoutDescrizione.setErrorEnabled(false);
         }
-
         return checked;
     }
 

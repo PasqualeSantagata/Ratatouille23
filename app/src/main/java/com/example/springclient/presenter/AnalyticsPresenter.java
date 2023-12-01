@@ -24,13 +24,17 @@ public class AnalyticsPresenter {
         analyticsModel.getAnalytics(new CallbackResponse<List<AnalyticsData>>() {
             @Override
             public void onFailure(Throwable t) {
-                statisticheActivity.impossibileComunicareServer("Errore di connessione, impossibile recuperare i dati dal server");
+                if(statisticheActivity.isVisibile()) {
+                    statisticheActivity.impossibileComunicareServer("Errore di connessione, impossibile recuperare i dati dal server");
+                }
             }
             @Override
             public void onSuccess(Response<List<AnalyticsData>> retData) {
-                if(retData.isSuccessful()){
-                    statisticheActivity.setAnalyticsDataList(retData.body());
-                    getCuochi();
+                if(statisticheActivity.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        statisticheActivity.setAnalyticsDataList(retData.body());
+                        getCuochi();
+                    }
                 }
             }
         }, dataInizio, dataFine);
@@ -40,15 +44,19 @@ public class AnalyticsPresenter {
         utenteModel.getAllCuochi(new CallbackResponse<List<String>>() {
             @Override
             public void onFailure(Throwable t) {
-                statisticheActivity.impossibileComunicareServer("Errore di connessione, impossibile recuperare i dati dal server");
+                if(statisticheActivity.isVisibile()) {
+                    statisticheActivity.impossibileComunicareServer("Errore di connessione, impossibile recuperare i dati dal server");
+                }
             }
 
             @Override
             public void onSuccess(Response<List<String>> retData) {
-                if(retData.isSuccessful()){
-                    statisticheActivity.setCuochi(retData.body());
-                    statisticheActivity.preparaDati();
-                    statisticheActivity.costruisciGrafo();
+                if(statisticheActivity.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        statisticheActivity.setCuochi(retData.body());
+                        statisticheActivity.preparaDati();
+                        statisticheActivity.costruisciGrafo();
+                    }
                 }
             }
         });

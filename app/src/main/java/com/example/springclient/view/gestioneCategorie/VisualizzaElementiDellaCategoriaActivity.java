@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -99,7 +100,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private boolean b;
 
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (b == true) {
+        if (b) {
             menu.findItem(R.id.item_lingue).setEnabled(false);
             menu.findItem(R.id.item_lingua_base).setEnabled(true);
         } else {
@@ -168,6 +169,20 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         onBackPressed();
     }
 
+    @Override
+    public void mostraPorgressBar() {
+
+    }
+    @Override
+    public void nascondiProgressBar() {
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
+    }
+
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
@@ -230,7 +245,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public void rimuoviElemento() {
         elementiMenu.remove(elementoSelezionato);
-        adapterElementoMenu.notifyItemChanged(elementoSelezionato);
+        adapterElementoMenu.notifyDataSetChanged();
         if(elementiMenu.isEmpty()){
             Intent intent = new Intent(this, EsploraCategorieMenuActivity.class);
             startActivity(intent);

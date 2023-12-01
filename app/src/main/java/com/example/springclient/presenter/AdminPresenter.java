@@ -23,21 +23,26 @@ public class AdminPresenter implements CreaUtenzaContract.Presenter {
 
     @Override
     public void registraUtente(Utente utente) {
+        adminView.mostraPorgressBar();
         autenticazioneModel.registraUtente(utente,new CallbackResponse<ApiResponse>() {
             @Override
             public void onFailure(Throwable t) {
-                adminView.registrazioneFallita();
+                adminView.nascondiProgressBar();
+                if(adminView.isVisibile()) {
+                    adminView.registrazioneFallita();
+                }
             }
 
             @Override
             public void onSuccess(Response<ApiResponse> retData) {
-                if(retData.isSuccessful()){
-                    adminView.registrazioneAvvenutaConSuccesso();
-
-                }
-                else if(retData.code() == 412){
-                    ApiResponse error = new Gson().fromJson(retData.errorBody().charStream(), ApiResponse.class);
-                    adminView.mostraErrore(error.getMessage());
+                adminView.nascondiProgressBar();
+                if(adminView.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        adminView.registrazioneAvvenutaConSuccesso();
+                    } else if (retData.code() == 412) {
+                        ApiResponse error = new Gson().fromJson(retData.errorBody().charStream(), ApiResponse.class);
+                        adminView.mostraErrore(error.getMessage());
+                    }
                 }
             }
         });

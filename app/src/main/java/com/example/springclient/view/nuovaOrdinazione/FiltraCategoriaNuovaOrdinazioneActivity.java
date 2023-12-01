@@ -2,8 +2,10 @@ package com.example.springclient.view.nuovaOrdinazione;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,11 +33,14 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
     private List<String> allergeni;
     private List<Portata> elementiMenu;
     private Intent intentVisualizzaCategoria;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtra_categoria_gestione_menu);
+        progressBar = findViewById(R.id.progressBarFiltraCategoriaGestioneMenu);
+        progressBar.setVisibility(View.INVISIBLE);
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementiMenu");
         allergeni = new ArrayList<>();
         initializeComponents();

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.authentication.AuthRequest;
@@ -76,6 +77,21 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     @Override
     public void tornaIndietro() {
 
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override

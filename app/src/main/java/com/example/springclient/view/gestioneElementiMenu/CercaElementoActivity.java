@@ -6,13 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +49,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     private TextInputLayout textInputLayoutDescrizione;
     private Context dialogDettagliContext;
     private ElementoMenu elementoDaEliminare;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -54,8 +58,11 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         setContentView(R.layout.activity_cerca_elemento_gestione_menu);
         getSupportActionBar().setTitle("CERCA ELEMENTO MENU");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        progressBar = findViewById(R.id.progressBarCercaElemento);
+        progressBar.setVisibility(View.INVISIBLE);
         gestioneElementiPresenter = new GestioneElementiPresenter(this);
         gestioneElementiPresenter.getElementiMenu();
+
     }
     @Override
     @SuppressLint("CheckResult")
@@ -100,6 +107,20 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
 
@@ -185,7 +206,9 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     @Override
     public void elementoEliminato() {
         int pos = elementoMenuList.indexOf(elementoDaEliminare);
+        elementoMenuList.remove(pos);
         adapter.notifyItemRemoved(pos);
+
     }
 
     @Override

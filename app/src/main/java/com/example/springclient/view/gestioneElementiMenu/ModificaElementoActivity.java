@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
@@ -43,13 +45,15 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
     private String categoriaSelezionata;
     private List<String> allergeni;
     private ModificaElementoContract.Presenter modificaElementoMenuPresenter;
-
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("MODIFICA ELEMENTO NEL MENU");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_modifica_elemento_gestione_menu);
+        progressBar = findViewById(R.id.progressModificaElemento);
+        progressBar.setVisibility(View.INVISIBLE);
         elementoMenu = (ElementoMenu) getIntent().getSerializableExtra("elementoMenu");
         modificaElementoMenuPresenter = new ModificaElementoPresenter(this);
         modificaElementoMenuPresenter.getNomiCategoriaDisponibili(elementoMenu.getId().toString());
@@ -114,6 +118,21 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     private boolean controllaCampi() {

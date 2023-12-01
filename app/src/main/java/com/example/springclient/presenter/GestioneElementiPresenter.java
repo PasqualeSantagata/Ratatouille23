@@ -79,15 +79,20 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
 
     @Override
     public void getElementiMenu() {
+        cercaElementoView.mostraPorgressBar();
         elementoMenuModel.getAllElementiMenu(new CallbackResponse<List<ElementoMenu>>() {
             @Override
             public void onFailure(Throwable t) {
-                cercaElementoView.impossibileContattareIlServer("Errore di rete: impossibile caricare gli elementi");
+                cercaElementoView.nascondiProgressBar();
+                if(cercaElementoView.isVisibile()) {
+                    cercaElementoView.impossibileContattareIlServer("Errore di rete: impossibile caricare gli elementi");
+                }
             }
 
             @Override
             public void onSuccess(Response<List<ElementoMenu>> retData) {
-                if(retData.isSuccessful()){
+                cercaElementoView.nascondiProgressBar();
+                if(retData.isSuccessful() && cercaElementoView.isVisibile()){
                     cercaElementoView.caricaElementi(retData.body());
                 }
             }
@@ -97,15 +102,20 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
 
     @Override
     public void rimuoviElementoMenu(ElementoMenu elementoMenu) {
+        cercaElementoView.mostraPorgressBar();
         elementoMenuModel.rimuoviElemento(new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-                cercaElementoView.impossibileContattareIlServer("Errore di rete: impossibile rimuovere l'elemento");
+                cercaElementoView.nascondiProgressBar();
+                if(cercaElementoView.isVisibile()) {
+                    cercaElementoView.impossibileContattareIlServer("Errore di rete: impossibile rimuovere l'elemento");
+                }
             }
 
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+                cercaElementoView.nascondiProgressBar();
+                if(retData.isSuccessful() && cercaElementoView.isVisibile()){
                     cercaElementoView.elementoEliminato();
                 }
             }
@@ -117,15 +127,19 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
         elementoMenuModel.restituisciTraduzione(new CallbackResponse<ElementoMenu>() {
             @Override
             public void onFailure(Throwable t) {
-                cercaElementoView.impossibileContattareIlServer("Errore di rete: impossibile caricare la traduzione");
+                if(cercaElementoView.isVisibile()) {
+                    cercaElementoView.impossibileContattareIlServer("Errore di rete: impossibile caricare la traduzione");
+                }
             }
 
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
-                if(retData.isSuccessful()) {
-                    cercaElementoView.mostraTraduzione(retData.body());
-                }else {
-                    cercaElementoView.traduzioneAssente();
+                if(cercaElementoView.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        cercaElementoView.mostraTraduzione(retData.body());
+                    } else {
+                        cercaElementoView.traduzioneAssente();
+                    }
                 }
             }
         }, elementoMenu.getId().toString());

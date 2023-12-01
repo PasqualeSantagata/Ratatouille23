@@ -19,7 +19,6 @@ public interface InserisciNuovaLinguaContract {
 
     interface Presenter {
         void annullaInserimentoNuovaLingua();
-
         void avviaNuovoElementoNuovaLingua();
         void aggiungiLingua(String nomeElemento, ElementoMenu elementoTradotto);
     }

@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -35,7 +37,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     private Button buttonIndietro;
     private Button buttonRiepilogo;
     private MostraCategoriaMenuPresenter categoriaPresenter;
-
+    private ProgressBar progressBar;
     private List<Categoria> categorie;
     private RecycleViewAdapterCategoria adapterCategoria;
     private Categoria categoria;
@@ -46,7 +48,8 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         getSupportActionBar().setTitle("CATEGORIE");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
-
+        progressBar = findViewById(R.id.progressBarEsploraCategorieMenu);
+        progressBar.setVisibility(View.INVISIBLE);
         categoriaPresenter = new MostraCategoriaMenuPresenter(this);
         //Dettagli ordinazione dalla activity precedente
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
@@ -89,6 +92,21 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override
@@ -143,16 +161,12 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
     @Override
     public void caricamentoCategorieFallito() {
-        //non viene mostrata la dialog se l'utente è uscito dall'activity mentre le categorie stavano ancora caricando
-        //nel caso in cui la connessione al server fallisca
-        if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            Dialog dialog = new Dialog(this);
-            mostraDialogErroreOneBtn(dialog, "Impossibile caricare le categorie", view -> {
-                Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
-                dialog.dismiss();
-                startActivity(intent);
-            });
-        }
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, "Impossibile caricare le categorie", view -> {
+            Intent intent = new Intent(this, StartNuovaOrdinazioneActivity.class);
+            dialog.dismiss();
+            startActivity(intent);
+        });
     }
 
 

@@ -11,10 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
@@ -52,6 +54,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     private String categoriaSelezionata;
     private ElementoMenu elementoMenu;
     private InserisciElementoContract.Presenter inserisciElementoPresenter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         getSupportActionBar().setTitle("INSERISCI ELEMENTO");
         setContentView(R.layout.activity_inserisci_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        progressBar = findViewById(R.id.progressBarInsersciElemento);
+        progressBar.setVisibility(View.INVISIBLE);
 
         inserisciElementoPresenter = new InserisciElementoPresenter(this);
         foodFactsPresenter = new FoodFactsPresenter(this);
@@ -113,6 +118,21 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override

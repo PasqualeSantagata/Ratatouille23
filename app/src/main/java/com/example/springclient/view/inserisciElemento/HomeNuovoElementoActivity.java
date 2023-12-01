@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.InserisciElementoContract;
@@ -35,6 +37,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     private List<String> lingue;
     private String categoriaSelezionata;
     private String linguaSelezionata;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         getSupportActionBar().setTitle("NUOVO ELEMENTO DEL MENÚ");
         setContentView(R.layout.activity_home_nuovo_elemento_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        progressBar = findViewById(R.id.progressBarHomeNuovoElemento);
+        progressBar.setVisibility(View.INVISIBLE);
         homeNuovoElementoPresenter = new InserisciElementoPresenter(this);
         homeNuovoElementoPresenter.getNomiCategorie();
     }
@@ -86,6 +91,21 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override

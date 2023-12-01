@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseView;
@@ -62,6 +63,21 @@ public class  DashboardAdminActivity extends AppCompatActivity implements ILogou
     @Override
     public void tornaIndietro() {
 
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override

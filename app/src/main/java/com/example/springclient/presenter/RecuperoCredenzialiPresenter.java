@@ -24,18 +24,23 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
 
     @Override
     public void avviaRecuperoPassword(String email){
+        recuperoCredenzialiView.mostraPorgressBar();
         recuperoCredenzialiModel.recuperaPassword(email, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-                recuperoCredenzialiView.erroreConnessione("Errore di connessione: impossiblie comunicare con il server");
+                recuperoCredenzialiView.nascondiProgressBar();
+                if(recuperoCredenzialiView.isVisibile()) {
+                    recuperoCredenzialiView.erroreConnessione("Errore di connessione: impossiblie comunicare con il server");
+                }
             }
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+                recuperoCredenzialiView.nascondiProgressBar();
+                if(retData.isSuccessful() && recuperoCredenzialiView.isVisibile()){
                     if(recuperoCredenzialiView!= null)
                         recuperoCredenzialiView.emailInviataCorrettamente();
                 }
-                else if(retData.code() == 401){
+                else if(retData.code() == 401 && recuperoCredenzialiView.isVisibile()){
                     recuperoCredenzialiView.emailErrata();
                 }
             }

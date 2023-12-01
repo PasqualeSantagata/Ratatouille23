@@ -3,11 +3,14 @@ package com.example.springclient.view.analyticsView;
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
+import androidx.lifecycle.Lifecycle;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -40,6 +43,7 @@ public class StatisticheActivity extends AppCompatActivity implements BaseView {
     private EditText editTextData;
     private Button buttonSelezionaDate;
     private Column column;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -50,7 +54,7 @@ public class StatisticheActivity extends AppCompatActivity implements BaseView {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         anyChartView = findViewById(R.id.any_chart_view);
-        anyChartView.setProgressBar(findViewById(R.id.progress_bar));
+        anyChartView.setProgressBar(findViewById(R.id.progress_bar_stat));
         analyticsPresenter = new AnalyticsPresenter(this);
         String dataFine = LocalDate.now().toString();
         String dataInizio = LocalDate.now().minusMonths(1).toString();
@@ -63,6 +67,7 @@ public class StatisticheActivity extends AppCompatActivity implements BaseView {
     @Override
     public void initializeComponents() {
         buttonSelezionaDate = findViewById(R.id.buttonSelezionaDateStatistiche);
+        progressBar = findViewById(R.id.progress_bar_stat);
         editTextData = findViewById(R.id.editTextDate);
         editTextData.setClickable(false);
         mostraPicker();
@@ -71,6 +76,22 @@ public class StatisticheActivity extends AppCompatActivity implements BaseView {
     @Override
     public void tornaIndietro() {
 
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     public void impossibileComunicareServer(String messaggio){

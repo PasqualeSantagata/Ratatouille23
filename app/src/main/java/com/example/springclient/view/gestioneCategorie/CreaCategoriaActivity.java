@@ -6,14 +6,17 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CreaCategoriaContract;
@@ -38,6 +41,7 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
     private File immagineFile;
     private String nomeCategoria;
     private EditText editTextNome;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +63,8 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
         buttonOk = findViewById(R.id.buttonOkCreaCategoriaGestioneMenu);
         immagineCategoria = (byte[]) getIntent().getSerializableExtra("immagine");
         editTextNome = textInputLayoutNomeCategoria.getEditText();
+        progressBar = findViewById(R.id.progressBarCreaCategoria);
+        progressBar.setVisibility(View.INVISIBLE);
 
         if (immagineCategoria != null) {
             immagine = BitmapFactory.decodeByteArray(immagineCategoria, 0, immagineCategoria.length);
@@ -102,6 +108,22 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     public boolean controllaCampi() {

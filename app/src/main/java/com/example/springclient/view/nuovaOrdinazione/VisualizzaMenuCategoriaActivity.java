@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,6 +56,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
     private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
     private OrdinazioneContract.Presenter viewElementiOrdinazionePresenter;
     private String nome;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +67,8 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         getSupportActionBar().setTitle(nome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
+        progressBar = findViewById(R.id.progressBarVisualizzaMenuCategoria);
+        progressBar.setVisibility(View.INVISIBLE);
         viewElementiOrdinazionePresenter = new OrdinazionePresenter(this);
         visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
         initializeComponents();
@@ -115,6 +121,23 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
 

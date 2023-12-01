@@ -34,15 +34,20 @@ public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Pre
 
     @Override
     public void getAllCategorie() {
+        categoriaView.mostraPorgressBar();
         categoriaModel.getAllCategorie(new CallbackResponse<List<Categoria>>() {
             @Override
             public void onFailure(Throwable t) {
-                categoriaView.caricamentoCategorieFallito();
+                categoriaView.nascondiProgressBar();
+                if(categoriaView.isVisibile()) {
+                    categoriaView.caricamentoCategorieFallito();
+                }
             }
 
             @Override
             public void onSuccess(Response<List<Categoria>> retData) {
-                if(retData.isSuccessful()){
+                categoriaView.nascondiProgressBar();
+                if(retData.isSuccessful() && categoriaView.isVisibile()){
                     categoriaView.setCategorie(retData.body());
                 }
             }
@@ -51,16 +56,21 @@ public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Pre
 
     @Override
     public void getFotoCategoriaById(Categoria categoria, int posizione) {
+        categoriaView.mostraPorgressBar();
         categoriaModel.getFotoCategoriaById(categoria.getId().toString(), new CallbackResponse<ResponseBody>() {
 
             @Override
             public void onFailure(Throwable t) {
-                categoriaView.caricamentoCategorieFallito();
+                categoriaView.nascondiProgressBar();
+                if(categoriaView.isVisibile()) {
+                    categoriaView.caricamentoCategorieFallito();
+                }
             }
 
             @Override
             public void onSuccess(Response<ResponseBody> retData) {
-                if(retData.isSuccessful()){
+                categoriaView.nascondiProgressBar();
+                if(retData.isSuccessful() && categoriaView.isVisibile()){
                     Bitmap bitmap = BitmapFactory.decodeStream(retData.body().byteStream());
                     categoria.setImage(bitmap);
                     categoriaView.mostraImmagineCategoria(posizione);

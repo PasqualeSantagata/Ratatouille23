@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CreaUtenzaContract;
@@ -58,7 +59,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
         adapterRuoli.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRuoli.setAdapter(adapterRuoli);
         progressBar = findViewById(R.id.progressBarInserimentoNuovoUtente);
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         okButton = findViewById(R.id.buttonOkCreaUtenza);
         indietroButton = findViewById(R.id.buttonIndietroNuovaUtenza);
@@ -74,6 +75,21 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
     @Override
     public void tornaIndietro() {
 
+    }
+
+    //@Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    //@Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public boolean isVisibile() {
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override
@@ -109,7 +125,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
                     nuovoUtente.setRuolo(Ruolo.SUPERVISORE);
             }
             adminPresenter.registraUtente(nuovoUtente);
-            progressBar.setVisibility(View.VISIBLE);
         } else {
             mostraErroreCampiVuoti();
         }
@@ -117,7 +132,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
 
     @Override
     public void mostraErroreCampiVuoti() {
-        progressBar.setVisibility(View.INVISIBLE);
 
         String nome, cognome, email, password;
         nome = textInputNome.getEditText().getText().toString();
@@ -143,7 +157,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
 
     @Override
     public void mostraErrore(String messaggio) {
-        progressBar.setVisibility(View.INVISIBLE);
 
         String lowMessaggio = messaggio.toLowerCase();
         if (lowMessaggio.contains("nome") && !lowMessaggio.contains("cog")) {
@@ -189,7 +202,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
         Dialog dialog = new Dialog(this);
         mostraDialogOkOneBtn(dialog,"Utente registrato correttamente", view -> dialog.dismiss());
         cancellaCampi();
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override

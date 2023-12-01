@@ -27,17 +27,24 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
 
     @Override
     public void salavaCategoria(Categoria categoria) {
+        creaCategoriaView.mostraPorgressBar();
         categoriaModel.saveCategoria(categoria, new CallbackResponse<Categoria>() {
             @Override
             public void onFailure(Throwable t) {
-                creaCategoriaView.erroreSalvataggioCategoria();
+                creaCategoriaView.nascondiProgressBar();
+                if(creaCategoriaView.isVisibile()) {
+                    creaCategoriaView.erroreSalvataggioCategoria();
+                }
             }
             @Override
             public void onSuccess(Response<Categoria> retData) {
-                if(retData.isSuccessful()){
-                    creaCategoriaView.salvaImmagine(retData.body().getId());
-                }else{
-                    creaCategoriaView.categoriaGiaEsistente();
+                creaCategoriaView.nascondiProgressBar();
+                if(creaCategoriaView.isVisibile()) {
+                    if (retData.isSuccessful()) {
+                        creaCategoriaView.salvaImmagine(retData.body().getId());
+                    } else {
+                        creaCategoriaView.categoriaGiaEsistente();
+                    }
                 }
             }
         });
@@ -45,14 +52,18 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
 
     @Override
     public void aggiungiFotoCategoria(String id, File foto) {
+        creaCategoriaView.mostraPorgressBar();
         categoriaModel.addFotoCategoria(id, foto, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-                creaCategoriaView.impossibileContattareIlServer("Errore di connessione durante il caricamento della foto");
+                creaCategoriaView.nascondiProgressBar();
+                if(creaCategoriaView.isVisibile())
+                    creaCategoriaView.impossibileContattareIlServer("Errore di connessione durante il caricamento della foto");
             }
             @Override
             public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+                creaCategoriaView.nascondiProgressBar();
+                if(retData.isSuccessful() && creaCategoriaView.isVisibile()){
                     creaCategoriaView.continuaInserimento();
                 }
             }
@@ -63,22 +74,17 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
     public void tornaHomeNuovoElemento() {
         creaCategoriaView.tornaIndietro();
     }
-
-
     @Override
     public void mostraScegliFoto() {
         creaCategoriaView.mostraScegliFoto();
     }
-
     @Override
     public void annullaInserisciImmagine() {
         scegliFotoView.tornaIndietro();
     }
-
     @Override
     public void caricaImmagine(byte[] immagine) {
         scegliFotoView.caricaImmagine(immagine);
     }
-
 
 }

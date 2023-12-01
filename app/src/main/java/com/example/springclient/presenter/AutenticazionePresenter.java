@@ -37,7 +37,9 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
             @Override
             public void onFailure(Throwable t) {
                 loginActivity.disabilitaPorogressBar();
-                loginActivity.impossibileContattareIlServer("Errore nella connsessione con il server");
+                if(loginActivity.isVisibile()) {
+                    loginActivity.impossibileContattareIlServer("Errore nella connsessione con il server");
+                }
             }
             @Override
             public void onSuccess(Response<AuthenticationResponse> retData) {

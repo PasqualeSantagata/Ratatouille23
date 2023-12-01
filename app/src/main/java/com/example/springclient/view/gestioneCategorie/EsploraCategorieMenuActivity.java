@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,6 +32,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     private RecycleViewAdapterCategoria adapterCategoria;
     private Button indietroButton;
     private Categoria categoria;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -39,14 +41,18 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         getSupportActionBar().setTitle("CATEGORIE");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
+        progressBar = findViewById(R.id.progressBarEsploraCategorieMenu);
+        progressBar.setVisibility(View.INVISIBLE);
         mostracategoriaMenuPresenter = new MostraCategoriaMenuPresenter(this);
         mostracategoriaMenuPresenter.getAllCategorie();
         Button riepilogoButton = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
         riepilogoButton.setVisibility(View.INVISIBLE);
+
     }
     @Override
     public void initializeComponents() {
         indietroButton = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
+
 
         indietroButton.setOnClickListener(view -> mostracategoriaMenuPresenter.tronaHomeModificaElementiMenu());
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);
@@ -59,6 +65,22 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     @Override
     public void tornaIndietro() {
         onBackPressed();
+    }
+
+    @Override
+    public void mostraPorgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void nascondiProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean isVisibile() {
+       return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override
@@ -109,14 +131,13 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
 
     @Override
     public void caricamentoCategorieFallito() {
-        if(getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            Dialog dialog = new Dialog(this);
-            mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
-                Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
-                dialog.dismiss();
-                startActivity(intent);
-            });
-        }
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
+            Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
+            dialog.dismiss();
+            startActivity(intent);
+        });
+
     }
 
     @Override
