@@ -25,8 +25,6 @@ import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazioneActivi
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
-import ua.naiksoftware.stomp.StompClient;
-
 public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View {
     private EditText editTextPassword;
     private EditText editTextEmail;
@@ -72,9 +70,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
            verificaCredenziali(email, password);
        });
 
-       textViewPasswordDimenticata.setOnClickListener(view -> {
-           avviaRecuperoPassword();
-       });
+       textViewPasswordDimenticata.setOnClickListener(view -> autenticazionePresenter.avviaRecuperoPassword());
     }
 
     @Override
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         }
     }
 
-    public void disabilitaErrori(){
+    private void disabilitaErrori(){
         textInputLayoutEmail.setErrorEnabled(false);
         textInputLayoutPassword.setErrorEnabled(false);
     }
@@ -116,28 +112,17 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     @Override
     public void dialgPrimoAccesso(){
         dialogPrimoAcesso = new Dialog(this);
-        dialogPrimoAcesso.setContentView(R.layout.dialog_warning_one_button);
-        TextView errorMessage = dialogPrimoAcesso.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        errorMessage.setText(R.string.dialog_cambia_pass);
-        dialogPrimoAcesso.show();
-
-        Button buttonDialog = dialogPrimoAcesso.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        buttonDialog.setOnClickListener(view -> {
+        mostraDialogOkOneBtn(dialogPrimoAcesso, "Devi cambiare password, clicca ok e riceverai una mail per aggiornarla", view -> {
             recuperoCredenzialiPresenter.avviaRecuperoPassword(email);
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             dialogPrimoAcesso.dismiss();
         });
     }
 
     public void disabilitaPorogressBar(){
         progressBar.setVisibility(View.GONE);
-
     }
 
-    public void cleanFields(){
-        editTextPassword.setText("");
-        editTextEmail.setText("");
-    }
     @Override
     public void avviaDashboardAdmin(){
         progressBar.setVisibility(View.GONE);
@@ -146,19 +131,10 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
     }
 
-    public void mostraDialogErrore(String messaggio) {
+    @Override
+    public void impossibileContattareIlServer(String messaggio) {
         Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_err_one_btn);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewErrorMessageDialogErrorOneBtn);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogErrorOneBtn);
-        dialogAttenzione.show();
-
-        buttonOk.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+        mostraDialogErroreOneBtn(dialogAttenzione, messaggio, view -> dialogAttenzione.dismiss());
     }
 
     @Override
@@ -168,12 +144,14 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
 
     @Override
     public void avviaDashboardAddettoSala() {
+        progressBar.setVisibility(View.GONE);
         Intent avviaOrdinazione =  new Intent(this, StartNuovaOrdinazioneActivity.class);
         startActivity(avviaOrdinazione);
     }
 
     @Override
     public void avviaDashboardAddettoCucina(String email) {
+        progressBar.setVisibility(View.GONE);
         Intent avviaCuoco = new Intent(this, HomeStatoOrdinazioneActivity.class);
         avviaCuoco.putExtra("email", email);
         startActivity(avviaCuoco);

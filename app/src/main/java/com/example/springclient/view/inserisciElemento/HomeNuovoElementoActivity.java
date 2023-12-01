@@ -1,5 +1,6 @@
 package com.example.springclient.view.inserisciElemento;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -74,6 +75,12 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
         fabAggiungiCategoria.setOnClickListener(view -> homeNuovoElementoPresenter.mostraCreaCategoria());
 
 
+    }
+
+    @Override
+    public void erroreComunicazioneServer(String messaggio){
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.springclient.presenter;
 
+import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.model.RecuperoCredenzialiModel;
@@ -11,16 +12,14 @@ import retrofit2.Response;
 
 public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract.Presenter {
 
-    private PasswordDimenticataActivity passwordDimenticataActivity;
-    private RecuperoCredenzialiModel recuperoCredenzialiModel;
+    private RecuperoCredenzialiContract.View recuperoCredenzialiView;
+    private RecuperoCredenzialiModel recuperoCredenzialiModel = new RecuperoCredenzialiModel(RetrofitService.getIstance());
     private MainActivity loginActivity;
-    public RecuperoCredenzialiPresenter(PasswordDimenticataActivity passwordDimenticataActivity){
-        this.passwordDimenticataActivity = passwordDimenticataActivity;
-        recuperoCredenzialiModel = new RecuperoCredenzialiModel();
+    public RecuperoCredenzialiPresenter(RecuperoCredenzialiContract.View recuperoCredenzialiView){
+        this.recuperoCredenzialiView = recuperoCredenzialiView;
     }
     public RecuperoCredenzialiPresenter(MainActivity loginActivity){
         this.loginActivity = loginActivity;
-        recuperoCredenzialiModel = new RecuperoCredenzialiModel();
     }
 
     @Override
@@ -28,17 +27,16 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
         recuperoCredenzialiModel.recuperaPassword(email, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-
+                recuperoCredenzialiView.erroreConnessione("Errore di connessione: impossiblie comunicare con il server");
             }
-
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-                    if(passwordDimenticataActivity!= null)
-                        passwordDimenticataActivity.emailInviataCorrettamente();
+                    if(recuperoCredenzialiView!= null)
+                        recuperoCredenzialiView.emailInviataCorrettamente();
                 }
                 else if(retData.code() == 401){
-                    passwordDimenticataActivity.emailErrata();
+                    recuperoCredenzialiView.emailErrata();
                 }
             }
         });

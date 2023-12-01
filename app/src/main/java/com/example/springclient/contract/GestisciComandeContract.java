@@ -1,20 +1,21 @@
 package com.example.springclient.contract;
 
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
 public interface GestisciComandeContract {
 
     interface HomeGestioneComande extends BaseView{
-        void setOrdinazioniSospese(List<Ordinazione> ordinazioniSospese);
+        void setPortateSospese(List<Portata> ordinazioniSospese);
+        void impossibileComunicareConServer(String messaggio);
 
-
+        void ordinazioneConclusa(String s);
     }
 
     interface Presenter{
         void getOrdinazioniSospese();
-
 
         void evadiOrdinazione(long idOrdinazione);
     }

@@ -87,23 +87,24 @@ public class OrdinazioneModel  {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        ordinazioneCallback.onFailure(e);
 
                     }
                 });
     }
 
-    public void aggiungiOrdinazione(CallbackResponse<Void> callbackResponse,  Ordinazione ordinazione){
+    public void aggiungiOrdinazione(CallbackResponse<Ordinazione> callbackResponse,  Ordinazione ordinazione){
         ordinazioneAPI.aggiungiOrdinazione(ordinazione)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<Void>>() {
+                .subscribe(new SingleObserver<Response<Ordinazione>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+                    public void onSuccess(@NonNull Response<Ordinazione> voidResponse) {
                         if(voidResponse.isSuccessful()){
                             callbackResponse.onSuccess(voidResponse);
 

@@ -10,7 +10,11 @@ public interface InserisciNuovaLinguaContract {
     }
 
     interface NuovoElementoNuovaLinguaView extends BaseView{
+        void impossibileComunicareServer(String messaggio);
+
         void linguaAggiuntaConSuccesso();
+
+        void mostraErroreInserimentoElemento(String errore);
     }
 
     interface Presenter {

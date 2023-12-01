@@ -12,6 +12,8 @@ public interface CreaCategoriaContract {
         void mostraScegliFoto();
 
         void impossibileContattareIlServer(String s);
+
+        void categoriaGiaEsistente();
     }
 
     interface ScegliFotoView extends BaseView{

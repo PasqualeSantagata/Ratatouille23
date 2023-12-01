@@ -13,21 +13,23 @@ public interface ModificaElementoContract {
         void elementoGiaPresenteNellaCategoria();
         void elementoAggiuntoAdUnaCategoria(String nomeCategoria);
         void elementoModificatoCorrettamente();
-        void erroreModifica();
+        void erroreModifica(String messaggio);
         void mostraErrori(String errore);
         void mostraSelezionaNuovaLingua();
+
 
     }
 
     interface ViewDefinisciOrdine extends BaseView{
 
+        void impossibileModificareOrdine(String s);
     }
     interface Presenter {
         void getNomiCategoriaDisponibili(String id);
         void restituisciTraduzioneElemento(String id);
         void aggiungiElementoAllaCategoria(String nomeCategoria, ElementoMenu elementoMenu);
         void modificaElementoMenu(ElementoMenu elementoMenu);
-        void modificaOrdineCategoria(Categoria categoria);
+        void modificaOrdineCategoria(String nomeCategoria, int ordinamento);
         void tornaIndietro();
 
         void mostraSelezionaNuovaLingua();

@@ -1,6 +1,7 @@
 package com.example.springclient.contract;
 
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
@@ -12,8 +13,13 @@ public interface VisualizzElementiContract {
         void setElementi(List<ElementoMenu> elementoMenuList);
         void rimuoviElemento();
         void mostraRiepilogo();
-        void mostraModifica(ElementoMenu elementoMenu);
 
+        void mostraFiltraCategoria(List<ElementoMenu> portataList);
+
+        void mostraModifica(ElementoMenu elementoMenu);
+        void impossibileComunicareConServer(String messaggio);
+
+        void impossibileRimuovereElemento(String s);
     }
 
     interface Presenter {
@@ -24,5 +30,7 @@ public interface VisualizzElementiContract {
         void aggiornaElementiCategoria(String nomeCategoria);
         void eliminaElementoDallaCategoria(Long idCategoria, ElementoMenu elementoMenu);
         void mostraRiepilogo();
+        void tornaEsploraCategorieMenu();
+        void mostrFiltraCategorie(String nomeCategoria);
     }
 }

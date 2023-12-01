@@ -189,9 +189,9 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
     }
 
     @Override
-    public void erroreModifica(){
+    public void erroreModifica(String messaggio){
         Dialog dialog = new Dialog(this);
-        mostraDialogErroreOneBtn(dialog, "Errore nella connessione con il server", view -> dialog.dismiss());
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
     }
 
     @Override

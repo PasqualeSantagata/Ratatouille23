@@ -24,7 +24,7 @@ public interface OrdinazioneAPI {
     Single<Response<Ordinazione>> concludiOrdinazione(@Path(value = "ordinazioneId", encoded = true)String id);
 
     @POST("api/v1/ordinazione")
-    Single<Response<Void>> aggiungiOrdinazione(@Body Ordinazione ordinazione);
+    Single<Response<Ordinazione>> aggiungiOrdinazione(@Body Ordinazione ordinazione);
 
 
 }

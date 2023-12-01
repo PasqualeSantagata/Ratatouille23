@@ -28,6 +28,9 @@ public interface UtenteAPI {
     @Headers("No-Authentication: true")
     Single<Response<AuthenticationResponse>> logInUtente(@Body AuthRequest authRequest);
 
+    @GET("/api/v1/auth/logout")
+    Single<Response<Void>> logOutUtente();
+
     @POST("api/v1/auth/refreshToken")
     @Headers("No-Authentication: true")
     Call<AuthenticationResponse> refreshToken(@Header("Authorization") String token);

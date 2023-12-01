@@ -23,12 +23,12 @@ import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
-import com.example.springclient.view.gestioneCategorie.EsploraCategorieMenuActivity;
-import com.example.springclient.view.gestioneCategorie.FiltraCategoriaGestioneMenuActivity;
 import com.example.springclient.view.gestioneElementiMenu.ModificaElementoActivity;
+import com.example.springclient.view.nuovaOrdinazione.FiltraCategoriaNuovaOrdinazioneActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -114,10 +114,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_riordinare:
-                Intent intent = new Intent(this, FiltraCategoriaGestioneMenuActivity.class);
-                intent.putExtra("elementiMenu", (Serializable) elementiMenu);
-                intent.putExtra("nomeCategoria", nome);
-                startActivity(intent);
+                visualizzaElementiPresenter.mostrFiltraCategorie(nome);
                 break;
             case R.id.item_lingue:
                 if (elementoSelezionato != -1) {
@@ -150,9 +147,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
         fabModifica.setOnClickListener(view -> {
             if (elementoSelezionato != -1) {
-                Intent intentModElemento = new Intent(this, ModificaElementoActivity.class);
-                intentModElemento.putExtra("elementoMenu", elementiMenu.get(elementoSelezionato));
-                startActivity(intentModElemento);
+                visualizzaElementiPresenter.mostraModifica(elementiMenu.get(elementoSelezionato));
             } else {
                 Toast.makeText(this, "Seleziona un elemento", Toast.LENGTH_SHORT).show();
             }
@@ -165,14 +160,12 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
             }
         });
 
-        indietroButton.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        indietroButton.setOnClickListener(view -> visualizzaElementiPresenter.tornaEsploraCategorieMenu());
     }
 
     @Override
     public void tornaIndietro() {
-
+        onBackPressed();
     }
 
     private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
@@ -231,9 +224,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
         dialogAttenzione.show();
 
-        buttonOk.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+        buttonOk.setOnClickListener(view -> dialogAttenzione.dismiss());
     }
 
     @Override
@@ -252,8 +243,31 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void mostraModifica(ElementoMenu elementoMenu) {
+    public void mostraFiltraCategoria(List<ElementoMenu> elementoMenuList) {
+        Intent intent = new Intent(this, FiltraCategoriaGestioneMenuActivity.class);
+        intent.putExtra("elementiCategoria", (Serializable) elementoMenuList);
+        intent.putExtra("nomeCategoria", nome);
+        intent.putExtra("idCategoria", idCategoria);
+        startActivity(intent);
 
+    }
+
+    @Override
+    public void mostraModifica(ElementoMenu elementoMenu) {
+        Intent intentModElemento = new Intent(this, ModificaElementoActivity.class);
+        intentModElemento.putExtra("elementoMenu", elementoMenu);
+        startActivity(intentModElemento);
+    }
+
+    @Override
+    public void impossibileComunicareConServer(String messaggio) {
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
+    }
+
+    @Override
+    public void impossibileRimuovereElemento(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -24,7 +24,7 @@ public class AnalyticsPresenter {
         analyticsModel.getAnalytics(new CallbackResponse<List<AnalyticsData>>() {
             @Override
             public void onFailure(Throwable t) {
-
+                statisticheActivity.impossibileComunicareServer("Errore di connessione, impossibile recuperare i dati dal server");
             }
             @Override
             public void onSuccess(Response<List<AnalyticsData>> retData) {
@@ -40,7 +40,7 @@ public class AnalyticsPresenter {
         utenteModel.getAllCuochi(new CallbackResponse<List<String>>() {
             @Override
             public void onFailure(Throwable t) {
-
+                statisticheActivity.impossibileComunicareServer("Errore di connessione, impossibile recuperare i dati dal server");
             }
 
             @Override
@@ -49,7 +49,6 @@ public class AnalyticsPresenter {
                     statisticheActivity.setCuochi(retData.body());
                     statisticheActivity.preparaDati();
                     statisticheActivity.costruisciGrafo();
-
                 }
             }
         });

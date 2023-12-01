@@ -15,23 +15,20 @@ import com.example.springclient.view.MainActivity;
 import retrofit2.Response;
 
 public class AutenticazionePresenter implements AutenticazioneContract.Presenter {
-    private final AutenticazioneModel autenticazioneModel;
-    private final RetrofitService retrofitService;
+    private final AutenticazioneModel autenticazioneModel = new AutenticazioneModel(RetrofitService.getIstance());
     private MainActivity loginActivity;
+    private ILogout iLogout;
     private SharedPreferences sharedPreferences;
 
-
-    private AutenticazionePresenter(){
-        retrofitService = RetrofitService.getIstance();
-        retrofitService.setUtentePresenter(this);
-        autenticazioneModel = AutenticazioneModel.getIstance();
+    public AutenticazionePresenter(ILogout iLogout) {
+        this.iLogout = iLogout;
     }
+
     public AutenticazionePresenter(MainActivity loginActivity){
-        this();
         this.loginActivity = loginActivity;
         sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        retrofitService.getTokenRefreshInterceptor().setMainActivityPresenter(this);
-        retrofitService.getMyInterceptor().setPreferences(sharedPreferences);
+        RetrofitService.getIstance().getTokenRefreshInterceptor().setMainActivityPresenter(this);
+        RetrofitService.getIstance().getMyInterceptor().setPreferences(sharedPreferences);
     }
 
     @Override
@@ -40,7 +37,7 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
             @Override
             public void onFailure(Throwable t) {
                 loginActivity.disabilitaPorogressBar();
-                loginActivity.mostraDialogErrore("Errore nella connsessione con il server");
+                loginActivity.impossibileContattareIlServer("Errore nella connsessione con il server");
             }
             @Override
             public void onSuccess(Response<AuthenticationResponse> retData) {
@@ -69,6 +66,28 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
                 }
             }
         });
+    }
+    @Override
+    public void logOutUtente(){
+        autenticazioneModel.logOutUtente(new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+                iLogout.logOutFallito();
+            }
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                if(retData.isSuccessful()){
+                    iLogout.logOutAvvenutoConSuccesso();
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public void avviaRecuperoPassword() {
+        loginActivity.avviaRecuperoPassword();
+
     }
 
     public void avviaAggiornaPassword(){

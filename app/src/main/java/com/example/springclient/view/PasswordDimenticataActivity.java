@@ -1,7 +1,6 @@
 package com.example.springclient.view;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -32,7 +31,6 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         credenzialiPresenter = new RecuperoCredenzialiPresenter(this);
         initializeComponents();
-
     }
 
     @Override
@@ -63,7 +61,7 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         progressBar.setVisibility(View.VISIBLE);
         credenzialiPresenter.avviaRecuperoPassword(email);
     }
-
+    @Override
     public void emailInviataCorrettamente(){
         Dialog emailInviataCorrettamenteDialog = new Dialog(this);
         emailInviataCorrettamenteDialog.setContentView(R.layout.dialog_ok_one_button);
@@ -80,11 +78,15 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
 
     @Override
     public void emailErrata(){
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
         emailTextInputLayout.setError("Email non trovata");
     }
 
-
+    @Override
+    public void erroreConnessione(String impossiblieComunicareConIlServer) {
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningOneBtn(dialog, impossiblieComunicareConIlServer, view -> dialog.dismiss());
+    }
 
 
 }

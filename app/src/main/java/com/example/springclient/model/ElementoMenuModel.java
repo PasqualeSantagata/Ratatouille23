@@ -55,12 +55,13 @@ public class ElementoMenuModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        elementoMenuCallback.onFailure(e);
 
                     }
                 });
     }
 
-    public void rimuoviElemento(CallbackResponse<Void> response, String id){
+    public void rimuoviElemento(CallbackResponse<Void> callback, String id){
         elementoMenuAPI.rimuoviElemento(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -72,13 +73,13 @@ public class ElementoMenuModel {
 
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
-                        response.onSuccess(voidResponse);
+                        callback.onSuccess(voidResponse);
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callback.onFailure(e);
                     }
                 });
     }
@@ -100,7 +101,7 @@ public class ElementoMenuModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callback.onFailure(e);
                     }
                 });
 
@@ -122,7 +123,7 @@ public class ElementoMenuModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callback.onFailure(e);
                     }
                 });
 
@@ -145,7 +146,7 @@ public class ElementoMenuModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callback.onFailure(e);
                     }
                 });
 
@@ -174,5 +175,27 @@ public class ElementoMenuModel {
 
     }
 
+    public void trovaElementiPerNomeCategoria(String nome, CallbackResponse<List<ElementoMenu>> listCallbackResponse){
+        elementoMenuAPI.trovaElementiPerNomeCategoria(nome)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Response<List<ElementoMenu>>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull Response<List<ElementoMenu>> listResponse) {
+                        listCallbackResponse.onSuccess(listResponse);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                        listCallbackResponse.onFailure(e);
+                    }
+                });
+    }
 
 }

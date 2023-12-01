@@ -47,7 +47,7 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        categoriaCallback.onFailure(e);
                     }
                 });
 
@@ -71,7 +71,7 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        categoriaCallback.onFailure(e);
                     }
                 });
     }
@@ -117,7 +117,7 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("e", "error");
+                        categoriaCallback.onFailure(e);
 
                     }
                 });
@@ -140,6 +140,7 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        callbackResponse.onFailure(e);
 
                     }
                 });
@@ -163,6 +164,7 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        callbackResponse.onFailure(e);
 
                     }
                 });
@@ -185,6 +187,7 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        callbackResponse.onFailure(e);
 
                     }
                 });
@@ -215,8 +218,8 @@ public class CategoriaModel{
 
     }
 
-    public void modificaOrdineCategoria(Categoria categoria, CallbackResponse<Void> callbackResponse){
-        categoriaAPI.modificaOrdineCategoria(categoria)
+    public void modificaOrdineCategoria(String nomeCategoria, int flagOrdinamento, CallbackResponse<Void> callbackResponse){
+        categoriaAPI.modificaOrdineCategoria(nomeCategoria, flagOrdinamento)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<Void>>() {
@@ -232,7 +235,8 @@ public class CategoriaModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                            callbackResponse.onFailure(e);
+
+                        callbackResponse.onFailure(e);
                     }
                 });
 

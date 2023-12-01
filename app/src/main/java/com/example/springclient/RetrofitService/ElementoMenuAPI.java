@@ -32,5 +32,6 @@ public interface ElementoMenuAPI {
     @POST("api/v1/elementoMenu/modificaElemento")
     Single<Response<Void>> modificaElementoMenu(@Body ElementoMenu elementoMenu);
 
-
+    @GET("api/v1/elementoMenu/findByNomeCategoria/{nomeCategoria}")
+    Single<Response<List<ElementoMenu>>> trovaElementiPerNomeCategoria(@Path(value = "nomeCategoria", encoded = true)String nomeCategoria);
 }

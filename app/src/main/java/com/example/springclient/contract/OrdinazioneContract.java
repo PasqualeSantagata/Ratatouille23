@@ -1,6 +1,7 @@
 package com.example.springclient.contract;
 
 
+import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 
@@ -8,8 +9,10 @@ import java.util.List;
 
 public interface OrdinazioneContract {
     interface ViewRiepilogoOrdinazione extends BaseView{
-        void salvaOrdinazione(List<Portata> portateOrdinazione);
-        void ordinazioneAvvvenutaConSuccesso();
+
+        void salvaPortate(Ordinazione ordinazione);
+
+        void ordinazioneAvvenutaConSuccesso();
         void ordinazioneFallita();
     }
 
@@ -20,7 +23,10 @@ public interface OrdinazioneContract {
     }
 
     interface ViewElementiOrdinazione extends BaseView {
+        void mostraFiltraCategoriaMenu(List<Portata> portataList);
 
+
+        void impossibileFiltrareElementi(String s);
     }
 
 
@@ -29,6 +35,6 @@ public interface OrdinazioneContract {
         void salvaPortate(List<Portata> portataList);
         void salvaOrdinazione(Ordinazione ordinazione);
         void tornaEsploraCategorie();
-
+        void mostraFiltraCategoria(String nomeCategoria);
     }
 }

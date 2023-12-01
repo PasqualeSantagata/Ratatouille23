@@ -1,4 +1,4 @@
-package com.example.springclient.view.gestioneCategorie;
+package com.example.springclient.view.nuovaOrdinazione;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewCategoria;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.nuovaOrdinazione.RiepilogoRiepilogoOrdinazioneActivity;
+import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
 import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
 import com.example.springclient.view.nuovaOrdinazione.VisualizzaMenuCategoriaActivity;
 
@@ -52,7 +52,8 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         //Fetch delle categorie dal server
         categoriaPresenter.getAllCategorie();
-        initializeComponents();
+
+
     }
 
     private void creaRecyclerView(){
@@ -79,7 +80,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
         } else {
             // starta il riepilogo ordinazione non vuota
-            Intent intentRiepilogo = new Intent(this, RiepilogoRiepilogoOrdinazioneActivity.class);
+            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
             intentRiepilogo.putExtra("ordinazione",ordinazione);
             startActivity(intentRiepilogo);
         }
@@ -131,7 +132,9 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             });
 
         }
+        initializeComponents();
         creaRecyclerView();
+
     }
     @Override
     public void mostraImmagineCategoria(int posizione){

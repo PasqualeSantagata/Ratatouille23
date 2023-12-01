@@ -55,7 +55,7 @@ public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Pre
 
             @Override
             public void onFailure(Throwable t) {
-
+                categoriaView.caricamentoCategorieFallito();
             }
 
             @Override

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.StatoOrdinazione;
+import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
@@ -19,10 +19,10 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
 
     private final IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate;
     Context context;
-    List<StatoOrdinazione> ordinazioniPrenotate;
+    List<Portata> ordinazioniPrenotate;
 
 
-    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<StatoOrdinazione> ordinazioniPrenotate) {
+    public RecycleViewAdapterOrdinazioniPrenotate(IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate, Context context, List<Portata> ordinazioniPrenotate) {
         this.iRecycleViewOrdinazioniPrenotate = iRecycleViewOrdinazioniPrenotate;
         this.context = context;
         this.ordinazioniPrenotate = ordinazioniPrenotate;
@@ -44,8 +44,8 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo().toString());
         //info singoli piatti della stessa ordinazione
        // holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getTempoPreparazione());
-        holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getPortata().getElementoMenu().getNome());
-        holder.textViewNota.setText(ordinazioniPrenotate.get(position).getPortata().getBreveNota());
+        holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getElementoMenu().getNome());
+        holder.textViewNota.setText(ordinazioniPrenotate.get(position).getBreveNota());
     }
 
 

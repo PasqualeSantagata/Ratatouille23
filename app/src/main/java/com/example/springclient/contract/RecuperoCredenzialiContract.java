@@ -8,8 +8,12 @@ public interface RecuperoCredenzialiContract {
 
     interface View extends BaseView{
         void verificaEmail(String email);
+
+        void emailInviataCorrettamente();
+
         void emailErrata();
 
+        void erroreConnessione(String impossiblieComunicareConIlServer);
     }
 
 }

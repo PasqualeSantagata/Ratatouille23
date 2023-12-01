@@ -29,7 +29,6 @@ import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
-import com.example.springclient.view.gestioneCategorie.EsploraCategorieActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -68,7 +67,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
         initializeComponents();
     }
-
+    @Override
     public void initializeComponents() {
         buttonIndietro = findViewById(R.id.buttonIndietroVisuaCatNuovaOrdinazione);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoVisualCatNuovaOrdinazione);
@@ -92,10 +91,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
             }
         });
 
-        buttonIndietro.setOnClickListener(view -> {
-            allergeni = elementiMenu.get(elementoSelezionato).getElementoMenu().getElencoAllergeni();
-            viewElementiOrdinazionePresenter.tornaEsploraCategorie();
-        });
+        buttonIndietro.setOnClickListener(view -> viewElementiOrdinazionePresenter.tornaEsploraCategorie());
 
         buttonRiepilogo.setOnClickListener(view -> {
             if(ordinazione != null && ordinazione.getElementiOrdinati().size() != 0) {
@@ -178,11 +174,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
                 break;
 
             case R.id.item_riordina_elem:
-                Intent intent = new Intent(this, FiltraCategoriaNuovaOrdinazioneActivity.class);
-                intent.putExtra("elementiMenu", (Serializable) elementiMenu);
-                intent.putExtra("nomeCategoria", nome);
-                startActivity(intent);
-
+                viewElementiOrdinazionePresenter.mostraFiltraCategoria(nome);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -241,14 +233,31 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     @Override
     public void mostraRiepilogo() {
-        Intent intentRiepilogo = new Intent(this, RiepilogoRiepilogoOrdinazioneActivity.class);
+        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
         intentRiepilogo.putExtra("ordinazione", ordinazione);
         startActivity(intentRiepilogo);
     }
 
     @Override
+    public void mostraFiltraCategoria(List<ElementoMenu> portataList) {
+
+    }
+
+
+    @Override
     public void mostraModifica(ElementoMenu elementoMenu) {
 
+    }
+
+    @Override
+    public void impossibileComunicareConServer(String messaggio) {
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
+    }
+
+    @Override
+    public void impossibileRimuovereElemento(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -261,4 +270,19 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     }
 
+    @Override
+    public void mostraFiltraCategoriaMenu(List<Portata> portataList) {
+        Intent intent = new Intent(this, FiltraCategoriaNuovaOrdinazioneActivity.class);
+        intent.putExtra("elementiMenu", (Serializable) portataList);
+        intent.putExtra("ordinazione", ordinazione);
+        intent.putExtra("nomeCategoria", nome);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void impossibileFiltrareElementi(String s) {
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningOneBtn(dialog, s, view -> dialog.dismiss());
+    }
 }

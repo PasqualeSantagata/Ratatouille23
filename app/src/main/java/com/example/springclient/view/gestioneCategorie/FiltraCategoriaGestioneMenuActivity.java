@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,16 +34,15 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
     private List<String> allergeni;
     private List<ElementoMenu> elementiMenu;
     private String nome;
-    private Categoria categoria;
     private Intent intentVisualizzaCategoria;
+    private int flagOrdinamento;
     private ModificaElementoContract.Presenter modificaElementoPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtra_categoria_gestione_menu);
-        categoria = (Categoria) getIntent().getSerializableExtra("categoria");
-        elementiMenu = categoria.getElementi();
+        elementiMenu = (List<ElementoMenu>) getIntent().getSerializableExtra("elementiCategoria");
         nome = getIntent().getStringExtra("nomeCategoria");
         allergeni = new ArrayList<>();
         modificaElementoPresenter = new ModificaElementoPresenter(this);
@@ -86,25 +86,25 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
             }
             if (checkboxNome.isChecked()) {
                 if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
-                    categoria.setFlagOrdinamento(1);
+                    flagOrdinamento = 1;
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeCrescente);
                 } else {
-                    categoria.setFlagOrdinamento(2);
+                    flagOrdinamento = 2;
                     Collections.sort(elementiMenu, ElementoMenu.compareNomeDecrescente);
                 }
             }
             if (checkboxPrezzo.isChecked()) {
                 if (buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))) {
-                    categoria.setFlagOrdinamento(3);
+                    flagOrdinamento = 3;
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoCrescente);
                 } else {
-                    categoria.setFlagOrdinamento(4);
+                    flagOrdinamento = 4;
                     Collections.sort(elementiMenu, ElementoMenu.comparePrezzoDecrescente);
                 }
             }
 
-            modificaElementoPresenter.modificaOrdineCategoria(categoria);
-            modificaElementoPresenter.mostraVisualizzaElementiDellaCategoria();
+            modificaElementoPresenter.modificaOrdineCategoria(nome, flagOrdinamento);
+
         });
         buttonAnnulla.setOnClickListener(view -> modificaElementoPresenter.mostraVisualizzaElementiDellaCategoria());
 
@@ -124,6 +124,7 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
         });
 
     }
+
 
     @Override
     public void tornaIndietro() {
@@ -148,8 +149,15 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
 
     @Override
     public void onBackPressed() {
-        intentVisualizzaCategoria.putExtra("categoria", (Serializable)categoria);
+        intentVisualizzaCategoria.putExtra("idCategoria", getIntent().getSerializableExtra("idCategoria"));
+        intentVisualizzaCategoria.putExtra("nomeCategoria", getIntent().getStringExtra("nomeCategoria"));
+        intentVisualizzaCategoria.putExtra("elementiCategoria", getIntent().getSerializableExtra("elementiCategoria"));
         startActivity(intentVisualizzaCategoria);
         super.onBackPressed();
+    }
+
+    @Override
+    public void impossibileModificareOrdine(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show();
     }
 }

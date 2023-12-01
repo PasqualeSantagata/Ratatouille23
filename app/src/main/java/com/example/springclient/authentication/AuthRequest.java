@@ -5,7 +5,7 @@ public class AuthRequest {
     private String password;
 
     public AuthRequest(String email, String password) {
-        this.email = email;
+        this.email = email.toLowerCase();
         this.password = password;
     }
 

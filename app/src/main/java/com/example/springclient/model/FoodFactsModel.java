@@ -38,7 +38,7 @@ public class FoodFactsModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callback.onFailure(e);
                     }
                 });
     }

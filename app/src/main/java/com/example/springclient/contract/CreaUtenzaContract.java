@@ -1,9 +1,8 @@
 package com.example.springclient.contract;
 
-import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.entity.Utente;
 
-public interface AdminContract {
+public interface CreaUtenzaContract {
     interface Presenter {
         void registraUtente(Utente utente);
 

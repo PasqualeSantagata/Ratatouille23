@@ -8,17 +8,19 @@ public class Portata implements Serializable {
     private ElementoMenu elementoMenu;
     private boolean prenotato;
     private String breveNota;
+    private Ordinazione ordinazione;
 
     public static final Comparator<Portata> compareNomeCrescente = Comparator.comparing(p -> p.elementoMenu.getNome());
     public static final Comparator<Portata> comparePrezzoCrescente = Comparator.comparing(p -> p.elementoMenu.getPrezzo());
     public static final Comparator<Portata> compareNomeDecrescente = (p1, p2) -> - compareNomeCrescente.compare(p1,p2);
     public static final Comparator<Portata> comparePrezzoDecrescente = (p1, p2) -> - comparePrezzoCrescente.compare(p1,p2);
 
-    public Portata(Long id, ElementoMenu elementoMenu, boolean prenotato, String breveNota) {
+    public Portata(Long id, ElementoMenu elementoMenu, boolean prenotato, String breveNota, Ordinazione ordinazione) {
         this.id = id;
         this.elementoMenu = elementoMenu;
         this.prenotato = prenotato;
         this.breveNota = breveNota;
+        this.ordinazione = ordinazione;
     }
 
     public Portata(ElementoMenu elementoMenu, boolean prenotato) {
@@ -60,6 +62,14 @@ public class Portata implements Serializable {
 
     public void setBreveNota(String breveNota) {
         this.breveNota = breveNota;
+    }
+
+    public Ordinazione getOrdinazione() {
+        return ordinazione;
+    }
+
+    public void setOrdinazione(Ordinazione ordinazione) {
+        this.ordinazione = ordinazione;
     }
 }
 

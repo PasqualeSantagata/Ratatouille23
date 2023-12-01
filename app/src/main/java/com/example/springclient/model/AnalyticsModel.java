@@ -40,7 +40,7 @@ public class AnalyticsModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callbackResponse.onFailure(e);
                     }
                 });
 

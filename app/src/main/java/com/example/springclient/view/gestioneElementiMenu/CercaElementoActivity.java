@@ -185,7 +185,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     @Override
     public void elementoEliminato() {
         int pos = elementoMenuList.indexOf(elementoDaEliminare);
-        adapter.notifyItemChanged(pos);
+        adapter.notifyItemRemoved(pos);
     }
 
     @Override

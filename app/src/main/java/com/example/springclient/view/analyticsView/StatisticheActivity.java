@@ -1,5 +1,6 @@
 package com.example.springclient.view.analyticsView;
 
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 import com.example.springclient.R;
 import com.example.springclient.analytics.AnalyticsData;
+import com.example.springclient.contract.BaseView;
 import com.example.springclient.presenter.AnalyticsPresenter;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -29,7 +31,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatisticheActivity extends AppCompatActivity {
+public class StatisticheActivity extends AppCompatActivity implements BaseView {
     private AnalyticsPresenter analyticsPresenter;
     private List<AnalyticsData> analyticsDataList;
     private List<String> cuochi;
@@ -58,11 +60,22 @@ public class StatisticheActivity extends AppCompatActivity {
 
     }
 
+    @Override
     public void initializeComponents() {
         buttonSelezionaDate = findViewById(R.id.buttonSelezionaDateStatistiche);
         editTextData = findViewById(R.id.editTextDate);
         editTextData.setClickable(false);
         mostraPicker();
+    }
+
+    @Override
+    public void tornaIndietro() {
+
+    }
+
+    public void impossibileComunicareServer(String messaggio){
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
     }
 
 

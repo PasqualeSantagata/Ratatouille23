@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
     private byte[] immagineCategoria = null;
     private Bitmap immagine;
     private File immagineFile;
+    private String nomeCategoria;
+    private EditText editTextNome;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
         setContentView(R.layout.activity_crea_categoria_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         getSupportActionBar().setTitle("CREA CATEGORIA");
+        nomeCategoria = getIntent().getStringExtra("nomeCategoria");
         creaCategoriaPresenter = new CreaCategoriaPresenter(this);
         initializeComponents();
     }
@@ -54,7 +58,7 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
         buttonIndietro = findViewById(R.id.buttonIndietroCreaCategoriaGestioneMenu);
         buttonOk = findViewById(R.id.buttonOkCreaCategoriaGestioneMenu);
         immagineCategoria = (byte[]) getIntent().getSerializableExtra("immagine");
-
+        editTextNome = textInputLayoutNomeCategoria.getEditText();
 
         if (immagineCategoria != null) {
             immagine = BitmapFactory.decodeByteArray(immagineCategoria, 0, immagineCategoria.length);
@@ -87,6 +91,9 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
             }
 
         });
+        if(nomeCategoria!=null && !nomeCategoria.equals("")){
+            editTextNome.setText(nomeCategoria);
+        }
 
         buttonIndietro.setOnClickListener(view -> creaCategoriaPresenter.tornaHomeNuovoElemento());
         imageViewAggiungiImmagine.setOnClickListener(view -> creaCategoriaPresenter.mostraScegliFoto());
@@ -126,6 +133,7 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
     @Override
     public void mostraScegliFoto() {
         Intent intent = new Intent(this, SelezionaImmagineCategoriaActivity.class);
+        intent.putExtra("nomeCategoria", editTextNome.getText().toString());
         startActivity(intent);
     }
 
@@ -133,6 +141,11 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
     public void impossibileContattareIlServer(String messaggio) {
         Dialog dialog = new Dialog(this);
         mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
+    }
+
+    @Override
+    public void categoriaGiaEsistente() {
+        textInputLayoutNomeCategoria.setError("Nome categoria non valido");
     }
 
     @Override

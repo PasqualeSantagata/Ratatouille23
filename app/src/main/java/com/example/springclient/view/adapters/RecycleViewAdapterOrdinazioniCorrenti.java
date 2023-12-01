@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.StatoOrdinazione;
+import com.example.springclient.entity.Portata;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -19,10 +19,10 @@ import java.util.List;
 public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder> {
     private final IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti;
     Context context;
-    List<StatoOrdinazione> ordinazioni;
+    List<Portata> ordinazioni;
 
 
-    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<StatoOrdinazione> ordinazioni) {
+    public RecycleViewAdapterOrdinazioniCorrenti(IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti, Context context, List<Portata> ordinazioni) {
         this.iRecycleViewOrdinazioniCorrenti = iRecycleViewOrdinazioniCorrenti;
         this.context = context;
         this.ordinazioni = ordinazioni;
@@ -41,10 +41,10 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder holder, int position) {
         holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
-        holder.textViewNota.setText(ordinazioni.get(position).getPortata().getBreveNota());
+        holder.textViewNota.setText(ordinazioni.get(position).getBreveNota());
         holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
         holder.textViewTempo.setText(LocalTime.now().toString());
-        holder.textViewNomePiatto.setText(ordinazioni.get(position).getPortata().getElementoMenu().getNome());
+        holder.textViewNomePiatto.setText(ordinazioni.get(position).getElementoMenu().getNome());
     }
 
     @Override

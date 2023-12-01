@@ -10,7 +10,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RecuperoCredenzialiModel {
-    private final RecuperoCredenzialiAPI recuperoCredenzialiAPI = RetrofitService.getIstance().getRecuperoCredenzialiAPI();
+    private final RecuperoCredenzialiAPI recuperoCredenzialiAPI;
+
+    public RecuperoCredenzialiModel(RetrofitService retrofitService){
+        recuperoCredenzialiAPI = retrofitService.getRecuperoCredenzialiAPI();
+    }
 
     public void recuperaPassword(String email, CallbackResponse<Void> callbackResponse) {
         recuperoCredenzialiAPI.passwordDimenticata(email)
@@ -23,6 +27,7 @@ public class RecuperoCredenzialiModel {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
+                        callbackResponse.onFailure(t);
 
                     }
                 });

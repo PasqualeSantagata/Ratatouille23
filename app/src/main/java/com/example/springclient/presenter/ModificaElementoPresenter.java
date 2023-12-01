@@ -48,9 +48,8 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
         categoriaModel.getNomiCategoriaDisponibili(id, new CallbackResponse<List<String>>() {
             @Override
             public void onFailure(Throwable t) {
-
+                modificaElementoMenuView.erroreModifica("Errore di connessione: impossibile caricare le categorie disponibili");
             }
-
             @Override
             public void onSuccess(Response<List<String>> retData) {
                 if (retData.isSuccessful()) {
@@ -82,7 +81,7 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
         categoriaModel.aggiungiElemento(nome, elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-
+                modificaElementoMenuView.erroreModifica("Errore di connessione: impossibile aggiungere l'elemento alla categorai");
             }
             @Override
             public void onSuccess(Response<Void> retData) {
@@ -102,7 +101,7 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
             @Override
             public void onFailure(Throwable t) {
                 Log.d("Error: ", t.toString());
-                modificaElementoMenuView.erroreModifica();
+                modificaElementoMenuView.erroreModifica("Errore di connessione con il server");
             }
 
             @Override
@@ -123,17 +122,17 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
     }
 
     @Override
-    public void modificaOrdineCategoria(Categoria categoria){
-        categoriaModel.modificaOrdineCategoria(categoria, new CallbackResponse<Void>() {
+    public void modificaOrdineCategoria(String nomeCategoria, int flagOrdinamento){
+        categoriaModel.modificaOrdineCategoria(nomeCategoria, flagOrdinamento, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-
+                definisciOrdineView.impossibileModificareOrdine("Errore di connessione, impossibile modificare l'ordine degli elementi");
             }
 
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
-
+                    mostraVisualizzaElementiDellaCategoria();
                 }
             }
         });

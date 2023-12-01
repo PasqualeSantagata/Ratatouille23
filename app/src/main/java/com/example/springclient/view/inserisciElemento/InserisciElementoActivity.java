@@ -205,6 +205,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     }
 
     @Override
+    public void autocompletamentoIrrangiungibile(){
+        Toast.makeText(this, "Impossibile contattare il servizion dia autocompletamento", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
     public void generaNomi(List<String> names) {
         suggeriti = names;
         adapter = new ArrayAdapter<>(InserisciElementoActivity.this, android.R.layout.simple_dropdown_item_1line, suggeriti);

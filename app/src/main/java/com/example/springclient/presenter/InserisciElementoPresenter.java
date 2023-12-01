@@ -35,7 +35,7 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
             @Override
             public void onFailure(Throwable t) {
                 Log.d("onFailure", t.getMessage());
-                inserisciElementoView.elementoInseritoCorrettamente();
+                inserisciElementoView.erroreInserimentoElemento();
             }
 
             @Override
@@ -59,7 +59,7 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
         categoriaModel.getNomiCategorie(new CallbackResponse<List<String>>() {
             @Override
             public void onFailure(Throwable t) {
-
+                homeNuovoElementoView.erroreComunicazioneServer("Errore di connessione con il server riporvare succesivamente");
             }
             @Override
             public void onSuccess(Response<List<String>> retData) {

@@ -12,16 +12,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseView;
+import com.example.springclient.contract.AutenticazioneContract;
 import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.presenter.AutenticazionePresenter;
+import com.example.springclient.presenter.ILogout;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.MainActivity;
-import com.example.springclient.view.gestioneCategorie.EsploraCategorieActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements OrdinazioneContract.StartNuovaOrdinazioneView {
+public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements OrdinazioneContract.StartNuovaOrdinazioneView, ILogout {
     private TextInputLayout textInputLayoutNumeroPersone;
     private TextInputLayout textInputLayoutSala;
     private TextInputLayout textInputLayoutTavolo;
@@ -40,6 +41,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
     private int n = 0;
     private Ordinazione ordinazione;
     private OrdinazioneContract.Presenter ordinazionePresenter;
+    private AutenticazioneContract.Presenter autenticazionePresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         setContentView(R.layout.activity_start_nuova_ordinazione);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         ordinazionePresenter = new OrdinazionePresenter(this);
+        autenticazionePresenter = new AutenticazionePresenter(this);
         initializeComponents();
     }
 
@@ -70,41 +73,23 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         fabAdd = findViewById(R.id.fabPlus);
         fabMinus = findViewById(R.id.fabMinus);
 
-        buttonIndietro.setOnClickListener(view -> {
-            tornaIndietro();
-        });
+        buttonIndietro.setOnClickListener(view -> tornaIndietro());
 
-        fab1.setOnClickListener(view -> {
-            etNumPersone.setText("1");
-        });
+        fab1.setOnClickListener(view -> etNumPersone.setText("1"));
 
-        fab2.setOnClickListener(view -> {
-            etNumPersone.setText("2");
-        });
+        fab2.setOnClickListener(view -> etNumPersone.setText("2"));
 
-        fab4.setOnClickListener(view -> {
-            etNumPersone.setText("4");
-        });
+        fab4.setOnClickListener(view -> etNumPersone.setText("4"));
 
-        fab8.setOnClickListener(view -> {
-            etNumPersone.setText("8");
-        });
+        fab8.setOnClickListener(view -> etNumPersone.setText("8"));
 
-        fab10.setOnClickListener(view -> {
-            etNumPersone.setText("10");
-        });
+        fab10.setOnClickListener(view -> etNumPersone.setText("10"));
 
-        fab20.setOnClickListener(view -> {
-            etNumPersone.setText("20");
-        });
+        fab20.setOnClickListener(view -> etNumPersone.setText("20"));
 
-        fab30.setOnClickListener(view -> {
-            etNumPersone.setText("30");
-        });
+        fab30.setOnClickListener(view -> etNumPersone.setText("30"));
 
-        fab50.setOnClickListener(view -> {
-            etNumPersone.setText("50");
-        });
+        fab50.setOnClickListener(view -> etNumPersone.setText("50"));
 
         fabAdd.setOnClickListener(view -> {
             Editable numPersone = etNumPersone.getText();
@@ -148,6 +133,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
                 ordinazionePresenter.mostraEsploraCategorie(ordinazione);
             }
         });
+        buttonIndietro.setOnClickListener(view -> avviaLogout());
     }
 
     @Override
@@ -185,15 +171,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
 
     @Override
     public void onBackPressed() {
-        Dialog dialog = new Dialog(this);
-        mostraDialogWarningTwoBtn(dialog,"Sicuro di voler uscire?",
-                view -> {
-                    Intent intentLogOut = new Intent(this, MainActivity.class);
-                    dialog.dismiss();
-                    startActivity(intentLogOut);
-                    super.onBackPressed();
-                },
-                view -> dialog.dismiss());
+        avviaLogout();
     }
 
     @Override
@@ -202,5 +180,25 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         intentCategorie.putExtra("ordinazione", ordinazione);
         startActivity(intentCategorie);
 
+    }
+
+    @Override
+    public void avviaLogout() {
+        Dialog dialog = new Dialog(this);
+        mostraDialogWarningTwoBtn(dialog,"Sicuro di voler uscire?",
+                view -> autenticazionePresenter.logOutUtente(),
+                view -> dialog.dismiss());
+    }
+
+    @Override
+    public void logOutAvvenutoConSuccesso() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void logOutFallito() {
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, "Errore di connessione impossibile terminare la tessione", view -> dialog.dismiss());
     }
 }

@@ -1,10 +1,12 @@
 package com.example.springclient.presenter;
 
 import com.example.springclient.RetrofitService.RetrofitService;
+import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.InserisciNuovaLinguaContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
+import com.google.gson.Gson;
 
 import retrofit2.Response;
 
@@ -36,15 +38,20 @@ public class InserisciNuovaLinguaPresenter implements InserisciNuovaLinguaContra
         elementoMenuModel.aggiungiLingua(new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-
+                nuovoElementoNuovaLinguaView.impossibileComunicareServer("Errore di connessione: impossibile aggiungere una lingua alternativa");
             }
 
             @Override
-            public void onSuccess(Response<Void> retData) {
-                if(retData.isSuccessful()){
+            public void onSuccess(Response<Void> response) {
+                if(response.isSuccessful()){
                     nuovoElementoNuovaLinguaView.linguaAggiuntaConSuccesso();
                 }
                 else{
+                    if(response.code() == 412) {
+                        ApiResponse apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse.class);
+                        String errore = apiResponse.getMessage();
+                        nuovoElementoNuovaLinguaView.mostraErroreInserimentoElemento(errore);
+                    }
 
                 }
             }

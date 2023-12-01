@@ -37,7 +37,7 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
                 if(retData.isSuccessful()){
                     creaCategoriaView.salvaImmagine(retData.body().getId());
                 }else{
-
+                    creaCategoriaView.categoriaGiaEsistente();
                 }
             }
         });

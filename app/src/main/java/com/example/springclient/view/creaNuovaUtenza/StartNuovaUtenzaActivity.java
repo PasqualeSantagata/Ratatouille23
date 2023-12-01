@@ -1,7 +1,6 @@
 package com.example.springclient.view.creaNuovaUtenza;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,13 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.AdminContract;
+import com.example.springclient.contract.CreaUtenzaContract;
 import com.example.springclient.entity.Ruolo;
 import com.example.springclient.entity.Utente;
 import com.example.springclient.presenter.AdminPresenter;
@@ -25,14 +23,14 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Arrays;
 import java.util.List;
 
-public class StartNuovaUtenzaActivity extends AppCompatActivity implements AdminContract.View, AdapterView.OnItemSelectedListener {
+public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaUtenzaContract.View, AdapterView.OnItemSelectedListener {
     private TextInputLayout textInputNome;
     private TextInputLayout textInputCognome;
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
     private Spinner spinnerRuoli;
     private ProgressBar progressBar;
-    private AdminContract.Presenter adminPresenter;
+    private CreaUtenzaContract.Presenter adminPresenter;
     private Button okButton;
     private Button indietroButton;
     private List<String> ruoli;
@@ -69,9 +67,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
             raccogliDati();
 
         });
-        indietroButton.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        indietroButton.setOnClickListener(view -> onBackPressed());
 
     }
 
@@ -97,7 +93,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements Admin
         String nome, cognome, email, password;
         nome = textInputNome.getEditText().getText().toString();
         cognome = textInputCognome.getEditText().getText().toString();
-        email = textInputEmail.getEditText().getText().toString();
+        email = textInputEmail.getEditText().getText().toString().toLowerCase();
         password = textInputPassword.getEditText().getText().toString();
 
         if (campiValidi(nome, cognome, email, password, ruolo)) {

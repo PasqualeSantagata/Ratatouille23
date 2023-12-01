@@ -91,7 +91,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
                                 byte[] bytes = convertiImmagine(bitmap);
                                 creaCategoriaPresenter.caricaImmagine(bytes);
                             }else{
-                                Toast.makeText(this, "Immagine con risoluzione errata", Toast.LENGTH_LONG).show();
+                                Toast.makeText(this, "Immagine con risoluzione errata, massimo supportato 500x500", Toast.LENGTH_LONG).show();
                             }
                         } catch(IOException e){
                                 Toast.makeText(this, "Errore ne caricamento della foto", Toast.LENGTH_LONG).show();
@@ -118,6 +118,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     public void caricaImmagine(byte[] immagine){
         Intent intent = new Intent(this, CreaCategoriaActivity.class);
         intent.putExtra("immagine", immagine);
+        intent.putExtra("nomeCategoria", getIntent().getStringExtra("nomeCategoria"));
         startActivity(intent);
     }
 

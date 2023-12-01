@@ -14,6 +14,9 @@ public interface AutenticazioneContract {
 
         void dialgPrimoAccesso();
         void avviaDashboardAdmin();
+
+        void impossibileContattareIlServer(String messaggio);
+
         void avviaDashboardSupervisore();
         void avviaDashboardAddettoSala();
         void avviaDashboardAddettoCucina(String email);
@@ -23,6 +26,9 @@ public interface AutenticazioneContract {
     interface Presenter {
         void logInUtente(AuthRequest authRequest);
 
+        void logOutUtente();
+
+        void avviaRecuperoPassword();
     }
 
 }

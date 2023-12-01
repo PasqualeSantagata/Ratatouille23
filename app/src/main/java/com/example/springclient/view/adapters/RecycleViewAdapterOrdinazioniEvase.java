@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.entity.StatoOrdinazione;
+import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
 
     private final IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase;
     Context context;
-    List<StatoOrdinazione> ordinazioniEvase;
+    List<Portata> ordinazioniEvase;
 
-    public RecycleViewAdapterOrdinazioniEvase(IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase, Context context, List<StatoOrdinazione> ordinazioniEvase) {
+    public RecycleViewAdapterOrdinazioniEvase(IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase, Context context, List<Portata> ordinazioniEvase) {
         this.iRecycleViewOrdinazioniEvase = iRecycleViewOrdinazioniEvase;
         this.context = context;
         this.ordinazioniEvase = ordinazioniEvase;
@@ -41,9 +41,9 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
         holder.textViewTavolo.setText(ordinazioniEvase.get(position).getOrdinazione().getTavolo());
         holder.textViewSala.setText(ordinazioniEvase.get(position).getOrdinazione().getSala());
         //info portate
-        holder.textViewNomePiatto.setText(ordinazioniEvase.get(position).getPortata().getElementoMenu().getNome());
+        holder.textViewNomePiatto.setText(ordinazioniEvase.get(position).getElementoMenu().getNome());
        // holder.textViewTempo.setText(ordinazioniEvase.get(position).getPortata().getElementoMenu().getTempoPreparazione());
-        holder.textViewNota.setText(ordinazioniEvase.get(position).getPortata().getBreveNota());
+        holder.textViewNota.setText(ordinazioniEvase.get(position).getBreveNota());
     }
 
     @Override

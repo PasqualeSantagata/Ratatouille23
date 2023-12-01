@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,9 +73,7 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
                 inserisciNuovaLinguaPresenter.aggiungiLingua(elemento.getNome(), elementoMenu);
             }
         });
-        indietroButton.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        indietroButton.setOnClickListener(view -> onBackPressed());
     }
 
     @Override
@@ -129,6 +128,12 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
     }
 
     @Override
+    public void impossibileComunicareServer(String messaggio){
+        Dialog dialog = new Dialog(this);
+        mostraDialogErroreOneBtn(dialog, messaggio, view -> dialog.dismiss());
+    }
+
+    @Override
     public void linguaAggiuntaConSuccesso() {
         Dialog dialog = new Dialog(this);
         mostraDialogOkOneBtn(dialog, "Traduzione inserita con successo", view -> {
@@ -136,6 +141,17 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
             startActivity(nuovaLingua);
         });
     }
+
+    @Override
+    public void mostraErroreInserimentoElemento(String errore) {
+        if (errore.toLowerCase().contains("nome")) {
+            textInputLayoutNome.setError(errore);
+        }else{
+            Toast.makeText(this, errore, Toast.LENGTH_LONG).show();
+        }
+
+    }
+
 
 
 }

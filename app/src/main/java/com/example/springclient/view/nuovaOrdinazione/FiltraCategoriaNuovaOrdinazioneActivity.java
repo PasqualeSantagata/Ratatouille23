@@ -30,7 +30,6 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
     private Button buttonTabellaAllergeni;
     private List<String> allergeni;
     private List<Portata> elementiMenu;
-    private String nome;
     private Intent intentVisualizzaCategoria;
 
     @Override
@@ -38,7 +37,6 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtra_categoria_gestione_menu);
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementiMenu");
-        nome = getIntent().getStringExtra("nomeCategoria");
         allergeni = new ArrayList<>();
         initializeComponents();
 
@@ -79,27 +77,25 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
             }
             if(checkboxNome.isChecked()) {
                 if (buttonNome.getText().toString().equals(getString(R.string.nome_up))) {
-                   Collections.sort(elementiMenu, Portata.compareNomeCrescente);
+                   elementiMenu.sort(Portata.compareNomeCrescente);
 
                 } else {
-                    Collections.sort(elementiMenu, Portata.compareNomeDecrescente);
+                    elementiMenu.sort(Portata.compareNomeDecrescente);
                 }
             }
             if(checkboxPrezzo.isChecked()){
                 if(buttonPrezzo.getText().toString().equals(getString(R.string.prezzo_up))){
-                    Collections.sort(elementiMenu, Portata.comparePrezzoCrescente);
+                    elementiMenu.sort(Portata.comparePrezzoCrescente);
                 }else{
-                    Collections.sort(elementiMenu, Portata.comparePrezzoDecrescente);
+                    elementiMenu.sort(Portata.comparePrezzoDecrescente);
                 }
             }
             intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
-            intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
-
+            intentVisualizzaCategoria.putExtra("nomeCategoria", getIntent().getStringExtra("nomeCategoria"));
+            intentVisualizzaCategoria.putExtra("ordinazione", getIntent().getSerializableExtra("ordinazione"));
             startActivity(intentVisualizzaCategoria);
         });
-        buttonAnnulla.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        buttonAnnulla.setOnClickListener(view -> onBackPressed());
 
         //Check box
         checkboxNome = findViewById(R.id.checkBoxFiltroNome);
@@ -136,8 +132,8 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
     @Override
     public void onBackPressed() {
         intentVisualizzaCategoria.putExtra("elementi",(Serializable) elementiMenu);
-        intentVisualizzaCategoria.putExtra("nomeCategoria", nome);
-
+        intentVisualizzaCategoria.putExtra("nomeCategoria", getIntent().getStringExtra("nomeCategoria"));
+        intentVisualizzaCategoria.putExtra("ordinazione", getIntent().getSerializableExtra("ordinazione"));
         startActivity(intentVisualizzaCategoria);
         super.onBackPressed();
     }

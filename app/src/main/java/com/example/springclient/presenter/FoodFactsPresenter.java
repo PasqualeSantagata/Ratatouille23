@@ -29,7 +29,7 @@ public class FoodFactsPresenter {
         foodFactsModel.getElementoMenuDetails(nome, new CallbackResponse<FoodFactsResponse>() {
             @Override
             public void onFailure(Throwable t) {
-
+                inserisciElementoView.autocompletamentoIrrangiungibile();
             }
             @Override
             public void onSuccess(Response<FoodFactsResponse> response) {

@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,11 +63,16 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
 
     @Override
     public void mostraVisualizzaElementiDellaCategoria(){
-        Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
-        intentVisualizzaCategoria.putExtra("elementiCategoria", (Serializable) categoria.getElementi());
-        intentVisualizzaCategoria.putExtra("idCategoria", categoria.getId());
-        intentVisualizzaCategoria.putExtra("nomeCategoria", categoria.getNome());
-        startActivity(intentVisualizzaCategoria);
+        if(categoria.getElementi().isEmpty()){
+            Toast.makeText(this,"Categoria attualmente vuota",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
+            intentVisualizzaCategoria.putExtra("elementiCategoria", (Serializable) categoria.getElementi());
+            intentVisualizzaCategoria.putExtra("idCategoria", categoria.getId());
+            intentVisualizzaCategoria.putExtra("nomeCategoria", categoria.getNome());
+            startActivity(intentVisualizzaCategoria);
+        }
     }
 
 

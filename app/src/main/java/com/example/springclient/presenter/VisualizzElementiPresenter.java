@@ -8,6 +8,8 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.model.ElementoMenuModel;
 
+import java.util.List;
+
 import retrofit2.Response;
 
 public class VisualizzElementiPresenter implements VisualizzElementiContract.Presenter {
@@ -24,9 +26,8 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
         categoriaModel.eliminaElementoDallaCategoria(idCategoria.toString(), elementoMenu, new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
-
+                visualizzaElementiView.impossibileRimuovereElemento("Errore di connessione: impossibile rimuovere l'elemento");
             }
-
             @Override
             public void onSuccess(Response<Void> retData) {
                 if(retData.isSuccessful()){
@@ -35,8 +36,8 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
             }
         });
-
     }
+
 
     @Override
     public void mostraModifica(ElementoMenu elementoMenu) {
@@ -46,6 +47,20 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
     @Override
     public void restituisciTraduzione(String idElemento) {
+        elementoMenuModel.restituisciTraduzione(new CallbackResponse<ElementoMenu>() {
+            @Override
+            public void onFailure(Throwable t) {
+                visualizzaElementiView.impossibileComunicareConServer("Errore di rete con il server, impossibile recuperare la traduzione");
+            }
+            @Override
+            public void onSuccess(Response<ElementoMenu> retData) {
+                if(retData.isSuccessful()){
+                    visualizzaElementiView.mostraTraduzione(retData.body());
+                }else{
+                    visualizzaElementiView.traduzioneAssente();
+                }
+            }
+        }, idElemento);
 
     }
 
@@ -91,6 +106,28 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
     @Override
     public void mostraRiepilogo() {
         visualizzaElementiView.mostraRiepilogo();
+    }
+
+    @Override
+    public void tornaEsploraCategorieMenu() {
+        visualizzaElementiView.tornaIndietro();
+    }
+
+    @Override
+    public void mostrFiltraCategorie(String nomeCategoria) {
+        elementoMenuModel.trovaElementiPerNomeCategoria(nomeCategoria, new CallbackResponse<List<ElementoMenu>>() {
+            @Override
+            public void onFailure(Throwable t) {
+                visualizzaElementiView.impossibileComunicareConServer("Impossibile comunicare con il server");
+            }
+
+            @Override
+            public void onSuccess(Response<List<ElementoMenu>> retData) {
+                if(retData.isSuccessful()){
+                    visualizzaElementiView.mostraFiltraCategoria(retData.body());
+                }
+            }
+        });
     }
 
 

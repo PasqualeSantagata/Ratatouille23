@@ -22,7 +22,6 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
-import com.example.springclient.view.gestioneCategorie.EsploraCategorieActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -30,7 +29,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable, OrdinazioneContract.ViewRiepilogoOrdinazione {
+public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable, OrdinazioneContract.ViewRiepilogoOrdinazione {
 
     private Button buttonIndietro;
     private Button buttonOk;
@@ -39,7 +38,6 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
     private List<Portata> portate;
     private RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn adapterElementoMenu;
     private OrdinazioneContract.Presenter presenterOrdinazione;
-    private int indiceElementoSelezionato = -1;
     private Portata elementoSelezionato;
 
     @Override
@@ -74,7 +72,7 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
         //Buttons
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
         buttonIndietro = findViewById(R.id.buttonIndietroRiepilogo);
-        buttonOk.setOnClickListener(view -> presenterOrdinazione.salvaPortate(portate));
+        buttonOk.setOnClickListener(view -> presenterOrdinazione.salvaOrdinazione(ordinazione));
         buttonIndietro.setOnClickListener(view -> presenterOrdinazione.tornaEsploraCategorie());
 
     }
@@ -84,14 +82,17 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
         onBackPressed();
     }
 
-    public void salvaOrdinazione(List<Portata> portateOrdinazione) {
-        ordinazione.setElementiOrdinati(portateOrdinazione);
-        presenterOrdinazione.salvaOrdinazione(ordinazione);
+    @Override
+    public void salvaPortate(Ordinazione ordinazione) {
+        for(Portata p: portate){
+            p.setOrdinazione(ordinazione);
+        }
+        presenterOrdinazione.salvaPortate(portate);
     }
 
 
     @Override
-    public void ordinazioneAvvvenutaConSuccesso() {
+    public void ordinazioneAvvenutaConSuccesso() {
         Dialog ordinazioneAvvenuta = new Dialog(this);
         mostraDialogOkOneBtn(ordinazioneAvvenuta, "Ordinazione inviata con successo", view -> {
             ordinazioneAvvenuta.dismiss();
@@ -108,7 +109,6 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
 
     @Override
     public void onItemClickRecyclerViewPortata(int position) {
-        indiceElementoSelezionato = position;
         elementoSelezionato = portate.get(position);
         //Dialog mostra info
         startDialogDettagliElemento(elementoSelezionato.getElementoMenu());
@@ -131,9 +131,7 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
         setTextInputLayoutText(textInputLayoutPrezzo, elementoMenu.getPrezzo().toString());
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
-        buttonIndietro.setOnClickListener(view -> {
-            dialogDettagli.dismiss();
-        });
+        buttonIndietro.setOnClickListener(view -> dialogDettagli.dismiss());
 
         dialogDettagli.show();
     }
@@ -145,7 +143,6 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
 
     @Override
     public void onButtonDeleted(int position) {
-        indiceElementoSelezionato = position;
         elementoSelezionato = portate.get(position);
         //Starta dialog warn per eliminare elem
         Dialog dialogAttenzione = new Dialog(this);
@@ -168,9 +165,7 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
                 onBackPressed();
             }
         });
-        buttonNo.setOnClickListener(view -> {
-            dialogAttenzione.dismiss();
-        });
+        buttonNo.setOnClickListener(view -> dialogAttenzione.dismiss());
 
     }
 
@@ -186,7 +181,6 @@ public class RiepilogoRiepilogoOrdinazioneActivity extends AppCompatActivity imp
     public void notifyAdapter() {
         adapterElementoMenu.notifyDataSetChanged();
     }
-
 
 }
 

@@ -37,7 +37,7 @@ public class UtenteModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        callbackResponse.onFailure(e);
                     }
                 });
 
