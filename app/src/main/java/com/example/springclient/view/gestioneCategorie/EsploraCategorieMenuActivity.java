@@ -19,14 +19,14 @@ import com.example.springclient.R;
 import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
-import com.example.springclient.view.adapters.IRecycleViewCategoria;
+import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 import com.example.springclient.view.gestioneElementiMenu.HomeModificaElemMenuActivity;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class EsploraCategorieMenuActivity extends AppCompatActivity implements MostraCategoriaContract.View, IRecycleViewCategoria {
+public class EsploraCategorieMenuActivity extends AppCompatActivity implements MostraCategoriaContract.View, IRecycleViewEventi {
     private List<Categoria> categorie;
     private MostraCategoriaContract.Presenter mostracategoriaMenuPresenter;
     private RecycleViewAdapterCategoria adapterCategoria;
@@ -75,7 +75,6 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     @Override
     public void nascondiProgressBar() {
         progressBar.setVisibility(View.INVISIBLE);
-
     }
 
     @Override
@@ -97,9 +96,8 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         }
     }
 
-
     @Override
-    public void onItemClick(int position) {
+    public void onItemClickRecyclerView(int position) {
         categoria = categorie.get(position);
         categoria.ordinaCategoria();
         mostracategoriaMenuPresenter.mostraElementiDellaCategoria();
@@ -151,4 +149,6 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         startActivity(homeModifica);
         super.onBackPressed();
     }
+
+
 }

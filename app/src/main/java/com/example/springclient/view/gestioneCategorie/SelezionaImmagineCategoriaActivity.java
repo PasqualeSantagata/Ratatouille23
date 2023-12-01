@@ -23,7 +23,7 @@ import com.example.springclient.R;
 import com.example.springclient.contract.CreaCategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.CreaCategoriaPresenter;
-import com.example.springclient.view.adapters.IRecycleViewCategoria;
+import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
 
 import java.io.ByteArrayOutputStream;
@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewCategoria, CreaCategoriaContract.ScegliFotoView {
+public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, CreaCategoriaContract.ScegliFotoView {
     private RecyclerView recyclerViewImmagini;
     private RecycleViewAdapterCategoria adapterCategoria;
     private Button buttonIndietro;
@@ -139,7 +139,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClickRecyclerView(int position) {
         Bitmap bitmap = categorieList.get(position).getImage();
         byte[] bytes = convertiImmagine(bitmap);
         caricaImmagine(bytes);
@@ -149,4 +149,6 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 }

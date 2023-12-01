@@ -24,8 +24,10 @@ import com.example.springclient.contract.GestioneElementiContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.GestioneElementiPresenter;
 import com.example.springclient.view.StartGestioneMenuActivity;
-import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
-import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenuInfoBtn;
+
+import com.example.springclient.view.adapters.IRecycleViewEventi;
+import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding4.widget.RxTextView;
@@ -36,11 +38,11 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
-public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewElementoMenu, GestioneElementiContract.CercaElementoView {
+public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewEventi, GestioneElementiContract.CercaElementoView {
 
     private Button buttonInditero;
     private RecyclerView recyclerViewElementi;
-    private RecycleViewAdapterGestioneElementoMenuInfoBtn adapter;
+    private RecycleViewAdapterGestioneElementoMenu adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
     private GestioneElementiContract.Presenter gestioneElementiPresenter;
@@ -71,7 +73,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
 
         recyclerViewElementi = findViewById(R.id.recyclerViewElementiRicercati);
-        adapter = new RecycleViewAdapterGestioneElementoMenuInfoBtn(this, elementoMenuList, this);
+        adapter = new RecycleViewAdapterGestioneElementoMenu(this, elementoMenuList, this);
         recyclerViewElementi.setAdapter(adapter);
 
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
@@ -173,14 +175,14 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
 
     @Override
-    public void onItemClickRecyclerViewPortata(int position) {
-        startDialogDettagliElemento(elementoMenuList.get(position));
+    public void onButtonRecyclerView(int position){
+        elementoDaEliminare = elementoMenuList.get(position);
+        gestioneElementiPresenter.avviaRimuoviElemento();
     }
 
     @Override
-    public void onButtonDeleted(int position) {
-        elementoDaEliminare = elementoMenuList.get(position);
-        gestioneElementiPresenter.avviaRimuoviElemento();
+    public void onItemClickRecyclerView(int position) {
+        startDialogDettagliElemento(elementoMenuList.get(position));
     }
 
     @Override
@@ -235,4 +237,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         elementoMenuListApp.addAll(elementoMenuList);
         initializeComponents();
     }
+
+
 }

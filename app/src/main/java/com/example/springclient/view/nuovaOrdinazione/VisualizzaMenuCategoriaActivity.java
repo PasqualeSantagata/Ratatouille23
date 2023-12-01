@@ -30,7 +30,7 @@ import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
-import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
+import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,7 +38,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.Serializable;
 import java.util.List;
 
-public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu, VisualizzElementiContract.View, BaseAllergeniDialog,
+public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, VisualizzElementiContract.View, BaseAllergeniDialog,
         OrdinazioneContract.ViewElementiOrdinazione {
     //impostare categoria dall'intent
     private Button buttonIndietro;
@@ -239,9 +239,10 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
     }
 
     @Override
-    public void onItemClickRecyclerViewPortata(int position) {
+    public void onItemClickRecyclerView(int position) {
         elementoSelezionato = position;
         setParameters(elementiMenu.get(position).getElementoMenu());
+
     }
 
     @Override
@@ -308,4 +309,6 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         Dialog dialog = new Dialog(this);
         mostraDialogWarningOneBtn(dialog, s, view -> dialog.dismiss());
     }
+
+
 }

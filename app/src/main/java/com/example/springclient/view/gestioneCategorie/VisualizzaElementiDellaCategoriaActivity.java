@@ -26,7 +26,7 @@ import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
-import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
+import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
 import com.example.springclient.view.gestioneElementiMenu.ModificaElementoActivity;
 import com.example.springclient.view.nuovaOrdinazione.FiltraCategoriaNuovaOrdinazioneActivity;
@@ -37,7 +37,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewElementoMenu,
+public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi,
         VisualizzElementiContract.View, BaseAllergeniDialog {
 
     private TextInputLayout textInputLayouNome;
@@ -211,13 +211,13 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onItemClickRecyclerViewPortata(int position) {
+    public void onItemClickRecyclerView(int position) {
         elementoSelezionato = position;
         setParameters(elementiMenu.get(position));
     }
 
     @Override
-    public void onButtonDeleted(int position) {
+    public void onButtonRecyclerView(int position) {
         elementoSelezionato = position;
         Dialog dialog = new Dialog(this);
         mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
@@ -227,8 +227,8 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                 },
                 view -> dialog.dismiss()
         );
-    }
 
+    }
     private void mostraDialogWarningOneBtn(String messaggio) {
         Dialog dialogAttenzione = new Dialog(this);
         dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
@@ -264,7 +264,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         intent.putExtra("nomeCategoria", nome);
         intent.putExtra("idCategoria", idCategoria);
         startActivity(intent);
-
     }
 
     @Override
@@ -315,5 +314,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         startActivity(esploraCategorie);
         super.onBackPressed();
     }
+
 
 }
