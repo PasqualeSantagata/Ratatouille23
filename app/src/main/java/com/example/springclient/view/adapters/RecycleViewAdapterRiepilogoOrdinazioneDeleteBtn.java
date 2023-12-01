@@ -17,12 +17,12 @@ import java.util.List;
 
 public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerView.Adapter<RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder>{
 
-    private final IRecycleViewElementoMenu recycleViewElementoMenuInterface;
+    private final IRecycleViewEventi iRecycleViewEventi;
     Context context;
     List<Portata> listaElementiMenu;
 
-    public RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(IRecycleViewElementoMenu recycleViewElementoMenuInterface, Context context, List<Portata> listaElementiMenu) {
-        this.recycleViewElementoMenuInterface = recycleViewElementoMenuInterface;
+    public RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(IRecycleViewEventi iRecycleViewEventi, Context context, List<Portata> listaElementiMenu) {
+        this.iRecycleViewEventi = iRecycleViewEventi;
         this.context = context;
         this.listaElementiMenu = listaElementiMenu;
     }
@@ -33,7 +33,7 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu_delete_btn, parent,false);
 
-        return new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder(view, recycleViewElementoMenuInterface);
+        return new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder(view, iRecycleViewEventi);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
         TextView textViewPrezzo;
         TextView textViewBreveNota;
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewElementoMenuInterface) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
             imageViewInfo = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
@@ -73,7 +73,7 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        recycleViewElementoMenuInterface.onItemClickRecyclerViewPortata(pos);
+                        recycleViewElementoMenuInterface.onItemClickRecyclerView(pos);
                     }
                 }
             });
@@ -82,7 +82,7 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        recycleViewElementoMenuInterface.onButtonDeleted(pos);
+                        recycleViewElementoMenuInterface.onButtonRecyclerView(pos);
 
                     }
                 }

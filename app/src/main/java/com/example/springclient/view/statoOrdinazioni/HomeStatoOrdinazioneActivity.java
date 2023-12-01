@@ -125,7 +125,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
-    @Override
+
     public void initializeComponents() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
@@ -201,18 +201,18 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
     @Override
-    public void onItemClickOrdinazioniPrenotate(int position) {
-
+    public void onItemClickOrdinazioniEvase(int position) {
+        mostraDialogDettagli(portateEvase.get(position));
     }
 
     @Override
-    public void onItemClickOrdinazioniEvase(int position) {
-
+    public void onItemClickOrdinazioniPrenotate(int position) {
+        mostraDialogDettagli(portatePrenotate.get(position));
     }
 
     @Override
     public void onGreenButtonClickOrdinazioniPrenotate(int position) {
-
+        //TODO passa da prenotata a evasa
     }
 
 

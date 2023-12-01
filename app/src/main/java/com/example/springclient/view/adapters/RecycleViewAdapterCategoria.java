@@ -17,31 +17,31 @@ import java.util.List;
 
 public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleViewAdapterCategoria.MyViewHolder> {
 
-    private final IRecycleViewCategoria recycleViewCategoriaInterface;
+    private final IRecycleViewEventi recycleViewEventi;
     Context context;
     List<Categoria> categoriaList;
 
-    public RecycleViewAdapterCategoria(Context context, List<Categoria> categoriaList, IRecycleViewCategoria recycleViewCategoriaInterface) {
+    public RecycleViewAdapterCategoria(Context context, List<Categoria> categoriaList, IRecycleViewEventi recycleViewEventi) {
         this.context = context;
         this.categoriaList = categoriaList;
-        this.recycleViewCategoriaInterface = recycleViewCategoriaInterface;
+        this.recycleViewEventi = recycleViewEventi;
     }
 
     @NonNull
     @Override
     public RecycleViewAdapterCategoria.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_recycle_view_categoria, parent,false);
+        View view = inflater.inflate(R.layout.item_recycle_view_categoria, parent, false);
 
-        return new RecycleViewAdapterCategoria.MyViewHolder(view, recycleViewCategoriaInterface);
+        return new RecycleViewAdapterCategoria.MyViewHolder(view, recycleViewEventi);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterCategoria.MyViewHolder holder, int position) {
 
-        if(categoriaList.get(position).getNome() == null || categoriaList.get(position).getNome().isEmpty()){
+        if (categoriaList.get(position).getNome() == null || categoriaList.get(position).getNome().isEmpty()) {
             holder.textViewNomeCategoria.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
             holder.textViewNomeCategoria.setText(categoriaList.get(position).getNome());
         }
 
@@ -57,24 +57,25 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
 
         TextView textViewNomeCategoria;
         ImageView imageViewCategoria;
-        public MyViewHolder(@NonNull View itemView, IRecycleViewCategoria recycleViewCategoriaInterface)  {
+
+        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewCategoriaInterface) {
             super(itemView);
             textViewNomeCategoria = itemView.findViewById(R.id.textViewRecycleViewNomeCategoria);
             imageViewCategoria = itemView.findViewById(R.id.imageViewRecycleViewCategoria);
 
             itemView.setOnClickListener(view -> {
-                if (recycleViewCategoriaInterface != null){
+                if (recycleViewCategoriaInterface != null) {
                     int pos = getAdapterPosition();
 
-                    if(pos != RecyclerView.NO_POSITION){
-                        recycleViewCategoriaInterface.onItemClick(pos);
+                    if (pos != RecyclerView.NO_POSITION) {
+                        recycleViewCategoriaInterface.onItemClickRecyclerView(pos);
                     }
-
                 }
+
             });
+
+
         }
-
-
     }
 
 }

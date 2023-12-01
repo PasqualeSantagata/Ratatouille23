@@ -16,14 +16,14 @@ import com.example.springclient.entity.ElementoMenu;
 import java.util.List;
 
 public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter<RecycleViewAdapterGestioneElementoMenu.MyViewHolder> {
-    IRecycleViewElementoMenu recycleViewElementoMenuInterface;
+    IRecycleViewEventi recycleViewEventi;
     Context context;
     List<ElementoMenu> listaElementiMenu;
 
-    public RecycleViewAdapterGestioneElementoMenu(Context context, List<ElementoMenu> listaElementiMenu, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
+    public RecycleViewAdapterGestioneElementoMenu(Context context, List<ElementoMenu> listaElementiMenu, IRecycleViewEventi recycleViewEventi) {
         this.context = context;
         this.listaElementiMenu = listaElementiMenu;
-        this.recycleViewElementoMenuInterface = recycleViewElementoMenuInterface;
+        this.recycleViewEventi = recycleViewEventi;
     }
 
     @NonNull
@@ -32,7 +32,7 @@ public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu_delete_btn, parent,false);
 
-        return new RecycleViewAdapterGestioneElementoMenu.MyViewHolder(view, recycleViewElementoMenuInterface);
+        return new RecycleViewAdapterGestioneElementoMenu.MyViewHolder(view, recycleViewEventi);
     }
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterGestioneElementoMenu.MyViewHolder holder, int position) {
@@ -51,7 +51,7 @@ public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter
         ImageView imageViewInfo;
         ImageView cancellaElementoImageView;
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewElementoMenuInterface) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
             imageViewInfo = itemView.findViewById(R.id.imageViewInfoRecycleView);
@@ -64,7 +64,7 @@ public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        recycleViewElementoMenuInterface.onItemClickRecyclerViewPortata(pos);
+                        recycleViewElementoMenuInterface.onItemClickRecyclerView(pos);
                     }
                 }
             });
@@ -73,7 +73,7 @@ public class RecycleViewAdapterGestioneElementoMenu extends RecyclerView.Adapter
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        recycleViewElementoMenuInterface.onButtonDeleted(pos);
+                        recycleViewElementoMenuInterface.onButtonRecyclerView(pos);
                     }
                 }
 

@@ -22,17 +22,14 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
-import com.example.springclient.view.adapters.IRecycleViewCategoria;
+import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.nuovaOrdinazione.RiepilogoOrdinazioneActivity;
-import com.example.springclient.view.nuovaOrdinazione.StartNuovaOrdinazioneActivity;
-import com.example.springclient.view.nuovaOrdinazione.VisualizzaMenuCategoriaActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewCategoria, MostraCategoriaContract.View {
+public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewEventi, MostraCategoriaContract.View {
     private Ordinazione ordinazione;
     private Button buttonIndietro;
     private Button buttonRiepilogo;
@@ -171,7 +168,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
 
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemClickRecyclerView(int position) {
         categoria = categorie.get(position);
         categoria.ordinaCategoria();
         categoriaPresenter.mostraElementiDellaCategoria();
