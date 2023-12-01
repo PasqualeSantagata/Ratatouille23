@@ -20,7 +20,7 @@ import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
-import com.example.springclient.view.adapters.IRecycleViewElementoMenu;
+import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,7 +29,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewElementoMenu, Serializable, OrdinazioneContract.ViewRiepilogoOrdinazione {
+public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewEventi, Serializable, OrdinazioneContract.ViewRiepilogoOrdinazione {
 
     private Button buttonIndietro;
     private Button buttonOk;
@@ -107,13 +107,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         mostraDialogErroreOneBtn(dialog,"Errore di connessione con il server", view -> dialog.dismiss());
     }
 
-    @Override
-    public void onItemClickRecyclerViewPortata(int position) {
-        elementoSelezionato = portate.get(position);
-        //Dialog mostra info
-        startDialogDettagliElemento(elementoSelezionato.getElementoMenu());
-    }
-
     private void startDialogDettagliElemento(ElementoMenu elementoMenu) {
         Dialog dialogDettagli = new Dialog(this);
         dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);
@@ -141,8 +134,28 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         editText.setText(text);
     }
 
+
     @Override
-    public void onButtonDeleted(int position) {
+    public void onBackPressed() {
+        Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
+        intentEsploraCategorie.putExtra("ordinazione", ordinazione);
+        startActivity(intentEsploraCategorie);
+        super.onBackPressed();
+    }
+
+    public void notifyAdapter() {
+        adapterElementoMenu.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClickRecyclerView(int position) {
+        elementoSelezionato = portate.get(position);
+        //Dialog mostra info
+        startDialogDettagliElemento(elementoSelezionato.getElementoMenu());
+    }
+
+    @Override
+    public void onButtonRecyclerView(int position) {
         elementoSelezionato = portate.get(position);
         //Starta dialog warn per eliminare elem
         Dialog dialogAttenzione = new Dialog(this);
@@ -166,21 +179,6 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
             }
         });
         buttonNo.setOnClickListener(view -> dialogAttenzione.dismiss());
-
     }
-
-
-    @Override
-    public void onBackPressed() {
-        Intent intentEsploraCategorie = new Intent(this, EsploraCategorieActivity.class);
-        intentEsploraCategorie.putExtra("ordinazione", ordinazione);
-        startActivity(intentEsploraCategorie);
-        super.onBackPressed();
-    }
-
-    public void notifyAdapter() {
-        adapterElementoMenu.notifyDataSetChanged();
-    }
-
 }
 

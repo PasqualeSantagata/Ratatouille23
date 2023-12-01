@@ -16,14 +16,14 @@ import com.example.springclient.entity.Portata;
 import java.util.List;
 
 public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<RecycleViewAdapterElementoMenu.MyViewHolder> {
-    IRecycleViewElementoMenu recycleViewElementoMenuInterface;
+    IRecycleViewEventi recycleViewEventi;
     Context context;
     List<Portata> listaElementiMenu;
 
-    public RecycleViewAdapterElementoMenu(Context context, List<Portata> listaElementiMenu, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
+    public RecycleViewAdapterElementoMenu(Context context, List<Portata> listaElementiMenu, IRecycleViewEventi recycleViewEventi) {
         this.context = context;
         this.listaElementiMenu = listaElementiMenu;
-        this.recycleViewElementoMenuInterface = recycleViewElementoMenuInterface;
+        this.recycleViewEventi = recycleViewEventi;
     }
 
     @NonNull
@@ -32,7 +32,7 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu, parent,false);
 
-        return new RecycleViewAdapterElementoMenu.MyViewHolder(view, recycleViewElementoMenuInterface);
+        return new RecycleViewAdapterElementoMenu.MyViewHolder(view, recycleViewEventi);
     }
 
     @Override
@@ -52,21 +52,18 @@ public class RecycleViewAdapterElementoMenu extends RecyclerView.Adapter<Recycle
         TextView textViewPrezzo;
         ImageView imageViewInfo;
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewElementoMenu recycleViewElementoMenuInterface) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewElementoMenuInterface) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
             textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoElemMenu);
             imageViewInfo = itemView.findViewById(R.id.imageViewInfoRecycleView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(recycleViewElementoMenuInterface != null){
-                        int pos = getAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if(recycleViewElementoMenuInterface != null){
+                    int pos = getAdapterPosition();
 
-                        if(pos != RecyclerView.NO_POSITION){
-                            recycleViewElementoMenuInterface.onItemClickRecyclerViewPortata(pos);
-                        }
+                    if(pos != RecyclerView.NO_POSITION){
+                        recycleViewElementoMenuInterface.onItemClickRecyclerView(pos);
                     }
                 }
             });

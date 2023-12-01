@@ -11,6 +11,10 @@ public interface VisualizzElementiContract {
         void mostraTraduzione(ElementoMenu elementoMenu);
         void traduzioneAssente();
         void setElementi(List<ElementoMenu> elementoMenuList);
+
+        void onItemClickRecyclerViewPortata(int position);
+        void onButtonDeleted(int position);
+
         void rimuoviElemento();
         void mostraRiepilogo();
 

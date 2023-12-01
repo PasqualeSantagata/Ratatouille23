@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
@@ -61,6 +62,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
         TextView textViewNota;
         ImageButton buttonAvanti;
 
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti) {
             super(itemView);
@@ -70,6 +72,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
             textViewNota = itemView.findViewById(R.id.textViewNotaRecycleViewStatoOrdinazioni);
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewStatoOrdinazioni);
             textViewSala = itemView.findViewById(R.id.textViewSalaRecycleViewStatoOrdinazioni);
+            
 
 
             itemView.setOnClickListener(view -> {
