@@ -59,7 +59,7 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
         TextView textViewTempo;
         TextView textViewNota;
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniEvase iRecycleViewOrdinazioniEvase) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniEvase recycleViewOrdinazioniEvase) {
             super(itemView);
             textViewNomePiatto = itemView.findViewById(R.id.textViewNomePiattoRecycleViewOrdinazioniEvase);
             textViewNota = itemView.findViewById(R.id.textViewBreveNotaRecycleViewOrdinazioniEvase);
@@ -68,11 +68,11 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewOrdinazioniEvase);
 
             itemView.setOnClickListener(view -> {
-                if (iRecycleViewOrdinazioniEvase != null){
+                if (recycleViewOrdinazioniEvase != null){
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        iRecycleViewOrdinazioniEvase.onItemClickOrdinazioniEvase(pos);
+                        recycleViewOrdinazioniEvase.onItemClickOrdinazioniEvase(pos);
                     }
                 }
             });
