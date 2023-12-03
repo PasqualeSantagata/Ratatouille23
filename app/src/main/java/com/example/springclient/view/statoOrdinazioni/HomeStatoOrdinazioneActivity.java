@@ -76,7 +76,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     @Override
     public void setPortateSospese(List<Portata> portateSospese) {
         this.portateSospese = portateSospese;
-        initializeComponents();
+        inizializzaComponenti();
     }
 
 
@@ -126,7 +126,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
 
 
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
         recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
         recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);

@@ -30,11 +30,11 @@ public class HomeModificaElementoMenuViewActivity extends AppCompatActivity impl
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_home_modifica_elem_gestione_menu);
         gestioneElementiPresenter = new GestioneElementiPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         buttonCategorie = findViewById(R.id.espoloraCategoriaHomeModificaButton);
         buttonCerca = findViewById(R.id.cercaHomeModificaButton);
         buttonIndietro = findViewById(R.id.buttonIndietroHomeModElemGestioneMenu);

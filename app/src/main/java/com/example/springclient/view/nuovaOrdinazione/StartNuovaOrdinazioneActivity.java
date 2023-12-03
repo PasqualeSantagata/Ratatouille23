@@ -39,7 +39,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
     private FloatingActionButton fab50;
     private FloatingActionButton fabAdd;
     private FloatingActionButton fabMinus;
-    private int n = 0;
+    private int numPersoneTavolo = 0;
     private Ordinazione ordinazione;
     private OrdinazioneContract.Presenter ordinazionePresenter;
     private AutenticazioneContract.Presenter autenticazionePresenter;
@@ -51,10 +51,10 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         ordinazionePresenter = new OrdinazionePresenter(this);
         autenticazionePresenter = new AutenticazionePresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
-
-    public void initializeComponents(){
+    @Override
+    public void inizializzaComponenti(){
         textInputLayoutNumeroPersone = findViewById(R.id.textInputLayoutNumPersoneStartNuovaOrdinazione);
         EditText etNumPersone = textInputLayoutNumeroPersone.getEditText();
         textInputLayoutSala = findViewById(R.id.textInputLayoutSalaStartNuovaOrdinazione);
@@ -96,9 +96,9 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
             Editable numPersone = etNumPersone.getText();
             String nPersone = numPersone.toString();
             if(!nPersone.equals("")) {
-                n = Integer.parseInt(nPersone);
+                this.numPersoneTavolo = Integer.parseInt(nPersone);
             }
-            etNumPersone.setText(Integer.valueOf(n + 1).toString());
+            etNumPersone.setText(Integer.valueOf(this.numPersoneTavolo + 1).toString());
         });
 
         fabMinus.setOnClickListener(view -> {

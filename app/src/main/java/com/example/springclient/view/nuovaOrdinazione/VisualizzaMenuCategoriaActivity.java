@@ -39,8 +39,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, VisualizzElementiContract.View, BaseAllergeniDialog,
-        OrdinazioneContract.ViewElementiOrdinazione {
-    //impostare categoria dall'intent
+        OrdinazioneContract.ElementiOrdinazioneView {
     private Button buttonIndietro;
     private Button buttonRiepilogo;
     private TextInputLayout textInputLayoutPrezzo;
@@ -51,11 +50,11 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
     private Ordinazione ordinazione;
     private int elementoSelezionato = -1;
     private TextView textViewAllergeni;
-    private boolean b;
+    private boolean valoreSelezionatoBurgerMenu;
     private List<String> allergeni;
     private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
     private OrdinazioneContract.Presenter viewElementiOrdinazionePresenter;
-    private String nome;
+    private String nomeCategoria;
     private ProgressBar progressBar;
 
     @Override
@@ -63,18 +62,18 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         super.onCreate(savedInstanceState);
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementi");
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
-        nome = getIntent().getStringExtra("nomeCategoria");
-        getSupportActionBar().setTitle(nome);
+        nomeCategoria = getIntent().getStringExtra("nomeCategoria");
+        getSupportActionBar().setTitle(nomeCategoria);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
         progressBar = findViewById(R.id.progressBarVisualizzaMenuCategoria);
         progressBar.setVisibility(View.INVISIBLE);
         viewElementiOrdinazionePresenter = new OrdinazionePresenter(this);
         visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         buttonIndietro = findViewById(R.id.buttonIndietroVisuaCatNuovaOrdinazione);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoVisualCatNuovaOrdinazione);
 
@@ -104,7 +103,8 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
                 visualizzaElementiPresenter.mostraRiepilogo();
             }
             else{
-                mostraDialogWarningOneBtn("Attenzione l'ordinazione non ha elementi");
+                Dialog dialogAttenzione = new Dialog(this);
+                mostraDialogWarningOneBtn(dialogAttenzione, "Attenzione l'ordinazione non ha elementi", view1 -> dialogAttenzione.dismiss());
             }
         });
 
@@ -140,20 +140,6 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
-
-    private void mostraDialogWarningOneBtn(String messaggio){
-        Dialog dialogAttenzione = new Dialog(this);
-        dialogAttenzione.setContentView(R.layout.dialog_warning_one_button);
-
-        TextView messaggiodialog = dialogAttenzione.findViewById(R.id.textViewMessageDialogueErrorOneBt);
-        messaggiodialog.setText(messaggio);
-
-        Button buttonOk = dialogAttenzione.findViewById(R.id.buttonOkDialogueErrorOneBt);
-        dialogAttenzione.show();
-
-        buttonOk.setOnClickListener(view -> dialogAttenzione.dismiss());
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -161,9 +147,9 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         return true;
     }
 
-
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(b){
+        if(valoreSelezionatoBurgerMenu){
             menu.findItem(R.id.item_lingue_ordinazione).setEnabled(false);
             menu.findItem(R.id.item_lingua_base_ordinazione).setEnabled(true);
         }else{
@@ -181,7 +167,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
                 if(elementoSelezionato != -1) {
                     visualizzaElementiPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getElementoMenu().getId().toString());
                     invalidateOptionsMenu();
-                    b = true;
+                    valoreSelezionatoBurgerMenu = true;
                 }
                 else{
                     Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
@@ -192,12 +178,12 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
                 if(elementoSelezionato != -1) {
                     setParameters(getElementoMenu());
                     invalidateOptionsMenu();
-                    b = false;
+                    valoreSelezionatoBurgerMenu = false;
                 }
                 break;
 
             case R.id.item_riordina_elem:
-                viewElementiOrdinazionePresenter.mostraFiltraCategoria(nome);
+                viewElementiOrdinazionePresenter.mostraFiltraCategoria(nomeCategoria);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -220,12 +206,12 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         editText.setText(text);
     }
 
-    public void setParameters(ElementoMenu elementoMenu){
+    private void setParameters(ElementoMenu elementoMenu){
         setTextInputLayoutText(textInputLayoutPrezzo, String.valueOf(elementoMenu.getPrezzo()));
         setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
     }
 
-    public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
+    private void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
         RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewElemMenuNuovaOrdinazione);
         RecycleViewAdapterPortata adapterElementoMenu = new RecycleViewAdapterPortata(this, listaElementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
@@ -234,7 +220,6 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
     }
 
     private ElementoMenu getElementoMenu(){
-        String nota = textInputLayoutNota.getEditText().getText().toString();
         return elementiMenu.get(elementoSelezionato).getElementoMenu();
     }
 
@@ -257,7 +242,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     @Override
     public void mostraRiepilogo() {
-        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
+        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityView.class);
         intentRiepilogo.putExtra("ordinazione", ordinazione);
         startActivity(intentRiepilogo);
     }
@@ -299,7 +284,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         Intent intent = new Intent(this, FiltraCategoriaNuovaOrdinazioneActivity.class);
         intent.putExtra("elementiMenu", (Serializable) portataList);
         intent.putExtra("ordinazione", ordinazione);
-        intent.putExtra("nomeCategoria", nome);
+        intent.putExtra("nomeCategoria", nomeCategoria);
         startActivity(intent);
 
     }

@@ -68,7 +68,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     }
     @Override
     @SuppressLint("CheckResult")
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         buttonInditero = findViewById(R.id.buttonIndietroCercaElemento);
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
 
@@ -235,7 +235,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         this.elementoMenuList = elementoMenuList;
         this.elementoMenuListApp = new ArrayList<>();
         elementoMenuListApp.addAll(elementoMenuList);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
 

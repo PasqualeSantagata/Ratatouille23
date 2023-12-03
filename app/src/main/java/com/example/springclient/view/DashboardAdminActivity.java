@@ -32,12 +32,11 @@ public class  DashboardAdminActivity extends AppCompatActivity implements ILogou
         setContentView(R.layout.activity_dashboard_admin);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autenticazionePresenter = new AutenticazionePresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
 
-    @Override
-    public void initializeComponents(){
+    public void inizializzaComponenti(){
         imageViewMenu = findViewById(R.id.imageViewMenuDash);
         imageViewAnalytics = findViewById(R.id.imageViewAnalyticsDash);
         imageViewNuovaUtenza = findViewById(R.id.imageViewNewUserDash);

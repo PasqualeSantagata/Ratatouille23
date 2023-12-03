@@ -6,7 +6,6 @@ import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.model.RecuperoCredenzialiModel;
 
 import com.example.springclient.view.MainActivity;
-import com.example.springclient.view.PasswordDimenticataActivity;
 
 import retrofit2.Response;
 
@@ -43,6 +42,23 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
                 else if(retData.code() == 401 && recuperoCredenzialiView.isVisibile()){
                     recuperoCredenzialiView.emailErrata();
                 }
+            }
+        });
+    }
+    @Override
+    public void avviaAggiornaPassword(String email){
+        loginActivity.mostraPorgressBar();
+        recuperoCredenzialiModel.recuperaPassword(email, new CallbackResponse<Void>() {
+            @Override
+            public void onFailure(Throwable t) {
+                loginActivity.nascondiProgressBar();
+                if(loginActivity.isVisibile()) {
+                    loginActivity.impossibileContattareIlServer("Errore di connessione durante l'aggiornamento della password");
+                }
+            }
+            @Override
+            public void onSuccess(Response<Void> retData) {
+                loginActivity.nascondiProgressBar();
             }
         });
     }

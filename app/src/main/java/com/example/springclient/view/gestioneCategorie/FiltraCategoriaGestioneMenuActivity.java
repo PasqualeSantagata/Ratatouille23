@@ -15,11 +15,9 @@ import androidx.lifecycle.Lifecycle;
 import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.ModificaElementoContract;
-import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ModificaElementoPresenter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -50,11 +48,11 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
         nome = getIntent().getStringExtra("nomeCategoria");
         allergeni = new ArrayList<>();
         modificaElementoPresenter = new ModificaElementoPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         //buttons
         buttonNome = findViewById(R.id.buttonNomeFiltraCategoria);
         buttonPrezzo = findViewById(R.id.buttonPrezzoFiltraCategoria);

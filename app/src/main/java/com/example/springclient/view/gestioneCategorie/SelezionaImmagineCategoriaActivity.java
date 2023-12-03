@@ -47,7 +47,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
         categorieList = new ArrayList<>();
         creaCategoriaPresenter = new CreaCategoriaPresenter(this);
         setImmaginiCategoriaDefault();
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     private void setImmaginiCategoriaDefault() {
@@ -75,7 +75,7 @@ public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implem
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         recyclerViewImmagini = findViewById(R.id.recyclerViewSelezImgCategoriaGestioneMenu);
         //aggiungiImmagineFab = findViewById(R.id.floatingActionButton);
         buttonAggiungiImmagine = findViewById(R.id.buttonAggingiImmagineSelezImmagine);

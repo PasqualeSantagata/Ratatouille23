@@ -114,7 +114,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.nuovaOrdinazione.RiepilogoOrdinazioneActivity"
+            android:name=".view.nuovaOrdinazione.RiepilogoOrdinazioneActivityView"
             android:exported="false"
             android:configChanges="orientation"
             android:screenOrientation= "landscape"

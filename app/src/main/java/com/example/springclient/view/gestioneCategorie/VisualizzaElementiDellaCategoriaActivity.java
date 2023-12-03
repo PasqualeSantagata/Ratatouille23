@@ -83,7 +83,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
             }
         };
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
@@ -135,7 +135,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         textInputLayouNome = findViewById(R.id.textInputLayoutNomeInserimNelMenu);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
@@ -297,7 +297,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public void setElementi(List<ElementoMenu> elementoMenuList) {
         this.elementiMenu = elementoMenuList;
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override

@@ -61,7 +61,7 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         textInputLayoutNome = findViewById(R.id.textInputLayoutModificaNome);
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutModificaPrezzo);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutModificaDescrizione);

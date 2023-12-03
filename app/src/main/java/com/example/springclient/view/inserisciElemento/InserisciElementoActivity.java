@@ -73,11 +73,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         linguaSelezionata = getIntent().getStringExtra("lingua");
         categoriaSelezionata = getIntent().getStringExtra("categoria");
 
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         //Text
         nomeElementoTextInputLayout = findViewById(R.id.TextInputLayoutNomeInserisciElementoMenu);
         prezzoElementoTextInputLayout = findViewById(R.id.TextInputLayoutPrezzoInserisciElementoMenu);

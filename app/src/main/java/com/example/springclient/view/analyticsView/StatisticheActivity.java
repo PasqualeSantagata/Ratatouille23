@@ -60,12 +60,12 @@ public class StatisticheActivity extends AppCompatActivity implements BaseView {
         String dataInizio = LocalDate.now().minusMonths(1).toString();
         analyticsPresenter.getAnalytics(dataInizio, dataFine);
 
-        initializeComponents();
+        inizializzaComponenti();
 
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         buttonSelezionaDate = findViewById(R.id.buttonSelezionaDateStatistiche);
         progressBar = findViewById(R.id.progress_bar_stat);
         editTextData = findViewById(R.id.editTextDate);

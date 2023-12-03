@@ -14,7 +14,6 @@ public class Portata implements Serializable {
     public static final Comparator<Portata> comparePrezzoCrescente = Comparator.comparing(p -> p.elementoMenu.getPrezzo());
     public static final Comparator<Portata> compareNomeDecrescente = (p1, p2) -> - compareNomeCrescente.compare(p1,p2);
     public static final Comparator<Portata> comparePrezzoDecrescente = (p1, p2) -> - comparePrezzoCrescente.compare(p1,p2);
-
     public Portata(Long id, ElementoMenu elementoMenu, boolean prenotato, String breveNota, Ordinazione ordinazione) {
         this.id = id;
         this.elementoMenu = elementoMenu;

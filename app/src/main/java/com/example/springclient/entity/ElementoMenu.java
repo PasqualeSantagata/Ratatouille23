@@ -13,7 +13,7 @@ public class ElementoMenu implements Serializable {
     private String descrizione;
     private List<String> elencoAllergeni;
     private String lingua;
-    public static final Comparator<ElementoMenu> compareNomeCrescente = (e1, e2) -> e1.nome.compareTo(e2.nome);
+    public static final Comparator<ElementoMenu> compareNomeCrescente = Comparator.comparing(e -> e.nome);
     public static final Comparator<ElementoMenu> comparePrezzoCrescente = Comparator.comparing(e -> e.prezzo);
     public static final Comparator<ElementoMenu> compareNomeDecrescente = (e1, e2) -> -e1.nome.compareTo(e2.getNome());
     public static final Comparator<ElementoMenu> comparePrezzoDecrescente = (e1, e2) -> -e1.prezzo.compareTo(e2.prezzo);
@@ -41,10 +41,6 @@ public class ElementoMenu implements Serializable {
         this.lingua = lingua;
     }
 
-    public void addAllergene(String allergene) {
-        if (!elencoAllergeni.contains(allergene))
-            elencoAllergeni.add(allergene);
-    }
 
     public ElementoMenu(String nome, Float prezzo, String descrizione, List<String> elencoAllergeni) {
         this.nome = nome;
@@ -79,11 +75,6 @@ public class ElementoMenu implements Serializable {
 
     public List<String> getElencoAllergeni() {
         return elencoAllergeni;
-    }
-
-
-    public void setElencoAllergeni(List<String> elencoAllergeni) {
-        this.elencoAllergeni = elencoAllergeni;
     }
 
     public String getLingua() {

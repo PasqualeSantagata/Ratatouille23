@@ -13,12 +13,9 @@ public interface VisualizzElementiContract {
         void setElementi(List<ElementoMenu> elementoMenuList);
         void rimuoviElemento();
         void mostraRiepilogo();
-
         void mostraFiltraCategoria(List<ElementoMenu> portataList);
-
         void mostraModifica(ElementoMenu elementoMenu);
         void impossibileComunicareConServer(String messaggio);
-
         void impossibileRimuovereElemento(String s);
     }
 

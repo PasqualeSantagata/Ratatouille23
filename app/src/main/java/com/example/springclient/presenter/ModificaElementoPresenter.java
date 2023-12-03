@@ -6,7 +6,6 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.ModificaElementoContract;
-import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.model.CategoriaModel;
 import com.example.springclient.model.ElementoMenuModel;
@@ -75,7 +74,7 @@ public class ModificaElementoPresenter implements ModificaElementoContract.Prese
             @Override
             public void onSuccess(Response<ElementoMenu> retData) {
                 modificaElementoMenuView.nascondiProgressBar();
-                modificaElementoMenuView.initializeComponents();
+                modificaElementoMenuView.inizializzaComponenti();
                 if(retData.isSuccessful() && modificaElementoMenuView.isVisibile()) {
                     modificaElementoMenuView.disabilitaFabInserisciTraduzione();
                 }

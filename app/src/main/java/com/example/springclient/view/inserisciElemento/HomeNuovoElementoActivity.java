@@ -52,7 +52,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         //Spinner lingua
         spinnerLingua = findViewById(R.id.spinnerLingueHomeInserisciElemento);
         spinnerLingua.setOnItemSelectedListener(this);
@@ -111,7 +111,7 @@ public class HomeNuovoElementoActivity extends AppCompatActivity implements Adap
     @Override
     public void setNomiCategorie(List<String> nomiCategorie) {
         this.categorie = nomiCategorie;
-        initializeComponents();
+        inizializzaComponenti();
     }
     @Override
     public void mostraCreaCategoria() {
