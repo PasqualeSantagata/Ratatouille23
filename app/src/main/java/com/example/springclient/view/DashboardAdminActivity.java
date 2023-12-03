@@ -36,6 +36,7 @@ public class  DashboardAdminActivity extends AppCompatActivity implements ILogou
     }
 
 
+    @Override
     public void initializeComponents(){
         imageViewMenu = findViewById(R.id.imageViewMenuDash);
         imageViewAnalytics = findViewById(R.id.imageViewAnalyticsDash);

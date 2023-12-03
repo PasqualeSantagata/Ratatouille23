@@ -31,7 +31,7 @@ import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
-import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
+import com.example.springclient.view.adapters.RecycleViewAdapterPortata;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -227,7 +227,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     public void setElementiMenuRecycleView(List<Portata> listaElementiMenu){
         RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewElemMenuNuovaOrdinazione);
-        RecycleViewAdapterElementoMenu adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, listaElementiMenu, this);
+        RecycleViewAdapterPortata adapterElementoMenu = new RecycleViewAdapterPortata(this, listaElementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewPiatti.setLayoutManager(linearLayoutManager);

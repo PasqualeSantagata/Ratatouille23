@@ -70,6 +70,7 @@
     <string name="invia_ordine">invia ordine</string>
     <string name="continua_l_ordinazione">continua l\'ordinazione</string>
     <string name="dettagli">Dettagli</string>
+    <string name="modifica_o_elimina_un_elemento_del_men">Modifica o elimina un elemento del menù</string>
 
 
     <string-array name="array_ruoli">

@@ -15,13 +15,13 @@ import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
-public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerView.Adapter<RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder>{
+public class RecycleViewAdapterPortataRiepilogo extends RecyclerView.Adapter<RecycleViewAdapterPortataRiepilogo.MyViewHolder>{
 
     private final IRecycleViewEventi iRecycleViewEventi;
     Context context;
     List<Portata> listaElementiMenu;
 
-    public RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(IRecycleViewEventi iRecycleViewEventi, Context context, List<Portata> listaElementiMenu) {
+    public RecycleViewAdapterPortataRiepilogo(IRecycleViewEventi iRecycleViewEventi, Context context, List<Portata> listaElementiMenu) {
         this.iRecycleViewEventi = iRecycleViewEventi;
         this.context = context;
         this.listaElementiMenu = listaElementiMenu;
@@ -29,15 +29,15 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
 
     @NonNull
     @Override
-    public RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecycleViewAdapterPortataRiepilogo.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_recycle_view_elementi_menu_delete_btn, parent,false);
 
-        return new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder(view, iRecycleViewEventi);
+        return new RecycleViewAdapterPortataRiepilogo.MyViewHolder(view, iRecycleViewEventi);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecycleViewAdapterPortataRiepilogo.MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
         //TODO input type dell'xml è number ma qua è passata la string, dovrebbe workare
         holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString() + "€");
@@ -57,32 +57,32 @@ public class RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn extends RecyclerVie
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView textViewNome;
-        ImageView imageViewInfo;
+        ImageView buttonDelete;
         TextView textViewPrezzo;
         TextView textViewBreveNota;
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewElementoMenuInterface) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi iRecycleViewEventi) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNomeRecycleViewDeleteBtn);
-            imageViewInfo = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
+            buttonDelete = itemView.findViewById(R.id.cancellaElementoImageViewRecycleViewDeleteBtn);
             textViewPrezzo = itemView.findViewById(R.id.textViewPrezzoRecycleViewDeleteBtn);
             textViewBreveNota = itemView.findViewById(R.id.textViewRecycleViewBreveNotaRiepilogo);
 
             itemView.setOnClickListener(view -> {
-                if(recycleViewElementoMenuInterface != null){
+                if(iRecycleViewEventi != null){
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        recycleViewElementoMenuInterface.onItemClickRecyclerView(pos);
+                        iRecycleViewEventi.onItemClickRecyclerView(pos);
                     }
                 }
             });
-            imageViewInfo.setOnClickListener(view -> {
-                if(recycleViewElementoMenuInterface != null){
+            buttonDelete.setOnClickListener(view -> {
+                if(iRecycleViewEventi != null){
                     int pos = getAdapterPosition();
 
                     if(pos != RecyclerView.NO_POSITION){
-                        recycleViewElementoMenuInterface.onButtonRecyclerView(pos);
+                        iRecycleViewEventi.onButtonEventRecyclerView(pos);
 
                     }
                 }

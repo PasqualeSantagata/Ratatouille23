@@ -26,7 +26,7 @@ import com.example.springclient.presenter.GestioneElementiPresenter;
 import com.example.springclient.view.StartGestioneMenuActivity;
 
 import com.example.springclient.view.adapters.IRecycleViewEventi;
-import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
+import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -42,7 +42,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
     private Button buttonInditero;
     private RecyclerView recyclerViewElementi;
-    private RecycleViewAdapterGestioneElementoMenu adapter;
+    private RecycleViewAdapterElementoMenu adapter;
     private TextInputLayout textInputLayoutRicercaNome;
     private List<ElementoMenu> elementoMenuList;
     private GestioneElementiContract.Presenter gestioneElementiPresenter;
@@ -73,7 +73,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         textInputLayoutRicercaNome = findViewById(R.id.textInputLayoutCerca);
 
         recyclerViewElementi = findViewById(R.id.recyclerViewElementiRicercati);
-        adapter = new RecycleViewAdapterGestioneElementoMenu(this, elementoMenuList, this);
+        adapter = new RecycleViewAdapterElementoMenu(this, elementoMenuList, this);
         recyclerViewElementi.setAdapter(adapter);
 
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
@@ -126,7 +126,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     }
 
 
-    private void setTextInputLayoutText(TextInputLayout textInputLayout, String text) {
+    private void setTextInputLayout(TextInputLayout textInputLayout, String text) {
         EditText editText = textInputLayout.getEditText();
         editText.setText(text);
     }
@@ -143,8 +143,8 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         Button buttonTraduzione = dialogDettagli.findViewById(R.id.buttonLingua);
 
         //Setto l'elemento menu di cui voglio vedere i dettagli
-        setTextInputLayoutText(textInputLayoutPrezzo, elementoMenu.getPrezzo().toString());
-        setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
+        setTextInputLayout(textInputLayoutPrezzo, elementoMenu.getPrezzo().toString());
+        setTextInputLayout(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
         this.dialogDettagliContext = dialogDettagli.getContext();
         this.textInputLayoutDescrizione = textInputLayoutDescrizione;
@@ -164,7 +164,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
         if (elementoMenu != null)
-            setTextInputLayoutText(textInputLayoutDescrizione, elementoMenu.getDescrizione());
+            setTextInputLayout(textInputLayoutDescrizione, elementoMenu.getDescrizione());
 
     }
 
@@ -175,7 +175,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
 
     @Override
-    public void onButtonRecyclerView(int position){
+    public void onButtonEventRecyclerView(int position){
         elementoDaEliminare = elementoMenuList.get(position);
         gestioneElementiPresenter.avviaRimuoviElemento();
     }

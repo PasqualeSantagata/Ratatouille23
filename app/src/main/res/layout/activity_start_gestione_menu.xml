@@ -48,7 +48,7 @@
 
         android:background="@drawable/design_button_rounded_green"
         android:fontFamily="@font/roboto_light"
-        android:text="Modifica un elemento del menù"
+        android:text="@string/modifica_o_elimina_un_elemento_del_men"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

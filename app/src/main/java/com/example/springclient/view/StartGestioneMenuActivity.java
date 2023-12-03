@@ -12,7 +12,7 @@ import androidx.lifecycle.Lifecycle;
 import com.example.springclient.R;
 import com.example.springclient.contract.GestioneElementiContract;
 import com.example.springclient.presenter.GestioneElementiPresenter;
-import com.example.springclient.view.gestioneElementiMenu.HomeModificaElemMenuActivity;
+import com.example.springclient.view.gestioneElementiMenu.HomeModificaElementoMenuViewActivity;
 import com.example.springclient.view.inserisciElemento.HomeNuovoElementoActivity;
 
 public class StartGestioneMenuActivity extends AppCompatActivity implements GestioneElementiContract.StartGestioneMenuView {
@@ -24,7 +24,7 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Elementi del Menù");
+        getSupportActionBar().setTitle("GESTIONE MENÙ");
         setContentView(R.layout.activity_start_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         gestioneElementiPresenter = new GestioneElementiPresenter(this);
@@ -66,7 +66,7 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
 
     @Override
     public void mostraHomeModificaElementoMenu() {
-        Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
+        Intent intent = new Intent(this, HomeModificaElementoMenuViewActivity.class);
         startActivity(intent);
     }
 

@@ -16,7 +16,7 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
     private GestioneElementiContract.StartGestioneMenuView startGestioneMenuView;
     private GestioneElementiContract.CercaElementoView cercaElementoView;
-    private GestioneElementiContract.HomeModificaElemMenu homeModificaElemMenuView;
+    private GestioneElementiContract.HomeModificaElementoMenuView homeModificaElementoMenuView;
 
 
     public GestioneElementiPresenter(GestioneElementiContract.StartGestioneMenuView startGestioneMenuView) {
@@ -27,22 +27,22 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
         this.cercaElementoView = cercaElementoView;
     }
 
-    public GestioneElementiPresenter(GestioneElementiContract.HomeModificaElemMenu homeModificaElemMenuView) {
-        this.homeModificaElemMenuView = homeModificaElemMenuView;
+    public GestioneElementiPresenter(GestioneElementiContract.HomeModificaElementoMenuView homeModificaElementoMenuView) {
+        this.homeModificaElementoMenuView = homeModificaElementoMenuView;
     }
 
     @Override
     public void mostraStartGestioneMenu() {
-        homeModificaElemMenuView.tornaIndietro();
+        homeModificaElementoMenuView.tornaIndietro();
     }
     @Override
     public void mostraEsploraCategorie() {
-        homeModificaElemMenuView.mostraEsploraCategorie();
+        homeModificaElementoMenuView.mostraEsploraCategorie();
     }
 
     @Override
     public void mostraCercaElemento() {
-        homeModificaElemMenuView.mostraCercaElemento();
+        homeModificaElementoMenuView.mostraCercaElemento();
     }
 
     @Override

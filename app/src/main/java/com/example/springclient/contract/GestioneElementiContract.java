@@ -26,7 +26,7 @@ public interface GestioneElementiContract {
         void caricaElementi(List<ElementoMenu> elementoMenuList);
     }
 
-    interface HomeModificaElemMenu extends BaseView {
+    interface HomeModificaElementoMenuView extends BaseView {
         void mostraEsploraCategorie();
 
         void mostraCercaElemento();

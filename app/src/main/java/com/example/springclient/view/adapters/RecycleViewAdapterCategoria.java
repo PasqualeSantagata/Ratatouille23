@@ -58,17 +58,17 @@ public class RecycleViewAdapterCategoria extends RecyclerView.Adapter<RecycleVie
         TextView textViewNomeCategoria;
         ImageView imageViewCategoria;
 
-        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewCategoriaInterface) {
+        public MyViewHolder(@NonNull View itemView, IRecycleViewEventi recycleViewEventi) {
             super(itemView);
             textViewNomeCategoria = itemView.findViewById(R.id.textViewRecycleViewNomeCategoria);
             imageViewCategoria = itemView.findViewById(R.id.imageViewRecycleViewCategoria);
 
             itemView.setOnClickListener(view -> {
-                if (recycleViewCategoriaInterface != null) {
+                if (recycleViewEventi != null) {
                     int pos = getAdapterPosition();
 
                     if (pos != RecyclerView.NO_POSITION) {
-                        recycleViewCategoriaInterface.onItemClickRecyclerView(pos);
+                        recycleViewEventi.onItemClickRecyclerView(pos);
                     }
                 }
 

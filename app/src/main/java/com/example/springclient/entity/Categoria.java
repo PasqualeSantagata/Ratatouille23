@@ -3,7 +3,6 @@ package com.example.springclient.entity;
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 
 public class Categoria implements Serializable {
@@ -31,11 +30,14 @@ public class Categoria implements Serializable {
         this.elementi = elementi;
     }
 
-    public Categoria(Long id, String nome, List<ElementoMenu> elementi, int image) {
+    public Categoria(Long id, String nome, List<ElementoMenu> elementi) {
         this.id = id;
         this.nome = nome;
         this.elementi = elementi;
+    }
 
+    public Categoria(Bitmap image) {
+        this.image = image;
     }
 
     public void ordinaCategoria(){
@@ -54,10 +56,6 @@ public class Categoria implements Serializable {
         }
     }
 
-
-    public Categoria(Bitmap image) {
-        this.image = image;
-    }
 
     public Bitmap getImage() {
         return image;

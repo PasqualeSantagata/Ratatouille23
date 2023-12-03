@@ -21,7 +21,7 @@ import com.example.springclient.entity.Categoria;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;
-import com.example.springclient.view.gestioneElementiMenu.HomeModificaElemMenuActivity;
+import com.example.springclient.view.gestioneElementiMenu.HomeModificaElementoMenuViewActivity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -114,7 +114,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         } else{
             Dialog dialog = new Dialog(this);
             mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
-                Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
+                Intent intent = new Intent(this, HomeModificaElementoMenuViewActivity.class);
                 dialog.dismiss();
                 startActivity(intent);
             });
@@ -131,7 +131,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     public void caricamentoCategorieFallito() {
         Dialog dialog = new Dialog(this);
         mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
-            Intent intent = new Intent(this, HomeModificaElemMenuActivity.class);
+            Intent intent = new Intent(this, HomeModificaElementoMenuViewActivity.class);
             dialog.dismiss();
             startActivity(intent);
         });
@@ -145,7 +145,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
 
     @Override
     public void onBackPressed() {
-        Intent homeModifica = new Intent(this, HomeModificaElemMenuActivity.class);
+        Intent homeModifica = new Intent(this, HomeModificaElementoMenuViewActivity.class);
         startActivity(homeModifica);
         super.onBackPressed();
     }

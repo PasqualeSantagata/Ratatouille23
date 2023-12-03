@@ -23,7 +23,7 @@ import com.example.springclient.entity.Ordinazione;
 import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
-import com.example.springclient.view.adapters.RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn;
+import com.example.springclient.view.adapters.RecycleViewAdapterPortataRiepilogo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -38,7 +38,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
 
     private Ordinazione ordinazione;
     private List<Portata> portate;
-    private RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn adapterElementoMenu;
+    private RecycleViewAdapterPortataRiepilogo adapterElementoMenu;
     private OrdinazioneContract.Presenter presenterOrdinazione;
     private Portata elementoSelezionato;
     private ProgressBar progressBar;
@@ -68,7 +68,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     public void initializeComponents() {
         //Recycler view
         RecyclerView recyclerViewRiepilogo = findViewById(R.id.RecyclerViewRiepilogoOrdinazione);
-        adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(this, this, portate);
+        adapterElementoMenu = new RecycleViewAdapterPortataRiepilogo(this, this, portate);
         recyclerViewRiepilogo.setAdapter(adapterElementoMenu);
         GridLayoutManager horizontal = new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL, false);
         recyclerViewRiepilogo.setLayoutManager(horizontal);
@@ -177,7 +177,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
     @Override
-    public void onButtonRecyclerView(int position) {
+    public void onButtonEventRecyclerView(int position) {
         elementoSelezionato = portate.get(position);
         //Starta dialog warn per eliminare elem
         Dialog dialogAttenzione = new Dialog(this);

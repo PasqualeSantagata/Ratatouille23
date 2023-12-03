@@ -24,12 +24,10 @@ import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
-import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
+import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
 import com.example.springclient.view.gestioneElementiMenu.ModificaElementoActivity;
-import com.example.springclient.view.nuovaOrdinazione.FiltraCategoriaNuovaOrdinazioneActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -49,7 +47,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     private List<ElementoMenu> elementiMenu;
     private int elementoSelezionato = -1;
     private VisualizzElementiContract.Presenter visualizzaElementiPresenter;
-    private RecycleViewAdapterGestioneElementoMenu adapterElementoMenu;
+    private RecycleViewAdapterElementoMenu adapterElementoMenu;
     private ItemTouchHelper.SimpleCallback simpleCallback;
     private String nome;
     private Menu menu;
@@ -191,7 +189,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
     public void setElementiMenuRecycleView() {
         RecyclerView recyclerViewPiatti = findViewById(R.id.recycleViewPiattiCategoriaInserimentoNelMenu);
-        adapterElementoMenu = new RecycleViewAdapterGestioneElementoMenu(this, elementiMenu, this);
+        adapterElementoMenu = new RecycleViewAdapterElementoMenu(this, elementiMenu, this);
         recyclerViewPiatti.setAdapter(adapterElementoMenu);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -217,7 +215,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void onButtonRecyclerView(int position) {
+    public void onButtonEventRecyclerView(int position) {
         elementoSelezionato = position;
         Dialog dialog = new Dialog(this);
         mostraDialogWarningTwoBtn(dialog, "Sei sicuro di voler eliminare questo elemento?",
