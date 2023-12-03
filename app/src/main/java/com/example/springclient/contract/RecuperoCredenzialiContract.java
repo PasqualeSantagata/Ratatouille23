@@ -4,6 +4,7 @@ public interface RecuperoCredenzialiContract {
     interface Presenter {
         void avviaRecuperoPassword(String email);
 
+        void avviaAggiornaPassword(String email);
     }
 
     interface View extends BaseView{

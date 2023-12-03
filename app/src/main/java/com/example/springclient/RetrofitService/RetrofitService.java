@@ -26,8 +26,6 @@ public class RetrofitService {
     private AggiungiTokenInterceptor aggiungiTokenInterceptor;
     private TokenRefreshInterceptor tokenRefreshInterceptor;
 
-    private AutenticazionePresenter autenticazionePresenter;
-
     public static RetrofitService getIstance(){
 
         if(INSTANCE == null)
@@ -83,10 +81,6 @@ public class RetrofitService {
     public AggiungiTokenInterceptor getMyInterceptor(){return aggiungiTokenInterceptor;}
     public AnalyticsAPI getAnalyticsAPI(){
         return analyticsAPI;
-    }
-
-    public void setUtentePresenter(AutenticazionePresenter autenticazionePresenter) {
-        this.autenticazionePresenter = autenticazionePresenter;
     }
     public TokenRefreshInterceptor getTokenRefreshInterceptor() {
         return tokenRefreshInterceptor;

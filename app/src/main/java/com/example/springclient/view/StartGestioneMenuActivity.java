@@ -28,11 +28,11 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
         setContentView(R.layout.activity_start_gestione_menu);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         gestioneElementiPresenter = new GestioneElementiPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents(){
+    public void inizializzaComponenti(){
         buttonIndietro = findViewById(R.id.buttonIndietroStartInserMenù);
         buttonAggiungiElementi = findViewById(R.id.buttonAggElemMenù);
         buttonModificaElementi = findViewById(R.id.buttonModElemMenù);

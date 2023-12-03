@@ -1,7 +1,6 @@
 package com.example.springclient.contract;
 
 
-import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.authentication.AuthRequest;
 
 public interface AutenticazioneContract {
@@ -16,7 +15,6 @@ public interface AutenticazioneContract {
         void avviaDashboardAdmin();
 
         void impossibileContattareIlServer(String messaggio);
-
         void avviaDashboardSupervisore();
         void avviaDashboardAddettoSala();
         void avviaDashboardAddettoCucina(String email);

@@ -32,9 +32,6 @@ public interface GestioneElementiContract {
         void mostraCercaElemento();
     }
 
-    interface ModificaElementoView extends BaseView {
-
-    }
 
     interface Presenter{
         void mostraEsploraCategorie();
@@ -43,9 +40,7 @@ public interface GestioneElementiContract {
         void tornaDashboardAdmin();
         void mostraHomeModificaElementoMenu();
         void mostraHomeNuovoElemento();
-
         void tornaStartGestioneMenu();
-
         void avviaRimuoviElemento();
 
         void mostraModificaElemento(ElementoMenu elementoMenu);

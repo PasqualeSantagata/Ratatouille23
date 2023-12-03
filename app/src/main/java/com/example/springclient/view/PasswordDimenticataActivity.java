@@ -32,11 +32,11 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         setContentView(R.layout.activity_password_dimenticata);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         credenzialiPresenter = new RecuperoCredenzialiPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents(){
+    public void inizializzaComponenti(){
         emailTextInputLayout = findViewById(R.id.textInputLayoutEmailPassDimenticata);
         buttonOk = findViewById(R.id.buttonOkPassDimenticata);
         buttonIndietro = findViewById(R.id.buttonIndietroPassDimenticata);

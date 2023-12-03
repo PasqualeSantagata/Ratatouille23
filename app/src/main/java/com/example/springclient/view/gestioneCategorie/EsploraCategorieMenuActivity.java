@@ -50,7 +50,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
 
     }
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         indietroButton = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
 
 
@@ -119,7 +119,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
                 startActivity(intent);
             });
         }
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override

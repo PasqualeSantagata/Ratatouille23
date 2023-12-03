@@ -31,11 +31,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewEventi, Serializable, OrdinazioneContract.ViewRiepilogoOrdinazione {
+public class RiepilogoOrdinazioneActivityView extends AppCompatActivity implements IRecycleViewEventi, Serializable, OrdinazioneContract.RiepilogoOrdinazioneView {
 
     private Button buttonIndietro;
     private Button buttonOk;
-
     private Ordinazione ordinazione;
     private List<Portata> portate;
     private RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn adapterElementoMenu;
@@ -61,11 +60,11 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         }
 
 
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         //Recycler view
         RecyclerView recyclerViewRiepilogo = findViewById(R.id.RecyclerViewRiepilogoOrdinazione);
         adapterElementoMenu = new RecycleViewAdapterRiepilogoOrdinazioneDeleteBtn(this, this, portate);
@@ -165,7 +164,7 @@ public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements I
         super.onBackPressed();
     }
 
-    public void notifyAdapter() {
+    private void notifyAdapter() {
         adapterElementoMenu.notifyDataSetChanged();
     }
 

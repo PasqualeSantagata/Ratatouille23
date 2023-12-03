@@ -49,12 +49,12 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
         elemento = (ElementoMenu) getIntent().getSerializableExtra("elemento");
         lingua = getIntent().getStringExtra("lingua");
         inserisciNuovaLinguaPresenter = new InserisciNuovaLinguaPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         //Text
         textInputLayoutNome = findViewById(R.id.textInputLayout8);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneNuovaLinguaGestioneMenu);

@@ -65,7 +65,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         buttonIndietro = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
         buttonRiepilogo = findViewById(R.id.buttonRiepilogoCategorieNuovaOrd);
 
@@ -80,7 +80,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
         } else {
             // starta il riepilogo ordinazione non vuota
-            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
+            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityView.class);
             intentRiepilogo.putExtra("ordinazione",ordinazione);
             startActivity(intentRiepilogo);
         }
@@ -147,7 +147,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             });
 
         }
-        initializeComponents();
+        inizializzaComponenti();
         creaRecyclerView();
 
     }

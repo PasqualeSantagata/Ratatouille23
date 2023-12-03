@@ -6,7 +6,7 @@ public class Utente {
     private String email;
     private String password;
     private String ruolo;
-    public Utente() {super();}
+
 
     public Utente(
             String nome,

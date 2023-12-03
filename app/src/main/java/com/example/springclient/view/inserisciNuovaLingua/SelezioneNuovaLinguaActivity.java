@@ -38,12 +38,12 @@ public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements A
         setContentView(R.layout.activity_nuova_lingua_gestione_menu);
         elemento = (ElementoMenu) getIntent().getSerializableExtra("elemento");
         inserisciNuovaLinguaPresenter = new InserisciNuovaLinguaPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
 
     @Override
-    public void initializeComponents(){
+    public void inizializzaComponenti(){
         spinnerLingua = findViewById(R.id.spinnerSelezionaLinguaGestioneMenu);
         buttonIndietro = findViewById(R.id.buttonIndietroSelezionaLinguaGestioneMenu);
         buttonOk = findViewById(R.id.buttonOkSelezionaLinguaGestioneMenu);

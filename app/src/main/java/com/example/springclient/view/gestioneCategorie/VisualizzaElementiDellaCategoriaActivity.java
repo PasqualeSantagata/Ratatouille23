@@ -24,12 +24,10 @@ import com.example.springclient.R;
 import com.example.springclient.contract.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterGestioneElementoMenu;
 import com.example.springclient.view.gestioneElementiMenu.ModificaElementoActivity;
-import com.example.springclient.view.nuovaOrdinazione.FiltraCategoriaNuovaOrdinazioneActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -85,7 +83,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
 
             }
         };
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
@@ -137,7 +135,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         textInputLayouNome = findViewById(R.id.textInputLayoutNomeInserimNelMenu);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneInserimNelMenu);
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoInserimNelMenu);
@@ -299,7 +297,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public void setElementi(List<ElementoMenu> elementoMenuList) {
         this.elementiMenu = elementoMenuList;
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override

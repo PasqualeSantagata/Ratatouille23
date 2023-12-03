@@ -17,42 +17,42 @@ import java.util.List;
 import retrofit2.Response;
 
 public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
-    private OrdinazioneContract.ViewRiepilogoOrdinazione viewRiepilogoOrdinazione;
-    private OrdinazioneContract.ViewElementiOrdinazione viewElementiOrdinazione;
+    private OrdinazioneContract.RiepilogoOrdinazioneView riepilogoOrdinazioneView;
+    private OrdinazioneContract.ElementiOrdinazioneView elementiOrdinazioneView;
     private OrdinazioneContract.StartNuovaOrdinazioneView viewStartNuovaOrdinazione;
     private BaseView baseView;
     private final OrdinazioneModel ordinazioneModel = new OrdinazioneModel(RetrofitService.getIstance());
     private final ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
 
-    public OrdinazionePresenter(OrdinazioneContract.ViewRiepilogoOrdinazione viewRiepilogoOrdinazione){
-       this.viewRiepilogoOrdinazione = viewRiepilogoOrdinazione;
-       baseView = viewRiepilogoOrdinazione;
+    public OrdinazionePresenter(OrdinazioneContract.RiepilogoOrdinazioneView riepilogoOrdinazioneView){
+       this.riepilogoOrdinazioneView = riepilogoOrdinazioneView;
+       baseView = riepilogoOrdinazioneView;
     }
 
     public OrdinazionePresenter(OrdinazioneContract.StartNuovaOrdinazioneView viewStartNuovaOrdinazione){
         this.viewStartNuovaOrdinazione = viewStartNuovaOrdinazione;
     }
 
-    public OrdinazionePresenter(OrdinazioneContract.ViewElementiOrdinazione viewElementiOrdinazione) {
-        this.viewElementiOrdinazione = viewElementiOrdinazione;
-        baseView = viewElementiOrdinazione;
+    public OrdinazionePresenter(OrdinazioneContract.ElementiOrdinazioneView elementiOrdinazioneView) {
+        this.elementiOrdinazioneView = elementiOrdinazioneView;
+        baseView = elementiOrdinazioneView;
     }
 
     @Override
     public void salvaPortate(List<Portata> portataList){
-        viewRiepilogoOrdinazione.mostraPorgressBar();
+        riepilogoOrdinazioneView.mostraPorgressBar();
         ordinazioneModel.savePortate(new CallbackResponse<List<Portata>>() {
             @Override
             public void onFailure(Throwable t) {
-                viewRiepilogoOrdinazione.nascondiProgressBar();
-                viewRiepilogoOrdinazione.ordinazioneFallita();
+                riepilogoOrdinazioneView.nascondiProgressBar();
+                riepilogoOrdinazioneView.ordinazioneFallita();
             }
 
             @Override
             public void onSuccess(Response<List<Portata>> retData) {
-                viewRiepilogoOrdinazione.nascondiProgressBar();
+                riepilogoOrdinazioneView.nascondiProgressBar();
                 if(retData.isSuccessful()){
-                   viewRiepilogoOrdinazione.ordinazioneAvvenutaConSuccesso();
+                   riepilogoOrdinazioneView.ordinazioneAvvenutaConSuccesso();
                 }
             }
         }, portataList);
@@ -61,21 +61,21 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     @Override
     public void salvaOrdinazione(Ordinazione ordinazione){
         ordinazione.setElementiOrdinati(null);
-        viewElementiOrdinazione.mostraPorgressBar();
+        elementiOrdinazioneView.mostraPorgressBar();
         ordinazioneModel.aggiungiOrdinazione(new CallbackResponse<Ordinazione>() {
             @Override
             public void onFailure(Throwable t) {
-                viewRiepilogoOrdinazione.nascondiProgressBar();
-                if(viewRiepilogoOrdinazione.isVisibile()) {
-                    viewRiepilogoOrdinazione.ordinazioneFallita();
+                riepilogoOrdinazioneView.nascondiProgressBar();
+                if(riepilogoOrdinazioneView.isVisibile()) {
+                    riepilogoOrdinazioneView.ordinazioneFallita();
                 }
             }
 
             @Override
             public void onSuccess(Response<Ordinazione> retData) {
-                viewRiepilogoOrdinazione.nascondiProgressBar();
-                if(retData.isSuccessful() && viewRiepilogoOrdinazione.isVisibile()){
-                    viewRiepilogoOrdinazione.salvaPortate(retData.body());
+                riepilogoOrdinazioneView.nascondiProgressBar();
+                if(retData.isSuccessful() && riepilogoOrdinazioneView.isVisibile()){
+                    riepilogoOrdinazioneView.salvaPortate(retData.body());
                 }
             }
         }, ordinazione);
@@ -92,24 +92,24 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     }
     @Override
     public void mostraFiltraCategoria(String nomeCategoria){
-        viewElementiOrdinazione.mostraPorgressBar();
+        elementiOrdinazioneView.mostraPorgressBar();
         elementoMenuModel.trovaElementiPerNomeCategoria(nomeCategoria, new CallbackResponse<List<ElementoMenu>>() {
             @Override
             public void onFailure(Throwable t) {
-                viewElementiOrdinazione.nascondiProgressBar();
-                if(viewElementiOrdinazione.isVisibile()) {
-                    viewElementiOrdinazione.impossibileFiltrareElementi("Errore di connessione, impossibile caricare gli elementi da filtrare");
+                elementiOrdinazioneView.nascondiProgressBar();
+                if(elementiOrdinazioneView.isVisibile()) {
+                    elementiOrdinazioneView.impossibileFiltrareElementi("Errore di connessione, impossibile caricare gli elementi da filtrare");
                 }
             }
             @Override
             public void onSuccess(Response<List<ElementoMenu>> retData) {
-                viewElementiOrdinazione.nascondiProgressBar();
-                if(retData.isSuccessful() && viewRiepilogoOrdinazione.isVisibile()) {
+                elementiOrdinazioneView.nascondiProgressBar();
+                if(retData.isSuccessful() && riepilogoOrdinazioneView.isVisibile()) {
                     List<Portata> portataList = new ArrayList<>();
                     for(ElementoMenu e: retData.body()){
                         portataList.add(new Portata(e, false));
                     }
-                    viewElementiOrdinazione.mostraFiltraCategoriaMenu(portataList);
+                    elementiOrdinazioneView.mostraFiltraCategoriaMenu(portataList);
                 }
 
             }

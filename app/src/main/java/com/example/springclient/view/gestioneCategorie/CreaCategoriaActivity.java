@@ -51,11 +51,11 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
         getSupportActionBar().setTitle("CREA CATEGORIA");
         nomeCategoria = getIntent().getStringExtra("nomeCategoria");
         creaCategoriaPresenter = new CreaCategoriaPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         imageViewAggiungiImmagine = findViewById(R.id.imageViewCategoriaCreaCategoriaGestioneMenu);
         textInputLayoutNomeCategoria = findViewById(R.id.TextInputLayoutNomeCategoriaCreaCategoriaGestioneMenu);
         textViewAggiungiImmagine = findViewById(R.id.textViewAggiungiImgCreaCategoriaGestioneMenu);

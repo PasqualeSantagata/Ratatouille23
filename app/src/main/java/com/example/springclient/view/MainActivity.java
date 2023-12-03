@@ -26,7 +26,7 @@ import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazioneActivi
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View {
+public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View{
     private EditText editTextPassword;
     private EditText editTextEmail;
     private TextInputLayout textInputLayoutEmail;
@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         autenticazionePresenter = new AutenticazionePresenter(this);
         recuperoCredenzialiPresenter = new RecuperoCredenzialiPresenter(this);
 
-        initializeComponents();
+        inizializzaComponenti();
     }
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
        textInputLayoutEmail =  findViewById(R.id.textInputLayoutEmailLogin);
        textInputLayoutPassword =  findViewById(R.id.textInputLayoutPassword);
        textViewPasswordDimenticata = findViewById(R.id.textViewDimenticatoPassword);
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     public void dialgPrimoAccesso(){
         dialogPrimoAcesso = new Dialog(this);
         mostraDialogOkOneBtn(dialogPrimoAcesso, "Devi cambiare password, clicca ok e riceverai una mail per aggiornarla", view -> {
-            recuperoCredenzialiPresenter.avviaRecuperoPassword(email);
+            recuperoCredenzialiPresenter.avviaAggiornaPassword(email);
             progressBar.setVisibility(View.INVISIBLE);
             dialogPrimoAcesso.dismiss();
         });

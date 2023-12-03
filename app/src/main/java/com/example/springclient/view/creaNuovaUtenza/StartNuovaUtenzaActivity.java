@@ -42,12 +42,12 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuova_utenza);
         adminPresenter = new AdminPresenter(this);
-        initializeComponents();
+        inizializzaComponenti();
     }
 
 
     @Override
-    public void initializeComponents() {
+    public void inizializzaComponenti() {
         textInputNome = findViewById(R.id.textInputLayoutNomeCreaUtenza);
         textInputEmail = findViewById(R.id.textInputLayoutEmailCreaUtenza);
         textInputCognome = findViewById(R.id.textInputLayoutCognomeCreaUtenza);
@@ -77,12 +77,12 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
 
     }
 
-    //@Override
+    @Override
     public void mostraPorgressBar() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    //@Override
+    @Override
     public void nascondiProgressBar() {
         progressBar.setVisibility(View.INVISIBLE);
     }
@@ -210,7 +210,7 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
         mostraDialogErroreOneBtn(dialog, "Errore imprevisto, utente non registrato, ritenta tra poco", view -> dialog.dismiss());
     }
 
-    public void cancellaCampi(){
+    private void cancellaCampi(){
         textInputNome.getEditText().setText("");
         textInputCognome.getEditText().setText("");
         textInputEmail.getEditText().setText("");
