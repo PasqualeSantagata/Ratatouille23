@@ -52,9 +52,10 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     private List<Portata> portateEvase;
     private int posizione;
     private RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
+    private RecycleViewAdapterOrdinazioniEvase adapterEvase;
+    private RecycleViewAdapterOrdinazioniPrenotate adapterPrenotate;
     private FirebaseAnalytics firebaseAnalytics;
     private String email;
-    private RecycleViewAdapterOrdinazioniPrenotate adapterPrenotate;
     private AutenticazionePresenter autenticazionePresenter;
 
     @Override
@@ -70,7 +71,17 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         email = getIntent().getStringExtra("email");
         portatePrenotate = new ArrayList<>();
+        portateEvase = new ArrayList<>();
         stompConnect();
+    }
+
+    public void inizializzaComponenti() {
+        recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
+        recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
+        recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
+        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, portateSospese);
+        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, portatePrenotate);
+        setDatiRecycleViewOrdinazioniEvase(recyclerViewOrdinazioniEvase, portateEvase);
     }
 
     @Override
@@ -78,7 +89,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         this.portateSospese = portateSospese;
         inizializzaComponenti();
     }
-
 
     @Override
     public void impossibileComunicareConServer(String messaggio) {
@@ -125,16 +135,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
-
-    public void inizializzaComponenti() {
-        recyclerViewOrdinazioniCorrenti = findViewById(R.id.recyclerViewOrdiniDaEvadereStatoOrdinazioni);
-        recyclerViewOrdinazioniPrenotate = findViewById(R.id.recyclerViewOrdiniPrenotatiStatoOrdinazioni);
-        recyclerViewOrdinazioniEvase = findViewById(R.id.recycleViewOrdiniEvasiStatoOrdinazioni);
-        setDatiRecycleViewOrdinazioniCorrenti(recyclerViewOrdinazioniCorrenti, portateSospese);
-        setDatiRecycleViewOrdinazioniPrenotate(recyclerViewOrdinazioniPrenotate, portatePrenotate);
-        //Reecuperare i dati e usare setDatiRecycleView per impostarle
-    }
-
     @Override
     public void tornaIndietro() {
 
@@ -172,8 +172,8 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
     public void setDatiRecycleViewOrdinazioniEvase(RecyclerView recyclerView, List<Portata> ordinazione) {
-        RecycleViewAdapterOrdinazioniEvase adapter = new RecycleViewAdapterOrdinazioniEvase(this, this, ordinazione);
-        recyclerView.setAdapter(adapter);
+        adapterEvase = new RecycleViewAdapterOrdinazioniEvase(this, this, ordinazione);
+        recyclerView.setAdapter(adapterEvase);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
@@ -197,7 +197,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         //Passa elem. alla reccyle view ordinazioni prenotate
         portatePrenotate.add(p);
         adapterPrenotate.notifyItemInserted(portatePrenotate.size()-1);
-
     }
 
     @Override
@@ -212,7 +211,10 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
     @Override
     public void onGreenButtonClickOrdinazioniPrenotate(int position) {
-        //TODO passa da prenotata a evasa
+        //TODO passa da prenotata a evasa e non so se bisogna implmentare che le evase si salvino sul db o gia sono salvate per la questione del flag
+        Portata p = portatePrenotate.get(position);
+        portateEvase.add(p);
+        adapterEvase.notifyItemInserted(portateEvase.size() -1);
     }
 
 

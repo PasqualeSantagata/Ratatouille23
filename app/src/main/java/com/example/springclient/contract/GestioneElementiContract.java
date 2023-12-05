@@ -32,7 +32,6 @@ public interface GestioneElementiContract {
         void mostraCercaElemento();
     }
 
-
     interface Presenter{
         void mostraEsploraCategorie();
 
@@ -53,8 +52,6 @@ public interface GestioneElementiContract {
 
         void mostraStartGestioneMenu();
     }
-
-
 
 
 }

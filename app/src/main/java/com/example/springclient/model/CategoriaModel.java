@@ -1,11 +1,8 @@
 package com.example.springclient.model;
 
-import android.util.Log;
-
 import com.example.springclient.RetrofitService.CategoriaAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
 import com.example.springclient.entity.ElementoMenu;
 
@@ -243,8 +240,8 @@ public class CategoriaModel{
 
     }
 
-    public void eliminaElementoDallaCategoria(String idCategoira, ElementoMenu elementoMenu, CallbackResponse<Void> callbackResponse){
-        categoriaAPI.eliminaElementoDallaCategoira(idCategoira, elementoMenu)
+    public void eliminaElementoDallaCategoria(String idCategoria, ElementoMenu elementoMenu, CallbackResponse<Void> callbackResponse){
+        categoriaAPI.eliminaElementoDallaCategoria(idCategoria, elementoMenu)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Response<Void>>() {

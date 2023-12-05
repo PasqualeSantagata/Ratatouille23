@@ -28,10 +28,10 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
     private Button buttonPrezzo;
     private Button buttonOk;
     private Button buttonAnnulla;
+    private Button buttonTabellaAllergeni;
     private CheckBox checkboxNome;
     private CheckBox checkboxPrezzo;
     private CheckBox checkboxAllergeni;
-    private Button buttonTabellaAllergeni;
     private List<String> allergeni;
     private List<ElementoMenu> elementiMenu;
     private String nome;
@@ -128,7 +128,6 @@ public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity imple
         });
 
     }
-
 
     @Override
     public void tornaIndietro() {

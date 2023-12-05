@@ -6,15 +6,11 @@ import com.example.springclient.entity.ElementoMenu;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
-import kotlin.ParameterName;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -48,6 +44,6 @@ public interface CategoriaAPI {
     @POST("/api/v1/categoria/modificaOrdine/{nome}")
     Single<Response<Void>> modificaOrdineCategoria(@Path(value = "nome", encoded = true)String nome, @Body int flagOrdinamento);
     @POST("/api/v1/categoria/eliminaElemento/{idCategoria}")
-    Single<Response<Void>> eliminaElementoDallaCategoira( @Path(value = "idCategoria", encoded = true)String idCategoria, @Body ElementoMenu elementoMenu);
+    Single<Response<Void>> eliminaElementoDallaCategoria(@Path(value = "idCategoria", encoded = true)String idCategoria, @Body ElementoMenu elementoMenu);
 
 }

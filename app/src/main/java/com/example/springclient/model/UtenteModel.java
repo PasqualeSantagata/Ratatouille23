@@ -3,7 +3,6 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.RetrofitService.UtenteAPI;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.entity.Utente;
 
 import java.util.List;
 
@@ -43,9 +42,6 @@ public class UtenteModel {
 
 
     }
-
-
-
 
 
 }
