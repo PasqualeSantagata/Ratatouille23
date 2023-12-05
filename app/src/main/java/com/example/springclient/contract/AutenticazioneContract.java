@@ -5,7 +5,7 @@ import com.example.springclient.authentication.AuthRequest;
 
 public interface AutenticazioneContract {
 
-    interface View extends BaseView{
+    interface ViewContract extends BaseViewContract {
 
         void verificaCredenziali(String email, String password);
 

@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.ModificaElementoContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ModificaElementoPresenter;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity implements BaseAllergeniDialog, ModificaElementoContract.ViewDefinisciOrdine {
+public class FiltraCategoriaGestioneMenuActivity extends AppCompatActivity implements BaseAllergeniDialog, ModificaElementoContract.ViewDefinisciOrdineContract {
     private Button buttonNome;
     private Button buttonPrezzo;
     private Button buttonOk;

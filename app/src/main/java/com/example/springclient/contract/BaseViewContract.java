@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.example.springclient.R;
 
-public interface BaseView {
+public interface BaseViewContract {
     void inizializzaComponenti();
     void tornaIndietro();
     void mostraPorgressBar();

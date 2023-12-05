@@ -23,7 +23,7 @@ import com.example.springclient.view.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements OrdinazioneContract.StartNuovaOrdinazioneView, ILogout {
+public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements OrdinazioneContract.StartNuovaOrdinazioneViewContract, ILogout {
     private TextInputLayout textInputLayoutNumeroPersone;
     private TextInputLayout textInputLayoutSala;
     private TextInputLayout textInputLayoutTavolo;

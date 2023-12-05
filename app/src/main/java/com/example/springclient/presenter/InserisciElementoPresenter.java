@@ -18,14 +18,14 @@ import retrofit2.Response;
 public class InserisciElementoPresenter implements InserisciElementoContract.Presenter{
     private ElementoMenuModel elementoMenuModel= new ElementoMenuModel(RetrofitService.getIstance());
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
-    private InserisciElementoContract.InserisciElementoView inserisciElementoView;
-    private InserisciElementoContract.HomeNuovoElmentoView homeNuovoElementoView;
+    private InserisciElementoContract.InserisciElementoViewContract inserisciElementoView;
+    private InserisciElementoContract.HomeNuovoElmentoViewContract homeNuovoElementoView;
 
-    public InserisciElementoPresenter(InserisciElementoContract.InserisciElementoView inserisciElementoView){
+    public InserisciElementoPresenter(InserisciElementoContract.InserisciElementoViewContract inserisciElementoView){
         this.inserisciElementoView = inserisciElementoView;
     }
 
-    public InserisciElementoPresenter(InserisciElementoContract.HomeNuovoElmentoView homeNuovoElementoView) {
+    public InserisciElementoPresenter(InserisciElementoContract.HomeNuovoElmentoViewContract homeNuovoElementoView) {
         this.homeNuovoElementoView = homeNuovoElementoView;
     }
 

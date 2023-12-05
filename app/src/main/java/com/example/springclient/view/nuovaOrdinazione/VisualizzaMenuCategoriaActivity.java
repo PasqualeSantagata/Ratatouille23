@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
@@ -38,8 +38,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.Serializable;
 import java.util.List;
 
-public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, VisualizzElementiContract.View, BaseAllergeniDialog,
-        OrdinazioneContract.ElementiOrdinazioneView {
+public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, VisualizzElementiContract.ViewContract, BaseAllergeniDialog,
+        OrdinazioneContract.ElementiOrdinazioneViewContract {
     private Button buttonIndietro;
     private Button buttonRiepilogo;
     private TextInputLayout textInputLayoutPrezzo;
@@ -242,7 +242,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     @Override
     public void mostraRiepilogo() {
-        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityView.class);
+        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityViewContract.class);
         intentRiepilogo.putExtra("ordinazione", ordinazione);
         startActivity(intentRiepilogo);
     }

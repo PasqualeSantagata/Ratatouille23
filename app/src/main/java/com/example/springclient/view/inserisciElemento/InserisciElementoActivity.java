@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.FoodFactsPresenter;
@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.InserisciElementoView, BaseAllergeniDialog {
+public class InserisciElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.InserisciElementoViewContract, BaseAllergeniDialog {
     private TextInputLayout nomeElementoTextInputLayout;
     private TextInputLayout prezzoElementoTextInputLayout;
     private TextInputLayout descrizioneTextInputLayout;

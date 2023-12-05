@@ -11,10 +11,10 @@ import retrofit2.Response;
 
 public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract.Presenter {
 
-    private RecuperoCredenzialiContract.View recuperoCredenzialiView;
+    private RecuperoCredenzialiContract.ViewContract recuperoCredenzialiView;
     private RecuperoCredenzialiModel recuperoCredenzialiModel = new RecuperoCredenzialiModel(RetrofitService.getIstance());
     private MainActivity loginActivity;
-    public RecuperoCredenzialiPresenter(RecuperoCredenzialiContract.View recuperoCredenzialiView){
+    public RecuperoCredenzialiPresenter(RecuperoCredenzialiContract.ViewContract recuperoCredenzialiView){
         this.recuperoCredenzialiView = recuperoCredenzialiView;
     }
     public RecuperoCredenzialiPresenter(MainActivity loginActivity){

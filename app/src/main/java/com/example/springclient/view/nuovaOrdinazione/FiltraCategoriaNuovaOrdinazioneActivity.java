@@ -11,13 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Portata;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 

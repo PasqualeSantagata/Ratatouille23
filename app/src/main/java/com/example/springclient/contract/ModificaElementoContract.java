@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ModificaElementoContract {
 
-    interface View extends BaseView{
+    interface ViewContract extends BaseViewContract {
         void setNomiCategoria(List<String> nomiCategoria);
         void disabilitaFabInserisciTraduzione();
         void elementoGiaPresenteNellaCategoria();
@@ -17,7 +17,7 @@ public interface ModificaElementoContract {
         void mostraSelezionaNuovaLingua();
     }
 
-    interface ViewDefinisciOrdine extends BaseView{
+    interface ViewDefinisciOrdineContract extends BaseViewContract {
         void impossibileModificareOrdine(String s);
     }
     interface Presenter {

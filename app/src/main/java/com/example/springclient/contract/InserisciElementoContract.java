@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface InserisciElementoContract {
 
-    interface InserisciElementoView extends BaseView{
+    interface InserisciElementoViewContract extends BaseViewContract {
         void mostraSelezioneNuovaLingua();
         void elementoInseritoCorrettamente();
         void mostraErroreInserimentoElemento(String errore);
@@ -16,7 +16,7 @@ public interface InserisciElementoContract {
         void autocompletamentoIrrangiungibile();
     }
 
-    interface HomeNuovoElmentoView extends BaseView {
+    interface HomeNuovoElmentoViewContract extends BaseViewContract {
         void erroreComunicazioneServer(String messaggio);
         void setNomiCategorie(List<String> nomiCategoiraList);
         void mostraCreaCategoria();

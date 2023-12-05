@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.ModificaElementoContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.ModificaElementoPresenter;
@@ -29,7 +29,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
-public class ModificaElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ModificaElementoContract.View, BaseAllergeniDialog {
+public class ModificaElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ModificaElementoContract.ViewContract, BaseAllergeniDialog {
     private TextInputLayout textInputLayoutNome;
     private TextInputLayout textInputLayoutDescrizione;
     private TextInputLayout textInputLayoutPrezzo;

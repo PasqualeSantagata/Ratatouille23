@@ -14,16 +14,16 @@ import retrofit2.Response;
 public class GestioneElementiPresenter implements GestioneElementiContract.Presenter {
 
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
-    private GestioneElementiContract.StartGestioneMenuView startGestioneMenuView;
-    private GestioneElementiContract.CercaElementoView cercaElementoView;
+    private GestioneElementiContract.StartGestioneMenuViewContract startGestioneMenuView;
+    private GestioneElementiContract.CercaElementoViewContract cercaElementoView;
     private GestioneElementiContract.HomeModificaElementoMenuView homeModificaElementoMenuView;
 
 
-    public GestioneElementiPresenter(GestioneElementiContract.StartGestioneMenuView startGestioneMenuView) {
+    public GestioneElementiPresenter(GestioneElementiContract.StartGestioneMenuViewContract startGestioneMenuView) {
         this.startGestioneMenuView = startGestioneMenuView;
 
     }
-    public GestioneElementiPresenter(GestioneElementiContract.CercaElementoView cercaElementoView) {
+    public GestioneElementiPresenter(GestioneElementiContract.CercaElementoViewContract cercaElementoView) {
         this.cercaElementoView = cercaElementoView;
     }
 

@@ -4,12 +4,12 @@ import com.example.springclient.entity.ElementoMenu;
 
 public interface InserisciNuovaLinguaContract {
 
-    interface SelezionaNuovaLinguaView extends BaseView {
+    interface SelezionaNuovaLinguaViewContract extends BaseViewContract {
 
         void avviaNuovoElementoNuovaLingua();
     }
 
-    interface NuovoElementoNuovaLinguaView extends BaseView{
+    interface NuovoElementoNuovaLinguaViewContract extends BaseViewContract {
         void impossibileComunicareServer(String messaggio);
 
         void linguaAggiuntaConSuccesso();

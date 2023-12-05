@@ -91,8 +91,13 @@ dependencies {
     //anycharts
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.5'
 
-    
 
+    // Required -- JUnit 4 framework
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    // Optional -- Robolectric environment
+    testImplementation "androidx.test:core:1.5.0"
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.11.0'
 
 
 }

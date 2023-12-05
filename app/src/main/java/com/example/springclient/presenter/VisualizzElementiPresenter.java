@@ -16,8 +16,8 @@ public class VisualizzElementiPresenter implements VisualizzElementiContract.Pre
 
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
-    private VisualizzElementiContract.View visualizzaElementiView;
-    public VisualizzElementiPresenter(VisualizzElementiContract.View visualizzaElementiView){
+    private VisualizzElementiContract.ViewContract visualizzaElementiView;
+    public VisualizzElementiPresenter(VisualizzElementiContract.ViewContract visualizzaElementiView){
         this.visualizzaElementiView = visualizzaElementiView;
     }
 

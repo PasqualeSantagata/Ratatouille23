@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
@@ -36,7 +36,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi,
-        VisualizzElementiContract.View, BaseAllergeniDialog {
+        VisualizzElementiContract.ViewContract, BaseAllergeniDialog {
 
     private TextInputLayout textInputLayouNome;
     private TextInputLayout textInputLayoutDescrizione;
@@ -95,10 +95,10 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         return true;
     }
 
-    private boolean b;
+    private boolean valBurgerMenu;
 
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (b) {
+        if (valBurgerMenu) {
             menu.findItem(R.id.item_lingue).setEnabled(false);
             menu.findItem(R.id.item_lingua_base).setEnabled(true);
         } else {
@@ -126,7 +126,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                 if (elementoSelezionato != -1) {
                     setParameters(getElementoMenu());
                     invalidateOptionsMenu();
-                    b = false;
+                    valBurgerMenu = false;
                 }
                 break;
         }
@@ -285,7 +285,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
         invalidateOptionsMenu();
-        b = true;
+        valBurgerMenu = true;
         setParameters(elementoMenu);
     }
 

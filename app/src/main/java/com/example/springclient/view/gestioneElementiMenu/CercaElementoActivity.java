@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
-public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewEventi, GestioneElementiContract.CercaElementoView {
+public class CercaElementoActivity extends AppCompatActivity implements IRecycleViewEventi, GestioneElementiContract.CercaElementoViewContract {
 
     private Button buttonInditero;
     private RecyclerView recyclerViewElementi;

@@ -2,7 +2,7 @@ package com.example.springclient.presenter;
 
 
 import com.example.springclient.RetrofitService.RetrofitService;
-import com.example.springclient.contract.BaseView;
+import com.example.springclient.contract.BaseViewContract;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.ElementoMenu;
@@ -17,25 +17,25 @@ import java.util.List;
 import retrofit2.Response;
 
 public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
-    private OrdinazioneContract.RiepilogoOrdinazioneView riepilogoOrdinazioneView;
-    private OrdinazioneContract.ElementiOrdinazioneView elementiOrdinazioneView;
-    private OrdinazioneContract.StartNuovaOrdinazioneView viewStartNuovaOrdinazione;
-    private BaseView baseView;
+    private OrdinazioneContract.RiepilogoOrdinazioneViewContract riepilogoOrdinazioneView;
+    private OrdinazioneContract.ElementiOrdinazioneViewContract elementiOrdinazioneView;
+    private OrdinazioneContract.StartNuovaOrdinazioneViewContract viewStartNuovaOrdinazione;
+    private BaseViewContract baseViewContract;
     private final OrdinazioneModel ordinazioneModel = new OrdinazioneModel(RetrofitService.getIstance());
     private final ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
 
-    public OrdinazionePresenter(OrdinazioneContract.RiepilogoOrdinazioneView riepilogoOrdinazioneView){
+    public OrdinazionePresenter(OrdinazioneContract.RiepilogoOrdinazioneViewContract riepilogoOrdinazioneView){
        this.riepilogoOrdinazioneView = riepilogoOrdinazioneView;
-       baseView = riepilogoOrdinazioneView;
+       baseViewContract = riepilogoOrdinazioneView;
     }
 
-    public OrdinazionePresenter(OrdinazioneContract.StartNuovaOrdinazioneView viewStartNuovaOrdinazione){
+    public OrdinazionePresenter(OrdinazioneContract.StartNuovaOrdinazioneViewContract viewStartNuovaOrdinazione){
         this.viewStartNuovaOrdinazione = viewStartNuovaOrdinazione;
     }
 
-    public OrdinazionePresenter(OrdinazioneContract.ElementiOrdinazioneView elementiOrdinazioneView) {
+    public OrdinazionePresenter(OrdinazioneContract.ElementiOrdinazioneViewContract elementiOrdinazioneView) {
         this.elementiOrdinazioneView = elementiOrdinazioneView;
-        baseView = elementiOrdinazioneView;
+        baseViewContract = elementiOrdinazioneView;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
 
     @Override
     public void tornaEsploraCategorie() {
-        baseView.tornaIndietro();
+        baseViewContract.tornaIndietro();
     }
     @Override
     public void mostraEsploraCategorie(Ordinazione ordinazione) {

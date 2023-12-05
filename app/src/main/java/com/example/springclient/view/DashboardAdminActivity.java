@@ -12,13 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseView;
+import com.example.springclient.contract.BaseViewContract;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.ILogout;
 import com.example.springclient.view.analyticsView.StatisticheActivity;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
 
-public class  DashboardAdminActivity extends AppCompatActivity implements ILogout, BaseView {
+public class  DashboardAdminActivity extends AppCompatActivity implements ILogout, BaseViewContract {
     private ImageView imageViewMenu;
     private ImageView imageViewAnalytics;
     private ImageView imageViewNuovaUtenza;

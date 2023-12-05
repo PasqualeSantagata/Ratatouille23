@@ -26,7 +26,7 @@ import com.example.springclient.view.statoOrdinazioni.HomeStatoOrdinazioneActivi
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class MainActivity extends AppCompatActivity implements AutenticazioneContract.View{
+public class MainActivity extends AppCompatActivity implements AutenticazioneContract.ViewContract {
     private EditText editTextPassword;
     private EditText editTextEmail;
     private TextInputLayout textInputLayoutEmail;

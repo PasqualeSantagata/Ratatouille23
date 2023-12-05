@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, CreaCategoriaContract.ScegliFotoView {
+public class SelezionaImmagineCategoriaActivity extends AppCompatActivity implements IRecycleViewEventi, CreaCategoriaContract.ScegliFotoViewContract {
     private RecyclerView recyclerViewImmagini;
     private RecycleViewAdapterCategoria adapterCategoria;
     private Button buttonIndietro;

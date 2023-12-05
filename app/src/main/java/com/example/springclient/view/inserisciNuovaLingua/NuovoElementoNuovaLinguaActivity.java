@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
-import com.example.springclient.contract.BaseAllergeniDialog;
+import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.InserisciNuovaLinguaContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.InserisciNuovaLinguaPresenter;
@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
-public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implements InserisciNuovaLinguaContract.NuovoElementoNuovaLinguaView, BaseAllergeniDialog {
+public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implements InserisciNuovaLinguaContract.NuovoElementoNuovaLinguaViewContract, BaseAllergeniDialog {
 
     private TextInputLayout textInputLayoutNome;
     private TextInputLayout textInputLayoutDescrizione;

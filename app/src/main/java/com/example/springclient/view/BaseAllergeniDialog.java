@@ -1,4 +1,4 @@
-package com.example.springclient.contract;
+package com.example.springclient.view;
 
 import android.app.Dialog;
 import android.content.Context;

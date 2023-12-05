@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.example.springclient.RetrofitService.RetrofitService;
-import com.example.springclient.contract.BaseView;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.MostraCategoriaContract;
 import com.example.springclient.entity.Categoria;
@@ -17,8 +16,8 @@ import retrofit2.Response;
 
 public class MostraCategoriaMenuPresenter implements MostraCategoriaContract.Presenter {
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
-    private MostraCategoriaContract.View categoriaView;
-    public MostraCategoriaMenuPresenter(MostraCategoriaContract.View categoriaView) {
+    private MostraCategoriaContract.ViewContract categoriaView;
+    public MostraCategoriaMenuPresenter(MostraCategoriaContract.ViewContract categoriaView) {
         this.categoriaView = categoriaView;
     }
 

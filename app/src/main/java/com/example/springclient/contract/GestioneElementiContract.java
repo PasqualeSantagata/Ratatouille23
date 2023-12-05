@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface GestioneElementiContract {
 
-    interface StartGestioneMenuView extends BaseView {
+    interface StartGestioneMenuViewContract extends BaseViewContract {
         void mostraHomeModificaElementoMenu();
         void mostraHomeNuovoElemento();
     }
 
-    interface CercaElementoView extends BaseView {
+    interface CercaElementoViewContract extends BaseViewContract {
         void mostraTraduzione(ElementoMenu elementoMenu);
 
         void traduzioneAssente();
@@ -26,7 +26,7 @@ public interface GestioneElementiContract {
         void caricaElementi(List<ElementoMenu> elementoMenuList);
     }
 
-    interface HomeModificaElementoMenuView extends BaseView {
+    interface HomeModificaElementoMenuView extends BaseViewContract {
         void mostraEsploraCategorie();
 
         void mostraCercaElemento();

@@ -12,16 +12,16 @@ import retrofit2.Response;
 
 
 public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
-    private CreaCategoriaContract.CreaCategoriaView creaCategoriaView;
-    private CreaCategoriaContract.ScegliFotoView scegliFotoView;
+    private CreaCategoriaContract.CreaCategoriaViewContract creaCategoriaView;
+    private CreaCategoriaContract.ScegliFotoViewContract scegliFotoView;
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
 
 
-    public CreaCategoriaPresenter(CreaCategoriaContract.CreaCategoriaView creaCategoriaView){
+    public CreaCategoriaPresenter(CreaCategoriaContract.CreaCategoriaViewContract creaCategoriaView){
         this.creaCategoriaView = creaCategoriaView;
     }
 
-    public CreaCategoriaPresenter(CreaCategoriaContract.ScegliFotoView scegliFotoView) {
+    public CreaCategoriaPresenter(CreaCategoriaContract.ScegliFotoViewContract scegliFotoView) {
         this.scegliFotoView = scegliFotoView;
     }
 

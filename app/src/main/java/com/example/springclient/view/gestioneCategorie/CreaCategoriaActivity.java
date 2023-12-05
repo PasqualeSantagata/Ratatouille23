@@ -29,7 +29,7 @@ import java.io.File;
 import java.io.OutputStream;
 import java.nio.file.Files;
 
-public class CreaCategoriaActivity extends AppCompatActivity implements CreaCategoriaContract.CreaCategoriaView {
+public class CreaCategoriaActivity extends AppCompatActivity implements CreaCategoriaContract.CreaCategoriaViewContract {
     private ImageView imageViewAggiungiImmagine;
     private TextView textViewAggiungiImmagine;
     private TextInputLayout textInputLayoutNomeCategoria;

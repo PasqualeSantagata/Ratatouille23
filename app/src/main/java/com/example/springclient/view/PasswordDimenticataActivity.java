@@ -17,7 +17,7 @@ import com.example.springclient.contract.RecuperoCredenzialiContract;
 import com.example.springclient.presenter.RecuperoCredenzialiPresenter;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class PasswordDimenticataActivity extends AppCompatActivity implements RecuperoCredenzialiContract.View {
+public class PasswordDimenticataActivity extends AppCompatActivity implements RecuperoCredenzialiContract.ViewContract {
 
     private TextInputLayout emailTextInputLayout;
     private Button buttonOk;

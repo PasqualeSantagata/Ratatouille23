@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.HomeNuovoElmentoView{
+public class HomeNuovoElementoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciElementoContract.HomeNuovoElmentoViewContract {
 
     private Spinner spinnerLingua;
     private Spinner spinnerCategoria;

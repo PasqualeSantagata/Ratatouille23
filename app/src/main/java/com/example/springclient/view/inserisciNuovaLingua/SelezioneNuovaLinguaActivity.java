@@ -22,7 +22,7 @@ import com.example.springclient.presenter.InserisciNuovaLinguaPresenter;
 import java.util.Arrays;
 import java.util.List;
 
-public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciNuovaLinguaContract.SelezionaNuovaLinguaView {
+public class SelezioneNuovaLinguaActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, InserisciNuovaLinguaContract.SelezionaNuovaLinguaViewContract {
     private Spinner spinnerLingua;
     private Button buttonIndietro;
     private Button buttonOk;

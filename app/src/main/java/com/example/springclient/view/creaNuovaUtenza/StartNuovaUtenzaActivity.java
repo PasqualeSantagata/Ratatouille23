@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Arrays;
 import java.util.List;
 
-public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaUtenzaContract.View, AdapterView.OnItemSelectedListener {
+public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaUtenzaContract.ViewContract, AdapterView.OnItemSelectedListener {
     private TextInputLayout textInputNome;
     private TextInputLayout textInputCognome;
     private TextInputLayout textInputEmail;
@@ -124,7 +124,9 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
                 case "Supervisore":
                     nuovoUtente.setRuolo(Ruolo.SUPERVISORE);
             }
-            adminPresenter.registraUtente(nuovoUtente);
+            if(adminPresenter.validaForm(email, password)) {
+                adminPresenter.registraUtente(nuovoUtente);
+            }
         } else {
             mostraErroreCampiVuoti();
         }

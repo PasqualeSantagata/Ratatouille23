@@ -11,14 +11,14 @@ import com.google.gson.Gson;
 import retrofit2.Response;
 
 public class InserisciNuovaLinguaPresenter implements InserisciNuovaLinguaContract.Presenter {
-    private InserisciNuovaLinguaContract.SelezionaNuovaLinguaView selezionaNuovaLinguaView;
+    private InserisciNuovaLinguaContract.SelezionaNuovaLinguaViewContract selezionaNuovaLinguaView;
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
-    private InserisciNuovaLinguaContract.NuovoElementoNuovaLinguaView nuovoElementoNuovaLinguaView;
+    private InserisciNuovaLinguaContract.NuovoElementoNuovaLinguaViewContract nuovoElementoNuovaLinguaView;
 
-    public InserisciNuovaLinguaPresenter(InserisciNuovaLinguaContract.SelezionaNuovaLinguaView selezionaNuovaLinguaView){
+    public InserisciNuovaLinguaPresenter(InserisciNuovaLinguaContract.SelezionaNuovaLinguaViewContract selezionaNuovaLinguaView){
         this.selezionaNuovaLinguaView = selezionaNuovaLinguaView;
     }
-    public InserisciNuovaLinguaPresenter(InserisciNuovaLinguaContract.NuovoElementoNuovaLinguaView nuovoElementoNuovaLinguaView){
+    public InserisciNuovaLinguaPresenter(InserisciNuovaLinguaContract.NuovoElementoNuovaLinguaViewContract nuovoElementoNuovaLinguaView){
         this.nuovoElementoNuovaLinguaView = nuovoElementoNuovaLinguaView;
     }
 

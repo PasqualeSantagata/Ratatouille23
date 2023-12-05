@@ -1,13 +1,12 @@
 package com.example.springclient.contract;
 
 import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
 
 import java.util.List;
 
 public interface VisualizzElementiContract {
 
-    interface View extends BaseView{
+    interface ViewContract extends BaseViewContract {
         void mostraTraduzione(ElementoMenu elementoMenu);
         void traduzioneAssente();
         void setElementi(List<ElementoMenu> elementoMenuList);
@@ -20,7 +19,6 @@ public interface VisualizzElementiContract {
     }
 
     interface Presenter {
-
         void mostraModifica(ElementoMenu elementoMenu);
         void restituisciTraduzione(String idElemento);
         void restituisciLinguaBase(String idElemento);

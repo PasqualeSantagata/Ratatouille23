@@ -26,7 +26,7 @@ import com.example.springclient.view.gestioneElementiMenu.HomeModificaElementoMe
 import java.io.Serializable;
 import java.util.List;
 
-public class EsploraCategorieMenuActivity extends AppCompatActivity implements MostraCategoriaContract.View, IRecycleViewEventi {
+public class EsploraCategorieMenuActivity extends AppCompatActivity implements MostraCategoriaContract.ViewContract, IRecycleViewEventi {
     private List<Categoria> categorie;
     private MostraCategoriaContract.Presenter mostracategoriaMenuPresenter;
     private RecycleViewAdapterCategoria adapterCategoria;
@@ -52,7 +52,6 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     @Override
     public void inizializzaComponenti() {
         indietroButton = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
-
 
         indietroButton.setOnClickListener(view -> mostracategoriaMenuPresenter.tronaHomeModificaElementiMenu());
         RecyclerView recyclerViewCategorie = findViewById(R.id.RecycleViewCategorie);

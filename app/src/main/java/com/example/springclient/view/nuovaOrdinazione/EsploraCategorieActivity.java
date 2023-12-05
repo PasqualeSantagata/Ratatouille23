@@ -29,7 +29,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewEventi, MostraCategoriaContract.View {
+public class EsploraCategorieActivity extends AppCompatActivity implements IRecycleViewEventi, MostraCategoriaContract.ViewContract {
     private Ordinazione ordinazione;
     private Button buttonIndietro;
     private Button buttonRiepilogo;
@@ -80,7 +80,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
         } else {
             // starta il riepilogo ordinazione non vuota
-            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityView.class);
+            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityViewContract.class);
             intentRiepilogo.putExtra("ordinazione",ordinazione);
             startActivity(intentRiepilogo);
         }

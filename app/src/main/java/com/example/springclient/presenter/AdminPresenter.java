@@ -9,15 +9,16 @@ import com.example.springclient.model.AutenticazioneModel;
 import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
 import com.google.gson.Gson;
 
-import org.checkerframework.checker.units.qual.A;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Response;
 
 public class AdminPresenter implements CreaUtenzaContract.Presenter {
-    private CreaUtenzaContract.View adminView;
+    private CreaUtenzaContract.ViewContract adminView;
     private AutenticazioneModel autenticazioneModel = new AutenticazioneModel(RetrofitService.getIstance());
 
-    public AdminPresenter(StartNuovaUtenzaActivity adminView){
+    public AdminPresenter(CreaUtenzaContract.ViewContract adminView){
         this.adminView = adminView;
     }
 
@@ -46,7 +47,25 @@ public class AdminPresenter implements CreaUtenzaContract.Presenter {
                 }
             }
         });
-
     }
 
+    @Override
+    public boolean validaForm(String email, String password){
+        Pattern patt = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
+        Matcher matcherEmail = patt.matcher(email);
+        if(email == null || password == null){
+            throw new IllegalArgumentException();
+        }
+        if(!matcherEmail.matches()){
+            adminView.mostraErrore("Email non valida");
+            return false;
+        }
+        patt = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}", Pattern.UNICODE_CASE);
+        Matcher matcherPass = patt.matcher(password);
+        if(!matcherPass.matches()){
+            adminView.mostraErrore("Password non sicura");
+            return false;
+        }
+        return true;
+    }
 }

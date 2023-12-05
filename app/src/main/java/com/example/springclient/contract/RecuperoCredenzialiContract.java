@@ -7,7 +7,7 @@ public interface RecuperoCredenzialiContract {
         void avviaAggiornaPassword(String email);
     }
 
-    interface View extends BaseView{
+    interface ViewContract extends BaseViewContract {
         void verificaEmail(String email);
 
         void emailInviataCorrettamente();

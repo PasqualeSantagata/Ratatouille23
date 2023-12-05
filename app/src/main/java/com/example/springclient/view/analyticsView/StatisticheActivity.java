@@ -24,7 +24,7 @@ import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
 import com.example.springclient.R;
 import com.example.springclient.analytics.AnalyticsData;
-import com.example.springclient.contract.BaseView;
+import com.example.springclient.contract.BaseViewContract;
 import com.example.springclient.presenter.AnalyticsPresenter;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -34,7 +34,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatisticheActivity extends AppCompatActivity implements BaseView {
+public class StatisticheActivity extends AppCompatActivity implements BaseViewContract {
     private AnalyticsPresenter analyticsPresenter;
     private List<AnalyticsData> analyticsDataList;
     private List<String> cuochi;

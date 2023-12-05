@@ -7,7 +7,7 @@ import com.example.springclient.entity.Portata;
 import java.util.List;
 
 public interface OrdinazioneContract {
-    interface RiepilogoOrdinazioneView extends BaseView{
+    interface RiepilogoOrdinazioneViewContract extends BaseViewContract {
 
         void salvaPortate(Ordinazione ordinazione);
 
@@ -16,12 +16,12 @@ public interface OrdinazioneContract {
     }
 
 
-    interface StartNuovaOrdinazioneView extends BaseView {
+    interface StartNuovaOrdinazioneViewContract extends BaseViewContract {
         void mostraEsploraCategorie(Ordinazione ordinazione);
 
     }
 
-    interface ElementiOrdinazioneView extends BaseView {
+    interface ElementiOrdinazioneViewContract extends BaseViewContract {
         void mostraFiltraCategoriaMenu(List<Portata> portataList);
 
 

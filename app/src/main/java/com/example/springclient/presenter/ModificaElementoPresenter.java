@@ -16,15 +16,15 @@ import java.util.List;
 import retrofit2.Response;
 
 public class ModificaElementoPresenter implements ModificaElementoContract.Presenter {
-    private ModificaElementoContract.View modificaElementoMenuView;
+    private ModificaElementoContract.ViewContract modificaElementoMenuView;
     private CategoriaModel categoriaModel = new CategoriaModel(RetrofitService.getIstance());
     private ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
-    private ModificaElementoContract.ViewDefinisciOrdine definisciOrdineView;
-    public ModificaElementoPresenter(ModificaElementoContract.View modificaElementoMenuView) {
+    private ModificaElementoContract.ViewDefinisciOrdineContract definisciOrdineView;
+    public ModificaElementoPresenter(ModificaElementoContract.ViewContract modificaElementoMenuView) {
         this.modificaElementoMenuView = modificaElementoMenuView;
     }
 
-    public ModificaElementoPresenter(ModificaElementoContract.ViewDefinisciOrdine definisciOrdineView) {
+    public ModificaElementoPresenter(ModificaElementoContract.ViewDefinisciOrdineContract definisciOrdineView) {
         this.definisciOrdineView = definisciOrdineView;
     }
 

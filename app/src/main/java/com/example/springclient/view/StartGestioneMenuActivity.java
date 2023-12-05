@@ -15,7 +15,7 @@ import com.example.springclient.presenter.GestioneElementiPresenter;
 import com.example.springclient.view.gestioneElementiMenu.HomeModificaElementoMenuViewActivity;
 import com.example.springclient.view.inserisciElemento.HomeNuovoElementoActivity;
 
-public class StartGestioneMenuActivity extends AppCompatActivity implements GestioneElementiContract.StartGestioneMenuView {
+public class StartGestioneMenuActivity extends AppCompatActivity implements GestioneElementiContract.StartGestioneMenuViewContract {
     private Button buttonIndietro;
     private Button buttonAggiungiElementi;
     private Button buttonModificaElementi;

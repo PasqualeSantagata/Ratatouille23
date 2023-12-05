@@ -5,7 +5,7 @@ import com.example.springclient.entity.Categoria;
 import java.io.File;
 
 public interface CreaCategoriaContract {
-    interface CreaCategoriaView extends BaseView{
+    interface CreaCategoriaViewContract extends BaseViewContract {
         void salvaImmagine(Long id);
         void continuaInserimento();
         void erroreSalvataggioCategoria();
@@ -16,7 +16,7 @@ public interface CreaCategoriaContract {
         void categoriaGiaEsistente();
     }
 
-    interface ScegliFotoView extends BaseView{
+    interface ScegliFotoViewContract extends BaseViewContract {
         void caricaImmagine(byte[] immagine);
     }
     interface Presenter {

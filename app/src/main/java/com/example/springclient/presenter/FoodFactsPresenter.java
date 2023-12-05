@@ -1,14 +1,11 @@
 package com.example.springclient.presenter;
 
-import android.util.Log;
-
 import com.example.springclient.RetrofitService.FoodFactsRetrofit;
 import com.example.springclient.apiUtils.FoodFactsResponse;
 import com.example.springclient.apiUtils.ProdottoResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.InserisciElementoContract;
 import com.example.springclient.model.FoodFactsModel;
-import com.example.springclient.view.inserisciElemento.InserisciElementoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +13,11 @@ import java.util.List;
 import retrofit2.Response;
 
 public class FoodFactsPresenter {
-    private InserisciElementoContract.InserisciElementoView inserisciElementoView;
+    private InserisciElementoContract.InserisciElementoViewContract inserisciElementoView;
     private FoodFactsModel foodFactsModel;
 
 
-    public FoodFactsPresenter(InserisciElementoContract.InserisciElementoView inserisciElementoView){
+    public FoodFactsPresenter(InserisciElementoContract.InserisciElementoViewContract inserisciElementoView){
         foodFactsModel = new FoodFactsModel(new FoodFactsRetrofit());
         this.inserisciElementoView = inserisciElementoView;
     }
