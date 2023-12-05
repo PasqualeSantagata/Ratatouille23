@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/textInputLayoutSalaDialogStatoOrdinazione"
+            android:id="@+id/constraintLayoutStatoOrdinazione"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:hint="@string/tavolo"
-                app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintEnd_toStartOf="@+id/textInputLayoutSalaDialogStatoOrdinazione"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescrizioneDialogDettagliStatoOrd">
 
@@ -99,7 +99,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
+                android:id="@+id/textInputLayoutSalaDialogStatoOrdinazione"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"

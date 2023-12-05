@@ -117,10 +117,8 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         Button buttonIndietro = dialogDettagli.findViewById(R.id.buttonIndietroDialogDettagliStatoOrd);
 
 
-        String descrizione = portata.getElementoMenu().getDescrizione();
-        String breveNota = portata.getBreveNota();
-        setTextInputLayoutText(textInputLayoutDescrizione, descrizione);
-        setTextInputLayoutText(textInputLayoutBreveNota, breveNota);
+        setTextInputLayoutText(textInputLayoutDescrizione, portata.getElementoMenu().getDescrizione());
+        setTextInputLayoutText(textInputLayoutBreveNota, portata.getBreveNota());
         setTextInputLayoutText(textInputLayoutTavolo, portata.getOrdinazione().getTavolo().toString());
         setTextInputLayoutText(textInputLayoutSala, portata.getOrdinazione().getSala().toString());
 
