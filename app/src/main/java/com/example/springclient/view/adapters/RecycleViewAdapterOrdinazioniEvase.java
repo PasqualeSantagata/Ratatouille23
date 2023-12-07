@@ -37,12 +37,12 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterOrdinazioniEvase.MyViewHolder holder, int position) {
-       //info ordinazione
+        //info ordinazione
         holder.textViewTavolo.setText(ordinazioniEvase.get(position).getOrdinazione().getTavolo());
         holder.textViewSala.setText(ordinazioniEvase.get(position).getOrdinazione().getSala());
         //info portate
         holder.textViewNomePiatto.setText(ordinazioniEvase.get(position).getElementoMenu().getNome());
-       // holder.textViewTempo.setText(ordinazioniEvase.get(position).getPortata().getElementoMenu().getTempoPreparazione());
+        holder.textViewTempo.setText(ordinazioniEvase.get(position).getOrdinazione().getOrarioOrdinazione());
         holder.textViewNota.setText(ordinazioniEvase.get(position).getBreveNota());
     }
 

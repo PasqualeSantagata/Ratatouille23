@@ -47,7 +47,11 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
                 inserisciElementoView.nascondiProgressBar();
                 if(inserisciElementoView.isVisibile()) {
                     if (response.isSuccessful()) {
-                        inserisciElementoView.elementoInseritoCorrettamente();
+                        inserisciElementoView.elementoInseritoCorrettamente("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi aggiungi, altrimenti premi " +
+                                "indietro per aggiungere un nuovo elemento",
+                                view->inserisciElementoView.mostraHomeNuovoElemento(),
+                                view->inserisciElementoView.mostraSelezioneNuovaLingua()
+                                );
                     } else {
                         if (response.code() == 412) {
                             ApiResponse apiResponse = new Gson().fromJson(response.errorBody().charStream(), ApiResponse.class);

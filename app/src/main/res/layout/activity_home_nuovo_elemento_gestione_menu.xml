@@ -34,6 +34,7 @@
         android:id="@+id/spinnerLingueHomeInserisciElemento"
         android:layout_width="500dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/design_item_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +44,7 @@
         android:id="@+id/spinnerCategoriaHomeInserimentoNelMenu"
         android:layout_width="500dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/design_item_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="154dp"
         android:clickable="true"
         app:backgroundTint="@color/my_green"
         app:layout_constraintBottom_toTopOf="@+id/buttonOkNuovoElemento"
@@ -93,6 +95,7 @@
         app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerLingueHomeInserisciElemento" />
+
     <ProgressBar
         android:id="@+id/progressBarHomeNuovoElemento"
         style="?android:attr/progressBarStyle"
@@ -100,9 +103,23 @@
         android:layout_height="86dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintVertical_bias="0.864" />
+
+    <TextView
+        android:id="@+id/textViewTipAddCategoria"
+        android:layout_width="511dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:text="Premere il tasto rotondo + per  aggiungere una nuova categoria  personalizzata"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriaHomeInserimentoNelMenu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
