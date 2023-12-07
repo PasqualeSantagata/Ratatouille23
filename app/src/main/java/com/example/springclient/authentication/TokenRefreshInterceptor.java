@@ -52,7 +52,7 @@ public class TokenRefreshInterceptor implements Interceptor {
     }
 
     public String getNewToken(String refreshToken, String url) throws IOException {
-        Log.d("LUNGHEZZA TOKEN", String.valueOf(refreshToken.length()));
+
 
         if(refreshToken.length() != 153){
             throw new IllegalArgumentException();
