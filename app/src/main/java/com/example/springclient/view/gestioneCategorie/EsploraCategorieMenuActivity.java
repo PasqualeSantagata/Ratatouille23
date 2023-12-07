@@ -40,7 +40,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
+        setContentView(R.layout.activity_esplora_categorie);
         progressBar = findViewById(R.id.progressBarEsploraCategorieMenu);
         progressBar.setVisibility(View.INVISIBLE);
         mostracategoriaMenuPresenter = new MostraCategoriaMenuPresenter(this);
@@ -49,6 +49,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
         riepilogoButton.setVisibility(View.INVISIBLE);
 
     }
+
     @Override
     public void inizializzaComponenti() {
         indietroButton = findViewById(R.id.buttonIndietroCategorieNuovaOrd);
@@ -78,15 +79,14 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
 
     @Override
     public boolean isVisibile() {
-       return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
+        return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
     @Override
-    public void mostraVisualizzaElementiDellaCategoria(){
-        if(categoria.getElementi().isEmpty()){
-            Toast.makeText(this,"Categoria attualmente vuota",Toast.LENGTH_LONG).show();
-        }
-        else {
+    public void mostraVisualizzaElementiDellaCategoria() {
+        if (categoria.getElementi().isEmpty()) {
+            Toast.makeText(this, "Categoria attualmente vuota", Toast.LENGTH_LONG).show();
+        } else {
             Intent intentVisualizzaCategoria = new Intent(this, VisualizzaElementiDellaCategoriaActivity.class);
             intentVisualizzaCategoria.putExtra("elementiCategoria", (Serializable) categoria.getElementi());
             intentVisualizzaCategoria.putExtra("idCategoria", categoria.getId());
@@ -104,13 +104,13 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
 
 
     @Override
-    public void setCategorie(List<Categoria> categorie){
+    public void setCategorie(List<Categoria> categorie) {
         this.categorie = categorie;
-        if(categorie != null && !categorie.isEmpty()){
-            for(int i = 0; i<categorie.size(); i++){
+        if (categorie != null && !categorie.isEmpty()) {
+            for (int i = 0; i < categorie.size(); i++) {
                 mostracategoriaMenuPresenter.getFotoCategoriaById(categorie.get(i), i);
             }
-        } else{
+        } else {
             Dialog dialog = new Dialog(this);
             mostraDialogErroreOneBtn(dialog, "Nessuna categoria da visualizzare", view -> {
                 Intent intent = new Intent(this, HomeModificaElementoMenuViewActivity.class);
@@ -122,7 +122,7 @@ public class EsploraCategorieMenuActivity extends AppCompatActivity implements M
     }
 
     @Override
-    public void mostraImmagineCategoria(int posizione){
+    public void mostraImmagineCategoria(int posizione) {
         adapterCategoria.notifyItemChanged(posizione);
     }
 

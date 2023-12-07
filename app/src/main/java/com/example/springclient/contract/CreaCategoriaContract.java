@@ -20,7 +20,7 @@ public interface CreaCategoriaContract {
         void caricaImmagine(byte[] immagine);
     }
     interface Presenter {
-        void salavaCategoria(Categoria categoria);
+        void salvaCategoria(Categoria categoria);
         void aggiungiFotoCategoria(String id, File foto);
         void tornaHomeNuovoElemento();
         void mostraScegliFoto();

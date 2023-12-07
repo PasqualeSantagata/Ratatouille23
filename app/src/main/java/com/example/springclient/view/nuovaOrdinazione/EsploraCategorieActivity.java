@@ -44,7 +44,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("CATEGORIE");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        setContentView(R.layout.activity_esplora_categorie_nuova_ordinazione);
+        setContentView(R.layout.activity_esplora_categorie);
         progressBar = findViewById(R.id.progressBarEsploraCategorieMenu);
         progressBar.setVisibility(View.INVISIBLE);
         categoriaPresenter = new MostraCategoriaMenuPresenter(this);

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.entity.Portata;
 
-import java.time.LocalTime;
 import java.util.List;
 
 public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<RecycleViewAdapterOrdinazioniCorrenti.MyViewHolder> {
@@ -44,7 +43,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
         holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
         holder.textViewNota.setText(ordinazioni.get(position).getBreveNota());
         holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
-        holder.textViewTempo.setText(LocalTime.now().toString());
+        holder.textViewTempo.setText(ordinazioni.get(position).getOrdinazione().getOrarioOrdinazione());
         holder.textViewNomePiatto.setText(ordinazioni.get(position).getElementoMenu().getNome());
     }
 

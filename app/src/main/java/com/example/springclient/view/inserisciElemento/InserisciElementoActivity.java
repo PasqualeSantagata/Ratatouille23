@@ -57,7 +57,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     private ProgressBar progressBar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("INSERISCI ELEMENTO");
         setContentView(R.layout.activity_inserisci_elemento_gestione_menu);
@@ -104,7 +104,9 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
         inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
         okButton.setOnClickListener(view -> {
-            if (checkFields()) {
+            if (checkFields(nomeElementoTextInputLayout.getEditText().getText().toString(),
+                    prezzoElementoTextInputLayout.getEditText().getText().toString(),
+                    descrizioneTextInputLayout.getEditText().getText().toString())) {
                 elementoMenu = getElementoValues();
                 inserisciElementoPresenter.inserisciElementoMenu(elementoMenu, categoriaSelezionata);
 
@@ -144,9 +146,11 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         startActivity(nuovaLingua);
     }
 
+    //TODO potenziale metodo da testare 3, con input dialog e messaggio
     @Override
-    public void elementoInseritoCorrettamente() {
+    public void elementoInseritoCorrettamente(String messaggio, View.OnClickListener eventoAggiungi, View.OnClickListener eventoIndietro) {
         cleanFields();
+        //Setto la dialog
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_two_button);
         TextView dialogTv = dialog.findViewById(R.id.textViewDialogOkTwoBtn);
@@ -154,13 +158,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         Button okButton = dialog.findViewById(R.id.okDialog2);
         indietroButton.setText("INDIETRO");
         okButton.setText("AGGIUNGI");
-        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi aggiungi, altrimenti premi " +
-                "indietro per aggiungere un nuovo elemento");
-        indietroButton.setOnClickListener(view -> inserisciElementoPresenter.mostraHomeNuovoElemento());
-        okButton.setOnClickListener(view -> inserisciElementoPresenter.mostraSelezioneNuovaLingua());
+        //setto gli eventi e il messaggio dagli input
+        dialogTv.setText(messaggio);
+        indietroButton.setOnClickListener(eventoIndietro);
+        okButton.setOnClickListener(eventoAggiungi);
+
         dialog.dismiss();
         dialog.show();
-
     }
 
     @Override
@@ -186,14 +190,9 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         return elementoMenu;
     }
 
-    private boolean checkFields() {
+    //TODO pitenzale metodo da testare 2,5 ma da generalizzare (argomenti generici passati, controllo campi vuoti + una regex)
+    public boolean checkFields(String nomeElemento, String prezzoElemento, String descrizione) {
         boolean checked = true;
-        String nomeElemento, prezzoElemento;
-        String descrizione;
-
-        nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
-        prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-        descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
 
         if (nomeElemento.equals("")) {
             nomeElementoTextInputLayout.setError("Nome non valido");

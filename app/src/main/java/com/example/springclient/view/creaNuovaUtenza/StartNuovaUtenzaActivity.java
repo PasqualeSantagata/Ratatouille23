@@ -134,7 +134,6 @@ public class StartNuovaUtenzaActivity extends AppCompatActivity implements CreaU
 
     @Override
     public void mostraErroreCampiVuoti() {
-
         String nome, cognome, email, password;
         nome = textInputNome.getEditText().getText().toString();
         cognome = textInputCognome.getEditText().getText().toString();

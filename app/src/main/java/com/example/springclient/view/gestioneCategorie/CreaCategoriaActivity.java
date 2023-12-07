@@ -92,7 +92,7 @@ public class CreaCategoriaActivity extends AppCompatActivity implements CreaCate
                     Dialog dialog = new Dialog(this);
                     mostraDialogWarningOneBtn(dialog, "Inserisci una foto per la categoria", view1 -> dialog.dismiss());
                 }else {
-                    creaCategoriaPresenter.salavaCategoria(categoria);
+                    creaCategoriaPresenter.salvaCategoria(categoria);
                 }
             }
 

@@ -10,9 +10,20 @@ public class Ordinazione implements Serializable {
     private Integer sala;
     private List<Portata> elementiOrdinati = new ArrayList<>();
     private boolean evasa;
+    private String orarioOrdinazione;
     private Long id;
     public Ordinazione() {
 
+    }
+
+    public Ordinazione(Integer numeroPersone, Integer tavolo, Integer sala, List<Portata> elementiOrdinati, boolean evasa, String orarioOrdinazione, Long id) {
+        this.numeroPersone = numeroPersone;
+        this.tavolo = tavolo;
+        this.sala = sala;
+        this.elementiOrdinati = elementiOrdinati;
+        this.evasa = evasa;
+        this.orarioOrdinazione = orarioOrdinazione;
+        this.id = id;
     }
 
     public Ordinazione(Integer numeroPersone, Integer tavolo, Integer sala) {
@@ -75,5 +86,13 @@ public class Ordinazione implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getOrarioOrdinazione() {
+        return orarioOrdinazione;
+    }
+
+    public void setOrarioOrdinazione(String orarioOrdinazione) {
+        this.orarioOrdinazione = orarioOrdinazione;
     }
 }

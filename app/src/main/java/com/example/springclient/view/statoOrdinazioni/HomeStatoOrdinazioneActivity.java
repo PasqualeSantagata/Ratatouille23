@@ -154,6 +154,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
+    //TODO potenzial metodo da testare, passando adapter e facendo restituire la recycler view
     public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<Portata> ordinazione) {
         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
         recyclerView.setAdapter(adapterCorrenti);

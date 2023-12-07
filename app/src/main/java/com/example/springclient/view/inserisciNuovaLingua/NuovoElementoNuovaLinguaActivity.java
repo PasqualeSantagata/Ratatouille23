@@ -103,6 +103,8 @@ public class NuovoElementoNuovaLinguaActivity extends AppCompatActivity implemen
         return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
+    //TODO potenziale metodo da testare 3 passando elemento e le text input cambiando ancora una volta check fields in generico check campi vuoti
+
     private ElementoMenu getElemento() {
         String nome, descrizione;
         List<String> allergeni = elemento.getElencoAllergeni();

@@ -117,6 +117,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         editText.setText(text);
     }
 
+    //TODO potenziale testing 1
     private void startDialogDettagliElemento(ElementoMenu elementoMenu) {
         Dialog dialogDettagli = new Dialog(this);
         dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);
@@ -134,7 +135,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
         this.dialogDettagliContext = dialogDettagli.getContext();
         this.textInputLayoutDescrizione = textInputLayoutDescrizione;
-        dialogDettagli.show();
 
         fabModifica.setOnClickListener(view -> {
             gestioneElementiPresenter.mostraModificaElemento(elementoMenu);
@@ -145,6 +145,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
 
         buttonTraduzione.setOnClickListener(view -> gestioneElementiPresenter.restituisciTraduzione(elementoMenu));
 
+        dialogDettagli.show();
     }
 
     @Override

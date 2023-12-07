@@ -26,7 +26,7 @@ public class CreaCategoriaPresenter implements CreaCategoriaContract.Presenter {
     }
 
     @Override
-    public void salavaCategoria(Categoria categoria) {
+    public void salvaCategoria(Categoria categoria) {
         creaCategoriaView.mostraPorgressBar();
         categoriaModel.saveCategoria(categoria, new CallbackResponse<Categoria>() {
             @Override

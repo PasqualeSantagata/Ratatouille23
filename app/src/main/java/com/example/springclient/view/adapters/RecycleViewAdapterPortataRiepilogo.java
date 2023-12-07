@@ -39,7 +39,6 @@ public class RecycleViewAdapterPortataRiepilogo extends RecyclerView.Adapter<Rec
     @Override
     public void onBindViewHolder(@NonNull RecycleViewAdapterPortataRiepilogo.MyViewHolder holder, int position) {
         holder.textViewNome.setText(listaElementiMenu.get(position).getElementoMenu().getNome());
-        //TODO input type dell'xml è number ma qua è passata la string, dovrebbe workare
         holder.textViewPrezzo.setText(listaElementiMenu.get(position).getElementoMenu().getPrezzo().toString() + "€");
 
         //Controllo su nota

@@ -47,7 +47,6 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
     }
 
     private void initializeComponents() {
-        //TODO provare set visibility filitri su prezzo e nome
         //buttons
         buttonNome = findViewById(R.id.buttonNomeFiltraCategoria);
         buttonPrezzo = findViewById(R.id.buttonPrezzoFiltraCategoria);

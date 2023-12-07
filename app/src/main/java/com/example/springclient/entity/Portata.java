@@ -22,6 +22,7 @@ public class Portata implements Serializable {
         this.ordinazione = ordinazione;
     }
 
+
     public Portata(ElementoMenu elementoMenu, boolean prenotato) {
         this.elementoMenu = elementoMenu;
         this.prenotato = prenotato;
@@ -70,5 +71,7 @@ public class Portata implements Serializable {
     public void setOrdinazione(Ordinazione ordinazione) {
         this.ordinazione = ordinazione;
     }
+
+
 }
 
