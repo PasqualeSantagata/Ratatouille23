@@ -154,7 +154,11 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
     }
 
     @Override
-    public void avviaDashboardSupervisore() {
+    public void avviaDashboardSupervisore(String ruolo) {
+        progressBar.setVisibility(View.GONE);
+        Intent avviaGestioneMenu = new Intent(this, StartGestioneMenuActivity.class);
+        avviaGestioneMenu.putExtra("ruolo", ruolo);
+        startActivity(avviaGestioneMenu);
 
     }
 

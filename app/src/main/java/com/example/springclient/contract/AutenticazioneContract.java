@@ -15,7 +15,7 @@ public interface AutenticazioneContract {
         void avviaDashboardAdmin();
 
         void impossibileContattareIlServer(String messaggio);
-        void avviaDashboardSupervisore();
+        void avviaDashboardSupervisore(String ruolo);
         void avviaDashboardAddettoSala();
         void avviaDashboardAddettoCucina(String email);
 

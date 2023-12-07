@@ -41,7 +41,7 @@ public class TokenRefreshInterceptor implements Interceptor {
             String refreshToken = sharedPreferences.getString("refreshToken", "");
             if(!refreshToken.isEmpty()) {
                 String token = getNewToken("Bearer " + refreshToken);
-                if (token.isEmpty() || token == null) {
+                if (token.isEmpty()) {
                     /**
                      * gestire meglio
                      */

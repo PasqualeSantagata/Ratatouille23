@@ -53,9 +53,6 @@ public class AdminPresenter implements CreaUtenzaContract.Presenter {
     public boolean validaForm(String email, String password){
         Pattern patt = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
         Matcher matcherEmail = patt.matcher(email);
-        if(email == null || password == null){
-            throw new IllegalArgumentException();
-        }
         if(!matcherEmail.matches()){
             adminView.mostraErrore("Email non valida");
             return false;

@@ -78,6 +78,27 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
     }
 
     @Override
+    public boolean filtraElementi(String elementoCercato, List<ElementoMenu> elementoMenuList, List<ElementoMenu> elementoMenuListApp){
+        boolean modificato = false;
+        if (elementoCercato != null && !elementoCercato.isEmpty()) {
+            for (ElementoMenu e : elementoMenuListApp) {
+                if (!e.getNome().toLowerCase().contains(elementoCercato.toLowerCase()) && elementoMenuList.contains(e)) {
+                    modificato = elementoMenuList.remove(e);
+                } else if (e.getNome().toLowerCase().contains(elementoCercato.toLowerCase()) && !elementoMenuList.contains(e)) {
+                    modificato = elementoMenuList.add(e);
+                }
+            }
+        } else {
+            for (ElementoMenu e : elementoMenuListApp) {
+                if (!elementoMenuList.contains(e)) {
+                    modificato = elementoMenuList.add(e);
+                }
+            }
+        }
+        return modificato;
+    }
+
+    @Override
     public void getElementiMenu() {
         cercaElementoView.mostraPorgressBar();
         elementoMenuModel.getAllElementiMenu(new CallbackResponse<List<ElementoMenu>>() {

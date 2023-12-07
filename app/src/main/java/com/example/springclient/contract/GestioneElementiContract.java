@@ -44,6 +44,8 @@ public interface GestioneElementiContract {
 
         void mostraModificaElemento(ElementoMenu elementoMenu);
 
+        boolean filtraElementi(String elementoCercato, List<ElementoMenu> elementoMenuList, List<ElementoMenu> elementoMenuListApp);
+
         void getElementiMenu();
 
         void rimuoviElementoMenu(ElementoMenu elementoMenu);

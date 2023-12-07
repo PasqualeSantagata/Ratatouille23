@@ -85,22 +85,8 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         charSequence -> {
-                            if (charSequence != null && !charSequence.toString().isEmpty()) {
-                                for (ElementoMenu e : elementoMenuListApp) {
-                                    if (!e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && elementoMenuList.contains(e)) {
-                                        elementoMenuList.remove(e);
-                                    } else if (e.getNome().toLowerCase().contains(charSequence.toString().toLowerCase()) && !elementoMenuList.contains(e)) {
-                                        elementoMenuList.add(e);
-                                    }
-                                }
-                            } else {
-                                for (ElementoMenu e : elementoMenuListApp) {
-                                    if (!elementoMenuList.contains(e)) {
-                                        elementoMenuList.add(e);
-                                    }
-                                }
-                            }
-                            adapter.notifyDataSetChanged();
+                            if(gestioneElementiPresenter.filtraElementi(charSequence.toString(), elementoMenuList, elementoMenuListApp))
+                                 adapter.notifyDataSetChanged();
                         });
 
         buttonInditero.setOnClickListener(view -> gestioneElementiPresenter.tornaStartGestioneMenu());

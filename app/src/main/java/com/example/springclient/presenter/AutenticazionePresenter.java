@@ -48,6 +48,7 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
                     sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                     sharedPreferences.edit().putString("accessToken", authenticationResponse.getAccessToken()).apply();
                     sharedPreferences.edit().putString("refreshToken", authenticationResponse.getRefreshToken()).apply();
+                    sharedPreferences.edit().putString("ruolo", authenticationResponse.getRuolo()).apply();
                     if(authenticationResponse.getRuolo().equals(Ruolo.ADMIN.name())) {
                         loginActivity.avviaDashboardAdmin();
                     }
@@ -57,6 +58,9 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
                     else if(authenticationResponse.getRuolo().equals(Ruolo.ADDETTO_CUCINA.name())){
                         loginActivity.avviaDashboardAddettoCucina(authenticationResponse.getEmail());
 
+                    } else if (authenticationResponse.getRuolo().equals(Ruolo.SUPERVISORE.name())){
+                        String ruolo = Ruolo.SUPERVISORE.name();
+                        loginActivity.avviaDashboardSupervisore(ruolo);
                     }
                 }
                 else if(retData.code() == 403){

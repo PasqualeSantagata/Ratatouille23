@@ -11,6 +11,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -45,8 +46,6 @@ public class OrdinazioneModel  {
                     }
                 });
     }
-
-
 
     public void savePortate(CallbackResponse<List<Portata>> portataCallback, List<Portata> portataList){
         ordinazioneAPI.savePortate(portataList)
