@@ -61,7 +61,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     @Override
     public void salvaOrdinazione(Ordinazione ordinazione){
         ordinazione.setElementiOrdinati(null);
-        elementiOrdinazioneView.mostraPorgressBar();
+        riepilogoOrdinazioneView.mostraPorgressBar();
         ordinazioneModel.aggiungiOrdinazione(new CallbackResponse<Ordinazione>() {
             @Override
             public void onFailure(Throwable t) {

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
@@ -46,6 +47,12 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+        String messaggio = getIntent().getStringExtra("uscitaForzata");
+        if(messaggio != null){
+            Toast.makeText(this, messaggio, Toast.LENGTH_LONG).show();
+        }
+
         autenticazionePresenter = new AutenticazionePresenter(this);
         recuperoCredenzialiPresenter = new RecuperoCredenzialiPresenter(this);
 
@@ -161,6 +168,14 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         startActivity(avviaGestioneMenu);
 
     }
+
+    @Override
+    public void forzaUscita(){
+       Intent resetMainActivity = new Intent(this, MainActivity.class);
+       resetMainActivity.putExtra("uscitaForzata", "Sessione scaduta");
+       startActivity(resetMainActivity);
+    }
+
 
     @Override
     public void avviaDashboardAddettoSala() {

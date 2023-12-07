@@ -81,6 +81,26 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
         });
     }
 
+
+    @Override
+    public boolean validaInserimentoElemento(String nome, String prezzo, String descrizione) {
+        boolean checked = true;
+
+        if (nome.equals("")) {
+            inserisciElementoView.mostraErroreInserimentoElemento("Nome non valido");
+            checked = false;
+        }
+        if (prezzo.isEmpty() || !prezzo.matches("[+-]?([0-9]*[.])?[0-9]+")) {
+            inserisciElementoView.mostraErroreInserimentoElemento("Prezzo non valido");
+            checked = false;
+        }
+        if (descrizione.isEmpty()) {
+            inserisciElementoView.mostraErroreInserimentoElemento("Inserisci una descrizione");
+            checked = false;
+        }
+        return checked;
+    }
+
     @Override
     public void mostraCreaCategoria() {
         homeNuovoElementoView.mostraCreaCategoria();
@@ -107,4 +127,6 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
     public void mostraSelezioneNuovaLingua() {
         inserisciElementoView.mostraSelezioneNuovaLingua();
     }
+
+
 }

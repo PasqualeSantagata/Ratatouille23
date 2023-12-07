@@ -33,6 +33,7 @@ public interface InserisciElementoContract {
         void mostraHomeNuovoElemento();
         void mostraSelezioneNuovaLingua();
 
+        boolean validaInserimentoElemento(String nome, String prezzo, String descrizione);
     }
 
 }

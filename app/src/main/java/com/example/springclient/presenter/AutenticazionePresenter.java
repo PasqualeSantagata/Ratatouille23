@@ -29,7 +29,9 @@ public class AutenticazionePresenter implements AutenticazioneContract.Presenter
         sharedPreferences = loginActivity.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         RetrofitService.getIstance().getTokenRefreshInterceptor().setMainActivityPresenter(this);
         RetrofitService.getIstance().getMyInterceptor().setPreferences(sharedPreferences);
+
     }
+
 
     @Override
     public void logInUtente(AuthRequest authRequest){

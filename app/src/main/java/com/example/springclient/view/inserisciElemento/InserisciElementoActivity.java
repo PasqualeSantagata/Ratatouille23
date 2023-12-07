@@ -104,7 +104,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         indietroButton = findViewById(R.id.buttonInserElemIndietro);
         inserisciButton = findViewById(R.id.buttonInserisciElementoGestioneMenu);
         okButton.setOnClickListener(view -> {
-            if (checkFields()) {
+            String nome, prezzo, descrizione;
+            nome = nomeElementoTextInputLayout.getEditText().getText().toString();
+            prezzo = prezzoElementoTextInputLayout.getEditText().getText().toString();
+            descrizione = prezzoElementoTextInputLayout.getEditText().getText().toString();
+            disabilitaErrori();
+            if (inserisciElementoPresenter.validaInserimentoElemento(nome, prezzo, descrizione)) {
                 elementoMenu = getElementoValues();
                 inserisciElementoPresenter.inserisciElementoMenu(elementoMenu, categoriaSelezionata);
 
@@ -167,7 +172,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     public void mostraErroreInserimentoElemento(String errore) {
         if (errore.toLowerCase().contains("nome")) {
             nomeElementoTextInputLayout.setError(errore);
-        }else{
+        }
+        else if(errore.toLowerCase().contains("prezzo")){
+            prezzoElementoTextInputLayout.setError(errore);
+        } else if (errore.toLowerCase().contains("descrizione")) {
+            descrizioneTextInputLayout.setError(errore);
+        } else{
             Toast.makeText(this, errore, Toast.LENGTH_LONG).show();
         }
 
@@ -186,37 +196,13 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         return elementoMenu;
     }
 
-    private boolean checkFields() {
-        boolean checked = true;
-        String nomeElemento, prezzoElemento;
-        String descrizione;
-
-        nomeElemento = nomeElementoTextInputLayout.getEditText().getText().toString();
-        prezzoElemento = prezzoElementoTextInputLayout.getEditText().getText().toString();
-        descrizione = descrizioneTextInputLayout.getEditText().getText().toString();
-
-        if (nomeElemento.equals("")) {
-            nomeElementoTextInputLayout.setError("Nome non valido");
-            checked = false;
-        } else {
-            nomeElementoTextInputLayout.setErrorEnabled(false);
-        }
-        if (prezzoElemento.isEmpty() || !prezzoElemento.matches("[+-]?([0-9]*[.])?[0-9]+")) {
-            prezzoElementoTextInputLayout.setError("Prezzo non valido");
-            checked = false;
-        } else {
-            prezzoElementoTextInputLayout.setErrorEnabled(false);
-        }
-        if (descrizione.isEmpty()) {
-            descrizioneTextInputLayout.setError("Descrizione non valida");
-
-            checked = false;
-        } else {
-            prezzoElementoTextInputLayout.setErrorEnabled(false);
-        }
-
-        return checked;
+    private void disabilitaErrori(){
+        nomeElementoTextInputLayout.setErrorEnabled(false);
+        prezzoElementoTextInputLayout.setErrorEnabled(false);
+        descrizioneTextInputLayout.setErrorEnabled(false);
     }
+
+
 
     private void cleanFields() {
         nomeElementoTextInputLayout.getEditText().setText("");

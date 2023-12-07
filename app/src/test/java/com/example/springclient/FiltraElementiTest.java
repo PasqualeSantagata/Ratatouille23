@@ -24,8 +24,6 @@ public class FiltraElementiTest {
     @InjectMocks
     GestioneElementiContract.Presenter gestioneElementiPresenter = new GestioneElementiPresenter(cercaElementoView);
 
-
-
     @Test
     public void filtraElementiNodeCoverageSet1Test(){
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();

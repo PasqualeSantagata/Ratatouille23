@@ -40,12 +40,9 @@ public class TokenRefreshInterceptor implements Interceptor {
             response.close();
             String refreshToken = sharedPreferences.getString("refreshToken", "");
             if(!refreshToken.isEmpty()) {
-                String token = getNewToken("Bearer " + refreshToken);
+                String token = getNewToken(refreshToken, "http://192.168.1.2:8080/");
                 if (token.isEmpty()) {
-                    /**
-                     * gestire meglio
-                     */
-                    throw new RuntimeException("Session token should be defined for auth apis");
+                    mainActivityPresenter.getActivity().forzaUscita();
                 }
                 newRequestBuilder.header("Authorization", "Bearer " + token);
                 return chain.proceed(newRequestBuilder.build());
@@ -54,7 +51,16 @@ public class TokenRefreshInterceptor implements Interceptor {
         return response;
     }
 
-    private String getNewToken(String refreshToken) throws IOException {
+    public String getNewToken(String refreshToken, String url) throws IOException {
+        Log.d("LUNGHEZZA TOKEN", String.valueOf(refreshToken.length()));
+
+        if(refreshToken.length() != 153){
+            throw new IllegalArgumentException();
+        }
+        if(url == null || url.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") ){
+            throw new IllegalArgumentException();
+
+        }
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -63,19 +69,15 @@ public class TokenRefreshInterceptor implements Interceptor {
                 .addInterceptor(loggingInterceptor)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:8080/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
         UtenteAPI service = retrofit.create(UtenteAPI.class);
-        retrofit2.Response<AuthenticationResponse> response= service.refreshToken(refreshToken).execute();
+        retrofit2.Response<AuthenticationResponse> response= service.refreshToken("Bearer " + refreshToken).execute();
         if(response.code() == 401){
-            /**
-             * mostrare di nuovo schermata login
-             */
-            Log.d("Token: ", "Sessone scaduta");
-            //throw new RuntimeException("Sessione scaduta");
+            mainActivityPresenter.getActivity().forzaUscita();
         }
         AuthenticationResponse authenticationResponse = response.body();
         if(authenticationResponse != null) {
