@@ -40,6 +40,7 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
         //info ordinazione
         holder.textViewTavolo.setText(ordinazioniEvase.get(position).getOrdinazione().getTavolo());
         holder.textViewSala.setText(ordinazioniEvase.get(position).getOrdinazione().getSala());
+        holder.textViewNumOrdinazione.setText(ordinazioniEvase.get(position).getOrdinazione().getId().toString());
         //info portate
         holder.textViewNomePiatto.setText(ordinazioniEvase.get(position).getElementoMenu().getNome());
         holder.textViewTempo.setText(ordinazioniEvase.get(position).getOrdinazione().getOrarioOrdinazione());
@@ -58,6 +59,7 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
         TextView textViewNomePiatto;
         TextView textViewTempo;
         TextView textViewNota;
+        TextView textViewNumOrdinazione;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniEvase recycleViewOrdinazioniEvase) {
             super(itemView);
@@ -66,6 +68,8 @@ public class RecycleViewAdapterOrdinazioniEvase  extends RecyclerView.Adapter<Re
             textViewSala = itemView.findViewById(R.id.textViewSalaRecycleViewOrdinazioniEvase);
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewOrdinazioniEvase);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewOrdinazioniEvase);
+            textViewNumOrdinazione = itemView.findViewById(R.id.numeroOrdinazioneEvasa);
+
 
             itemView.setOnClickListener(view -> {
                 if (recycleViewOrdinazioniEvase != null){

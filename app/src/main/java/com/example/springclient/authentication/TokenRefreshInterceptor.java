@@ -2,7 +2,6 @@ package com.example.springclient.authentication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -24,13 +23,15 @@ public class TokenRefreshInterceptor implements Interceptor {
     private SharedPreferences sharedPreferences;
     private AutenticazionePresenter mainActivityPresenter;
 
-    public TokenRefreshInterceptor(){
+    public TokenRefreshInterceptor() {
 
     }
 
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
+        String url = "http://20.251.220.220:8080/";
+        String token = "";
         Request request = chain.request();
         Request.Builder newRequestBuilder = request.newBuilder();
         Response response = chain.proceed(request);
@@ -39,29 +40,31 @@ public class TokenRefreshInterceptor implements Interceptor {
         if (response.code() == 401 && request.header("No-Authentication") == null) {
             response.close();
             String refreshToken = sharedPreferences.getString("refreshToken", "");
-            if(!refreshToken.isEmpty()) {
-                String token = getNewToken(refreshToken, "http://192.168.1.2:8080/");
-                if (token.isEmpty()) {
-                    mainActivityPresenter.getActivity().forzaUscita();
-                }
-                newRequestBuilder.header("Authorization", "Bearer " + token);
-                return chain.proceed(newRequestBuilder.build());
+            if (validaRefreshToken(refreshToken, url)) {
+                token = getNewToken(refreshToken, url);
             }
+            if (token.isEmpty()) {
+                mainActivityPresenter.getActivity().forzaUscita();
+            }
+            newRequestBuilder.header("Authorization", "Bearer " + token);
+            return chain.proceed(newRequestBuilder.build());
         }
         return response;
     }
 
+    public boolean validaRefreshToken(String refreshToken, String url) {
+        if (refreshToken.length() != 153) {
+            throw new IllegalArgumentException();
+        }
+        if (url == null || url.matches("\\\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") || url.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return true;
+    }
+
+
     public String getNewToken(String refreshToken, String url) throws IOException {
-
-
-        if(refreshToken.length() != 153){
-            throw new IllegalArgumentException();
-        }
-        if(url == null || url.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") ){
-            throw new IllegalArgumentException();
-
-        }
-
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -75,16 +78,17 @@ public class TokenRefreshInterceptor implements Interceptor {
                 .client(okHttpClient)
                 .build();
         UtenteAPI service = retrofit.create(UtenteAPI.class);
-        retrofit2.Response<AuthenticationResponse> response= service.refreshToken("Bearer " + refreshToken).execute();
-        if(response.code() == 401){
+        retrofit2.Response<AuthenticationResponse> response = service.refreshToken("Bearer " + refreshToken).execute();
+        if (response.code() == 401) {
             mainActivityPresenter.getActivity().forzaUscita();
         }
         AuthenticationResponse authenticationResponse = response.body();
-        if(authenticationResponse != null) {
+        if (authenticationResponse != null) {
             sharedPreferences.edit().putString("accessToken", authenticationResponse.getAccessToken()).commit();
             sharedPreferences.edit().putString("refreshToken", authenticationResponse.getRefreshToken()).commit();
         }
         String token = sharedPreferences.getString("accessToken", "");
+
         return token;
     }
 

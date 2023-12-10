@@ -219,7 +219,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
     private void stompConnect() {
         if (stompClient == null) {
-            stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
+            stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://20.251.220.220:8080/ordinazione-endpoint/websocket");
             stompClient.connect();
 
             stompClient.topic("/topic/ricevi-ordinazione")

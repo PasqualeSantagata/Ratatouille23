@@ -42,6 +42,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         //info ordinazione
         holder.textViewSala.setText(ordinazioniPrenotate.get(position).getOrdinazione().getSala().toString());
         holder.textViewTavolo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getTavolo().toString());
+        holder.textViewNumOrdinazione.setText(ordinazioniPrenotate.get(position).getOrdinazione().getId().toString());
         //info singoli piatti della stessa ordinazione
         holder.textViewTempo.setText(ordinazioniPrenotate.get(position).getOrdinazione().getOrarioOrdinazione());
         holder.textViewNomePiatto.setText(ordinazioniPrenotate.get(position).getElementoMenu().getNome());
@@ -63,6 +64,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
         TextView textViewTempo;
         TextView textViewNota;
         ImageButton buttonAvanti;
+        TextView textViewNumOrdinazione;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniPrenotate iRecycleViewOrdinazioniPrenotate) {
             super(itemView);
@@ -72,6 +74,7 @@ public class RecycleViewAdapterOrdinazioniPrenotate extends RecyclerView.Adapter
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewOrdinazioniPrenotate);
             textViewTempo = itemView.findViewById(R.id.textViewTempoRecycleViewOrdinazioniPrenotate);
             buttonAvanti = itemView.findViewById(R.id.buttonAvantiRecycleViewOrdinazioniPrenotate);
+            textViewNumOrdinazione = itemView.findViewById(R.id.numeroOrdinazionePrenotata);
 
             itemView.setOnClickListener(view -> {
                 if (iRecycleViewOrdinazioniPrenotate != null){

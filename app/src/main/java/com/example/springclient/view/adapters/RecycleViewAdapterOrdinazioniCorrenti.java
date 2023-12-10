@@ -8,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
@@ -43,6 +42,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
         holder.textViewSala.setText(ordinazioni.get(position).getOrdinazione().getSala().toString());
         holder.textViewNota.setText(ordinazioni.get(position).getBreveNota());
         holder.textViewTavolo.setText(ordinazioni.get(position).getOrdinazione().getTavolo().toString());
+        holder.textViewNumOrdinazione.setText(ordinazioni.get(position).getOrdinazione().getId().toString());
         holder.textViewTempo.setText(ordinazioni.get(position).getOrdinazione().getOrarioOrdinazione());
         holder.textViewNomePiatto.setText(ordinazioni.get(position).getElementoMenu().getNome());
     }
@@ -60,8 +60,7 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
         TextView textViewTempo;
         TextView textViewNota;
         ImageButton buttonAvanti;
-
-        CardView cardView;
+        TextView textViewNumOrdinazione;
 
         public MyViewHolder(@NonNull View itemView, IRecycleViewOrdinazioniCorrenti iRecycleViewOrdinazioniCorrenti) {
             super(itemView);
@@ -71,7 +70,8 @@ public class RecycleViewAdapterOrdinazioniCorrenti extends RecyclerView.Adapter<
             textViewNota = itemView.findViewById(R.id.textViewNotaRecycleViewStatoOrdinazioni);
             textViewTavolo = itemView.findViewById(R.id.textViewTavoloRecycleViewStatoOrdinazioni);
             textViewSala = itemView.findViewById(R.id.textViewSalaRecycleViewStatoOrdinazioni);
-            
+            textViewNumOrdinazione = itemView.findViewById(R.id.NumeroOrdinazioneCorrente);
+
 
 
             itemView.setOnClickListener(view -> {

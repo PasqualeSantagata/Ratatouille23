@@ -2,7 +2,6 @@ package com.example.springclient.RetrofitService;
 
 import com.example.springclient.authentication.AggiungiTokenInterceptor;
 import com.example.springclient.authentication.TokenRefreshInterceptor;
-import com.example.springclient.presenter.AutenticazionePresenter;
 import com.google.gson.Gson;
 
 import okhttp3.OkHttpClient;
@@ -14,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final String base_URL ="http://192.168.1.2:8080/";
+    private static final String base_URL ="http://20.251.220.220:8080/";
     private static RetrofitService INSTANCE;
     private UtenteAPI utenteAPI;
     private ElementoMenuAPI elementoMenuAPI;

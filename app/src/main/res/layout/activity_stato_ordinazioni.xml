@@ -17,7 +17,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewOrdiniDaEvadereStatoOrdinazioni"
                 android:layout_width="1220dp"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
@@ -29,7 +29,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewOrdiniPrenotatiStatoOrdinazioni"
                 android:layout_width="1220dp"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
@@ -41,11 +41,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleViewOrdiniEvasiStatoOrdinazioni"
                 android:layout_width="1220dp"
-                android:layout_height="300dp"
+                android:layout_height="350dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="50dp"
                 android:background="@color/grey_trasparent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewOrdiniEvasiStatoOrdinazioni" />

@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="300dp">
+    android:layout_height="350dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="313dp"
-        android:layout_height="280dp"
+        android:layout_height="330dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
 
@@ -29,7 +29,7 @@
                 android:id="@+id/textViewNotaRecycleViewStatoOrdinazioni"
                 android:layout_width="215dp"
                 android:layout_height="91dp"
-                android:layout_marginStart="23dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="9dp"
                 android:text="@string/breve_nota"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/textViewNomePiattoRecycleViewStatoOrdinazioni"
                 android:layout_width="266dp"
-                android:layout_height="55dp"
+                android:layout_height="92dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="22dp"
@@ -52,11 +52,12 @@
                 android:id="@+id/imageView18"
                 android:layout_width="313dp"
                 android:layout_height="5dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewNotaRecycleViewStatoOrdinazioni"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOrdinazioneNumeroCorrenti"
                 app:srcCompat="@drawable/line_1" />
 
             <TextView
@@ -65,7 +66,7 @@
                 android:layout_height="46dp"
                 android:layout_marginStart="107dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="20dp"
                 android:text="tempo"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,13 +75,14 @@
 
             <ImageButton
                 android:id="@+id/buttonAvantiRecycleViewStatoOrdinazioni"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
+                android:layout_width="66dp"
+                android:layout_height="70dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="#00FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView18"
                 app:srcCompat="@drawable/button_avanti"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -118,7 +120,7 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="43dp"
+                android:layout_marginBottom="70dp"
                 android:text="10"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/my_green"
@@ -143,6 +145,30 @@
                 app:layout_constraintBottom_toTopOf="@+id/textViewSalaRecycleViewStatoOrdinazioni"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView7" />
+
+            <TextView
+                android:id="@+id/textViewOrdinazioneNumeroCorrenti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/ordinazione_numero"
+                android:textColor="#FF9800"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNotaRecycleViewStatoOrdinazioni" />
+
+            <TextView
+                android:id="@+id/NumeroOrdinazioneCorrente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:text="10"
+                android:textAlignment="viewEnd"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/textViewOrdinazioneNumeroCorrenti"
+                app:layout_constraintTop_toBottomOf="@+id/textViewNotaRecycleViewStatoOrdinazioni" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
