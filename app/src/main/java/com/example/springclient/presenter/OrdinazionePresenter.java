@@ -11,22 +11,32 @@ import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.model.OrdinazioneModel;
 import com.example.springclient.entity.Portata;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     private OrdinazioneContract.RiepilogoOrdinazioneViewContract riepilogoOrdinazioneView;
     private OrdinazioneContract.ElementiOrdinazioneViewContract elementiOrdinazioneView;
     private OrdinazioneContract.StartNuovaOrdinazioneViewContract viewStartNuovaOrdinazione;
     private BaseViewContract baseViewContract;
+    private final StompClient stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
     private final OrdinazioneModel ordinazioneModel = new OrdinazioneModel(RetrofitService.getIstance());
     private final ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
 
     public OrdinazionePresenter(OrdinazioneContract.RiepilogoOrdinazioneViewContract riepilogoOrdinazioneView){
        this.riepilogoOrdinazioneView = riepilogoOrdinazioneView;
        baseViewContract = riepilogoOrdinazioneView;
+       stompClient.connect();
     }
 
     public OrdinazionePresenter(OrdinazioneContract.StartNuovaOrdinazioneViewContract viewStartNuovaOrdinazione){
@@ -52,7 +62,9 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
             public void onSuccess(Response<List<Portata>> retData) {
                 riepilogoOrdinazioneView.nascondiProgressBar();
                 if(retData.isSuccessful()){
-                   riepilogoOrdinazioneView.ordinazioneAvvenutaConSuccesso();
+                    Ordinazione ordinazione = portataList.get(0).getOrdinazione();
+                    riepilogoOrdinazioneView.ordinazioneAvvenutaConSuccesso();
+                    stompClient.send("/app/invia-ordinazione", ordinazione.getId().toString()).subscribe();
                 }
             }
         }, portataList);
@@ -60,6 +72,11 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     }
     @Override
     public void salvaOrdinazione(Ordinazione ordinazione){
+        ZonedDateTime zdt = ZonedDateTime.ofInstant (Instant.now () , ZoneId.of ( "Europe/Paris" ));
+        ordinazione.setOrarioOrdinazione(LocalTime.of(
+                zdt.getHour(),
+               zdt.getMinute()
+            ).toString());
         ordinazione.setElementiOrdinati(null);
         riepilogoOrdinazioneView.mostraPorgressBar();
         ordinazioneModel.aggiungiOrdinazione(new CallbackResponse<Ordinazione>() {
@@ -118,6 +135,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
 
     }
 
-
-
+    public StompClient getStompClient() {
+        return stompClient;
+    }
 }

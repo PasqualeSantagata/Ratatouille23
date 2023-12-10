@@ -1,5 +1,6 @@
 package com.example.springclient.view.statoOrdinazioni;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -50,7 +51,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     private List<Portata> portateSospese;
     private List<Portata> portatePrenotate;
     private List<Portata> portateEvase;
-    private int posizione;
+   // private int posizione;
     private RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
     private RecycleViewAdapterOrdinazioniEvase adapterEvase;
     private RecycleViewAdapterOrdinazioniPrenotate adapterPrenotate;
@@ -101,9 +102,18 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
-    public void aggiornaPrenotazioni() {
-        portateSospese.remove(posizione);
-        adapterCorrenti.notifyItemRemoved(posizione);
+    public void aggiornaPrenotazioni(long idPortata) {
+        int rimuovi = -1;
+        for(Portata p: portateSospese){
+            if(p.getId() == idPortata){
+                rimuovi = portateSospese.indexOf(p);
+                break;
+            }
+        }
+        if(rimuovi > -1){
+            portateSospese.remove(rimuovi);
+            adapterCorrenti.notifyItemRemoved(rimuovi);
+        }
     }
 
     private void mostraDialogDettagli(Portata portata){
@@ -189,7 +199,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, email);
         Long id = p.getId();
         portateSospese.get(position).setPrenotato(true);
-        posizione = position;
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
@@ -210,13 +219,15 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
 
     @Override
     public void onGreenButtonClickOrdinazioniPrenotate(int position) {
-        //TODO passa da prenotata a evasa e non so se bisogna implmentare che le evase si salvino sul db o gia sono salvate per la questione del flag
         Portata p = portatePrenotate.get(position);
         portateEvase.add(p);
         adapterEvase.notifyItemInserted(portateEvase.size() -1);
+        portatePrenotate.remove(position);
+        adapterPrenotate.notifyItemRemoved(position);
     }
 
 
+    @SuppressLint("CheckResult")
     private void stompConnect() {
         if (stompClient == null) {
             stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://20.251.220.220:8080/ordinazione-endpoint/websocket");
@@ -225,14 +236,18 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
             stompClient.topic("/topic/ricevi-ordinazione")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(ordinazione -> Log.d("WS2:", "Received " + ordinazione.getPayload()));
+                    .subscribe(ordinazione -> {
+                        Log.d("WS2:", "Received " + ordinazione.getPayload());
+                        comandePresenter.getOrdinazioniSospese();
+                    });
 
             stompClient.topic("/topic/ricevi-prenotazione")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(prenotazione -> {
-                        aggiornaPrenotazioni();
-                        comandePresenter.evadiOrdinazione(Long.valueOf(prenotazione.getPayload()));
+                        long idPortata = Long.valueOf(prenotazione.getPayload());
+                        aggiornaPrenotazioni(idPortata);
+                        comandePresenter.evadiOrdinazione(idPortata);
                         Log.d("WS2:", "Received " + prenotazione.getPayload());
                     });
         }

@@ -10,8 +10,6 @@ public interface InserisciElementoContract {
 
     interface InserisciElementoViewContract extends BaseViewContract {
         void mostraSelezioneNuovaLingua();
-        void elementoInseritoCorrettamente(String messaggio, View.OnClickListener eventoAggiungi, View.OnClickListener eventoIndietro);
-
         void elementoInseritoCorrettamente();
 
         void mostraErroreInserimentoElemento(String errore);

@@ -48,6 +48,7 @@ public class GestisciComandePresenter implements GestisciComandeContract.Present
             }
         });
     }
+
     @Override
     public void evadiOrdinazione(long idPortata) {
         boolean completo = true;

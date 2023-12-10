@@ -47,6 +47,7 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
             String email = String.valueOf(emailTextInputLayout.getEditText().getText());
             verificaEmail(email);
         });
+        buttonIndietro.setOnClickListener(view -> onBackPressed());
     }
 
     @Override
@@ -104,6 +105,5 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         Dialog dialog = new Dialog(this);
         mostraDialogWarningOneBtn(dialog, impossiblieComunicareConIlServer, view -> dialog.dismiss());
     }
-
 
 }

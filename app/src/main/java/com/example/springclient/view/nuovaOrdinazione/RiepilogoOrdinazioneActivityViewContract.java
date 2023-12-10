@@ -59,7 +59,6 @@ public class RiepilogoOrdinazioneActivityViewContract extends AppCompatActivity 
             portate.add(o);
         }
 
-
         inizializzaComponenti();
     }
 
@@ -89,13 +88,11 @@ public class RiepilogoOrdinazioneActivityViewContract extends AppCompatActivity 
     @Override
     public void mostraPorgressBar() {
         progressBar.setVisibility(View.VISIBLE);
-
     }
 
     @Override
     public void nascondiProgressBar() {
         progressBar.setVisibility(View.INVISIBLE);
-
     }
 
     @Override
