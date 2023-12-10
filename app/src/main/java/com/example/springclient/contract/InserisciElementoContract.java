@@ -1,9 +1,6 @@
 package com.example.springclient.contract;
 
-import android.view.View;
-
 import com.example.springclient.entity.ElementoMenu;
-
 import java.util.List;
 
 public interface InserisciElementoContract {
@@ -11,7 +8,6 @@ public interface InserisciElementoContract {
     interface InserisciElementoViewContract extends BaseViewContract {
         void mostraSelezioneNuovaLingua();
         void elementoInseritoCorrettamente();
-
         void mostraErroreInserimentoElemento(String errore);
         void erroreInserimentoElemento();
         void generaNomi(List<String> nomi);

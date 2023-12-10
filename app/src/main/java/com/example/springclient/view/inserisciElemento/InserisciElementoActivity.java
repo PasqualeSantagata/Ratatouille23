@@ -150,7 +150,7 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
     }
 
     @Override
-    public void elementoInseritoCorrettamente(String messaggio, View.OnClickListener eventoAggiungi, View.OnClickListener eventoIndietro) {
+    public void elementoInseritoCorrettamente() {
         cleanFields();
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_ok_two_button);
@@ -159,16 +159,12 @@ public class InserisciElementoActivity extends AppCompatActivity implements Adap
         Button okButton = dialog.findViewById(R.id.okDialog2);
         indietroButton.setText("INDIETRO");
         okButton.setText("AGGIUNGI");
-        dialogTv.setText(messaggio);
-        indietroButton.setOnClickListener(eventoIndietro);
-        okButton.setOnClickListener(eventoAggiungi);
+        dialogTv.setText("Elemento salvato correttamente. Se vuoi aggiungere anche una traduzione premi aggiungi, altrimenti premi " +
+                "indietro per aggiungere un nuovo elemento");
+        indietroButton.setOnClickListener(view -> inserisciElementoPresenter.mostraHomeNuovoElemento());
+        okButton.setOnClickListener(view -> inserisciElementoPresenter.mostraSelezioneNuovaLingua());
         dialog.dismiss();
         dialog.show();
-
-    }
-
-    @Override
-    public void elementoInseritoCorrettamente() {
 
     }
 
