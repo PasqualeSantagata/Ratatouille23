@@ -2,7 +2,6 @@ package com.example.springclient.authentication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -54,10 +53,11 @@ public class TokenRefreshInterceptor implements Interceptor {
     }
 
     public boolean validaRefreshToken(String refreshToken, String url) {
+
         if (refreshToken.length() != 153) {
             throw new IllegalArgumentException();
         }
-        if (url == null || url.matches("\\\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") || url.isEmpty()) {
+        if (url == null || !url.matches("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") || url.isEmpty()) {
             throw new IllegalArgumentException();
         }
 

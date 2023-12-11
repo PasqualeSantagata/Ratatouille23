@@ -91,7 +91,7 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
             inserisciElementoView.mostraErroreInserimentoElemento("Nome non valido");
             checked = false;
         }
-        if (prezzo.isEmpty() || !prezzo.matches("[+-]?([0-9]*[.])?[0-9]+")) {
+        if (prezzo.isEmpty() || !prezzo.matches("([0-9]*[.])?[0-9]+")) {
             inserisciElementoView.mostraErroreInserimentoElemento("Prezzo non valido");
             checked = false;
         }

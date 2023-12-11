@@ -7,16 +7,14 @@ import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.entity.Portata;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.model.OrdinazioneModel;
-import com.example.springclient.entity.Portata;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class OrdinazionePresenter implements OrdinazioneContract.Presenter {
     private OrdinazioneContract.ElementiOrdinazioneViewContract elementiOrdinazioneView;
     private OrdinazioneContract.StartNuovaOrdinazioneViewContract viewStartNuovaOrdinazione;
     private BaseViewContract baseViewContract;
-    private final StompClient stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://10.0.2.2:8080/ordinazione-endpoint/websocket");
+    private final StompClient stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, "ws://20.251.220.220:8080/ordinazione-endpoint/websocket");
     private final OrdinazioneModel ordinazioneModel = new OrdinazioneModel(RetrofitService.getIstance());
     private final ElementoMenuModel elementoMenuModel = new ElementoMenuModel(RetrofitService.getIstance());
 
