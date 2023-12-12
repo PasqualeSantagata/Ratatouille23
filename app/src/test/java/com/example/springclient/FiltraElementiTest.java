@@ -1,6 +1,8 @@
 package com.example.springclient;
 
 
+import static org.junit.Assert.assertEquals;
+
 import com.example.springclient.contract.GestioneElementiContract;
 import com.example.springclient.entity.ElementoMenu;
 import com.example.springclient.presenter.GestioneElementiPresenter;
@@ -10,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import static org.junit.Assert.*;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,11 +147,5 @@ public class FiltraElementiTest {
         risultato.add(e1);
         assertEquals(risultato, elementoMenuList);
     }
-
-
-
-
-
-
 
 }

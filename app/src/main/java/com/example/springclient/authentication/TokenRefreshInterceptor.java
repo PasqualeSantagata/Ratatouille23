@@ -54,7 +54,7 @@ public class TokenRefreshInterceptor implements Interceptor {
 
     public boolean validaRefreshToken(String refreshToken, String url) {
 
-        if (refreshToken.length() != 153) {
+        if (!refreshToken.matches("^[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+$")) {
             throw new IllegalArgumentException();
         }
         if (url == null || !url.matches("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]") || url.isEmpty()) {

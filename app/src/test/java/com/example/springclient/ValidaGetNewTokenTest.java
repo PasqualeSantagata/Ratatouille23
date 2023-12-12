@@ -34,14 +34,14 @@ public class ValidaGetNewTokenTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void getTokenConTokenLunghezzaSuperioreTest() {
-        tokenRefreshInterceptor.validaRefreshToken("fevvfsdcwv3rvvwrtbjej340j343rtnrkonro3409geog33gajdcn8ww9thrmq380239cm3cm32998m3t2h89chchmu923m9uxmxh93uxmfg2gxm3498xg2m93h2893ghm283h38ghx308931mhgt8rr12434343", "http://000.000.0.0:0000/");
+        tokenRefreshInterceptor.validaRefreshToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLnNtdXNpQGdtYWlsLmNvbSIsImlhdCI6MTcwMjM3NDY4NiwiZXhwIjoxNzAyNDYxMDg2fQ.rGbglA9vL-W0m30HG7qV2QIzp8KxeWZHDcGkW5mLS6I", "http://000.000.0.0:0000/");
         fail();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void getTokenConUrlVuotoTest() {
         Boolean controllo = tokenRefreshInterceptor.validaRefreshToken(
-                "fevvfsdcwv3rvvwrtbjej340j343rtnrkonro3409geog33gajdcn8ww9thrmq380239cm3cm32998m3t2h89chchmu923m9uxmxh93uxmfg2gxm3498xg2m93h2893ghm283h38ghx308931mhgt8rr1",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLnNtdXNpQGdtYWlsLmNvbSIsImlhdCI6MTcwMjM3NDY4NiwiZXhwIjoxNzAyNDYxMDg2fQ.rGbglA9vL-W0m30HG7qV2QIzp8KxeWZHDcGkW5mLS6I",
                 "");
         fail("errore url vuoto");
     }
@@ -49,7 +49,7 @@ public class ValidaGetNewTokenTest {
     @Test(expected = IllegalArgumentException.class)
     public void getTokenConUrlNonValidoTest() {
         Boolean controllo = tokenRefreshInterceptor.validaRefreshToken(
-                "fevvfsdcwv3rvvwrtbjej340j343rtnrkonro3409geog33gajdcn8ww9thrmq380239cm3cm32998m3t2h89chchmu923m9uxmxh93uxmfg2gxm3498xg2m93h2893ghm283h38ghx308931mhgt8rr1",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLnNtdXNpQGdtYWlsLmNvbSIsImlhdCI6MTcwMjM3NDY4NiwiZXhwIjoxNzAyNDYxMDg2fQ.rGbglA9vL-W0m30HG7qV2QIzp8KxeWZHDcGkW5mLS6I",
                 "hattp://000.000.0.0:/0000/");
 
        fail("errore url non valido");
@@ -59,7 +59,7 @@ public class ValidaGetNewTokenTest {
     @Test
     public void getTokenDatiCorrettiTest() {
         Boolean token = tokenRefreshInterceptor.validaRefreshToken(
-                "fevvfsdcwv3rvvwrtbjej340j343rtnrkonro3409geog33gajdcn8ww9thrmq380239cm3cm32998m3t2h89chchmu923m9uxmxh93uxmfg2gxm3498xg2m93h2893ghm283h38ghx308931mhgt8rr1",
+                "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLnNtdXNpQGdtYWlsLmNvbSIsImlhdCI6MTcwMjM3NDY4NiwiZXhwIjoxNzAyNDYxMDg2fQ.rGbglA9vL-W0m30HG7qV2QIzp8KxeWZHDcGkW5mLS6I",
                 "http://000.000.0.0:0000/");
 
         assertTrue(token);
