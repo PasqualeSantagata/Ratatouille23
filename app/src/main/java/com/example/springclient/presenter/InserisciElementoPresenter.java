@@ -82,7 +82,6 @@ public class InserisciElementoPresenter implements InserisciElementoContract.Pre
     }
 
 
-    //TODO da testare
     @Override
     public boolean validaInserimentoElemento(String nome, String prezzo, String descrizione) {
         boolean checked = true;

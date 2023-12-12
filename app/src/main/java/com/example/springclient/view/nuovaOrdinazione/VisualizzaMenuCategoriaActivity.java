@@ -80,7 +80,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         textInputLayoutPrezzo = findViewById(R.id.textInputLayoutPrezzoVisuaCatNuovaOrdinazione);
         textInputLayoutDescrizione = findViewById(R.id.textInputLayoutDescrizioneVisuaCatNuovaOrdinazione);
         textInputLayoutNota= findViewById(R.id.textInputLayoutBreveNota);
-        textViewAllergeni= findViewById(R.id.textViewAllergeniVisualCatNuovaOrd);
+        textViewAllergeni= findViewById(R.id.buttonVisualizzaAllergeni);
 
         fabAggiungiAdOrdinazione = findViewById(R.id.fabAggiungiAdOrdinazione);
 
