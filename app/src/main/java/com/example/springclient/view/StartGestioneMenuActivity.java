@@ -37,6 +37,8 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
         String ruolo = getIntent().getStringExtra("ruolo");
         if(ruolo != null){
             pref.edit().putString("ruolo", ruolo).apply();
+        }else{
+            pref.edit().putString("ruolo", "").apply();
         }
         gestioneElementiPresenter = new GestioneElementiPresenter(this);
         inizializzaComponenti();

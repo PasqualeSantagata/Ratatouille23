@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.GestisciComandeContract;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.Portata;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.GestisciComandePresenter;
 import com.example.springclient.presenter.ILogout;

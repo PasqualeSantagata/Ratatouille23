@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.OrdinazioneContract;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.ElementoMenu;
+import com.example.springclient.model.entity.Ordinazione;
+import com.example.springclient.model.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterPortataRiepilogo;

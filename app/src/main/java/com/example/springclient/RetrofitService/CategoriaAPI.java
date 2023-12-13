@@ -1,7 +1,7 @@
 package com.example.springclient.RetrofitService;
 
-import com.example.springclient.entity.Categoria;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.Categoria;
+import com.example.springclient.model.entity.ElementoMenu;
 
 import java.util.List;
 

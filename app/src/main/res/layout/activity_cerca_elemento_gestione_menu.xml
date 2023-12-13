@@ -10,8 +10,8 @@
         android:id="@+id/textInputLayoutCerca"
         android:layout_width="430dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="@string/nome"
+        android:layout_marginTop="50dp"
+        android:hint="  Cerca un elemento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,16 +24,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewElementiRicercati"
-        android:layout_width="1285dp"
-        android:layout_height="560dp"
+        android:layout_width="1281dp"
+        android:layout_height="481dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonIndietroCercaElemento"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCerca" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCerca"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonIndietroCercaElemento"

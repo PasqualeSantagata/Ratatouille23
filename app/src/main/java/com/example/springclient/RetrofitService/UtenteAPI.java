@@ -4,7 +4,7 @@ package com.example.springclient.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.authentication.AuthRequest;
-import com.example.springclient.entity.Utente;
+import com.example.springclient.model.entity.Utente;
 
 import java.util.List;
 

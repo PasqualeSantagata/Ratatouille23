@@ -15,7 +15,7 @@ import androidx.lifecycle.Lifecycle;
 import com.example.springclient.R;
 import com.example.springclient.contract.AutenticazioneContract;
 import com.example.springclient.contract.OrdinazioneContract;
-import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.model.entity.Ordinazione;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.ILogout;
 import com.example.springclient.presenter.OrdinazionePresenter;

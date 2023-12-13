@@ -20,7 +20,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="787dp"
         android:layout_height="653dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="58dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="681dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="50dp"
             android:clickable="true"
 
             android:outlineSpotShadowColor="@color/white"

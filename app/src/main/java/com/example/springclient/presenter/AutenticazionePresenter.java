@@ -7,7 +7,7 @@ import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.AutenticazioneContract;
 import com.example.springclient.authentication.AuthenticationResponse;
-import com.example.springclient.entity.Ruolo;
+import com.example.springclient.model.entity.Ruolo;
 import com.example.springclient.model.AutenticazioneModel;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.view.MainActivity;

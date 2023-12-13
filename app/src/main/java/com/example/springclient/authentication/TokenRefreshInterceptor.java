@@ -2,6 +2,7 @@ package com.example.springclient.authentication;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -30,7 +31,7 @@ public class TokenRefreshInterceptor implements Interceptor {
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-        String url = "http://20.251.220.220:8080/";
+        String url = "http://192.168.1.2:8080/";
         String token = "";
         Request request = chain.request();
         Request.Builder newRequestBuilder = request.newBuilder();

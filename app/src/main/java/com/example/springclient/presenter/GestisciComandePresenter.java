@@ -3,9 +3,9 @@ package com.example.springclient.presenter;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.GestisciComandeContract;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.Portata;
 import com.example.springclient.model.OrdinazioneModel;
-import com.example.springclient.entity.Ordinazione;
+import com.example.springclient.model.entity.Ordinazione;
 
 import java.util.ArrayList;
 import java.util.List;

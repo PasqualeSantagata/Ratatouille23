@@ -179,6 +179,8 @@
                 android:layout_width="400dp"
                 android:layout_height="match_parent"
                 android:background="@color/my_green"
+                android:editable="false"
+                tools:ignore="Deprecated"
                 android:hint="Lang"
                 android:textAlignment="center"
                 android:textAllCaps="false"

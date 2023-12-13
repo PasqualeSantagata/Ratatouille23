@@ -1,8 +1,8 @@
 package com.example.springclient.RetrofitService;
 
 
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.Ordinazione;
+import com.example.springclient.model.entity.Portata;
 
 import java.util.List;
 import io.reactivex.rxjava3.core.Single;

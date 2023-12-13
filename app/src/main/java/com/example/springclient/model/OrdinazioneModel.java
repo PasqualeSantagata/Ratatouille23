@@ -3,15 +3,13 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.OrdinazioneAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.contract.OrdinazioneContract;
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.Ordinazione;
+import com.example.springclient.model.entity.Portata;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;

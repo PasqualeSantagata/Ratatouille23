@@ -23,8 +23,6 @@ public class ValidaFormTest {
         presenter = new AdminPresenter(creaUtenzaView);
     }
 
-
-
     @Test
     public void validaFormEmailCorrettaPasswordCorretta(){
         assertTrue(presenter.validaForm("p.santagata@gmail.com", "buonGiorno#12"));
@@ -80,10 +78,5 @@ public class ValidaFormTest {
     public void validaFormEmailCorrettaPasswordDiLunghezzaMinoreDiOtto(){
         assertFalse(presenter.validaForm("p.santagata@gmail.com", "Buong#2"));
     }
-
-
-
-
-
 
 }

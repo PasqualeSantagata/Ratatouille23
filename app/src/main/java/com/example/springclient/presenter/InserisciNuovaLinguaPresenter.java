@@ -4,7 +4,7 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.InserisciNuovaLinguaContract;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 import com.google.gson.Gson;
 

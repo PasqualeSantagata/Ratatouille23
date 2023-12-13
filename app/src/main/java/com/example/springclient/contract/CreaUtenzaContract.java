@@ -1,6 +1,6 @@
 package com.example.springclient.contract;
 
-import com.example.springclient.entity.Utente;
+import com.example.springclient.model.entity.Utente;
 
 public interface CreaUtenzaContract {
     interface Presenter {

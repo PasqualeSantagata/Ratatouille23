@@ -25,9 +25,9 @@ import com.example.springclient.R;
 import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.OrdinazioneContract;
 import com.example.springclient.contract.VisualizzElementiContract;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.ElementoMenu;
+import com.example.springclient.model.entity.Ordinazione;
+import com.example.springclient.model.entity.Portata;
 import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
@@ -94,6 +94,9 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
                 ordinazione.aggiungiPiatto(portata);
                 Toast.makeText(this,"Aggiunto ad ordinazione",Toast.LENGTH_SHORT).show();
             }
+            else{
+                Toast.makeText(this,"Nessun elemento selezionato",Toast.LENGTH_SHORT).show();
+            }
         });
 
         buttonIndietro.setOnClickListener(view -> viewElementiOrdinazionePresenter.tornaEsploraCategorie());
@@ -156,7 +159,6 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
             menu.findItem(R.id.item_lingue_ordinazione).setEnabled(true);
             menu.findItem(R.id.item_lingua_base_ordinazione).setEnabled(false);
         }
-
         return true;
     }
 
@@ -166,14 +168,11 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
             case R.id.item_lingue_ordinazione :
                 if(elementoSelezionato != -1) {
                     visualizzaElementiPresenter.restituisciTraduzione(elementiMenu.get(elementoSelezionato).getElementoMenu().getId().toString());
-                    invalidateOptionsMenu();
-                    valoreSelezionatoBurgerMenu = true;
                 }
                 else{
                     Toast.makeText(this, "Seleziona un elemento per visualizzarne la traduzione", Toast.LENGTH_LONG).show();
                 }
                 break;
-
             case R.id.item_lingua_base_ordinazione:
                 if(elementoSelezionato != -1) {
                     setParameters(getElementoMenu());
@@ -181,7 +180,6 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
                     valoreSelezionatoBurgerMenu = false;
                 }
                 break;
-
             case R.id.item_riordina_elem:
                 viewElementiOrdinazionePresenter.mostraFiltraCategoria(nomeCategoria);
                 break;
@@ -191,6 +189,8 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     @Override
     public void mostraTraduzione(ElementoMenu elementoMenu) {
+        invalidateOptionsMenu();
+        valoreSelezionatoBurgerMenu = true;
         setParameters(elementoMenu);
     }
 

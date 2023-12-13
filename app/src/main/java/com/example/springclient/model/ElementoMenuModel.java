@@ -3,7 +3,7 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.ElementoMenuAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 
 import java.util.List;
 

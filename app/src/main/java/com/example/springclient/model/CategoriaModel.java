@@ -3,8 +3,8 @@ package com.example.springclient.model;
 import com.example.springclient.RetrofitService.CategoriaAPI;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.entity.Categoria;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.Categoria;
+import com.example.springclient.model.entity.ElementoMenu;
 
 import java.io.File;
 import java.util.List;

@@ -6,7 +6,7 @@ import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.authentication.AuthenticationResponse;
 import com.example.springclient.authentication.AuthRequest;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.entity.Utente;
+import com.example.springclient.model.entity.Utente;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

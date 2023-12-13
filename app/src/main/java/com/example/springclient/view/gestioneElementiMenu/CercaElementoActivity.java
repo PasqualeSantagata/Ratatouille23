@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.GestioneElementiContract;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 import com.example.springclient.presenter.GestioneElementiPresenter;
 import com.example.springclient.view.StartGestioneMenuActivity;
 
@@ -117,7 +117,6 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
         editText.setText(text);
     }
 
-    //TODO potenziale testing 1
     private void startDialogDettagliElemento(ElementoMenu elementoMenu) {
         Dialog dialogDettagli = new Dialog(this);
         dialogDettagli.setContentView(R.layout.dialog_dettagli_cerca_elemento_gestione_menu);

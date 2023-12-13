@@ -1,4 +1,4 @@
-package com.example.springclient.entity;
+package com.example.springclient.model.entity;
 
 import java.io.Serializable;
 import java.util.Comparator;

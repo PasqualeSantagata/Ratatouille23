@@ -21,7 +21,7 @@ import androidx.lifecycle.Lifecycle;
 import com.example.springclient.R;
 import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.InserisciElementoContract;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 import com.example.springclient.presenter.FoodFactsPresenter;
 import com.example.springclient.presenter.InserisciElementoPresenter;
 import com.example.springclient.view.inserisciNuovaLingua.SelezioneNuovaLinguaActivity;

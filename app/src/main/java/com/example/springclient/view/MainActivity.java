@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements AutenticazioneCon
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setStatusBarColor(0xffF68967);
 
         String messaggio = getIntent().getStringExtra("uscitaForzata");
         if(messaggio != null){

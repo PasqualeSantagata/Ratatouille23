@@ -15,8 +15,8 @@ import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CreaUtenzaContract;
-import com.example.springclient.entity.Ruolo;
-import com.example.springclient.entity.Utente;
+import com.example.springclient.model.entity.Ruolo;
+import com.example.springclient.model.entity.Utente;
 import com.example.springclient.presenter.AdminPresenter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;

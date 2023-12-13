@@ -1,6 +1,6 @@
 package com.example.springclient.contract;
 
-import com.example.springclient.entity.Categoria;
+import com.example.springclient.model.entity.Categoria;
 
 import java.util.List;
 

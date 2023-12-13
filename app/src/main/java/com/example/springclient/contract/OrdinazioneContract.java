@@ -1,8 +1,8 @@
 package com.example.springclient.contract;
 
 
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.Ordinazione;
+import com.example.springclient.model.entity.Portata;
 
 import java.util.List;
 

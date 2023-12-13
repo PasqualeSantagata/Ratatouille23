@@ -1,6 +1,6 @@
 package com.example.springclient.contract;
 
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 
 public interface InserisciNuovaLinguaContract {
 

@@ -99,8 +99,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayoutDescrizioneInserisciElementoMenu"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_width="424dp"
+        android:layout_height="226dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="800dp"

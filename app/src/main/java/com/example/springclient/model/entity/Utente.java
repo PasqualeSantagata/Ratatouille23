@@ -1,4 +1,4 @@
-package com.example.springclient.entity;
+package com.example.springclient.model.entity;
 
 public class Utente {
     private String nome;

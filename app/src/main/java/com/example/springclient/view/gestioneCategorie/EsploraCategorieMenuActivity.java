@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.MostraCategoriaContract;
-import com.example.springclient.entity.Categoria;
+import com.example.springclient.model.entity.Categoria;
 import com.example.springclient.presenter.MostraCategoriaMenuPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterCategoria;

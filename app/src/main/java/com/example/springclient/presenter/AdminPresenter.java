@@ -4,9 +4,8 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.apiUtils.ApiResponse;
 import com.example.springclient.contract.CreaUtenzaContract;
 import com.example.springclient.contract.CallbackResponse;
-import com.example.springclient.entity.Utente;
+import com.example.springclient.model.entity.Utente;
 import com.example.springclient.model.AutenticazioneModel;
-import com.example.springclient.view.creaNuovaUtenza.StartNuovaUtenzaActivity;
 import com.google.gson.Gson;
 
 import java.util.regex.Matcher;

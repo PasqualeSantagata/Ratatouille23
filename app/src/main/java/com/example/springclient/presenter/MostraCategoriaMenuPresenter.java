@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.MostraCategoriaContract;
-import com.example.springclient.entity.Categoria;
+import com.example.springclient.model.entity.Categoria;
 import com.example.springclient.model.CategoriaModel;
 
 import java.util.List;

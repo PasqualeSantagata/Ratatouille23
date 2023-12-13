@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.springclient.R;
 import com.example.springclient.view.BaseAllergeniDialog;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.ElementoMenu;
+import com.example.springclient.model.entity.Portata;
 
 import java.io.Serializable;
 import java.util.ArrayList;

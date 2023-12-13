@@ -5,9 +5,9 @@ import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.BaseViewContract;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.OrdinazioneContract;
-import com.example.springclient.entity.ElementoMenu;
-import com.example.springclient.entity.Ordinazione;
-import com.example.springclient.entity.Portata;
+import com.example.springclient.model.entity.ElementoMenu;
+import com.example.springclient.model.entity.Ordinazione;
+import com.example.springclient.model.entity.Portata;
 import com.example.springclient.model.ElementoMenuModel;
 import com.example.springclient.model.OrdinazioneModel;
 

@@ -24,7 +24,7 @@ public class RecuperoCredenzialiPresenter implements RecuperoCredenzialiContract
     @Override
     public void avviaRecuperoPassword(String email){
         recuperoCredenzialiView.mostraPorgressBar();
-        recuperoCredenzialiModel.recuperaPassword(email, new CallbackResponse<Void>() {
+        recuperoCredenzialiModel.recuperaPassword(email.toLowerCase(), new CallbackResponse<Void>() {
             @Override
             public void onFailure(Throwable t) {
                 recuperoCredenzialiView.nascondiProgressBar();

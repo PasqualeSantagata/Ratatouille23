@@ -3,6 +3,7 @@ package com.example.springclient.view.gestioneCategorie;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.springclient.R;
 import com.example.springclient.view.BaseAllergeniDialog;
 import com.example.springclient.contract.VisualizzElementiContract;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 import com.example.springclient.presenter.VisualizzElementiPresenter;
 import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterElementoMenu;
@@ -130,7 +131,6 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
                 }
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

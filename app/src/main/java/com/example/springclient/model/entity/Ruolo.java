@@ -1,4 +1,4 @@
-package com.example.springclient.entity;
+package com.example.springclient.model.entity;
 
 public enum Ruolo {
     ADMIN,

@@ -1,9 +1,8 @@
-package com.example.springclient.entity;
+package com.example.springclient.model.entity;
 
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
 
 public class Categoria implements Serializable {

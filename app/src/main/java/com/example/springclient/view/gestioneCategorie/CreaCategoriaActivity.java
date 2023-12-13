@@ -20,7 +20,7 @@ import androidx.lifecycle.Lifecycle;
 
 import com.example.springclient.R;
 import com.example.springclient.contract.CreaCategoriaContract;
-import com.example.springclient.entity.Categoria;
+import com.example.springclient.model.entity.Categoria;
 import com.example.springclient.presenter.CreaCategoriaPresenter;
 import com.example.springclient.view.inserisciElemento.HomeNuovoElementoActivity;
 import com.google.android.material.textfield.TextInputLayout;

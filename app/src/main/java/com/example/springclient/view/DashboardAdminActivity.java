@@ -30,6 +30,7 @@ public class  DashboardAdminActivity extends AppCompatActivity implements ILogou
         getSupportActionBar().setTitle("DASHBOARD");
         getSupportActionBar().hide();
         setContentView(R.layout.activity_dashboard_admin);
+        getWindow().setStatusBarColor(0xffF68967);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         autenticazionePresenter = new AutenticazionePresenter(this);
         inizializzaComponenti();

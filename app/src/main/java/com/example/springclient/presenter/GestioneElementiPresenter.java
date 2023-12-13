@@ -3,7 +3,7 @@ package com.example.springclient.presenter;
 import com.example.springclient.RetrofitService.RetrofitService;
 import com.example.springclient.contract.CallbackResponse;
 import com.example.springclient.contract.GestioneElementiContract;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 import com.example.springclient.model.ElementoMenuModel;
 
 
@@ -58,9 +58,7 @@ public class GestioneElementiPresenter implements GestioneElementiContract.Prese
     @Override
     public void mostraHomeNuovoElemento() {
         startGestioneMenuView.mostraHomeNuovoElemento();
-
     }
-
     @Override
     public void tornaStartGestioneMenu(){
         cercaElementoView.tornaIndietro();

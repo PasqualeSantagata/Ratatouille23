@@ -4,7 +4,7 @@ package com.example.springclient;
 import static org.junit.Assert.assertEquals;
 
 import com.example.springclient.contract.GestioneElementiContract;
-import com.example.springclient.entity.ElementoMenu;
+import com.example.springclient.model.entity.ElementoMenu;
 import com.example.springclient.presenter.GestioneElementiPresenter;
 
 import org.junit.Test;
@@ -35,7 +35,10 @@ public class FiltraElementiTest {
         elementoMenuListApp.add(e2);
         elementoMenuListApp.add(e3);
         elementoMenuListApp.add(e4);
-        List<ElementoMenu> elementoMenuList = new ArrayList<>(elementoMenuListApp);
+        List<ElementoMenu> elementoMenuList = new ArrayList<>();
+        elementoMenuList.add(e1);
+        elementoMenuList.add(e2);
+        elementoMenuList.add(e3);
         gestioneElementiPresenter.filtraElementi("Orecchiette", elementoMenuList, elementoMenuListApp);
         List<ElementoMenu> risultato = new ArrayList<>();
         risultato.add(e4);
@@ -53,7 +56,7 @@ public class FiltraElementiTest {
         elementoMenuListApp.add(e2);
         elementoMenuListApp.add(e3);
         elementoMenuListApp.add(e4);
-        List<ElementoMenu> elementoMenuList = new ArrayList<>(elementoMenuListApp);
+        List<ElementoMenu> elementoMenuList = new ArrayList<>();
         gestioneElementiPresenter.filtraElementi("", elementoMenuList, elementoMenuListApp);
         List<ElementoMenu> risultato = new ArrayList<>();
         risultato.add(e1);
@@ -64,7 +67,7 @@ public class FiltraElementiTest {
     }
 
     @Test
-    public void filtraElementiPath82_83_84_85_86_84_101(){
+    public void filtraElementiPath82_83_84_85_86_84_98(){
         ElementoMenu e1 = new ElementoMenu("b", "Desc1", "Italiano" );
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
@@ -76,7 +79,7 @@ public class FiltraElementiTest {
     }
 
     @Test
-    public void filtraElementiPath82_83_84_85_87_88_84_101(){
+    public void filtraElementiPath82_83_84_85_87_88_84_98(){
         ElementoMenu e1 = new ElementoMenu("ab", "Desc1", "Italiano" );
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
@@ -87,7 +90,7 @@ public class FiltraElementiTest {
         assertEquals(risultato, elementoMenuList);
     }
     @Test
-    public void filtraElementiPath82_83_84_101(){
+    public void filtraElementiPath82_83_84_98(){
         ElementoMenu e1 = new ElementoMenu("ab", "Desc1", "Italiano" );
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
@@ -99,7 +102,7 @@ public class FiltraElementiTest {
     }
 
     @Test
-    public void filtraElementiPath82_83_92_101(){
+    public void filtraElementiPath82_83_92_98(){
         ElementoMenu e1 = new ElementoMenu("ab", "Desc1", "Italiano" );
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
@@ -111,23 +114,11 @@ public class FiltraElementiTest {
     }
 
     @Test
-    public void filtraElementiPath82_83_92_93_92_101(){
+    public void filtraElementiPath82_83_92_93_92_98(){
         ElementoMenu e1 = new ElementoMenu("ab", "Desc1", "Italiano" );
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
         elementoMenuList.add(e1);
-        elementoMenuListApp.add(e1);
-        gestioneElementiPresenter.filtraElementi("", elementoMenuList, elementoMenuListApp);
-        List<ElementoMenu> risultato = new ArrayList<>();
-        risultato.add(e1);
-        assertEquals(risultato, elementoMenuList);
-    }
-
-    @Test
-    public void filtraElementiPath82_83_92_93_94_92_101(){
-        ElementoMenu e1 = new ElementoMenu("ab", "Desc1", "Italiano" );
-        List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
-        List<ElementoMenu> elementoMenuList = new ArrayList<>();
         elementoMenuListApp.add(e1);
         gestioneElementiPresenter.filtraElementi("", elementoMenuList, elementoMenuListApp);
         List<ElementoMenu> risultato = new ArrayList<>();
@@ -136,7 +127,19 @@ public class FiltraElementiTest {
     }
 
     @Test
-    public void filtraElementiPath82_83_84_85_87_84_101(){
+    public void filtraElementiPath82_83_92_93_94_92_98(){
+        ElementoMenu e1 = new ElementoMenu("ab", "Desc1", "Italiano" );
+        List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
+        List<ElementoMenu> elementoMenuList = new ArrayList<>();
+        elementoMenuListApp.add(e1);
+        gestioneElementiPresenter.filtraElementi("", elementoMenuList, elementoMenuListApp);
+        List<ElementoMenu> risultato = new ArrayList<>();
+        risultato.add(e1);
+        assertEquals(risultato, elementoMenuList);
+    }
+
+    @Test
+    public void filtraElementiPath82_83_84_85_87_84_98(){
         ElementoMenu e1 = new ElementoMenu("a", "Desc1", "Italiano" );
         List<ElementoMenu> elementoMenuListApp = new ArrayList<>();
         List<ElementoMenu> elementoMenuList = new ArrayList<>();
