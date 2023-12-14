@@ -242,7 +242,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
 
     @Override
     public void mostraRiepilogo() {
-        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityViewContract.class);
+        Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
         intentRiepilogo.putExtra("ordinazione", ordinazione);
         startActivity(intentRiepilogo);
     }

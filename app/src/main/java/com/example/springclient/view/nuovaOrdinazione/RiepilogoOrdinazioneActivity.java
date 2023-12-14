@@ -31,7 +31,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiepilogoOrdinazioneActivityViewContract extends AppCompatActivity implements IRecycleViewEventi, Serializable, OrdinazioneContract.RiepilogoOrdinazioneViewContract {
+public class RiepilogoOrdinazioneActivity extends AppCompatActivity implements IRecycleViewEventi, Serializable, OrdinazioneContract.RiepilogoOrdinazioneViewContract {
 
     private Button buttonIndietro;
     private Button buttonOk;

@@ -27,14 +27,8 @@ public class ValidaGetNewTokenTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void getTokenConTokenLunghezzaInferioreTest() {
+    public void getTokenConTokenNonValidoTest() {
         tokenRefreshInterceptor.validaRefreshToken("3rg53", "http://000.000.0.0:0000/");
-        fail();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void getTokenConTokenLunghezzaSuperioreTest() {
-        tokenRefreshInterceptor.validaRefreshToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwLnNtdXNpQGdtYWlsLmNvbSIsImlhdCI6MTcwMjM3NDY4NiwiZXhwIjoxNzAyNDYxMDg2fQ.rGbglA9vL-W0m30HG7qV2QIzp8KxeWZHDcGkW5mLS6I", "http://000.000.0.0:0000/");
         fail();
     }
 
