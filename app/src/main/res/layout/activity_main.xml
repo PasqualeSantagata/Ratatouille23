@@ -14,7 +14,7 @@
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="100dp"
         android:backgroundTint="@color/white"
-        android:text="@android:string/ok"
+        android:text="ACCEDI"
         android:textColor="@color/black"
 
         app:cornerRadius="@android:dimen/app_icon_size"

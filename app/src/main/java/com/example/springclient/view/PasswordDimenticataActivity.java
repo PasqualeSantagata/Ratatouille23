@@ -31,6 +31,7 @@ public class PasswordDimenticataActivity extends AppCompatActivity implements Re
         getSupportActionBar().hide();
         setContentView(R.layout.activity_password_dimenticata);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setStatusBarColor(0xffF68967);
         credenzialiPresenter = new RecuperoCredenzialiPresenter(this);
         inizializzaComponenti();
     }

@@ -27,7 +27,7 @@ public class  DashboardAdminActivity extends AppCompatActivity implements ILogou
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("DASHBOARD");
+        getSupportActionBar().setTitle("DASHBOARD AMMINISTRATORE");
         getSupportActionBar().hide();
         setContentView(R.layout.activity_dashboard_admin);
         getWindow().setStatusBarColor(0xffF68967);

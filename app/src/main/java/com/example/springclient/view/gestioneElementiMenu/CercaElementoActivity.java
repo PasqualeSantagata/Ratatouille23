@@ -58,7 +58,7 @@ public class CercaElementoActivity extends AppCompatActivity implements IRecycle
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cerca_elemento_gestione_menu);
-        getSupportActionBar().setTitle("CERCA ELEMENTO MENU");
+        getSupportActionBar().setTitle("CERCA ELEMENTO MENÙ");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         progressBar = findViewById(R.id.progressBarCercaElemento);
         progressBar.setVisibility(View.INVISIBLE);

@@ -37,8 +37,6 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
         String ruolo = getIntent().getStringExtra("ruolo");
         if(ruolo != null){
             pref.edit().putString("ruolo", ruolo).apply();
-        }else{
-            pref.edit().putString("ruolo", "").apply();
         }
         gestioneElementiPresenter = new GestioneElementiPresenter(this);
         inizializzaComponenti();
@@ -95,8 +93,8 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
         if(!ruolo.equals("SUPERVISORE")) {
             Intent intent = new Intent(this, DashboardAdminActivity.class);
             startActivity(intent);
-            super.onBackPressed();
         }else{
+            pref.edit().putString("ruolo", "").apply();
             avviaLogout();
         }
     }

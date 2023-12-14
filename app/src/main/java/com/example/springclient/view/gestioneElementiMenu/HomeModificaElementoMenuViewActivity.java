@@ -26,7 +26,7 @@ public class HomeModificaElementoMenuViewActivity extends AppCompatActivity impl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Modifica Elemento del Menù");
+        getSupportActionBar().setTitle("MODIFICA ELEMENTO DEL MENÙ");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_home_modifica_elem_gestione_menu);
         gestioneElementiPresenter = new GestioneElementiPresenter(this);

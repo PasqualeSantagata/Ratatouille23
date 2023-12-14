@@ -63,7 +63,7 @@ public class VisualizzaElementiDellaCategoriaActivity extends AppCompatActivity 
         idCategoria = (Long) getIntent().getSerializableExtra("idCategoria");
         nome = getIntent().getStringExtra("nomeCategoria");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        getSupportActionBar().setTitle(nome);
+        getSupportActionBar().setTitle(nome.toUpperCase());
         setContentView(R.layout.activity_visualizza_categoria_gestione_menu);
         visualizzaElementiPresenter = new VisualizzElementiPresenter(this);
 

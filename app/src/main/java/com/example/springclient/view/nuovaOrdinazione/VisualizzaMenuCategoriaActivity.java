@@ -63,7 +63,7 @@ public class VisualizzaMenuCategoriaActivity extends AppCompatActivity implement
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementi");
         ordinazione = (Ordinazione) getIntent().getSerializableExtra("ordinazione");
         nomeCategoria = getIntent().getStringExtra("nomeCategoria");
-        getSupportActionBar().setTitle(nomeCategoria);
+        getSupportActionBar().setTitle(nomeCategoria.toUpperCase());
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_visualizza_categoria_nuova_ordinazione);
         progressBar = findViewById(R.id.progressBarVisualizzaMenuCategoria);

@@ -70,6 +70,8 @@ public class StatisticheActivity extends AppCompatActivity implements BaseViewCo
         progressBar = findViewById(R.id.progress_bar_stat);
         editTextData = findViewById(R.id.editTextDate);
         editTextData.setClickable(false);
+        editTextData.setVisibility(View.INVISIBLE);
+        buttonSelezionaDate.setVisibility(View.INVISIBLE);
         mostraPicker();
     }
 
@@ -158,12 +160,15 @@ public class StatisticheActivity extends AppCompatActivity implements BaseViewCo
         cartesian.xAxis(0).title("Email cuochi");
         cartesian.yAxis(0).title("Portate preparate");
 
+        column.color("#66A865");
         anyChartView.setChart(cartesian);
 
         }
         else{
             column.data(datiGrafo);
         }
+        editTextData.setVisibility(View.VISIBLE);
+        buttonSelezionaDate.setVisibility(View.VISIBLE);
 
     }
 
