@@ -59,7 +59,6 @@ public class Utente {
     @Override
     public String toString() {
 
-        // TODO Auto-generated method stub
         return "Utente{" +
                 ", firstName= " + nome +
                 ", lastName= " + cognome +

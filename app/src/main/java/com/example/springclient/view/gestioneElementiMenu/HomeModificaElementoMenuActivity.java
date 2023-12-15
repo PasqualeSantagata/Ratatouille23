@@ -15,7 +15,7 @@ import com.example.springclient.presenter.GestioneElementiPresenter;
 import com.example.springclient.view.StartGestioneMenuActivity;
 import com.example.springclient.view.gestioneCategorie.EsploraCategorieMenuActivity;
 
-public class HomeModificaElementoMenuViewActivity extends AppCompatActivity implements GestioneElementiContract.HomeModificaElementoMenuView {
+public class HomeModificaElementoMenuActivity extends AppCompatActivity implements GestioneElementiContract.HomeModificaElementoMenuView {
 
     private Button buttonCerca;
     private Button buttonCategorie;

@@ -17,7 +17,7 @@ import com.example.springclient.contract.GestioneElementiContract;
 import com.example.springclient.presenter.AutenticazionePresenter;
 import com.example.springclient.presenter.GestioneElementiPresenter;
 import com.example.springclient.presenter.ILogout;
-import com.example.springclient.view.gestioneElementiMenu.HomeModificaElementoMenuViewActivity;
+import com.example.springclient.view.gestioneElementiMenu.HomeModificaElementoMenuActivity;
 import com.example.springclient.view.inserisciElemento.HomeNuovoElementoActivity;
 
 public class StartGestioneMenuActivity extends AppCompatActivity implements GestioneElementiContract.StartGestioneMenuViewContract, ILogout {
@@ -77,7 +77,7 @@ public class StartGestioneMenuActivity extends AppCompatActivity implements Gest
 
     @Override
     public void mostraHomeModificaElementoMenu() {
-        Intent intent = new Intent(this, HomeModificaElementoMenuViewActivity.class);
+        Intent intent = new Intent(this, HomeModificaElementoMenuActivity.class);
         startActivity(intent);
     }
 

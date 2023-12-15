@@ -135,7 +135,6 @@ public class ModificaElementoActivity extends AppCompatActivity implements Adapt
         return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
     }
 
-    //TODO pitenzale metodo da testare 2 ma da generalizzare (argomenti generici passati, controllo campi vuoti) 
     private boolean controllaCampi() {
         boolean corretto = true;
         String nome, descrizione, prezzo;
