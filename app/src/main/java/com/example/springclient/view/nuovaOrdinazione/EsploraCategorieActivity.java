@@ -80,7 +80,7 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
             mostraDialogWarningOneBtn(dialog,"Ordinazione vuota", view1 -> dialog.dismiss() );
         } else {
             // starta il riepilogo ordinazione non vuota
-            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivityViewContract.class);
+            Intent intentRiepilogo = new Intent(this, RiepilogoOrdinazioneActivity.class);
             intentRiepilogo.putExtra("ordinazione",ordinazione);
             startActivity(intentRiepilogo);
         }
@@ -127,10 +127,6 @@ public class EsploraCategorieActivity extends AppCompatActivity implements IRecy
     }
 
 
-
-    /*
-            la foto viene recuperata in due passaggi in caso la connessione fosse lenta
-        */
     @Override
     public void setCategorie(List<Categoria> categorie){
         this.categorie = categorie;

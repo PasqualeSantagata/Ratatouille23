@@ -42,11 +42,11 @@ public class FiltraCategoriaNuovaOrdinazioneActivity extends AppCompatActivity i
         progressBar.setVisibility(View.INVISIBLE);
         elementiMenu = (List<Portata>) getIntent().getSerializableExtra("elementiMenu");
         allergeni = new ArrayList<>();
-        initializeComponents();
+        inizializzaComponenti();
 
     }
 
-    private void initializeComponents() {
+    private void inizializzaComponenti() {
         //buttons
         buttonNome = findViewById(R.id.buttonNomeFiltraCategoria);
         buttonPrezzo = findViewById(R.id.buttonPrezzoFiltraCategoria);

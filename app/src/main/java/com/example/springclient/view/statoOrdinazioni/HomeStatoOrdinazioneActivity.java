@@ -51,7 +51,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     private List<Portata> portateSospese;
     private List<Portata> portatePrenotate;
     private List<Portata> portateEvase;
-   // private int posizione;
     private RecycleViewAdapterOrdinazioniCorrenti adapterCorrenti;
     private RecycleViewAdapterOrdinazioniEvase adapterEvase;
     private RecycleViewAdapterOrdinazioniPrenotate adapterPrenotate;
@@ -164,7 +163,6 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
     }
 
 
-    //TODO potenzial metodo da testare, passando adapter e facendo restituire la recycler view
     public void setDatiRecycleViewOrdinazioniCorrenti(RecyclerView recyclerView, List<Portata> ordinazione) {
         adapterCorrenti = new RecycleViewAdapterOrdinazioniCorrenti(this, this, ordinazione);
         recyclerView.setAdapter(adapterCorrenti);
@@ -202,7 +200,7 @@ public class HomeStatoOrdinazioneActivity extends AppCompatActivity implements I
         stompClient.send("/app/invia-prenotazione", id.toString()).subscribe();
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-        //Passa elem. alla reccyle view ordinazioni prenotate
+        //Passa elemento alla reccyle view ordinazioni prenotate
         portatePrenotate.add(p);
         adapterPrenotate.notifyItemInserted(portatePrenotate.size()-1);
     }
