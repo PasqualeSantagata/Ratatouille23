@@ -23,7 +23,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TokenRefreshInterceptor implements Interceptor {
     private SharedPreferences sharedPreferences;
     private AutenticazionePresenter mainActivityPresenter;
-
     public TokenRefreshInterceptor() {
 
     }
@@ -31,7 +30,7 @@ public class TokenRefreshInterceptor implements Interceptor {
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-        String url = "http://192.168.1.2:8080/";
+        String url = "http://20.251.220.220:8080/";
         String token = "";
         Request request = chain.request();
         Request.Builder newRequestBuilder = request.newBuilder();

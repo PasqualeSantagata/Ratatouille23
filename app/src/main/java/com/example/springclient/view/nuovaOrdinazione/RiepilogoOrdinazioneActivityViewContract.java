@@ -26,6 +26,7 @@ import com.example.springclient.view.adapters.IRecycleViewEventi;
 import com.example.springclient.view.adapters.RecycleViewAdapterPortataRiepilogo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class RiepilogoOrdinazioneActivityViewContract extends AppCompatActivity 
     private OrdinazioneContract.Presenter presenterOrdinazione;
     private Portata elementoSelezionato;
     private ProgressBar progressBar;
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,12 +55,11 @@ public class RiepilogoOrdinazioneActivityViewContract extends AppCompatActivity 
         progressBar = findViewById(R.id.progressBarRiepilogo);
         progressBar.setVisibility(View.INVISIBLE);
         presenterOrdinazione = new OrdinazionePresenter(this);
-
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         portate = new ArrayList<>();
         for (Portata o : ordinazione.getElementiOrdinati()) {
             portate.add(o);
         }
-
         inizializzaComponenti();
     }
 
@@ -75,7 +76,13 @@ public class RiepilogoOrdinazioneActivityViewContract extends AppCompatActivity 
         //Buttons
         buttonOk = findViewById(R.id.buttonOkRiepilogo);
         buttonIndietro = findViewById(R.id.buttonIndietroRiepilogo);
-        buttonOk.setOnClickListener(view -> presenterOrdinazione.salvaOrdinazione(ordinazione));
+        buttonOk.setOnClickListener(view ->{
+            presenterOrdinazione.salvaOrdinazione(ordinazione);
+            Bundle bundle = new Bundle();
+            bundle.putString(FirebaseAnalytics.Param.SOURCE, "ordinazione conclusa");
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle);
+
+        });
         buttonIndietro.setOnClickListener(view -> presenterOrdinazione.tornaEsploraCategorie());
 
     }

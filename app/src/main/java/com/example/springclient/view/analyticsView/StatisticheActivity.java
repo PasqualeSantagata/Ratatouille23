@@ -123,7 +123,9 @@ public class StatisticheActivity extends AppCompatActivity implements BaseViewCo
         datiGrafo = new ArrayList<>();
         List<String> cuochiAnalitics = new ArrayList<>();
         for(AnalyticsData analyticsData: analyticsDataList){
-            cuochiAnalitics.add(analyticsData.getCuoco());
+            if(!analyticsData.getCuoco().equals("")) {
+                cuochiAnalitics.add(analyticsData.getCuoco());
+            }
         }
         for(String cuoco: cuochi){
             if(!cuochiAnalitics.contains(cuoco)){

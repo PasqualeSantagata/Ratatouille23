@@ -22,6 +22,7 @@ import com.example.springclient.presenter.OrdinazionePresenter;
 import com.example.springclient.view.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements OrdinazioneContract.StartNuovaOrdinazioneViewContract, ILogout {
     private TextInputLayout textInputLayoutNumeroPersone;
@@ -43,6 +44,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
     private Ordinazione ordinazione;
     private OrdinazioneContract.Presenter ordinazionePresenter;
     private AutenticazioneContract.Presenter autenticazionePresenter;
+    private FirebaseAnalytics firebaseAnalytics;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         ordinazionePresenter = new OrdinazionePresenter(this);
         autenticazionePresenter = new AutenticazionePresenter(this);
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         inizializzaComponenti();
     }
     @Override
@@ -131,6 +134,9 @@ public class StartNuovaOrdinazioneActivity extends AppCompatActivity implements 
                 Integer nsala = n3;
 
                 ordinazione = new Ordinazione(nPersone, ntavolo, nsala);
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.CONTENT, "ordinazione avviata");
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle);
                 ordinazionePresenter.mostraEsploraCategorie(ordinazione);
             }
         });
